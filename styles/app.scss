@@ -1,27 +1,11 @@
 // Mixins
 @use 'mixins/breakpoints.module.scss';
 @use 'mixins/common.module.scss';
+@use 'mixins/animations.module.scss';
 
 // Components
-@use 'components/footer.module.scss';
-@use 'components/navigation.module.scss';
-@use 'components/main.module.scss';
-@use 'components/section.module.scss';
-@use 'components/wallet-button.module.scss';
-@use 'components/comic-reader.module.scss';
-@use 'components/playground.module.scss';
-@use 'components/carousel.module.scss';
-@use 'components/comic-carousel.module.scss';
-@use 'components/genre-list.module.scss';
-@use 'components/comic-list.module.scss';
-@use 'components/comic-issue-list.module.scss';
-@use 'components/creator-list.module.scss';
-@use 'components/overlay.module.scss';
-@use 'components/avatar.module.scss';
-
-// Pages
-@use 'pages/home.module.scss';
-@use 'pages/comic-details.module.scss';
+@use 'components/sidebar.module.scss';
+@use 'components/button.module.scss';
 
 // Variables
 @use 'variables/theme.module.scss';
