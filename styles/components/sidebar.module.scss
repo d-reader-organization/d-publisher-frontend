@@ -22,9 +22,6 @@
 		width: 100%;
 	}
 
-	.logo-with-text {
-	}
-
 	.create-button {
 		width: 196px;
 		margin-top: 60px;
@@ -40,17 +37,14 @@
 	}
 
 	.navigation-item {
-		li {
-			width: 100%;
-			padding: 23px 27px;
-			display: flex;
-			align-items: center;
-			cursor: pointer;
-			border-top: 1px solid $grey-300;
-		}
+		width: 100%;
 
 		&--disabled {
 			pointer-events: none;
+
+			&:last-of-type {
+				border-bottom: 1px solid $grey-300;
+			}
 
 			li {
 				& > * {
@@ -63,10 +57,13 @@
 			}
 		}
 
-		&:last-of-type {
-			li {
-				border-bottom: 1px solid $grey-300;
-			}
+		li {
+			width: 100%;
+			padding: 23px 27px;
+			display: flex;
+			align-items: center;
+			cursor: pointer;
+			border-top: 1px solid $grey-300;
 		}
 	}
 
