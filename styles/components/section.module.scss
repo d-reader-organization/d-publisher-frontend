@@ -1,0 +1,28 @@
+@use '../mixins/breakpoints.module.scss' as *;
+@use '../mixins/common.module.scss' as *;
+@use '../variables/theme.module.scss' as *;
+
+.section {
+	position: relative;
+
+	margin: 4vw auto;
+
+	@include sm {
+		margin: 3vw auto;
+	}
+
+	.section-title-row {
+		@include flexRow;
+		justify-content: space-between;
+		padding-bottom: 0.5rem;
+
+		.section-title {
+			text-transform: capitalize;
+			font-weight: bold;
+		}
+
+		.section-title-button {
+			color: $important-color;
+		}
+	}
+}

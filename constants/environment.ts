@@ -1,5 +1,6 @@
 import { WalletAdapterNetwork } from '@solana/wallet-adapter-base'
 import { clusterApiUrl } from '@solana/web3.js'
+import logoImage from 'public/logo192.png'
 import { AppIdentity } from '@solana-mobile/mobile-wallet-adapter-protocol'
 
 // TODO: validate all .env variables
@@ -10,6 +11,6 @@ export const network = (process.env.NEXT_PUBLIC_SOLANA_CLUSTER as WalletAdapterN
 
 export const APP_IDENTITY: AppIdentity = {
 	uri: undefined, // auto generated
-	icon: undefined, // add logo192
+	icon: logoImage.src,
 	name: 'dReader',
 }

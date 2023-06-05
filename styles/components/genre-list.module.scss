@@ -1,0 +1,21 @@
+@use '../mixins/common.module.scss' as *;
+@use '../mixins/animations.module.scss' as *;
+
+.genre-list {
+	@include flexRow;
+	// @include centeredRow;
+
+	.genre-item {
+		@include centeredRow;
+		width: 100%;
+		height: 60px;
+		padding: 1rem;
+		white-space: nowrap;
+	}
+
+	.genre-icon {
+		width: 32px;
+		height: 32px;
+		margin-right: 0.5rem;
+	}
+}
