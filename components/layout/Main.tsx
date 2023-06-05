@@ -1,12 +1,5 @@
-import React from 'react'
-import { BoxProps, Box } from '@mui/material'
-
-const Main: React.FC<BoxProps> = ({ children, ...props }) => {
-	return (
-		<Box component='main' {...props}>
-			{children}
-		</Box>
-	)
+const Main = () => {
+	return <div>Main</div>
 }
 
 export default Main

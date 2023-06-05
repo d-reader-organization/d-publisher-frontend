@@ -4,7 +4,6 @@
 
 svg {
 	color: $secondary-color;
-	fill: $secondary-color;
 }
 
 .text--important {
@@ -29,6 +28,21 @@ svg {
 html {
 	scrollbar-color: $primary-color-dark transparent;
 	scrollbar-width: thin;
+}
+
+html, body {
+	width: 100%;
+	height: 100%;
+}
+
+#__next {
+	width: 100%;
+	height: 100%;
+}
+
+ul {
+	padding: 0;
+	list-style-type: none;
 }
 
 .blur {
