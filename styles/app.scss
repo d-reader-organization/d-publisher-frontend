@@ -3,6 +3,7 @@
 @use 'mixins/common.module.scss';
 
 // Components
+<<<<<<< Updated upstream
 @use 'components/footer.module.scss';
 @use 'components/navigation.module.scss';
 @use 'components/main.module.scss';
@@ -22,6 +23,14 @@
 // Pages
 @use 'pages/home.module.scss';
 @use 'pages/comic-details.module.scss';
+=======
+@use 'components/sidebar.module.scss';
+@use 'components/button.module.scss';
+@use 'components/publisher.module.scss';
+@use 'components/header.module.scss';
+@use 'components/dashboard-stats.module.scss';
+@use 'components/content-table.module.scss';
+>>>>>>> Stashed changes
 
 // Variables
 @use 'variables/theme.module.scss';

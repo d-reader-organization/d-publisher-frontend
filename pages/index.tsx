@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import { useMemo } from 'react'
 import type { NextPage } from 'next'
 import Navigation from 'components/layout/Navigation'
@@ -122,6 +123,12 @@ const Home: NextPage = () => {
 			<Footer />
 		</div>
 	)
+=======
+import { NextPage } from 'next'
+
+const HomePage: NextPage = () => {
+	return <></>
+>>>>>>> Stashed changes
 }
 
-export default Home
+export default HomePage

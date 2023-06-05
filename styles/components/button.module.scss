@@ -1,0 +1,30 @@
+@use '../variables/theme.module.scss' as *;
+
+.button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-width: 169px;
+	padding: 14px;
+	border-radius: 8px;
+	border: none;
+	cursor: pointer;
+	font-size: 16px;
+	line-height: 19px;
+	font-weight: 600;
+
+	&--color-important {
+		background: $important-color;
+		color: $grey-600;
+	}
+
+	&--color-transparent {
+		border: 1px solid $grey-100;
+		color: $grey-100;
+	}
+
+	&--color-grey-100 {
+		color: $grey-600;
+		background: $grey-100;
+	}
+}
