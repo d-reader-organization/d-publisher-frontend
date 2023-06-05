@@ -3,9 +3,12 @@
 @use 'mixins/common.module.scss';
 @use 'mixins/animations.module.scss';
 
-// Components
 @use 'components/sidebar.module.scss';
 @use 'components/button.module.scss';
+@use 'components/publisher.module.scss';
+@use 'components/header.module.scss';
+@use 'components/dashboard-stats.module.scss';
+@use 'components/content-table.module.scss';
 
 // Variables
 @use 'variables/theme.module.scss';
