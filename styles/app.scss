@@ -9,6 +9,18 @@
 @use 'components/header.module.scss';
 @use 'components/dashboard-stats.module.scss';
 @use 'components/content-table.module.scss';
+@use 'components/steps.module.scss';
+@use 'components/input.module.scss';
+@use 'components/label.module.scss';
+@use 'components/select.module.scss';
+@use 'components/textarea.module.scss';
+@use 'components/file-upload.module.scss';
+@use 'components/checkbox.module.scss';
+@use 'components/connect-wallet-button.scss';
+
+// Pages
+@use 'pages/create.module.scss';
+@use 'pages/index.module.scss';
 
 // Variables
 @use 'variables/theme.module.scss';

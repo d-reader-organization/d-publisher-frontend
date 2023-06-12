@@ -2,6 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import { Typography } from '@mui/material'
 import clsx from 'clsx'
+import { useWallet } from '@solana/wallet-adapter-react'
 
 import LogoIcon from 'public/assets/vector-icons/logo-with-text.svg'
 import DocumentIcon from 'public/assets/vector-icons/document.svg'
@@ -32,6 +33,12 @@ const NAVIGATION_LIST_ITEMS = [
 ]
 
 const Sidebar = () => {
+	const { disconnect } = useWallet()
+
+	const handleLogout = () => {
+		disconnect()
+	}
+
 	return (
 		<div className='sidebar'>
 			<div className='sidebar-upper'>
@@ -62,8 +69,12 @@ const Sidebar = () => {
 			</div>
 			<div className='sidebar-lower'>
 				<div className='actions'>
-					<div className='action'>Settings</div>
-					<div className='action'>Log out</div>
+					<div className='action'>
+						<Link href='/settings'>Settings </Link>
+					</div>
+					<div className='action' onClick={handleLogout}>
+						Log out
+					</div>
 				</div>
 			</div>
 		</div>
