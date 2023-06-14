@@ -33,7 +33,10 @@
 	}
 
 	& > input[type="file"] {
-		display: none;
+		opacity: 0;
+		pointer-events: none;
+		position: relative;
+		z-index: -1;
 	}
 
 	.image-icon {

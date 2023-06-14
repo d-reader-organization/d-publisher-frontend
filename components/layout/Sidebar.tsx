@@ -13,19 +13,19 @@ import Button from 'components/Button'
 
 const NAVIGATION_LIST_ITEMS = [
 	{
-		href: 'dashboard',
+		href: '/dashboard',
 		comingSoon: false,
 		title: 'Dashboard',
 		icon: <DashboardIcon className='navigation-item-icon' />,
 	},
 	{
-		href: 'analytics',
+		href: '/analytics',
 		comingSoon: true,
 		title: 'Analytics',
 		icon: <AnalyticsIcon className='navigation-item-icon' />,
 	},
 	{
-		href: 'inbox',
+		href: '/inbox',
 		comingSoon: true,
 		title: 'Inbox',
 		icon: <InboxIcon className='navigation-item-icon' />,
@@ -43,7 +43,7 @@ const Sidebar = () => {
 		<div className='sidebar'>
 			<div className='sidebar-upper'>
 				<LogoIcon />
-				<Link href='create'>
+				<Link href='/comic/create' replace={true}>
 					<Button color='important' className='create-button'>
 						<DocumentIcon className='document-icon' />
 						Create

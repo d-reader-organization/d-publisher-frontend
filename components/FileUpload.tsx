@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { InputHTMLAttributes, forwardRef, useImperativeHandle, useRef, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import clsx from 'clsx'
 
@@ -6,15 +6,14 @@ import ImageIcon from 'public/assets/vector-icons/image.svg'
 import CloseIcon from 'public/assets/vector-icons/close.svg'
 import { convertFileToBlob } from 'utils/file'
 
-interface Props {
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
 	label: string
 	onUpload: (url: string) => void
-	className?: string
 }
 
-const FileUpload: React.FC<Props> = ({ label, onUpload, className = '' }) => {
-	const ref = useRef<HTMLInputElement>(null)
-	const [assetUrl, setAssetUrl] = useState<string>()
+const FileUpload = forwardRef<HTMLInputElement, Props>(({ label, onUpload, className = '', ...props }, ref) => {
+	const componentRef = useRef<HTMLInputElement>(null)
+	const [assetUrl, setAssetUrl] = useState<string>('')
 	const [draggingFileOver, setDraggingFileOver] = useState<boolean>(false)
 
 	const { getRootProps, getInputProps } = useDropzone({
@@ -37,6 +36,8 @@ const FileUpload: React.FC<Props> = ({ label, onUpload, className = '' }) => {
 		},
 	})
 
+	useImperativeHandle(ref, () => componentRef.current as HTMLInputElement)
+
 	const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
 		if (!event.target) return
 
@@ -53,11 +54,12 @@ const FileUpload: React.FC<Props> = ({ label, onUpload, className = '' }) => {
 	}
 
 	const handleRemoveFile = (event: React.MouseEvent<HTMLButtonElement>) => {
-		if (!ref.current) return
+		if (!componentRef.current) return
 		event.preventDefault()
 		event.stopPropagation()
-		setAssetUrl(undefined)
-		ref.current.value = ''
+		setAssetUrl('')
+		onUpload('')
+		componentRef.current.value = ''
 	}
 
 	return (
@@ -74,7 +76,7 @@ const FileUpload: React.FC<Props> = ({ label, onUpload, className = '' }) => {
 					<CloseIcon className='close-icon' />
 				</button>
 			)}
-			<input type='file' ref={ref} onChange={handleFileChange} {...getInputProps} />
+			<input {...props} {...getInputProps} type='file' onChange={handleFileChange} ref={componentRef} />
 			{!assetUrl && (
 				<>
 					<ImageIcon className='image-icon' />
@@ -83,6 +85,8 @@ const FileUpload: React.FC<Props> = ({ label, onUpload, className = '' }) => {
 			)}
 		</label>
 	)
-}
+})
+
+FileUpload.displayName = 'FileUpload'
 
 export default FileUpload

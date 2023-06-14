@@ -10,8 +10,11 @@
 	cursor: pointer;
 	position: relative;
 
-	input {
-		display: none;
+	input[type="checkbox"] {
+		opacity: none;
+		pointer-events: none;
+		position: relative;
+		z-index: -1;
 	}
 
 	.checked-icon {

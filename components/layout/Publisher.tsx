@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
-
-import Sidebar from './Sidebar'
 import { useAuth } from '@open-sauce/solomon'
 import { useRouter } from 'next/router'
+
+import Sidebar from './Sidebar'
 
 interface Props {
 	children: React.ReactNode
@@ -10,11 +10,11 @@ interface Props {
 
 const Publisher: React.FC<Props> = ({ children }) => {
 	const router = useRouter()
-	const { isAuthenticated } = useAuth()
+	const { isAuthenticated, isAuthenticating } = useAuth()
 
 	useEffect(() => {
-		if (!isAuthenticated) router.push('/')
-	}, [isAuthenticated, router])
+		// if (!isAuthenticated && isAuthenticated) router.push('/')
+	}, [isAuthenticated, isAuthenticating, router])
 
 	return (
 		<div className='publisher'>

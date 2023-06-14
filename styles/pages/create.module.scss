@@ -33,7 +33,7 @@
 
 	.comic-logo-input {
 		width: 200px;
-		height: 280px;
+		height: 200px;
 	}
 
 	.comic-banner-input {
@@ -43,17 +43,14 @@
 
 	.social-media-wrapper {
 		display: flex;
-		max-width: 714px;
+		flex-wrap: wrap;
+		max-width: 812px;
 	}
 
 	.social-media-container {
 		width: 100%;
-		max-width: 262px;
+		max-width: 388px;
 		margin-right: 18px;
-
-		&:last-of-type {
-			margin-right: 0;
-		}
 	}
 
 	.group-label {
@@ -73,7 +70,7 @@
 	.checkmark-text {
 		margin-left: 20px;
 		font-weight: 700;
-	font-size: 14px;
+		font-size: 14px;
 		line-height: 19px;
 		color: $white;
 
