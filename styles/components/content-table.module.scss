@@ -6,32 +6,32 @@
 	margin: 0 24px;
 	border: 1px solid $grey-300;
 	border-radius: 8px;
-}
 
-.content-table-empty {
-	font-weight: 700;
-	font-size: 16px;
-	line-height: 19px;
-	text-align: center;
-	color: $grey-200;
-}
+	.content-table-empty {
+		font-weight: 700;
+		font-size: 16px;
+		line-height: 19px;
+		text-align: center;
+		color: $grey-200;
+	}
 
-.content-table {
+	.content-table {
 
-}
+	}
 
-.content-table-head {
+	.content-table-head {
 
-}
+	}
 
-.content-table-row {
+	.content-table-row {
 
-}
+	}
 
-.content-table-cell {
-	padding: 12px;
-	font-weight: 700;
-	font-size: 16px;
-	line-height: 19px;
-	color: $white;
+	.content-table-cell {
+		padding: 12px;
+		font-weight: 700;
+		font-size: 16px;
+		line-height: 19px;
+		color: $white;
+	}
 }

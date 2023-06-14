@@ -1,0 +1,95 @@
+@use '../variables/theme.module.scss' as *;
+
+.form {
+	padding: 65px 133px;
+
+	.audience-status-wrapper {
+		display: flex;
+		max-width: 571px;
+	}
+
+	.audience-status-container {
+		width: 100%;
+		max-width: 262px;
+		margin-right: 43px;
+
+		&:last-of-type {
+			margin-right: 0;
+		}
+	}
+
+	.comic-file-wrapper {
+		width: 100%;
+		display: flex;
+	}
+
+	.comic-file-container {
+		margin-right: 45px;
+
+		&:last-of-type {
+			margin-right: 0;
+		}
+	}
+
+	.comic-logo-input {
+		width: 200px;
+		height: 200px;
+	}
+
+	.comic-banner-input {
+		width: 557px;
+		height: 280px;
+	}
+
+	.social-media-wrapper {
+		display: flex;
+		flex-wrap: wrap;
+		max-width: 812px;
+	}
+
+	.social-media-container {
+		width: 100%;
+		max-width: 388px;
+		margin-right: 18px;
+	}
+
+	.group-label {
+		margin-bottom: 34px;
+	}
+
+	.checkmark-row {
+		display: flex;
+		align-items: center;
+		margin-bottom: 20px;
+
+		&:last-of-type {
+			margin-bottom: 0;
+		}
+	}
+
+	.checkmark-text {
+		margin-left: 20px;
+		font-weight: 700;
+		font-size: 14px;
+		line-height: 19px;
+		color: $white;
+
+		&--highlighted {
+			color: $yellow;
+		}
+	}
+
+	.actions {
+		display: flex;
+		align-items: center;
+		margin-top: 120px;
+	}
+
+	.action-button {
+		margin-right: 30px;
+	}
+
+	.action-button-icon {
+		margin-left: 8px;
+	}
+}

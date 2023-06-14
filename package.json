@@ -16,6 +16,7 @@
 	"dependencies": {
 		"@emotion/react": "^11.11.0",
 		"@emotion/styled": "^11.11.0",
+		"@hookform/resolvers": "^3.1.1",
 		"@mui/icons-material": "^5.11.16",
 		"@mui/material": "^5.13.1",
 		"@open-sauce/solomon": "^0.4.1",
@@ -25,14 +26,20 @@
 		"@solana/wallet-adapter-material-ui": "^0.16.30",
 		"@solana/wallet-adapter-react": "^0.15.32",
 		"@solana/web3.js": "^1.76.0",
+		"@types/lodash": "^4.14.195",
+		"@types/react-dropzone": "^5.1.0",
 		"bs58": "^5.0.0",
+		"lodash": "^4.17.21",
 		"next": "^13.4.3",
 		"next-pwa": "^5.6.0",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
+		"react-dropzone": "^14.2.3",
+		"react-hook-form": "^7.44.3",
 		"react-query": "^3.39.3",
 		"react-responsive-carousel": "^3.2.23",
-		"socket.io-client": "^4.6.1"
+		"socket.io-client": "^4.6.1",
+		"yup": "^1.2.0"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.21.8",

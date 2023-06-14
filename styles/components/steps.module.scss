@@ -1,0 +1,32 @@
+@use '../variables/theme.module.scss' as *;
+
+.steps {
+	display: flex;
+	width: 100%;
+
+	.steps-item {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		padding: 40px;
+		font-weight: 600;
+		font-size: 16px;
+		line-height: 19px;
+		color: $white;
+		border-bottom: 1px solid $grey-300;
+		border-right: 1px solid $grey-300;
+
+		& > * {
+			opacity: 0.2;
+		}
+
+		&--active > * {
+			opacity: 1;
+		}
+
+		&:last-of-type {
+			border-right: none;
+		}
+	}
+}

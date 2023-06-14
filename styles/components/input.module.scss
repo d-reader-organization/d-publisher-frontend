@@ -1,0 +1,43 @@
+@use '../variables/theme.module.scss' as *;
+
+.input-wrapper {
+	position: relative;
+	margin-bottom: 34px;
+
+	.input {
+		--padding-left: 15px;
+
+		width: 100%;
+		max-width: 571px;
+		padding: 15px;
+		padding-left: var(--padding-left);
+		border: 1px solid $grey-300;
+		border-radius: 8px;
+		background: $grey-500;
+		color: $white;
+		font-weight: 500;
+		font-size: 16px;
+		line-height: 19px;
+		position: relative;
+
+		&::placeholder {
+			color: $grey-100;
+		}
+	}
+
+	.input-prefix {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0 16px;
+		height: 100%;
+		top: 0;
+		left: 0;
+		position: absolute;
+		font-weight: 400;
+		font-size: 16px;
+		line-height: 22px;
+		color: $grey-300;
+		border-right: 1px solid $grey-300;
+	}
+}
