@@ -44,7 +44,7 @@ const Sidebar = () => {
 			<div className='sidebar-upper'>
 				<LogoIcon />
 				<Link href='/comic/create' replace={true}>
-					<Button color='important' className='create-button'>
+					<Button backgroundColor='important' className='create-button'>
 						<DocumentIcon className='document-icon' />
 						Create
 					</Button>

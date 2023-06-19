@@ -11,12 +11,12 @@ export type CreateComicFormData = {
 	logo: string
 	banner: string
 	description: string
-	flavourText: string
-	website: string
-	twitter: string
-	discord: string
-	instagram: string
-	lynkfire: string
+	flavourText: string | undefined
+	website: string | undefined
+	twitter: string | undefined
+	discord: string | undefined
+	instagram: string | undefined
+	lynkfire: string | undefined
 	ownershipConfirmation: boolean
 	authorRegistrationAndUploadingAgreement: boolean
 }

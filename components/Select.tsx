@@ -71,6 +71,7 @@ const Select = forwardRef<HTMLInputElement, Props>(
 			if (!isMultipleSelect && !isOptionAlreadySelected) {
 				setSelectedOptions([selectedOption])
 				onSelect([selectedOption])
+				setIsDropdownOpen(false)
 
 				if (!isSearchable) setSearchTerm(selectedOption.label)
 

@@ -6,7 +6,6 @@ import { useRouter } from 'next/router'
 
 import Publisher from 'components/layout/Publisher'
 import Header from 'components/layout/Header'
-import Steps from 'components/Steps'
 import Input from 'components/Input'
 import Label from 'components/Label'
 import Select from 'components/Select'
@@ -16,7 +15,6 @@ import FileUpload from 'components/FileUpload'
 import Checkbox from 'components/Checkbox'
 import Button from 'components/Button'
 import ArrowRightIcon from 'public/assets/vector-icons/arrow-right.svg'
-import InfoIcon from 'public/assets/vector-icons/info.svg'
 import { SelectOption } from 'types/selectOption'
 import { AudienceType } from 'enums/audienceType'
 import { CurrentStatus } from 'enums/currentStatus'
@@ -37,7 +35,7 @@ const validationSchema = yup.object().shape({
 		.max(20, generateMaxLengthErrorMessage('title', 20)),
 	genres: yup
 		.array()
-		.of(yup.object({ value: yup.string().required(), label: yup.string().required() }))
+		.of(yup.object({ label: yup.string().required(), value: yup.string().required() }))
 		.required(generateRequiredErrorMessage('Genres'))
 		.min(1, generateRequiredErrorMessage('Genres')),
 	audienceType: yup.string().required(generateRequiredErrorMessage('Audience type')),
@@ -49,16 +47,20 @@ const validationSchema = yup.object().shape({
 		.required(generateRequiredErrorMessage('Description'))
 		.min(3, generateMinLengthErrorMessage('description', 3))
 		.max(200, generateMaxLengthErrorMessage('description', 200)),
-	flavourText: yup.string().max(60, generateMaxLengthErrorMessage('flavourText', 60)),
+	flavourText: yup.string().notOneOf([undefined]).max(60, generateMaxLengthErrorMessage('flavourText', 60)),
 	website: yup.string().max(30, generateMaxLengthErrorMessage('website', 30)),
 	twitter: yup.string().max(30, generateMaxLengthErrorMessage('twitter', 30)),
 	discord: yup.string().max(30, generateMaxLengthErrorMessage('discord', 30)),
 	instagram: yup.string().max(30, generateMaxLengthErrorMessage('instagram', 30)),
 	lynkfire: yup.string().max(30, generateMaxLengthErrorMessage('lynkfire', 30)),
-	ownershipConfirmation: yup.boolean().isTrue(generateNotCheckedErrorMessage('Ownership confirmation')),
+	ownershipConfirmation: yup
+		.boolean()
+		.required()
+		.oneOf([true], generateNotCheckedErrorMessage('Ownership confirmation')),
 	authorRegistrationAndUploadingAgreement: yup
 		.boolean()
-		.isTrue(generateNotCheckedErrorMessage('Author registration and uploading agreement')),
+		.required()
+		.oneOf([true], generateNotCheckedErrorMessage('Author registration and uploading agreement')),
 })
 
 const CreatePage: NextPage = () => {
@@ -71,7 +73,7 @@ const CreatePage: NextPage = () => {
 	} = useForm<CreateComicFormData>({
 		defaultValues: {
 			title: '',
-			genres: [] as Omit<SelectOption, 'icon'>[],
+			genres: [],
 			audienceType: '',
 			currentStatus: '',
 			logo: '',
@@ -92,22 +94,22 @@ const CreatePage: NextPage = () => {
 
 	const handleSaveAndClose = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
-		onSubmit(handleSubmit, handleSubmitFail)()
+		onSubmit(handleFormSubmit, handleFormError)()
 	}
 
 	const handleSaveAndGoNext = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
 		onSubmit((data) => {
-			handleSubmit(data)
+			handleFormSubmit(data)
 			router.push('/comic/issue/create')
-		}, handleSubmitFail)()
+		}, handleFormError)()
 	}
 
-	const handleSubmit = (data: CreateComicFormData) => {
+	const handleFormSubmit = (data: CreateComicFormData) => {
 		toaster.add('Successfuly created new comic', 'success')
 	}
 
-	const handleSubmitFail = (errors: FieldErrors<CreateComicFormData>) => {
+	const handleFormError = (errors: FieldErrors<CreateComicFormData>) => {
 		const [_, errorValue] = Object.entries(errors)[0]
 
 		if (!errorValue.message) {
@@ -121,13 +123,6 @@ const CreatePage: NextPage = () => {
 	return (
 		<Publisher>
 			<Header title='Create Comic' />
-			<Steps
-				steps={[
-					{ label: '01 Create Comic', isActive: true },
-					{ label: '02 Add Issue', isActive: false },
-					{ label: '03 Publish', isActive: false },
-				]}
-			/>
 			<form className='form'>
 				<Label isRequired>Comic title</Label>
 				<Input {...register('title')} />
@@ -266,10 +261,16 @@ const CreatePage: NextPage = () => {
 					</span>
 				</div>
 				<div className='actions'>
-					<Button type='submit' onClick={handleSaveAndClose} color='transparent' className='action-button'>
+					<Button
+						type='submit'
+						onClick={handleSaveAndClose}
+						backgroundColor='transparent'
+						borderColor='grey-100'
+						className='action-button'
+					>
 						Save & Close
 					</Button>
-					<Button type='submit' onClick={handleSaveAndGoNext} color='grey-100' className='action-button'>
+					<Button type='submit' onClick={handleSaveAndGoNext} backgroundColor='grey-100' className='action-button'>
 						Next <ArrowRightIcon className='action-button-icon' />
 					</Button>
 				</div>

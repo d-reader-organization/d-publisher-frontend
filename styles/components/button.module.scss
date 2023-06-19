@@ -13,19 +13,34 @@
 	line-height: 19px;
 	font-weight: 600;
 
-	&--color-important {
+	&--background-color-important {
 		background: $important-color;
 		color: $grey-600;
 	}
 
-	&--color-transparent {
-		border: 1px solid $grey-100;
+	&--background-color-transparent {
 		background: transparent;
 		color: $grey-100;
 	}
 
-	&--color-grey-100 {
-		color: $grey-600;
+	&--background-color-grey-100 {
 		background: $grey-100;
+		color: $grey-600;
+	}
+
+	&--border-color-important {
+		border: 1px solid $important-color;
+	}
+
+	&--border-color--transparent {
+		border: none;
+	}
+
+	&--border-color-grey-100 {
+		border: 1px solid $grey-100;
+	}
+
+	&--border-color-grey-300 {
+		border: 1px solid $grey-300;
 	}
 }
