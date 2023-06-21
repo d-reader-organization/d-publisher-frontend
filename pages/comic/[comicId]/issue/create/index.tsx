@@ -3,7 +3,6 @@ import { NextPage } from 'next'
 import { FieldErrors, useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { find } from 'lodash'
 
 import Publisher from 'components/layout/Publisher'
 import Header from 'components/layout/Header'
@@ -75,7 +74,7 @@ const validationSchema = yup.object().shape({
 	signature: yup.string().required(generateRequiredErrorMessage('Logo')),
 })
 
-const AddIssuePage: NextPage = () => {
+const CreateIssuePage: NextPage = () => {
 	const toaster = useToaster()
 	const router = useRouter()
 	const { register, setValue, getValues, watch, handleSubmit } = useForm<CreateIssueFormData>({
@@ -102,9 +101,10 @@ const AddIssuePage: NextPage = () => {
 
 	const handleFormError = (errors: FieldErrors<CreateIssueFormData>) => {
 		const [_, errorValue] = Object.entries(errors)[0]
-		let errorMessage: string = 'Error while submitting the form'
+		let errorMessage = 'Error while submitting the form'
 
-		if (Array.isArray(errorValue)) errorMessage = Object.entries(errorValue[0] as object)[0][1].message
+		if (Array.isArray(errorValue))
+			errorMessage = Object.entries(errorValue.filter((value) => value)[0] as object)[0][1].message
 		else if (typeof errorValue === 'object' && !Array.isArray(errorValue) && errorValue.message)
 			errorMessage = errorValue.message
 
@@ -117,7 +117,8 @@ const AddIssuePage: NextPage = () => {
 				steps={[
 					{ label: '01 Create Issue', isActive: true },
 					{ label: '02 Upload assets', isActive: false },
-					{ label: '03 Publish', isActive: false },
+					{ label: '03 Upload pages', isActive: false },
+					{ label: '04 Publish', isActive: false },
 				]}
 			/>
 			<form className='form'>
@@ -148,9 +149,10 @@ const AddIssuePage: NextPage = () => {
 				</Label>
 				<div className='description'>Upload a photo with your signature used for signing the comic covers</div>
 				<FileUpload
+					id='signature-upload'
 					label='Upload your signature'
-					onUpload={(url) => {
-						setValue('signature', url)
+					onUpload={(urls) => {
+						setValue('signature', urls[0])
 					}}
 					className='signature-upload'
 				/>
@@ -162,4 +164,4 @@ const AddIssuePage: NextPage = () => {
 	)
 }
 
-export default AddIssuePage
+export default CreateIssuePage

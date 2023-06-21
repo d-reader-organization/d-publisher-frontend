@@ -10,6 +10,7 @@ import DashboardIcon from 'public/assets/vector-icons/dashboard.svg'
 import AnalyticsIcon from 'public/assets/vector-icons/analytics.svg'
 import InboxIcon from 'public/assets/vector-icons/inbox.svg'
 import Button from 'components/Button'
+import { useRouter } from 'next/router'
 
 const NAVIGATION_LIST_ITEMS = [
 	{
@@ -33,17 +34,19 @@ const NAVIGATION_LIST_ITEMS = [
 ]
 
 const Sidebar = () => {
+	const router = useRouter()
 	const { disconnect } = useWallet()
 
 	const handleLogout = () => {
 		disconnect()
+		router.push('/')
 	}
 
 	return (
 		<div className='sidebar'>
 			<div className='sidebar-upper'>
 				<LogoIcon />
-				<Link href='/comic/create' replace={true}>
+				<Link href='/comic/create' replace={true} className='create-button-link'>
 					<Button backgroundColor='important' className='create-button'>
 						<DocumentIcon className='document-icon' />
 						Create

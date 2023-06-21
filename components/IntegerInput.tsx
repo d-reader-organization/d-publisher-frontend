@@ -31,7 +31,12 @@ const IntegerInput = forwardRef<HTMLInputElement, Props>(
 				>
 					<MinusIcon />
 				</Button>
-				<input ref={ref} value={valueSufix ? `${value} ${valueSufix}` : value} className='number-input-value' />
+				<input
+					ref={ref}
+					onChange={() => {}}
+					value={valueSufix ? `${value} ${valueSufix}` : value}
+					className='number-input-value'
+				/>
 				<Button
 					backgroundColor='transparent'
 					borderColor='grey-300'

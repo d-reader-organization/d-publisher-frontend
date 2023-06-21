@@ -1,5 +1,5 @@
 import React, { forwardRef, useState } from 'react'
-import { cloneDeep, remove } from 'lodash'
+import { cloneDeep } from 'lodash'
 
 import { SelectOption } from 'types/SelectOption'
 import { SelectInputField } from 'types/selectInputField'
@@ -69,5 +69,7 @@ const SelectWithInput = forwardRef<HTMLInputElement, Props>(({ options, onChange
 		</div>
 	)
 })
+
+SelectWithInput.displayName = 'SelectWithInput'
 
 export default SelectWithInput

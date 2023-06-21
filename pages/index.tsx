@@ -24,7 +24,7 @@ const HomePage: NextPage = () => {
 			</div>
 			<div>
 				<ConnectWalletButton />
-				<div className='wallet-text'>Don't have a wallet yet?</div>
+				<div className='wallet-text'>Don&apos;t have a wallet yet?</div>
 				<div className='wallet-link-wrapper'>
 					<a href='https://solflare.com/download' target='_blank' className='wallet-link'>
 						<Button backgroundColor='transparent' borderColor='grey-100' className='wallet-link-button'>

@@ -1,91 +1,136 @@
 import React, { InputHTMLAttributes, forwardRef, useImperativeHandle, useRef, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import clsx from 'clsx'
+import { cloneDeep, remove } from 'lodash'
 
 import ImageIcon from 'public/assets/vector-icons/image.svg'
 import CloseIcon from 'public/assets/vector-icons/close.svg'
 import { convertFileToBlob } from 'utils/file'
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
-	label: string
-	onUpload: (url: string) => void
+	id: string
+	label?: string
+	allowMultipleFiles?: boolean
+	onUpload?: (url: string[]) => void
 }
 
-const FileUpload = forwardRef<HTMLInputElement, Props>(({ label, onUpload, className = '', ...props }, ref) => {
-	const componentRef = useRef<HTMLInputElement>(null)
-	const [assetUrl, setAssetUrl] = useState<string>('')
-	const [draggingFileOver, setDraggingFileOver] = useState<boolean>(false)
+const FileUpload = forwardRef<HTMLInputElement, Props>(
+	({ id, label, allowMultipleFiles = false, onUpload = () => {}, className = '', ...props }, ref) => {
+		const componentRef = useRef<HTMLInputElement>(null)
+		const [assetUrls, setAssetUrls] = useState<string[]>([])
+		const [draggingFileOver, setDraggingFileOver] = useState<boolean>(false)
 
-	const { getRootProps, getInputProps } = useDropzone({
-		onDragEnter: () => {
-			setDraggingFileOver(true)
-		},
-		onDragLeave: () => {
-			setDraggingFileOver(false)
-		},
-		onDrop: async (files) => {
-			setDraggingFileOver(false)
-			const file = files[0]
+		const { getRootProps, getInputProps } = useDropzone({
+			onDragEnter: () => {
+				setDraggingFileOver(true)
+			},
+			onDragLeave: () => {
+				setDraggingFileOver(false)
+			},
+			onDrop: async (files) => {
+				setDraggingFileOver(false)
 
-			if (!file) return
+				if (!allowMultipleFiles && files.length > 1) return
 
-			const blob = await convertFileToBlob(file)
+				const urls: string[] = []
 
-			const url = URL.createObjectURL(blob)
-			setAssetUrl(url)
-		},
-	})
+				for (let i = 0; i < files.length; i++) {
+					const blob = await convertFileToBlob(files[i])
 
-	useImperativeHandle(ref, () => componentRef.current as HTMLInputElement)
+					const url = URL.createObjectURL(blob)
 
-	const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
-		if (!event.target) return
+					urls.push(url)
+				}
 
-		const files = event.target.files
-		const file = files ? files[0] : null
+				setAssetUrls(urls.sort())
+			},
+		})
 
-		if (!file) return
+		useImperativeHandle(ref, () => componentRef.current as HTMLInputElement)
 
-		const blob = await convertFileToBlob(file)
+		const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+			if (!event.target) return
 
-		const url = URL.createObjectURL(blob)
-		setAssetUrl(url)
-		onUpload(url)
+			const files = event.target.files || []
+
+			if (!allowMultipleFiles && files.length > 1) return
+
+			const urls: string[] = []
+
+			for (let i = 0; i < files.length; i++) {
+				const blob = await convertFileToBlob(files[i])
+
+				const url = URL.createObjectURL(blob)
+
+				urls.push(url)
+			}
+
+			setAssetUrls(urls.sort())
+			onUpload(urls)
+		}
+
+		const handleRemoveFile = (event: React.MouseEvent<HTMLButtonElement>, assetUrl: string) => {
+			if (!componentRef.current) return
+			event.preventDefault()
+			event.stopPropagation()
+
+			const deepClonedAssetUrls = cloneDeep(assetUrls)
+
+			remove(deepClonedAssetUrls, (deepClonedAssetUrl) => deepClonedAssetUrl === assetUrl)
+
+			setAssetUrls(deepClonedAssetUrls.sort())
+			onUpload(deepClonedAssetUrls)
+			URL.revokeObjectURL(assetUrl)
+			componentRef.current.value = ''
+		}
+
+		return (
+			<label
+				htmlFor={id}
+				className={clsx('file-upload', className, {
+					'file-upload--no-pointer': assetUrls.length > 0,
+					'file-upload--dropping': draggingFileOver,
+				})}
+				{...getRootProps()}
+			>
+				{assetUrls.length > 0 && (
+					<div className='preview-image-list'>
+						{assetUrls.map((assetUrl) => (
+							<div
+								key={assetUrl}
+								className={clsx('preview-image-wrapper', {
+									'preview-image-wrapper--cover': assetUrls.length === 1,
+								})}
+							>
+								<img src={assetUrl} alt='preview-image' className='preview-image' />
+								<button className='close-button' onClick={(event) => handleRemoveFile(event, assetUrl)}>
+									<CloseIcon className='close-icon' />
+								</button>
+							</div>
+						))}
+					</div>
+				)}
+
+				<input
+					{...props}
+					{...getInputProps}
+					id={id}
+					type='file'
+					multiple={allowMultipleFiles}
+					onChange={handleFileChange}
+					ref={componentRef}
+					disabled={assetUrls.length > 0}
+				/>
+				{assetUrls.length === 0 && (
+					<>
+						<ImageIcon className='image-icon' />
+						<span className='label'>{label}</span>
+					</>
+				)}
+			</label>
+		)
 	}
-
-	const handleRemoveFile = (event: React.MouseEvent<HTMLButtonElement>) => {
-		if (!componentRef.current) return
-		event.preventDefault()
-		event.stopPropagation()
-		setAssetUrl('')
-		onUpload('')
-		componentRef.current.value = ''
-	}
-
-	return (
-		<label
-			className={clsx('file-upload', className, {
-				'file-upload--no-pointer': assetUrl,
-				'file-upload--dropping': draggingFileOver,
-			})}
-			{...getRootProps()}
-		>
-			{assetUrl && <img src={assetUrl} alt='preview-image' className='preview-image' />}
-			{assetUrl && (
-				<button className='close-button' onClick={handleRemoveFile}>
-					<CloseIcon className='close-icon' />
-				</button>
-			)}
-			<input {...props} {...getInputProps} type='file' onChange={handleFileChange} ref={componentRef} />
-			{!assetUrl && (
-				<>
-					<ImageIcon className='image-icon' />
-					<span className='label'>{label}</span>
-				</>
-			)}
-		</label>
-	)
-})
+)
 
 FileUpload.displayName = 'FileUpload'
 

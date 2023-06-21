@@ -3,7 +3,7 @@ import { cloneDeep, remove } from 'lodash'
 import { ClickAwayListener } from '@mui/material'
 import clsx from 'clsx'
 
-import { SelectOption } from 'types/selectOption'
+import { SelectOption } from 'types/SelectOption'
 import DropdownIcon from 'public/assets/vector-icons/dropdown.svg'
 import CloseIcon from 'public/assets/vector-icons/close.svg'
 
@@ -11,15 +11,27 @@ import Input from './Input'
 
 interface Props extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onSelect'> {
 	options: SelectOption[]
+	defaultSelectedOptions?: SelectOption[]
 	onSelect: (selectedOptions: SelectOption[]) => void
 	isSearchable?: boolean
 	isMultipleSelect?: boolean
 }
 
 const Select = forwardRef<HTMLInputElement, Props>(
-	({ options, onSelect, className, isSearchable = false, isMultipleSelect = false, ...props }, ref) => {
-		const [searchTerm, setSearchTerm] = useState('')
-		const [selectedOptions, setSelectedOptions] = useState<SelectOption[]>([])
+	(
+		{
+			options,
+			defaultSelectedOptions = [],
+			onSelect,
+			className,
+			isSearchable = false,
+			isMultipleSelect = false,
+			...props
+		},
+		ref
+	) => {
+		const [searchTerm, setSearchTerm] = useState(defaultSelectedOptions[0]?.label ?? '')
+		const [selectedOptions, setSelectedOptions] = useState<SelectOption[]>(defaultSelectedOptions)
 		const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 
 		const filteredOptions = useMemo(
@@ -39,8 +51,8 @@ const Select = forwardRef<HTMLInputElement, Props>(
 			setSearchTerm(event.target.value)
 		}
 
-		const unselectOption = (value: string): SelectOption[] | null => {
-			let updatedSelectedOptions: SelectOption[] | null = null
+		const unselectOption = (value: string): SelectOption[] => {
+			let updatedSelectedOptions: SelectOption[] = []
 			setSelectedOptions((currentSelectedOptions) => {
 				const deepClonedCurrentSelectedOptions = cloneDeep(currentSelectedOptions)
 				remove(deepClonedCurrentSelectedOptions, (selectedOption) => selectedOption.value === value)
@@ -61,6 +73,8 @@ const Select = forwardRef<HTMLInputElement, Props>(
 
 			if (!selectedOption) return
 
+			if (!isMultipleSelect) setIsDropdownOpen(false)
+
 			if (isOptionAlreadySelected) {
 				const updatedSelectedOptions = unselectOption(value)
 				if (updatedSelectedOptions) onSelect(updatedSelectedOptions)
@@ -71,7 +85,6 @@ const Select = forwardRef<HTMLInputElement, Props>(
 			if (!isMultipleSelect && !isOptionAlreadySelected) {
 				setSelectedOptions([selectedOption])
 				onSelect([selectedOption])
-				setIsDropdownOpen(false)
 
 				if (!isSearchable) setSearchTerm(selectedOption.label)
 
@@ -92,13 +105,13 @@ const Select = forwardRef<HTMLInputElement, Props>(
 		}
 
 		return (
-			<div className='select'>
+			<div className={clsx('select', className)}>
 				<ClickAwayListener onClickAway={() => setIsDropdownOpen(false)}>
 					<div className='input-wrapper'>
 						<div className='input-icon-wrapper'>
 							<Input
 								{...props}
-								className={clsx('select-search', className, { 'select-search--disabled': !isSearchable })}
+								className={clsx('select-search', { 'select-search--disabled': !isSearchable })}
 								ref={ref}
 								onChange={handleSearchTermChange}
 								value={searchTerm}

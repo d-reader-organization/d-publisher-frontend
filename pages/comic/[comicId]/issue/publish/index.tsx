@@ -12,7 +12,8 @@ const PublishIssue: NextPage = () => {
 				steps={[
 					{ label: '01 Create Issue', isActive: true },
 					{ label: '02 Upload assets', isActive: true },
-					{ label: '03 Publish', isActive: true },
+					{ label: '03 Upload pages', isActive: true },
+					{ label: '04 Publish', isActive: true },
 				]}
 			/>
 			<form className='form'></form>

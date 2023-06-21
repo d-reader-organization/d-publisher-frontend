@@ -15,7 +15,6 @@ import FileUpload from 'components/FileUpload'
 import Checkbox from 'components/Checkbox'
 import Button from 'components/Button'
 import ArrowRightIcon from 'public/assets/vector-icons/arrow-right.svg'
-import { SelectOption } from 'types/selectOption'
 import { AudienceType } from 'enums/audienceType'
 import { CurrentStatus } from 'enums/currentStatus'
 import { CreateComicFormData } from 'types/createComicFormData'
@@ -157,7 +156,7 @@ const CreatePage: NextPage = () => {
 								if (!selectedOptions[0]) {
 									setValue('audienceType', '')
 								}
-								setValue('audienceType', selectedOptions[0].value as AudienceType)
+								setValue('audienceType', (selectedOptions[0]?.value as AudienceType) ?? '')
 							}}
 							ref={register('audienceType').ref}
 						/>
@@ -175,7 +174,7 @@ const CreatePage: NextPage = () => {
 								if (!selectedOptions[0]) {
 									setValue('currentStatus', '')
 								}
-								setValue('currentStatus', selectedOptions[0].value as CurrentStatus)
+								setValue('currentStatus', (selectedOptions[0]?.value as CurrentStatus) ?? '')
 							}}
 							ref={register('currentStatus').ref}
 						/>
@@ -187,10 +186,11 @@ const CreatePage: NextPage = () => {
 							Comic Logo
 						</Label>
 						<FileUpload
+							id='logo-upload'
 							label='Choose a picture 200x200px'
 							className='comic-logo-input'
-							onUpload={(url) => {
-								setValue('logo', url)
+							onUpload={(urls) => {
+								setValue('logo', urls[0])
 							}}
 							ref={register('logo').ref}
 						/>
@@ -200,10 +200,11 @@ const CreatePage: NextPage = () => {
 							Comic Banner
 						</Label>
 						<FileUpload
+							id='banner-upload'
 							label='Choose a picture 557x280px'
 							className='comic-banner-input'
-							onUpload={(url) => {
-								setValue('banner', url)
+							onUpload={(urls) => {
+								setValue('banner', urls[0])
 							}}
 							ref={register('banner').ref}
 						/>
