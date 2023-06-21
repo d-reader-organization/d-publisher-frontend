@@ -17,10 +17,15 @@
 @use 'components/file-upload.module.scss';
 @use 'components/checkbox.module.scss';
 @use 'components/connect-wallet-button.scss';
+@use 'components/number-input.module.scss';
+@use 'components/select-with-input.module.scss';
+@use 'components/expandable.module.scss';
 
 // Pages
-@use 'pages/create.module.scss';
 @use 'pages/index.module.scss';
+@use 'pages/comic-create.module.scss';
+@use 'pages/issue-create.module.scss';
+@use 'pages/issue-upload-assets.module.scss';
 
 // Variables
 @use 'variables/theme.module.scss';

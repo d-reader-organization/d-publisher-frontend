@@ -24,15 +24,15 @@ const HomePage: NextPage = () => {
 			</div>
 			<div>
 				<ConnectWalletButton />
-				<div className='wallet-text'>Don't have a wallet yet?</div>
+				<div className='wallet-text'>Don&apos;t have a wallet yet?</div>
 				<div className='wallet-link-wrapper'>
 					<a href='https://solflare.com/download' target='_blank' className='wallet-link'>
-						<Button color='transparent' className='wallet-link-button'>
+						<Button backgroundColor='transparent' borderColor='grey-100' className='wallet-link-button'>
 							<SolflareIcon className='wallet-link-icon' /> Get Solflare
 						</Button>
 					</a>
 					<a href='https://phantom.app/download' target='_blank' className='wallet-link'>
-						<Button color='transparent' className='wallet-link-button'>
+						<Button backgroundColor='transparent' borderColor='grey-100' className='wallet-link-button'>
 							<PhantomIcon className='wallet-link-icon' />
 							Get Phantom
 						</Button>

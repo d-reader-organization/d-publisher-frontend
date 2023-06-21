@@ -1,0 +1,34 @@
+@use '../variables/theme.module.scss' as *;
+
+.form {
+	.rarities-select {
+		width: 262px;
+	}
+
+	.upload-pages {
+		width: 100%;
+		max-width: 910px;
+		height: 410px;
+	}
+
+	.rarity-cover-wrapper {
+		display: flex;
+		justify-content: center;
+	}
+
+	.cover-image-upload {
+		margin-right: 50px;
+	}
+
+	.default-issue-checkbox {
+		margin-right: 12px;
+	}
+
+	.default-issue-checkbox-wrapper {
+		display: flex;
+		align-items: center;
+		font-weight: 500;
+		font-size: 16px;
+		line-height: 22px;
+	}
+}

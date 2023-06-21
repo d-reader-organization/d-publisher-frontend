@@ -1,5 +1,11 @@
 export const generateRequiredErrorMessage = (name: string) => `${name} is required`
 
+export const generateRequiredArrayElementErrorMessage = (name: string) => `All of ${name} inputs are required`
+
+export const generateMinNumberErrorMessage = (name: string, min: number) => `Minimum value for ${name} is ${min}`
+
+export const generateMaxNumberErrorMessage = (name: string, max: number) => `Maximum value for ${name} is ${max}`
+
 export const generateMinLengthErrorMessage = (name: string, minLength: number | string) =>
 	`Max length for ${name} is ${minLength} characters`
 

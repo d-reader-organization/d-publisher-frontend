@@ -1,0 +1,25 @@
+@use '../variables/theme.module.scss' as *;
+
+.form {
+	.description {
+		font-weight: 400;
+		font-size: 14px;
+		line-height: 19px;
+		color: $grey-100;
+	}
+
+	.issue-number-wrapper {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		max-width: 571px;
+		width: 100%;
+		margin-bottom: 34px;
+	}
+
+	.signature-upload {
+		width: 234px;
+		height: 194px;
+		margin-top: 24px;
+	}
+}
