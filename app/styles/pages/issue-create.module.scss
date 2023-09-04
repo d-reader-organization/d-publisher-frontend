@@ -1,0 +1,43 @@
+@use '../variables/theme.module.scss' as *;
+
+.create-comic-issue-page {
+	.form {
+		padding: 60px 120px;
+
+		.description {
+			font-weight: 400;
+			font-size: 14px;
+			line-height: 19px;
+			color: $grey-100;
+		}
+
+		.issue-number-wrapper {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			max-width: 571px;
+			width: 100%;
+			margin-bottom: 34px;
+		}
+
+		.signature-upload {
+			width: 234px;
+			height: 194px;
+			margin-top: 24px;
+		}
+
+		.actions {
+			display: flex;
+			align-items: center;
+			margin-top: 120px;
+		}
+
+		.action-button {
+			margin-right: 30px;
+		}
+
+		.action-button-icon {
+			margin-left: 8px;
+		}
+	}
+}

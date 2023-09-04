@@ -1,0 +1,30 @@
+@use '../variables/theme.module.scss' as *;
+
+.dashboard-stats {
+	display: flex;
+
+	.item {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		width: 33.33%;
+		padding: 60px 0 76px 0;
+	}
+
+	.item-title {
+		margin-bottom: 7px;
+		font-weight: 600;
+		font-size: 16px;
+		line-height: 19px;
+		color: $grey-100;
+	}
+
+	.item-value {
+		font-weight: 600;
+		font-size: 30px;
+		line-height: 36px;
+		color: $white;
+	}
+
+}

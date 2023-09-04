@@ -1,0 +1,52 @@
+@use '../variables/theme.module.scss' as *;
+@use '../mixins/common.module.scss' as *;
+
+.login-page {
+	.title {
+		text-align: center;
+		padding-top: 60px;
+	}
+
+	.subtitle {
+		margin-top: 0;
+		text-align: center;
+	}
+
+	.container {
+		@include centeredColumn;
+	}
+
+	.form {
+		margin: 0 auto;
+		width: max-content;
+		padding: 40px 120px;
+
+		.input-wrapper {
+			min-width: 460px;
+		}
+
+		.actions {
+			display: flex;
+			align-items: center;
+			margin-top: 120px;
+		}
+
+		.action-button {
+			margin: 0 auto 2rem auto;
+
+			&--register {
+				font-weight: normal;
+				border-radius: 0;
+				border-bottom: 1px solid $grey-100;
+
+				&:hover {
+					filter: brightness(1.5);
+				}
+			}
+		}
+
+		.action-button-icon {
+			margin-left: 8px;
+		}
+	}
+}
