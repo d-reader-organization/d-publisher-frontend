@@ -1,17 +1,9 @@
-'use client'
-
 import type { Metadata } from 'next'
-import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react'
-import { WalletModalProvider } from '@solana/wallet-adapter-react-ui'
-import { QueryClient, QueryClientProvider } from 'react-query'
-import { ReactQueryDevtools } from 'react-query/devtools'
-import { ThemeProvider, CssBaseline } from '@mui/material'
+import { CssBaseline } from '@mui/material'
+import ClientContext from '@/providers/ClientContextProvider'
 import CreatorAuthProvider from 'providers/CreatorAuthProvider'
 import ToastProvider from 'providers/ToastProvider'
-import { endpoint, network } from 'constants/environment'
-import { getWallets } from 'constants/wallets'
 import localFont from 'next/font/local'
-import theme from './styles/theme'
 import clsx from 'clsx'
 import 'app/styles/app.scss'
 
@@ -43,39 +35,18 @@ export const metadata: Metadata = {
 	viewport: 'minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover',
 }
 
-const queryClient = new QueryClient({
-	defaultOptions: {
-		queries: {
-			refetchOnWindowFocus: true,
-			refetchOnMount: false,
-			refetchOnReconnect: false,
-			retry: 1,
-			staleTime: 10 * 1000, // stale for 10 seconds
-		},
-	},
-})
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang='en'>
 			<body className={clsx(satoshi.className, 'layout')}>
-				<QueryClientProvider client={queryClient}>
+				<ClientContext>
 					<CreatorAuthProvider>
-						<ThemeProvider theme={theme}>
-							<ConnectionProvider endpoint={endpoint}>
-								<WalletProvider wallets={getWallets(network)} autoConnect>
-									<WalletModalProvider className='wallet-dialog'>
-										<ToastProvider>
-											<CssBaseline />
-											{children}
-										</ToastProvider>
-									</WalletModalProvider>
-								</WalletProvider>
-							</ConnectionProvider>
-						</ThemeProvider>
+						<ToastProvider>
+							<CssBaseline />
+							{children}
+						</ToastProvider>
 					</CreatorAuthProvider>
-					<ReactQueryDevtools initialIsOpen={false} />
-				</QueryClientProvider>
+				</ClientContext>
 			</body>
 		</html>
 	)
