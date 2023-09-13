@@ -14,7 +14,6 @@ import Textarea from 'components/Textarea'
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { RoutePath } from 'enums/routePath'
-import CircularProgress from '@mui/material/CircularProgress'
 import { yourDetailsValidationSchema } from '../schemas'
 import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
 
@@ -61,40 +60,39 @@ export default function UpdateYourCreatorDetailsPage() {
 				]}
 			/>
 
-			<main className='register-page register-page--visual-identity'>
-				{me ? (
-					<>
-						<h1 className='title'>Hi {me.name}</h1>
+			<main className='register-page'>
+				<>
+					<h1 className='title' style={{ visibility: me?.name ? 'visible' : 'hidden' }}>
+						Hi {me?.name}
+					</h1>
 
-						<form className='form'>
-							<Label>Short biography</Label>
-							<div className='description'>Your bio will be displayed on your dReader creator page</div>
-							<Textarea
-								maxCharacters={256}
-								rows={6}
-								{...register('description')}
-								placeholder='Emmy award winning visual development studio. Film, television, gaming, publishing...'
-							/>
-							<Label>Flavor text</Label>
-							<div className='description'>
-								Flavor text will be displayed beneath the description, as a small testimonial
-							</div>
-							<Textarea
-								maxCharacters={128}
-								rows={2}
-								{...register('flavorText')}
-								placeholder="Best studio I've ever worked with - my mom"
-							/>
+					<form className='form form--centered form--md'>
+						<Label>Short biography</Label>
+						<div className='description'>Your bio will be displayed on your dReader creator page</div>
+						<Textarea
+							maxCharacters={256}
+							rows={5}
+							{...register('description')}
+							placeholder='Emmy award winning visual development studio. Film, television, gaming, publishing...'
+						/>
+						<Label>Flavor text</Label>
+						<div className='description'>
+							Flavor text will be displayed beneath the description, as a small testimonial
+						</div>
+						<Textarea
+							maxCharacters={128}
+							rows={2}
+							{...register('flavorText')}
+							placeholder="Best studio I've ever worked with - my mom"
+						/>
+
+						<div className='actions'>
 							<Button type='submit' onClick={onSubmitClick} backgroundColor='green-100' className='action-button'>
 								Next <ArrowRightIcon className='action-button-icon' />
 							</Button>
-						</form>
-					</>
-				) : (
-					<div className='loading-spinner'>
-						<CircularProgress />
-					</div>
-				)}
+						</div>
+					</form>
+				</>
 			</main>
 		</>
 	)

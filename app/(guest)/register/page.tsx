@@ -51,7 +51,8 @@ export default function RegisterCreatorPage() {
 
 			<main className='register-page'>
 				<h1 className='title'>Tell us about yourself</h1>
-				<form className='form'>
+
+				<form className='form form--centered form--register-creator'>
 					<Label isRequired>Display name</Label>
 					<div className='description'>Your username will be visible to dReader community</div>
 					<Input {...register('name')} placeholder='John Doe' />
@@ -63,9 +64,12 @@ export default function RegisterCreatorPage() {
 						8 characters minimum. At least 1 lowercase, 1 uppercase character and 1 number
 					</div>
 					<Input {...register('password')} type='password' placeholder='********' />
-					<Button type='submit' onClick={onSubmitClick} backgroundColor='green-100' className='action-button'>
-						Next <ArrowRightIcon className='action-button-icon' />
-					</Button>
+
+					<div className='actions'>
+						<Button type='submit' onClick={onSubmitClick} backgroundColor='green-100' className='action-button'>
+							Next <ArrowRightIcon className='action-button-icon' />
+						</Button>
+					</div>
 				</form>
 			</main>
 		</>

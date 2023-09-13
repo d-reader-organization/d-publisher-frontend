@@ -1,3 +1,5 @@
+@use '../mixins/common.module.scss' as *;
+
 .label {
 	display: flex;
 	align-items: center;
@@ -9,6 +11,10 @@
 	&--small {
 		font-size: 12px;
 		line-height: 14px;
+	}
+
+	&--centered {
+		@include centeredRow;
 	}
 
 	.icon-wrapper {

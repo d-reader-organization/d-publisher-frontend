@@ -1,0 +1,23 @@
+.form--edit-comic-socials {
+	padding: 60px 120px;
+	max-width: 820px;
+
+	.social-media-wrapper {
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	.social-media-container {
+		width: calc(50% - 9px);
+		// margin-right: 18px;
+		// max-width: 388px;
+
+		&:nth-child(2n - 1) {
+			margin-right: 18px;
+		}
+	}
+
+	.group-label {
+		margin-bottom: 34px;
+	}
+}

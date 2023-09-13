@@ -6,12 +6,12 @@ import clsx from 'clsx'
 import LogoIcon from 'public/assets/vector-icons/logo-with-text.svg'
 import DocumentIcon from 'public/assets/vector-icons/document.svg'
 import DashboardIcon from 'public/assets/vector-icons/dashboard.svg'
+import ProfileIcon from 'public/assets/vector-icons/profile.svg'
 import AnalyticsIcon from 'public/assets/vector-icons/analytics.svg'
 import InboxIcon from 'public/assets/vector-icons/inbox.svg'
-import Button from 'components/Button'
-import { usePathname, useRouter } from 'next/navigation'
-import { RoutePath } from 'enums/routePath'
 import { useCreatorAuth } from 'providers/CreatorAuthProvider'
+import { RoutePath } from 'enums/routePath'
+import Button from 'components/Button'
 
 const NAVIGATION_LIST_ITEMS = [
 	{
@@ -19,6 +19,12 @@ const NAVIGATION_LIST_ITEMS = [
 		comingSoon: false,
 		title: 'Dashboard',
 		icon: <DashboardIcon className='navigation-item-icon' />,
+	},
+	{
+		href: RoutePath.Profile,
+		comingSoon: false,
+		title: 'Profile',
+		icon: <ProfileIcon className='navigation-item-icon navigation-item-icon--profile' />,
 	},
 	{
 		href: RoutePath.Analytics,

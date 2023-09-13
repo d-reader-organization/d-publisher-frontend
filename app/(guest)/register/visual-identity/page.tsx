@@ -6,16 +6,17 @@ import Button from 'components/Button'
 import Label from 'components/Label'
 import LogoIcon from 'public/assets/vector-icons/logo-with-text.svg'
 import ArrowRightIcon from 'public/assets/vector-icons/arrow-right.svg'
+import AvatarPlaceholderImage from 'public/assets/images/avatar-placeholder.jpg'
+import { useUpdateCreatorFiles } from 'api/creator/queries/useUpdateCreatorFiles'
+import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
 import { useFetchMe } from 'api/creator'
 import { useRouter } from 'next/navigation'
 import { RoutePath } from 'enums/routePath'
 import FileUpload from 'components/FileUpload'
-import { useUpdateCreatorFiles } from 'api/creator/queries/useUpdateCreatorFiles'
 import { UpdateCreatorFilesData } from 'models/creator'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm, Resolver } from 'react-hook-form'
 import { visualIdentityValidationSchema } from '../schemas'
-import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
 
 export default function UpdateCreatorVisualIdentityPage() {
 	const router = useRouter()
@@ -69,11 +70,11 @@ export default function UpdateCreatorVisualIdentityPage() {
 				]}
 			/>
 
-			<main className='register-page register-page--visual-identity'>
+			<main className='register-page'>
 				<h1 className='title'>Hello sexy!</h1>
 
-				<form className='form'>
-					<Label isRequired tooltipText='.jpg and .jpeg preferred if no transparency'>
+				<form className='form form--centered form--edit-visual-identity'>
+					<Label centered isRequired tooltipText='.jpg and .jpeg preferred if no transparency'>
 						Add profile avatar & cover
 					</Label>
 					<div className='description'>Recommended sizes are 500 x 500px for avatar and 680 x 320px for cover</div>
@@ -99,13 +100,13 @@ export default function UpdateCreatorVisualIdentityPage() {
 							previewUrl={me?.avatar}
 						/>
 					</div>
-					<Button onClick={onNextClick} backgroundColor='green-100' className='action-button'>
-						Next <ArrowRightIcon className='action-button-icon' />
-					</Button>
+					<div className='actions'>
+						<Button onClick={onNextClick} backgroundColor='green-100' className='action-button'>
+							Next <ArrowRightIcon className='action-button-icon' />
+						</Button>
+					</div>
 				</form>
 			</main>
-
-			{/* TODO: "Go Back" button */}
 		</>
 	)
 }

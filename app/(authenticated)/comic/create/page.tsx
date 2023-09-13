@@ -81,8 +81,8 @@ export default function CreateComicPage() {
 				]}
 			/>
 
-			<main className='create-comic-page'>
-				<form className='form'>
+			<main>
+				<form className='form form--create-comic form--md'>
 					<Label isRequired>Comic title</Label>
 					<Input {...register('title')} />
 					<Label isRequired>Genres</Label>

@@ -20,12 +20,20 @@
 @use 'components/select-with-input.module.scss';
 @use 'components/expandable.module.scss';
 
+// Forms
+@use 'forms/base-form.module.scss';
+@use 'forms/create-comic-issue-form.module.scss';
+@use 'forms/create-comic-form.module.scss';
+@use 'forms/edit-comic-assets-form.module.scss';
+@use 'forms/edit-comic-socials-form.module.scss';
+@use 'forms/edit-comic-issue-assets-form.module.scss';
+@use 'forms/edit-creator-visual-identity-form.module.scss';
+@use 'forms/login-creator-form.module.scss';
+
 // Pages
 @use 'pages/layout.module.scss';
 @use 'pages/index.module.scss';
-@use 'pages/comic-create.module.scss';
-@use 'pages/issue-create.module.scss';
-@use 'pages/issue-upload-assets.module.scss';
+@use 'pages/profile.module.scss';
 @use 'pages/register.module.scss';
 @use 'pages/login.module.scss';
 

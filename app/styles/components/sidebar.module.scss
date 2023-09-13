@@ -84,6 +84,13 @@
 
 	.navigation-item-icon {
 		margin-right: 13px;
+		width: 16px;
+		height: 16px;
+		color: white;
+
+		&--profile {
+			fill: white;
+		}
 	}
 
 	.actions {

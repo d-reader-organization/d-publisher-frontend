@@ -53,7 +53,8 @@ export default function ConnectCreatorSocialsPage() {
 		})
 	}, [me, reset])
 
-	const onSkipClick = () => {
+	const onSkipClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+		event.preventDefault()
 		router.push(RoutePath.RegisterSubmit)
 	}
 
@@ -86,10 +87,11 @@ export default function ConnectCreatorSocialsPage() {
 				]}
 			/>
 
-			<main className='register-page register-page--connect-socials'>
+			<main className='register-page'>
 				<h1 className='title'>Connect socials</h1>
 				<p className='subtitle'>Artists with connected socials perform 30% greater</p>
-				<form className='form'>
+
+				<form className='form form--centered form--sm'>
 					<div className='social-media-wrapper'>
 						<div className='social-media-container'>
 							<Label size='small'>Twitter</Label>
@@ -108,7 +110,8 @@ export default function ConnectCreatorSocialsPage() {
 							<Input {...register('website')} prefix='https://' />
 						</div>
 					</div>
-					<Box display='flex' flexDirection='row' justifyContent='center'>
+
+					<div className='actions'>
 						<Button
 							type='submit'
 							onClick={onSkipClick}
@@ -121,7 +124,7 @@ export default function ConnectCreatorSocialsPage() {
 						<Button type='submit' onClick={onSubmitClick} backgroundColor='green-100' className='action-button'>
 							Submit <ArrowRightIcon className='action-button-icon' />
 						</Button>
-					</Box>
+					</div>
 				</form>
 			</main>
 		</>

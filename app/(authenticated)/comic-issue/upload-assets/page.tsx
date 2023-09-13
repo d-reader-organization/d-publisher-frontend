@@ -111,7 +111,7 @@ export default function UploadComicIssueAssetsPage() {
 		})
 	}
 
-	// TODO: FIX THIS handle client-side form errors across the app
+	// TODO: handle client-side form errors across the app
 	const handleFormError = (errors: FieldErrors<CreateComicIssueData>) => {
 		const [_, errorValue] = Object.entries(errors)[0]
 
@@ -130,8 +130,8 @@ export default function UploadComicIssueAssetsPage() {
 				]}
 			/>
 
-			<main className='upload-comic-issue-assets-page'>
-				<form className='form'>
+			<main>
+				<form className='form form--md form--edit-comic-issue-assets'>
 					<Label isRequired tooltipText='Some tooltip text'>
 						Issue Covers
 					</Label>
@@ -181,9 +181,12 @@ export default function UploadComicIssueAssetsPage() {
 							</div>
 						</Expandable>
 					))}
-					<Button type='submit' onClick={handleNextClick} backgroundColor='grey-100' className='action-button'>
-						Next <ArrowRightIcon className='action-button-icon' />
-					</Button>
+
+					<div className='actions'>
+						<Button type='submit' onClick={handleNextClick} backgroundColor='grey-100' className='action-button'>
+							Next <ArrowRightIcon className='action-button-icon' />
+						</Button>
+					</div>
 				</form>
 			</main>
 		</>

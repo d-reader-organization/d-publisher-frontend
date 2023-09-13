@@ -1,4 +1,4 @@
-import React, { InputHTMLAttributes, forwardRef, useImperativeHandle, useRef, useState } from 'react'
+import React, { InputHTMLAttributes, forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { cloneDeep, remove } from 'lodash'
 import clsx from 'clsx'
@@ -6,6 +6,8 @@ import clsx from 'clsx'
 import ImageIcon from 'public/assets/vector-icons/image.svg'
 import CloseIcon from 'public/assets/vector-icons/close.svg'
 import { convertFileToBlob } from 'utils/file'
+import Image from 'next/image'
+import SkeletonImage from './SkeletonImage'
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
 	id: string
@@ -104,6 +106,12 @@ const FileUpload = forwardRef<HTMLInputElement, Props>(
 			componentRef.current.value = ''
 		}
 
+		useEffect(() => {
+			if (previewUrl) {
+				setAssetUrls([previewUrl])
+			}
+		}, [previewUrl])
+
 		return (
 			<label
 				htmlFor={id}
@@ -122,7 +130,7 @@ const FileUpload = forwardRef<HTMLInputElement, Props>(
 									'preview-image-wrapper--cover': assetUrls.length === 1,
 								})}
 							>
-								<img src={assetUrl || previewUrl} alt='' className='preview-image' />
+								<SkeletonImage fill src={assetUrl || previewUrl} alt='' className='preview-image' />
 								<button className='close-button' onClick={(event) => handleRemoveFile(event, assetUrl)}>
 									<CloseIcon className='close-icon' />
 								</button>

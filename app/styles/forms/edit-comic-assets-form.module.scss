@@ -1,0 +1,42 @@
+@use '../variables/theme.module.scss' as *;
+
+.form--edit-comic-assets {
+	padding: 60px 120px;
+
+	.comic-file-wrapper {
+		width: 100%;
+		display: flex;
+	}
+
+	.comic-file-container {
+		margin-right: 45px;
+
+		&:last-of-type {
+			margin-right: 0;
+		}
+	}
+
+	.comic-cover-input {
+		aspect-ratio: $comic-cover-aspect-ratio;
+		width: 280px;
+		height: auto;
+	}
+
+	.comic-logo-input {
+		aspect-ratio: 2/1;
+		width: 256px;
+		height: auto;
+	}
+
+	.comic-banner-input {
+		aspect-ratio: 800/450;
+		width: 600px;
+		height: auto;
+	}
+
+	.comic-pfp-input {
+		aspect-ratio: 1;
+		width: 256px;
+		height: auto;
+	}
+}

@@ -1,0 +1,55 @@
+@use '../variables/theme.module.scss' as *;
+@use '../mixins/common.module.scss' as *;
+
+.form {
+	width: max-content;
+	padding: 40px 120px 80px 120px;
+	min-width: $xs-width;
+
+	&--sm {
+		min-width: 640px;
+	}
+
+	&--md {
+		min-width: 820px;
+	}
+
+	&--lg {
+		min-width: 980px;
+	}
+
+	&--centered {
+		margin: 0 auto;
+	}
+
+	.description {
+		font-weight: 400;
+		margin-bottom: 12px;
+		font-size: 14px;
+		line-height: 18px;
+		color: $grey-100;
+	}
+
+	.actions {
+		// TODO: actions class should have margin-top on some forms
+		// add &--centered class
+		@include centeredRow;
+
+		.action-button:not(:last-child) {
+			margin-right: 1rem;
+		}
+
+		&--column {
+			@include centeredColumn;
+
+			.action-button:not(:last-child) {
+				margin-bottom: 1rem;
+				margin-right: 0;
+			}
+		}
+	}
+
+	.action-button-icon {
+		margin-left: 8px;
+	}
+}

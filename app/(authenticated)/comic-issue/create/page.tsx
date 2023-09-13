@@ -79,8 +79,8 @@ export default function CreateComicIssuePage() {
 				]}
 			/>
 
-			<main className='create-comic-issue-page'>
-				<form className='form'>
+			<main>
+				<form className='form form--md form--create-comic-issue'>
 					<Label isRequired>Issue title</Label>
 					<Input {...register('title')} placeholder='Name of the episode' />
 					<div className='issue-number-wrapper'>
@@ -122,9 +122,12 @@ export default function CreateComicIssuePage() {
 					/>
 					<Label>Flavor text</Label>
 					<Textarea maxCharacters={128} rows={2} {...register('flavorText')} placeholder='Some sweet flavor text' />
-					<Button type='submit' onClick={onSubmitClick} backgroundColor='grey-100' className='action-button'>
-						Next <ArrowRightIcon className='action-button-icon' />
-					</Button>
+
+					<div className='actions'>
+						<Button type='submit' onClick={onSubmitClick} backgroundColor='grey-100' className='action-button'>
+							Next <ArrowRightIcon className='action-button-icon' />
+						</Button>
+					</div>
 				</form>
 			</main>
 		</>

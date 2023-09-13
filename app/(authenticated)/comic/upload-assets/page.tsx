@@ -37,8 +37,6 @@ export default function UploadComicAssetsPage() {
 	})
 	const { mutateAsync: updateComicFiles } = useUpdateComicFiles(comicSlug)
 
-	// TODO: what if the comic already has files uploaded? reset(comic)
-
 	useAuthenticatedRoute()
 
 	const handleSaveAndClose = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -78,8 +76,8 @@ export default function UploadComicAssetsPage() {
 				]}
 			/>
 
-			<main className='create-comic-page'>
-				<form className='form'>
+			<main>
+				<form className='form form--edit-comic-assets form--md'>
 					<div className='comic-file-wrapper'>
 						<div className='comic-file-container'>
 							<Label isRequired tooltipText='.jpg or .jpeg formats preferred, .png allowed'>
@@ -140,6 +138,7 @@ export default function UploadComicAssetsPage() {
 							/>
 						</div>
 					</div>
+
 					<div className='actions'>
 						<Button
 							type='submit'

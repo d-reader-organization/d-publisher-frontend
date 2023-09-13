@@ -78,8 +78,8 @@ export default function ConnectComicSocialsPage() {
 				]}
 			/>
 
-			<main className='create-comic-page'>
-				<form className='form'>
+			<main>
+				<form className='form form--edit-comic-socials'>
 					<Label className='group-label'>Additional Links</Label>
 					<Label size='small'>Website</Label>
 					<Input prefix='https://' {...register('website')} />
