@@ -89,11 +89,12 @@ export default function CreateComicIssuePage() {
 							<p className='description'>Choose the episode number</p>
 						</div>
 						<IntegerInput
+							min={1}
 							ref={register('number').ref}
 							value={watch('number')}
-							onChange={(increment) => {
+							onChange={(step) => {
 								const currentNumber = getValues('number')
-								setValue('number', currentNumber + increment)
+								setValue('number', currentNumber + step)
 							}}
 						/>
 					</div>

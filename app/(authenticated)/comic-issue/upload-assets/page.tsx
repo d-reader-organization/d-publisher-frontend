@@ -123,7 +123,7 @@ export default function UploadComicIssueAssetsPage() {
 			<Header title='Create issue' />
 			<Steps
 				steps={[
-					{ label: '01 Create Issue', isActive: true },
+					{ label: '01 Create Issue', isActive: false },
 					{ label: '02 Upload assets', isActive: true },
 					{ label: '03 Upload pages', isActive: false },
 					{ label: '04 Publish', isActive: false },

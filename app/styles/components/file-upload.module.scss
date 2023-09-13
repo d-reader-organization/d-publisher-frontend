@@ -66,13 +66,12 @@
 	.preview-image-wrapper {
 		height: 100%;
 		min-height: 100%;
+		width: 100%;
 		margin-right: 12px;
 		position: relative;
-		flex-shrink: 0;
 
 		&:last-of-type {
 			margin-right: 0;
-			padding-right: 15px;
 
 			.close-button {
 				right: 20px;
@@ -98,6 +97,7 @@
 		height: 100%;
 		border-radius: 8px;
 		object-fit: cover;
+		position: relative !important;
 	}
 
 	.close-button {

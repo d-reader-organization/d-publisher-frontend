@@ -9,15 +9,15 @@ interface Props {
 	value?: number
 	min?: number
 	max?: number
-	onChange?: (increment: number) => void
+	onChange?: (step: number) => void
 	valueSufix?: string
 }
 
 const IntegerInput = forwardRef<HTMLInputElement, Props>(
 	({ value = 0, min = 0, max = 1000, onChange, valueSufix }, ref) => {
-		const handleChange = (event: React.MouseEvent<HTMLButtonElement>, increment: number) => {
+		const handleChange = (event: React.MouseEvent<HTMLButtonElement>, step: number) => {
 			event.preventDefault()
-			if (onChange) onChange(increment)
+			if (onChange) onChange(step)
 		}
 
 		return (

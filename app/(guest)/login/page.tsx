@@ -49,7 +49,7 @@ export default function LoginPage() {
 				<h1 className='title'>Welcome back</h1>
 				<p className='subtitle'>let&apos;s get back to building!</p>
 
-				<form className='form form--centered form-sm form--login-creator'>
+				<form className='form form--centered form--sm form--login-creator'>
 					<Label isRequired>Email</Label>
 					<Input {...register('nameOrEmail')} placeholder='john.doe@dreader.io' type='email' />
 
