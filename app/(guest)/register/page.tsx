@@ -14,6 +14,8 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useRegisterCreator } from 'api/auth'
 import { RoutePath } from 'enums/routePath'
 import { registerValidationSchema } from './schemas'
+import FormActions from '@/components/FormActions'
+import Form from '@/components/Form'
 
 export default function RegisterCreatorPage() {
 	const router = useRouter()
@@ -52,25 +54,26 @@ export default function RegisterCreatorPage() {
 			<main className='register-page'>
 				<h1 className='title'>Tell us about yourself</h1>
 
-				<form className='form form--centered form--register-creator'>
+				<Form centered minSize='sm' className='form--register-creator'>
 					<Label isRequired>Display name</Label>
 					<div className='description'>Your username will be visible to dReader community</div>
 					<Input {...register('name')} placeholder='John Doe' />
+
 					<Label isRequired>Email</Label>
-					<div className='description'>Your username will be visible to dReader community</div>
 					<Input {...register('email')} placeholder='john.doe@dreader.io' />
+
 					<Label isRequired>Password</Label>
 					<div className='description'>
 						8 characters minimum. At least 1 lowercase, 1 uppercase character and 1 number
 					</div>
 					<Input {...register('password')} type='password' placeholder='********' />
 
-					<div className='actions'>
+					<FormActions centered>
 						<Button type='submit' onClick={onSubmitClick} backgroundColor='green-100' className='action-button'>
 							Next <ArrowRightIcon className='action-button-icon' />
 						</Button>
-					</div>
-				</form>
+					</FormActions>
+				</Form>
 			</main>
 		</>
 	)

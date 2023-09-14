@@ -5,6 +5,7 @@ import LogoWithTextIcon from 'public/assets/vector-icons/logo-with-text.svg'
 import { RoutePath } from 'enums/routePath'
 import Button from 'components/Button'
 import useGuestRoute from '@/hooks/useCreatorGuestRoute'
+import FormActions from '@/components/FormActions'
 
 export default function Home() {
 	const router = useRouter()
@@ -15,7 +16,7 @@ export default function Home() {
 		<main className='index'>
 			<h1 className='title'>Welcome artist & creators</h1>
 
-			<div className='actions'>
+			<FormActions centered>
 				<Button
 					onClick={() => {
 						router.push(RoutePath.Register)
@@ -34,7 +35,7 @@ export default function Home() {
 				>
 					Login
 				</Button>
-			</div>
+			</FormActions>
 
 			<div>
 				<LogoWithTextIcon className='logo' />

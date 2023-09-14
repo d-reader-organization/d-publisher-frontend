@@ -12,6 +12,7 @@ import ArrowRightIcon from 'public/assets/vector-icons/arrow-right.svg'
 import { useToaster } from '@/providers/ToastProvider'
 import { yupRequiredMessage } from '@/utils/error'
 import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
+import Form from '@/components/Form'
 
 export default function UploadComicIssuePagesPage() {
 	const toaster = useToaster()
@@ -49,7 +50,7 @@ export default function UploadComicIssuePagesPage() {
 			/>
 
 			<main>
-				<form className='form form--edit-comic-issue-pages'>
+				<Form padding className='form--edit-comic-issue-pages'>
 					<Label isRequired tooltipText='some info'>
 						Add issue pages
 					</Label>
@@ -64,7 +65,7 @@ export default function UploadComicIssuePagesPage() {
 					<Button type='submit' onClick={handleNextClick} backgroundColor='grey-100' className='action-button'>
 						Next <ArrowRightIcon className='action-button-icon' />
 					</Button>
-				</form>
+				</Form>
 			</main>
 		</>
 	)

@@ -2,20 +2,42 @@
 @use '../mixins/common.module.scss' as *;
 
 .form {
-	width: max-content;
-	padding: 40px 120px 80px 120px;
 	min-width: $xs-width;
 
-	&--sm {
+	&--max-content {
+		width: max-content;
+	}
+
+	&--width-100 {
+		width: 100%;
+	}
+
+	&--base-padding {
+		padding: 60px 120px;
+	}
+
+	&--min-sm {
 		min-width: 640px;
 	}
 
-	&--md {
+	&--min-md {
 		min-width: 820px;
 	}
 
-	&--lg {
+	&--min-lg {
 		min-width: 980px;
+	}
+
+	&--max-sm {
+		max-width: 640px;
+	}
+
+	&--max-md {
+		max-width: 820px;
+	}
+
+	&--max-lg {
+		max-width: 980px;
 	}
 
 	&--centered {
@@ -31,9 +53,9 @@
 	}
 
 	.actions {
-		// TODO: actions class should have margin-top on some forms
-		// add &--centered class
-		@include centeredRow;
+		@include flexRow;
+		align-items: center;
+		justify-content: left;
 
 		.action-button:not(:last-child) {
 			margin-right: 1rem;
@@ -46,6 +68,14 @@
 				margin-bottom: 1rem;
 				margin-right: 0;
 			}
+		}
+
+		&--centered {
+			justify-content: center;
+		}
+
+		&--margin-top {
+			margin-top: 40px;
 		}
 	}
 

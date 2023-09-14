@@ -14,6 +14,8 @@ import { RoutePath } from 'enums/routePath'
 import { LoginData } from 'models/auth/login'
 import { loginValidationSchema } from './schemas'
 import useGuestRoute from 'hooks/useCreatorGuestRoute'
+import FormActions from '@/components/FormActions'
+import Form from '@/components/Form'
 
 export default function LoginPage() {
 	const router = useRouter()
@@ -32,12 +34,8 @@ export default function LoginPage() {
 		event.preventDefault()
 
 		handleSubmit(async (data) => {
-			try {
-				await login(data)
-				router.push(RoutePath.Dashboard)
-			} catch {
-				// do something?
-			}
+			await login(data)
+			router.push(RoutePath.Dashboard)
 		})()
 	}
 
@@ -49,14 +47,14 @@ export default function LoginPage() {
 				<h1 className='title'>Welcome back</h1>
 				<p className='subtitle'>let&apos;s get back to building!</p>
 
-				<form className='form form--centered form--sm form--login-creator'>
+				<Form padding centered minSize='sm' className='form--login-creator'>
 					<Label isRequired>Email</Label>
 					<Input {...register('nameOrEmail')} placeholder='john.doe@dreader.io' type='email' />
 
 					<Label isRequired>Password</Label>
 					<Input {...register('password')} type='password' placeholder='********' />
 
-					<div className='actions actions--column'>
+					<FormActions column centered>
 						<Button type='submit' onClick={onSubmitClick} backgroundColor='green-100' className='action-button'>
 							Let&apos;s go
 						</Button>
@@ -70,8 +68,8 @@ export default function LoginPage() {
 						>
 							No account? Register here
 						</Button>
-					</div>
-				</form>
+					</FormActions>
+				</Form>
 			</main>
 		</>
 	)

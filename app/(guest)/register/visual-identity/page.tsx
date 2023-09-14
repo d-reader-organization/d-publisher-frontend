@@ -6,7 +6,6 @@ import Button from 'components/Button'
 import Label from 'components/Label'
 import LogoIcon from 'public/assets/vector-icons/logo-with-text.svg'
 import ArrowRightIcon from 'public/assets/vector-icons/arrow-right.svg'
-import AvatarPlaceholderImage from 'public/assets/images/avatar-placeholder.jpg'
 import { useUpdateCreatorFiles } from 'api/creator/queries/useUpdateCreatorFiles'
 import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
 import { useFetchMe } from 'api/creator'
@@ -17,10 +16,15 @@ import { UpdateCreatorFilesData } from 'models/creator'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm, Resolver } from 'react-hook-form'
 import { visualIdentityValidationSchema } from '../schemas'
+import FormActions from '@/components/FormActions'
+import Form from '@/components/Form'
 
 export default function UpdateCreatorVisualIdentityPage() {
 	const router = useRouter()
+
 	const { data: me } = useFetchMe()
+	const { mutateAsync: updateCreatorFiles } = useUpdateCreatorFiles(me?.slug || '')
+
 	const {
 		register,
 		setValue,
@@ -29,11 +33,9 @@ export default function UpdateCreatorVisualIdentityPage() {
 		defaultValues: {
 			avatar: undefined,
 			banner: undefined,
-			logo: undefined,
 		},
 		resolver: yupResolver(visualIdentityValidationSchema) as Resolver<UpdateCreatorFilesData>,
 	})
-	const { mutateAsync: updateCreatorFiles } = useUpdateCreatorFiles(me?.slug || '')
 
 	useAuthenticatedRoute(RoutePath.Register)
 
@@ -47,14 +49,9 @@ export default function UpdateCreatorVisualIdentityPage() {
 
 		if (data.avatar) formData.append('avatar', data.avatar)
 		if (data.banner) formData.append('banner', data.banner)
-		if (data.logo) formData.append('logo', data.logo)
 
-		try {
-			await updateCreatorFiles(formData)
-			router.push(RoutePath.RegisterConnectSocials)
-		} catch {
-			// do something?
-		}
+		await updateCreatorFiles(formData)
+		router.push(RoutePath.RegisterConnectSocials)
 	}
 
 	return (
@@ -73,7 +70,7 @@ export default function UpdateCreatorVisualIdentityPage() {
 			<main className='register-page'>
 				<h1 className='title'>Hello sexy!</h1>
 
-				<form className='form form--centered form--edit-visual-identity'>
+				<Form padding centered className='form--edit-visual-identity'>
 					<Label centered isRequired tooltipText='.jpg and .jpeg preferred if no transparency'>
 						Add profile avatar & cover
 					</Label>
@@ -100,12 +97,12 @@ export default function UpdateCreatorVisualIdentityPage() {
 							previewUrl={me?.avatar}
 						/>
 					</div>
-					<div className='actions'>
+					<FormActions centered marginTop>
 						<Button onClick={onNextClick} backgroundColor='green-100' className='action-button'>
 							Next <ArrowRightIcon className='action-button-icon' />
 						</Button>
-					</div>
-				</form>
+					</FormActions>
+				</Form>
 			</main>
 		</>
 	)

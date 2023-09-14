@@ -27,11 +27,14 @@ import { RoutePath } from 'enums/routePath'
 import Box from '@mui/material/Box'
 import { connectSocialsValidationSchema } from '../schemas'
 import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
+import FormActions from '@/components/FormActions'
+import Form from '@/components/Form'
 
 export default function ConnectCreatorSocialsPage() {
 	const router = useRouter()
 	const { data: me } = useFetchMe()
 	const { mutateAsync: updateCreator } = useUpdateCreator(me?.slug || '')
+
 	const { register, handleSubmit, reset } = useForm<UpdateCreatorData>({
 		defaultValues: {
 			twitter: removeTwitter(me?.twitter),
@@ -45,12 +48,14 @@ export default function ConnectCreatorSocialsPage() {
 	useAuthenticatedRoute(RoutePath.Register)
 
 	useEffect(() => {
-		reset({
-			twitter: removeTwitter(me?.twitter),
-			instagram: removeInstagram(me?.instagram),
-			website: removeHttps(me?.website),
-			lynkfire: removeLynkfire(me?.lynkfire),
-		})
+		if (me) {
+			reset({
+				twitter: removeTwitter(me.twitter),
+				instagram: removeInstagram(me.instagram),
+				website: removeHttps(me.website),
+				lynkfire: removeLynkfire(me.lynkfire),
+			})
+		}
 	}, [me, reset])
 
 	const onSkipClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -91,7 +96,7 @@ export default function ConnectCreatorSocialsPage() {
 				<h1 className='title'>Connect socials</h1>
 				<p className='subtitle'>Artists with connected socials perform 30% greater</p>
 
-				<form className='form form--centered form--sm'>
+				<Form centered minSize='sm'>
 					<div className='social-media-wrapper'>
 						<div className='social-media-container'>
 							<Label size='small'>Twitter</Label>
@@ -111,7 +116,7 @@ export default function ConnectCreatorSocialsPage() {
 						</div>
 					</div>
 
-					<div className='actions'>
+					<FormActions centered>
 						<Button
 							type='submit'
 							onClick={onSkipClick}
@@ -124,8 +129,8 @@ export default function ConnectCreatorSocialsPage() {
 						<Button type='submit' onClick={onSubmitClick} backgroundColor='green-100' className='action-button'>
 							Submit <ArrowRightIcon className='action-button-icon' />
 						</Button>
-					</div>
-				</form>
+					</FormActions>
+				</Form>
 			</main>
 		</>
 	)

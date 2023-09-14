@@ -15,6 +15,8 @@ import { RoutePath } from 'enums/routePath'
 import { useUpdateComicFiles } from 'api/comic'
 import { uploadAssetsValidationSchema } from '../schemas'
 import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
+import FormActions from '@/components/FormActions'
+import Form from '@/components/Form'
 
 export default function UploadComicAssetsPage() {
 	const router = useRouter()
@@ -57,12 +59,8 @@ export default function UploadComicAssetsPage() {
 		if (data.pfp) formData.append('pfp', data.pfp)
 		if (data.logo) formData.append('logo', data.logo)
 
-		try {
-			const comic = await updateComicFiles(formData)
-			router.push(`${RoutePath.ComicConnectSocials}?slug=${comic.slug}`)
-		} catch {
-			// do something?
-		}
+		const comic = await updateComicFiles(formData)
+		router.push(`${RoutePath.ComicConnectSocials}?slug=${comic.slug}`)
 	}
 
 	return (
@@ -77,7 +75,7 @@ export default function UploadComicAssetsPage() {
 			/>
 
 			<main>
-				<form className='form form--edit-comic-assets form--md'>
+				<Form padding minSize='md' className='form--edit-comic-assets'>
 					<div className='comic-file-wrapper'>
 						<div className='comic-file-container'>
 							<Label isRequired tooltipText='.jpg or .jpeg formats preferred, .png allowed'>
@@ -139,7 +137,7 @@ export default function UploadComicAssetsPage() {
 						</div>
 					</div>
 
-					<div className='actions'>
+					<FormActions marginTop>
 						<Button
 							type='submit'
 							onClick={handleSaveAndClose}
@@ -152,8 +150,8 @@ export default function UploadComicAssetsPage() {
 						<Button type='submit' onClick={handleSaveAndGoNext} backgroundColor='grey-100' className='action-button'>
 							Next <ArrowRightIcon className='action-button-icon' />
 						</Button>
-					</div>
-				</form>
+					</FormActions>
+				</Form>
 			</main>
 		</>
 	)

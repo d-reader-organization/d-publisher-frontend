@@ -13,6 +13,7 @@ import Container from '@mui/material/Container'
 import { useRouter } from 'next/navigation'
 import { useFetchMe } from 'api/creator'
 import { RoutePath } from 'enums/routePath'
+import FormActions from '@/components/FormActions'
 
 export default function SubmitCreatorRegistrationPage() {
 	const router = useRouter()
@@ -57,11 +58,11 @@ export default function SubmitCreatorRegistrationPage() {
 						Review time is around 12-24 hours. In the meantime, you can start creating!
 					</p>
 
-					<div className='actions'>
+					<FormActions centered>
 						<Button onClick={onSubmit} backgroundColor='green-100' className='action-button'>
 							Start creating <ArrowRightIcon className='action-button-icon' />
 						</Button>
-					</div>
+					</FormActions>
 				</Container>
 			</main>
 		</>

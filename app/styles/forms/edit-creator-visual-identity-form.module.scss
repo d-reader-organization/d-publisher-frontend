@@ -3,6 +3,8 @@
 
 	.profile-assets-upload {
 		position: relative;
+		width: max-content;
+		margin: 0 auto;
 
 		.avatar-upload {
 			position: absolute;
@@ -25,9 +27,5 @@
 			margin: 1rem auto;
 			padding: 0.5rem;
 		}
-	}
-
-	.action-button {
-		margin-top: 6rem;
 	}
 }

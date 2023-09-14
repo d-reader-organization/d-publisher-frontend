@@ -2,13 +2,13 @@
 
 import Header from 'components/layout/Header'
 import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
-import { useFetchMe } from '@/api/creator'
-import { useRouter } from 'next/navigation'
+import UpdateCreatorBasicInfoForm from '@/components/forms/UpdateCreatorBasicInfoForm'
+import UpdateCreatorVisualIdentity from '@/components/forms/UpdateCreatorVisualIdentity'
+import UpdateCreatorSocials from '@/components/forms/UpdateCreatorSocials'
 import Expandable from '@/components/Expandable'
-import RegisterForm from '@/components/forms/RegisterForm'
+import { useFetchMe } from '@/api/creator'
 
 export default function ProfilePage() {
-	const router = useRouter()
 	const { data: me } = useFetchMe()
 
 	useAuthenticatedRoute()
@@ -22,11 +22,14 @@ export default function ProfilePage() {
 
 			<main className='profile-page'>
 				<Expandable title='Basic info'>
-					<RegisterForm />
+					<UpdateCreatorBasicInfoForm />
 				</Expandable>
-				<Expandable title='Your details'>Your Details</Expandable>
-				<Expandable title='Visual Identity'>Visual Identity</Expandable>
-				<Expandable title='Socials'>Socials</Expandable>
+				<Expandable title='Visual Identity'>
+					<UpdateCreatorVisualIdentity />
+				</Expandable>
+				<Expandable title='Socials'>
+					<UpdateCreatorSocials />
+				</Expandable>
 			</main>
 		</>
 	)

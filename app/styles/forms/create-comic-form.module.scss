@@ -1,8 +1,6 @@
 @use '../variables/theme.module.scss' as *;
 
 .form--create-comic {
-	padding: 60px 120px;
-
 	.audience-status-wrapper {
 		display: flex;
 		flex-direction: row;

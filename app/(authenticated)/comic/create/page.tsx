@@ -20,6 +20,8 @@ import { AudienceType } from 'enums/audienceType'
 import { RoutePath } from 'enums/routePath'
 import { createComicValidationSchema } from '../schemas'
 import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
+import FormActions from '@/components/FormActions'
+import Form from '@/components/Form'
 
 type LegalAgreement = {
 	ownershipConfirmation: boolean
@@ -62,12 +64,8 @@ export default function CreateComicPage() {
 	}
 
 	const handleFormSubmit = async (data: CreateComicData) => {
-		try {
-			const comic = await createComic(data)
-			router.push(`${RoutePath.ComicUploadAssets}?slug=${comic.slug}`)
-		} catch {
-			// do something?
-		}
+		const comic = await createComic(data)
+		router.push(`${RoutePath.ComicUploadAssets}?slug=${comic.slug}`)
 	}
 
 	return (
@@ -82,7 +80,7 @@ export default function CreateComicPage() {
 			/>
 
 			<main>
-				<form className='form form--create-comic form--md'>
+				<Form padding minSize='md' className='form--create-comic'>
 					<Label isRequired>Comic title</Label>
 					<Input {...register('title')} />
 					<Label isRequired>Genres</Label>
@@ -172,7 +170,8 @@ export default function CreateComicPage() {
 							<span className='checkmark-text--highlighted'>Author Registration and Uploading Agreement</span>
 						</span>
 					</div>
-					<div className='actions'>
+
+					<FormActions marginTop>
 						<Button
 							type='submit'
 							onClick={handleSaveAndClose}
@@ -185,8 +184,8 @@ export default function CreateComicPage() {
 						<Button type='submit' onClick={handleSaveAndGoNext} backgroundColor='grey-100' className='action-button'>
 							Next <ArrowRightIcon className='action-button-icon' />
 						</Button>
-					</div>
-				</form>
+					</FormActions>
+				</Form>
 			</main>
 		</>
 	)

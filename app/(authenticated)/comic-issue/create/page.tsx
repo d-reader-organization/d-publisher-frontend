@@ -20,6 +20,8 @@ import { CollaboratorRole } from 'enums/collaboratorRole'
 import { ROLE_SELECT_OPTIONS } from '@/constants/roles'
 import { RoutePath } from '@/enums/routePath'
 import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
+import FormActions from '@/components/FormActions'
+import Form from '@/components/Form'
 
 export default function CreateComicIssuePage() {
 	const router = useRouter()
@@ -53,12 +55,8 @@ export default function CreateComicIssuePage() {
 	}
 
 	const handleFormSubmit = async (data: CreateComicIssueData) => {
-		try {
-			const comicIssue = await createComicIssue(data)
-			router.push(`${RoutePath.ComicIssueUploadAssets}?id=${comicIssue.id}`)
-		} catch {
-			// do something?
-		}
+		const comicIssue = await createComicIssue(data)
+		router.push(`${RoutePath.ComicIssueUploadAssets}?id=${comicIssue.id}`)
 	}
 
 	const handleFormError = (errors: FieldErrors<CreateComicIssueData>) => {
@@ -80,7 +78,7 @@ export default function CreateComicIssuePage() {
 			/>
 
 			<main>
-				<form className='form form--md form--create-comic-issue'>
+				<Form padding minSize='md' className='form--create-comic-issue'>
 					<Label isRequired>Issue title</Label>
 					<Input {...register('title')} placeholder='Name of the episode' />
 					<div className='issue-number-wrapper'>
@@ -124,12 +122,12 @@ export default function CreateComicIssuePage() {
 					<Label>Flavor text</Label>
 					<Textarea maxCharacters={128} rows={2} {...register('flavorText')} placeholder='Some sweet flavor text' />
 
-					<div className='actions'>
+					<FormActions marginTop>
 						<Button type='submit' onClick={onSubmitClick} backgroundColor='grey-100' className='action-button'>
 							Next <ArrowRightIcon className='action-button-icon' />
 						</Button>
-					</div>
-				</form>
+					</FormActions>
+				</Form>
 			</main>
 		</>
 	)

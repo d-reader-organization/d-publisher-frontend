@@ -29,10 +29,26 @@ const satoshi = localFont({
 export const metadata: Metadata = {
 	title: 'dPublisher',
 	description:
-		'Affordable, Authentic & Limited Edition. From manga to comics, now you can own digital graphic novels from your favorite artists and get rewarded for collecting.',
+		'📚 An on-chain platform for self-publishing digital comics, tracking user analytics, and capturing the audience',
 	keywords: 'NFT, dReader, dPublisher, Comic, Solana, SOL, mint, collection, manga, manwha',
 	themeColor: '#181A20',
 	viewport: 'minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover',
+	openGraph: {
+		type: 'website',
+		title: 'dPublisher',
+		description:
+			'📚 An on-chain platform for self-publishing digital comics, tracking user analytics, and capturing the audience',
+		images: 'public/assets/images/home-metadata.jpg',
+		url: process.env.NEXT_PUBLIC_SITE_URL,
+		siteName: 'Home for comics',
+	},
+	twitter: {
+		title: 'dPublisher',
+		description:
+			'📚 An on-chain platform for self-publishing digital comics, tracking user analytics, and capturing the audience',
+		site: undefined,
+		card: 'summary_large_image',
+	},
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

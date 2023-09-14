@@ -16,6 +16,8 @@ import { UpdateComicSocialsData } from 'models/comic'
 import { useUpdateComic } from 'api/comic'
 import { connectSocialsValidationSchema } from '../schemas'
 import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
+import FormActions from '@/components/FormActions'
+import Form from '@/components/Form'
 
 export default function ConnectComicSocialsPage() {
 	const router = useRouter()
@@ -59,12 +61,9 @@ export default function ConnectComicSocialsPage() {
 			discord: prependHttps(data.discord),
 			telegram: prependHttps(data.telegram),
 		}
-		try {
-			const comic = await updateComic(requestData)
-			router.push(`${RoutePath.CreateComicIssue}?comicSlug=${comic.slug}`)
-		} catch {
-			// TODO: check if this catch block is necessary or not??
-		}
+
+		const comic = await updateComic(requestData)
+		router.push(`${RoutePath.CreateComicIssue}?comicSlug=${comic.slug}`)
 	}
 
 	return (
@@ -79,7 +78,7 @@ export default function ConnectComicSocialsPage() {
 			/>
 
 			<main>
-				<form className='form form--edit-comic-socials'>
+				<Form className='form--edit-comic-socials'>
 					<Label className='group-label'>Additional Links</Label>
 					<Label size='small'>Website</Label>
 					<Input prefix='https://' {...register('website')} />
@@ -109,7 +108,8 @@ export default function ConnectComicSocialsPage() {
 							<Input {...register('telegram')} prefix='https://' />
 						</div>
 					</div>
-					<div className='actions'>
+
+					<FormActions marginTop>
 						<Button
 							type='submit'
 							onClick={handleSaveAndClose}
@@ -122,8 +122,8 @@ export default function ConnectComicSocialsPage() {
 						<Button type='submit' onClick={handleSaveAndGoNext} backgroundColor='grey-100' className='action-button'>
 							Next <ArrowRightIcon className='action-button-icon' />
 						</Button>
-					</div>
-				</form>
+					</FormActions>
+				</Form>
 			</main>
 		</>
 	)

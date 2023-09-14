@@ -16,6 +16,8 @@ import { useRouter } from 'next/navigation'
 import { RoutePath } from 'enums/routePath'
 import { yourDetailsValidationSchema } from '../schemas'
 import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
+import FormActions from '@/components/FormActions'
+import Form from '@/components/Form'
 
 export default function UpdateYourCreatorDetailsPage() {
 	const router = useRouter()
@@ -32,10 +34,12 @@ export default function UpdateYourCreatorDetailsPage() {
 	useAuthenticatedRoute(RoutePath.Register)
 
 	useEffect(() => {
-		reset({
-			description: me?.description || '',
-			flavorText: me?.flavorText || '',
-		})
+		if (me) {
+			reset({
+				description: me.description || '',
+				flavorText: me.flavorText || '',
+			})
+		}
 	}, [me, reset])
 
 	const onSubmitClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -66,7 +70,7 @@ export default function UpdateYourCreatorDetailsPage() {
 						Hi {me?.name}
 					</h1>
 
-					<form className='form form--centered form--md'>
+					<Form centered minSize='md'>
 						<Label>Short biography</Label>
 						<div className='description'>Your bio will be displayed on your dReader creator page</div>
 						<Textarea
@@ -86,12 +90,12 @@ export default function UpdateYourCreatorDetailsPage() {
 							placeholder="Best studio I've ever worked with - my mom"
 						/>
 
-						<div className='actions'>
+						<FormActions centered>
 							<Button type='submit' onClick={onSubmitClick} backgroundColor='green-100' className='action-button'>
 								Next <ArrowRightIcon className='action-button-icon' />
 							</Button>
-						</div>
-					</form>
+						</FormActions>
+					</Form>
 				</>
 			</main>
 		</>

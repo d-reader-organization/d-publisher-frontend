@@ -22,6 +22,8 @@ import { generateRequiredArrayElementErrorMessage } from '@/utils/error'
 import { ComicRarity } from '@/enums/comicRarity'
 import { cloneDeep } from 'lodash'
 import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
+import FormActions from '@/components/FormActions'
+import Form from '@/components/Form'
 
 export default function UploadComicIssueAssetsPage() {
 	const toaster = useToaster()
@@ -131,7 +133,7 @@ export default function UploadComicIssueAssetsPage() {
 			/>
 
 			<main>
-				<form className='form form--md form--edit-comic-issue-assets'>
+				<Form padding minSize='md' className='form--edit-comic-issue-assets'>
 					<Label isRequired tooltipText='Some tooltip text'>
 						Issue Covers
 					</Label>
@@ -182,12 +184,12 @@ export default function UploadComicIssueAssetsPage() {
 						</Expandable>
 					))}
 
-					<div className='actions'>
+					<FormActions marginTop>
 						<Button type='submit' onClick={handleNextClick} backgroundColor='grey-100' className='action-button'>
 							Next <ArrowRightIcon className='action-button-icon' />
 						</Button>
-					</div>
-				</form>
+					</FormActions>
+				</Form>
 			</main>
 		</>
 	)

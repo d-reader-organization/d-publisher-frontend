@@ -2,8 +2,10 @@ import { generateMaxLengthErrorMessage, generateMinLengthErrorMessage, yupRequir
 import * as yup from 'yup'
 
 export const connectSocialsValidationSchema = yup.object().shape({
-	description: yup.string().max(256, generateMaxLengthErrorMessage('description', 256)),
-	flavorText: yup.string().max(128, generateMaxLengthErrorMessage('description', 128)),
+	website: yup.string().max(30, generateMaxLengthErrorMessage('website', 30)),
+	twitter: yup.string().max(30, generateMaxLengthErrorMessage('twitter', 30)),
+	instagram: yup.string().max(30, generateMaxLengthErrorMessage('instagram', 30)),
+	lynkfire: yup.string().max(30, generateMaxLengthErrorMessage('lynkfire', 30)),
 })
 
 export const registerValidationSchema = yup.object().shape({
@@ -18,7 +20,7 @@ export const registerValidationSchema = yup.object().shape({
 
 export const yourDetailsValidationSchema = yup.object().shape({
 	description: yup.string().max(256, generateMaxLengthErrorMessage('description', 256)),
-	flavorText: yup.string().max(128, generateMaxLengthErrorMessage('description', 128)),
+	flavorText: yup.string().max(128, generateMaxLengthErrorMessage('flavor text', 128)),
 })
 
 export const visualIdentityValidationSchema = yup.object().shape({
