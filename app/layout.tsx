@@ -38,7 +38,7 @@ export const metadata: Metadata = {
 		title: 'dPublisher',
 		description:
 			'📚 An on-chain platform for self-publishing digital comics, tracking user analytics, and capturing the audience',
-		images: 'public/assets/images/home-metadata.jpg',
+		images: 'assets/images/home-metadata.jpg',
 		url: process.env.NEXT_PUBLIC_SITE_URL,
 		siteName: 'Home for comics',
 	},
