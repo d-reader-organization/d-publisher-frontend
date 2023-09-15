@@ -24,6 +24,9 @@ module.exports = withBundleAnalyzer(withPWA({
       }
     ],
   },
+	experimental: {
+		appDir: true,
+	},
 	webpack(config) {
 		config.module.rules.push({
 			test: /\.svg$/,
