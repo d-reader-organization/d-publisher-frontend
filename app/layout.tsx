@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { CssBaseline } from '@mui/material'
 import ClientContext from '@/providers/ClientContextProvider'
 import CreatorAuthProvider from 'providers/CreatorAuthProvider'
+// import MetadataImage from 'public/assets/images/home-metadata.jpg'
 import ToastProvider from 'providers/ToastProvider'
 import localFont from 'next/font/local'
 import clsx from 'clsx'
@@ -28,6 +29,7 @@ const satoshi = localFont({
 
 export const metadata: Metadata = {
 	title: 'dPublisher',
+	metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL as string),
 	description:
 		'📚 An on-chain platform for self-publishing digital comics, tracking user analytics, and capturing the audience',
 	keywords: 'NFT, dReader, dPublisher, Comic, Solana, SOL, mint, collection, manga, manwha',
@@ -38,7 +40,7 @@ export const metadata: Metadata = {
 		title: 'dPublisher',
 		description:
 			'📚 An on-chain platform for self-publishing digital comics, tracking user analytics, and capturing the audience',
-		images: 'assets/images/home-metadata.jpg',
+		images: '/assets/images/home-metadata.jpg',
 		url: process.env.NEXT_PUBLIC_SITE_URL,
 		siteName: 'Home for comics',
 	},
