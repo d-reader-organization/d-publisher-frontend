@@ -16,9 +16,13 @@ import { RoutePath } from 'enums/routePath'
 import { registerValidationSchema } from './schemas'
 import FormActions from '@/components/FormActions'
 import Form from '@/components/Form'
+import usePrefetchRoute from '@/hooks/usePrefetchRoute'
 
 export default function RegisterCreatorPage() {
 	const router = useRouter()
+
+	const nextPage = RoutePath.RegisterYourDetails
+
 	const { mutateAsync: registerCreator } = useRegisterCreator()
 	const { register, handleSubmit } = useForm<RegisterData>({
 		defaultValues: {
@@ -29,12 +33,14 @@ export default function RegisterCreatorPage() {
 		resolver: yupResolver(registerValidationSchema),
 	})
 
+	usePrefetchRoute(nextPage)
+
 	const onSubmitClick = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
 
 		handleSubmit(async (data) => {
 			await registerCreator(data)
-			router.push(RoutePath.RegisterYourDetails)
+			router.push(nextPage)
 		})()
 	}
 

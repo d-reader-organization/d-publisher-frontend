@@ -18,12 +18,14 @@ import { connectSocialsValidationSchema } from '../schemas'
 import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
 import FormActions from '@/components/FormActions'
 import Form from '@/components/Form'
+import usePrefetchRoute from '@/hooks/usePrefetchRoute'
 
 export default function ConnectComicSocialsPage() {
 	const router = useRouter()
 
 	const searchParams = useSearchParams()
 	const comicSlug = searchParams.get('slug') || ''
+	const nextPage = `${RoutePath.CreateComicIssue}?comicSlug=${comicSlug}`
 
 	const { register, handleSubmit: onSubmit } = useForm<UpdateComicSocialsData>({
 		defaultValues: {
@@ -39,6 +41,7 @@ export default function ConnectComicSocialsPage() {
 	})
 	const { mutateAsync: updateComic } = useUpdateComic(comicSlug)
 
+	usePrefetchRoute(nextPage)
 	useAuthenticatedRoute()
 
 	const handleSaveAndClose = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -62,8 +65,8 @@ export default function ConnectComicSocialsPage() {
 			telegram: prependHttps(data.telegram),
 		}
 
-		const comic = await updateComic(requestData)
-		router.push(`${RoutePath.CreateComicIssue}?comicSlug=${comic.slug}`)
+		await updateComic(requestData)
+		router.push(nextPage)
 	}
 
 	return (

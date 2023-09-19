@@ -24,7 +24,8 @@ export interface BasicComicIssue {
 	cover: string
 	signature: string
 	releaseDate: string
-	isFree: boolean
+	isFreeToRead: boolean
+	isFullyUploaded: boolean
 	isPublished: boolean
 	isPopular: boolean
 	isDeleted: boolean
@@ -53,12 +54,15 @@ export interface CreateComicIssueData
 		| 'description'
 		| 'flavorText'
 		| 'comicSlug'
+		| 'isFreeToRead'
 	> {
+	isFullyUploaded?: BasicComicIssue['isFullyUploaded']
 	supply?: BasicComicIssue['supply']
 	discountMintPrice?: BasicComicIssue['discountMintPrice']
 	mintPrice?: BasicComicIssue['mintPrice']
 	sellerFee?: BasicComicIssue['sellerFee']
 	creatorAddress?: BasicComicIssue['creatorAddress']
+	creatorBackupAddress?: string
 	collaborators?: ComicIssueCollaborator[]
 	royaltyWallets?: RoyaltyWallet[]
 	releaseDate: Date
@@ -76,6 +80,7 @@ export type UpdateComicIssueData = Partial<
 		| 'flavorText'
 		| 'releaseDate'
 		| 'creatorAddress'
+		| 'creatorBackupAddress'
 		| 'collaborators'
 		| 'royaltyWallets'
 	>

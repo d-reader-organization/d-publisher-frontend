@@ -59,7 +59,7 @@ const UpdateCreatorVisualIdentity: React.FC = () => {
 					id='banner-upload'
 					label='Upload cover'
 					className='banner-upload'
-					onFileObtain={(files) => {
+					onUpload={(files) => {
 						setValue('banner', files[0].file)
 					}}
 					ref={register('banner').ref}
@@ -69,7 +69,7 @@ const UpdateCreatorVisualIdentity: React.FC = () => {
 					id='avatar-upload'
 					label='Upload avatar'
 					className='avatar-upload'
-					onFileObtain={(files) => {
+					onUpload={(files) => {
 						setValue('avatar', files[0].file)
 					}}
 					ref={register('avatar').ref}

@@ -28,6 +28,7 @@ export const createComicIssueValidationSchema = yup.object().shape({
 	creatorAddress: yup.string(),
 	comicSlug: yup.string().required(),
 	releaseDate: yup.date().required(),
+	isFreeToRead: yup.boolean().required(),
 	collaborators: yup
 		.array()
 		.of(

@@ -12,7 +12,6 @@ const SkeletonImage: React.FC<Props> = ({ src, width, height, className, style, 
 	const transparentStyles: CSSProperties = { opacity: 0, position: 'absolute' }
 	const maybeTransparentStyles = isLoaded ? undefined : transparentStyles
 
-	console.log('src: ', src, isLoaded)
 	return (
 		<>
 			{(!isLoaded || !src) && (
@@ -24,7 +23,6 @@ const SkeletonImage: React.FC<Props> = ({ src, width, height, className, style, 
 					width={width}
 					height={height}
 					onLoadingComplete={() => {
-						console.log('LOADED!', src)
 						setIsLoaded(true)
 					}}
 					className={className}

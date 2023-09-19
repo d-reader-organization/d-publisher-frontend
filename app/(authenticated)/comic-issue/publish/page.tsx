@@ -17,7 +17,7 @@ import { RoutePath } from '@/enums/routePath'
 import usePrefetchRoute from '@/hooks/usePrefetchRoute'
 import { useUpdateComicIssuePages } from '@/api/comicIssue'
 
-export default function UploadComicIssuePagesPage() {
+export default function PublishComicIssuePage() {
 	const toaster = useToaster()
 	const router = useRouter()
 
@@ -30,6 +30,7 @@ export default function UploadComicIssuePagesPage() {
 
 	usePrefetchRoute(nextPage)
 	useAuthenticatedRoute()
+	// TODO: show different content depending on the user role
 
 	const handleUploadPages = (pageFiles: File[]) => {
 		setPageFiles(pageFiles)
@@ -51,7 +52,7 @@ export default function UploadComicIssuePagesPage() {
 			const pageNumber = i + 1
 			if (pageFile) formData.append(`pages[${i}][image]`, pageFile)
 			formData.append(`pages[${i}][pageNumber]`, pageNumber.toString())
-			formData.append(`pages[${i}][isPreviewable]`, (pageNumber <= numberOfPreviewPages).toString())
+			formData.append(`pages[${i}][isPreviewable]`, (pageNumber < numberOfPreviewPages).toString())
 			i = i + 1
 		}
 
@@ -66,8 +67,8 @@ export default function UploadComicIssuePagesPage() {
 				steps={[
 					{ label: '01 Create Issue', isActive: false },
 					{ label: '02 Upload assets', isActive: false },
-					{ label: '03 Upload pages', isActive: true },
-					{ label: '04 Publish', isActive: false },
+					{ label: '03 Upload pages', isActive: false },
+					{ label: '04 Publish', isActive: true },
 				]}
 			/>
 

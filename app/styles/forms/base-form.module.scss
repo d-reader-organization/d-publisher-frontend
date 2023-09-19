@@ -82,4 +82,26 @@
 	.action-button-icon {
 		margin-left: 8px;
 	}
+
+	.checkmark-row {
+		display: flex;
+		align-items: center;
+		margin-bottom: 20px;
+
+		&:last-of-type {
+			margin-bottom: 0;
+		}
+	}
+
+	.checkmark-text {
+		margin-left: 20px;
+		font-weight: 700;
+		font-size: 14px;
+		line-height: 19px;
+		color: $white;
+
+		&--highlighted {
+			color: $yellow;
+		}
+	}
 }

@@ -16,9 +16,13 @@ import { loginValidationSchema } from './schemas'
 import useGuestRoute from 'hooks/useCreatorGuestRoute'
 import FormActions from '@/components/FormActions'
 import Form from '@/components/Form'
+import usePrefetchRoute from '@/hooks/usePrefetchRoute'
 
 export default function LoginPage() {
 	const router = useRouter()
+
+	const nextPage = RoutePath.Dashboard
+
 	const { mutateAsync: login } = useLoginCreator()
 	const { register, handleSubmit } = useForm<LoginData>({
 		defaultValues: {
@@ -28,6 +32,7 @@ export default function LoginPage() {
 		resolver: yupResolver(loginValidationSchema),
 	})
 
+	usePrefetchRoute(nextPage)
 	useGuestRoute()
 
 	const onSubmitClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -35,7 +40,7 @@ export default function LoginPage() {
 
 		handleSubmit(async (data) => {
 			await login(data)
-			router.push(RoutePath.Dashboard)
+			router.push(nextPage)
 		})()
 	}
 

@@ -7,4 +7,6 @@ export interface PublishOnChainData
 	> {
 	startDate: string
 	endDate: string
+	publicMintLimit?: number
+	freezePeriod?: number
 }

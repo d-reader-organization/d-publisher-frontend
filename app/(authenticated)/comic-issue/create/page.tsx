@@ -22,6 +22,11 @@ import { RoutePath } from '@/enums/routePath'
 import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
 import FormActions from '@/components/FormActions'
 import Form from '@/components/Form'
+import Checkbox from '@/components/Checkbox'
+
+const isComicFreeToReadTooltipText = `Do you want this comic episode to be available to read for free on the platform, Regardless if the user owns the digital copy or is a monthly subscriber?
+
+In other words, do you want this comic episode to be part of our freemium offer`
 
 export default function CreateComicIssuePage() {
 	const router = useRouter()
@@ -37,6 +42,7 @@ export default function CreateComicIssuePage() {
 			flavorText: '',
 			releaseDate: new Date(),
 			comicSlug: comicSlug,
+			isFreeToRead: false,
 			collaborators: [],
 		},
 		resolver: yupResolver(createComicIssueValidationSchema) as Resolver<CreateComicIssueData>,
@@ -121,6 +127,20 @@ export default function CreateComicIssuePage() {
 					/>
 					<Label>Flavor text</Label>
 					<Textarea maxCharacters={128} rows={2} {...register('flavorText')} placeholder='Some sweet flavor text' />
+
+					<Label isRequired tooltipText={isComicFreeToReadTooltipText}>
+						Is this comic free to read?
+					</Label>
+					<div className='checkmark-row'>
+						<Checkbox
+							checked={watch('isFreeToRead')}
+							onChange={(event) => {
+								setValue('isFreeToRead', Boolean(event.target.checked))
+							}}
+							ref={register('isFreeToRead').ref}
+						/>
+						<span className='checkmark-text'>Free to read</span>
+					</div>
 
 					<FormActions marginTop>
 						<Button type='submit' onClick={onSubmitClick} backgroundColor='grey-100' className='action-button'>

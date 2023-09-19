@@ -2,13 +2,26 @@ import type { Metadata } from 'next'
 import { CssBaseline } from '@mui/material'
 import ClientContext from '@/providers/ClientContextProvider'
 import CreatorAuthProvider from 'providers/CreatorAuthProvider'
-// import MetadataImage from 'public/assets/images/home-metadata.jpg'
 import ToastProvider from 'providers/ToastProvider'
 import localFont from 'next/font/local'
 import clsx from 'clsx'
 import 'app/styles/app.scss'
 
-// TODO: deprecate next-sitemap and implement https://nextjs.org/docs/app/api-reference/file-conventions/metadata
+/**
+ * TODO:
+ * deprecate next-sitemap and implement https://nextjs.org/docs/app/api-reference/file-conventions/metadata
+ * number input for statelessCover.share
+ * isFullyUploaded checkbox
+ * fetch the comic series to see if the series are, in fact, existing (on comic issue create page)
+ * fetch the latest comic issue of a comic and use that data to prefill the comic issue create form
+ * upload stateful covers screen
+ * publish-on-chain screen
+ * edit comic
+ * edit comic issue
+ * view comics
+ * view comic issues
+ * sign copies
+ */
 
 const satoshi = localFont({
 	src: [

@@ -1,10 +1,9 @@
 import { Nft } from 'models/nft'
-import { User } from 'models/user'
-import { Wallet } from 'models/wallet'
+import { WalletIdentity } from 'models/wallet/walletIdentity'
 
 export interface CandyMachineReceipt {
 	nft: Pick<Nft, 'address' | 'name'>
-	buyer: Pick<User, 'id' | 'avatar' | 'name'> & Pick<Wallet, 'address'>
+	buyer: WalletIdentity
 	candyMachineAddress: string
 	price: number
 	timestamp: string

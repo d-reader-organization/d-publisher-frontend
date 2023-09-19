@@ -13,27 +13,14 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
 	id: string
 	label?: string
 	allowMultipleFiles?: boolean
-	onUpload?: (url: string[]) => void
-	onFileObtain?: (uploadedFiles: UploadedFile[]) => void
+	onUpload?: (uploadedFiles: UploadedFile[]) => void
 	previewUrl?: string
 }
 
 type UploadedFile = { url: string; file: File }
 
 const FileUpload = forwardRef<HTMLInputElement, Props>(
-	(
-		{
-			id,
-			label,
-			allowMultipleFiles = false,
-			previewUrl = '',
-			onUpload = () => {},
-			onFileObtain = () => {},
-			className = '',
-			...props
-		},
-		ref
-	) => {
+	({ id, label, allowMultipleFiles = false, previewUrl = '', onUpload = () => {}, className = '', ...props }, ref) => {
 		const componentRef = useRef<HTMLInputElement>(null)
 		const [assetUrls, setAssetUrls] = useState<string[]>(previewUrl ? [previewUrl] : [])
 		const [draggingFileOver, setDraggingFileOver] = useState<boolean>(false)
@@ -60,7 +47,7 @@ const FileUpload = forwardRef<HTMLInputElement, Props>(
 					urls.push(url)
 				}
 
-				setAssetUrls(urls.sort())
+				setAssetUrls(urls)
 			},
 		})
 
@@ -86,9 +73,8 @@ const FileUpload = forwardRef<HTMLInputElement, Props>(
 
 			const urls = uploads.map((upload) => upload.url)
 
-			setAssetUrls(urls.sort())
-			onUpload(urls)
-			onFileObtain(uploads)
+			setAssetUrls(urls)
+			onUpload(uploads)
 		}
 
 		const handleRemoveFile = (event: React.MouseEvent<HTMLButtonElement>, assetUrl: string) => {
@@ -100,8 +86,7 @@ const FileUpload = forwardRef<HTMLInputElement, Props>(
 
 			remove(deepClonedAssetUrls, (deepClonedAssetUrl) => deepClonedAssetUrl === assetUrl)
 
-			setAssetUrls(deepClonedAssetUrls.sort())
-			onUpload(deepClonedAssetUrls)
+			setAssetUrls(deepClonedAssetUrls)
 			URL.revokeObjectURL(assetUrl)
 			componentRef.current.value = ''
 		}

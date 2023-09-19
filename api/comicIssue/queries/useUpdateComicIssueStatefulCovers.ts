@@ -19,6 +19,7 @@ export const useUpdateComicIssueStatefulCovers = (id: string | number) => {
 		onSuccess: () => {
 			toaster.add('Covers updated!', 'success')
 		},
+		onMutate: toaster.uploadingFiles,
 		onError: toaster.onQueryError,
 	})
 }

@@ -12,6 +12,7 @@ export const nftKeys = Object.freeze({
 		NFT_QUERY_KEYS.GET,
 		params.ownerAddress,
 		params.comicSlug,
+		params.userId,
 		params.comicIssueId,
 		params.skip,
 		params.take,

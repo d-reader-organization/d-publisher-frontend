@@ -14,15 +14,20 @@ import { useRouter } from 'next/navigation'
 import { useFetchMe } from 'api/creator'
 import { RoutePath } from 'enums/routePath'
 import FormActions from '@/components/FormActions'
+import usePrefetchRoute from '@/hooks/usePrefetchRoute'
 
 export default function SubmitCreatorRegistrationPage() {
 	const router = useRouter()
+
+	const nextPage = RoutePath.Dashboard
+
 	const { data: me } = useFetchMe()
 
+	usePrefetchRoute(nextPage)
 	useAuthenticatedRoute(RoutePath.Register)
 
 	const onSubmit = () => {
-		router.push(RoutePath.Dashboard)
+		router.push(nextPage)
 	}
 
 	// if user is fetched but has no avatar defined, fallback to placeholder

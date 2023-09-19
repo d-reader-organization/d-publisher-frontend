@@ -17,12 +17,14 @@ import { uploadAssetsValidationSchema } from '../schemas'
 import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
 import FormActions from '@/components/FormActions'
 import Form from '@/components/Form'
+import usePrefetchRoute from '@/hooks/usePrefetchRoute'
 
 export default function UploadComicAssetsPage() {
 	const router = useRouter()
 
 	const searchParams = useSearchParams()
 	const comicSlug = searchParams.get('slug') || ''
+	const nextPage = `${RoutePath.ComicConnectSocials}?slug=${comicSlug}`
 
 	const {
 		register,
@@ -39,6 +41,7 @@ export default function UploadComicAssetsPage() {
 	})
 	const { mutateAsync: updateComicFiles } = useUpdateComicFiles(comicSlug)
 
+	usePrefetchRoute(nextPage)
 	useAuthenticatedRoute()
 
 	const handleSaveAndClose = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -59,8 +62,8 @@ export default function UploadComicAssetsPage() {
 		if (data.pfp) formData.append('pfp', data.pfp)
 		if (data.logo) formData.append('logo', data.logo)
 
-		const comic = await updateComicFiles(formData)
-		router.push(`${RoutePath.ComicConnectSocials}?slug=${comic.slug}`)
+		await updateComicFiles(formData)
+		router.push(nextPage)
 	}
 
 	return (
@@ -85,7 +88,7 @@ export default function UploadComicAssetsPage() {
 								id='cover-upload'
 								label='Choose a picture 663x1024px'
 								className='comic-cover-input'
-								onFileObtain={(files) => {
+								onUpload={(files) => {
 									setValue('cover', files[0].file)
 								}}
 								ref={register('cover').ref}
@@ -99,7 +102,7 @@ export default function UploadComicAssetsPage() {
 								id='banner-upload'
 								label='Choose a picture 1600x900px'
 								className='comic-banner-input'
-								onFileObtain={(files) => {
+								onUpload={(files) => {
 									setValue('banner', files[0].file)
 								}}
 								ref={register('banner').ref}
@@ -115,7 +118,7 @@ export default function UploadComicAssetsPage() {
 								id='logo-upload'
 								label='Choose a picture 512x512px'
 								className='comic-logo-input'
-								onFileObtain={(files) => {
+								onUpload={(files) => {
 									setValue('logo', files[0].file)
 								}}
 								ref={register('logo').ref}
@@ -129,7 +132,7 @@ export default function UploadComicAssetsPage() {
 								id='pfp-upload'
 								label='Choose a picture 512x512px'
 								className='comic-pfp-input'
-								onFileObtain={(files) => {
+								onUpload={(files) => {
 									setValue('pfp', files[0].file)
 								}}
 								ref={register('pfp').ref}

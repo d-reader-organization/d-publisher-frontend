@@ -1,14 +1,13 @@
-import { Wallet } from 'models/wallet'
-import { User } from 'models/user'
 import { ComicRarity } from 'enums/comicRarity'
 import { NftAttribute } from 'models/nft/nftAttribute'
+import { WalletIdentity } from 'models/wallet/walletIdentity'
 
 export interface ListedNftItem {
 	id: number
 	nftAddress: string
 	name: string
 	cover: string
-	seller: Pick<User, 'id' | 'avatar' | 'name'> & Pick<Wallet, 'address'>
+	seller: WalletIdentity
 	tokenAddress: string
 	price: number
 	attributes: NftAttribute[]

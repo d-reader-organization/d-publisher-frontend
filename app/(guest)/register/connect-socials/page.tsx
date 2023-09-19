@@ -29,9 +29,13 @@ import { connectSocialsValidationSchema } from '../schemas'
 import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
 import FormActions from '@/components/FormActions'
 import Form from '@/components/Form'
+import usePrefetchRoute from '@/hooks/usePrefetchRoute'
 
 export default function ConnectCreatorSocialsPage() {
 	const router = useRouter()
+
+	const nextPage = RoutePath.RegisterSubmit
+
 	const { data: me } = useFetchMe()
 	const { mutateAsync: updateCreator } = useUpdateCreator(me?.slug || '')
 
@@ -45,6 +49,7 @@ export default function ConnectCreatorSocialsPage() {
 		resolver: yupResolver(connectSocialsValidationSchema) as Resolver<UpdateCreatorData>,
 	})
 
+	usePrefetchRoute(nextPage)
 	useAuthenticatedRoute(RoutePath.Register)
 
 	useEffect(() => {
@@ -60,7 +65,7 @@ export default function ConnectCreatorSocialsPage() {
 
 	const onSkipClick = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
-		router.push(RoutePath.RegisterSubmit)
+		router.push(nextPage)
 	}
 
 	const onSubmitClick = (event: React.MouseEvent<HTMLButtonElement>) => {

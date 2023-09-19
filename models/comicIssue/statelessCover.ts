@@ -8,6 +8,7 @@ export interface StatelessCover {
 	image: string
 }
 
-export interface CreateStatelessCoverData extends Pick<StatelessCover, 'artist' | 'rarity' | 'isDefault' | 'image'> {
+export interface CreateStatelessCoverData extends Pick<StatelessCover, 'artist' | 'rarity' | 'isDefault'> {
 	share?: StatelessCover['share']
+	image?: File
 }

@@ -18,9 +18,12 @@ import { useForm, Resolver } from 'react-hook-form'
 import { visualIdentityValidationSchema } from '../schemas'
 import FormActions from '@/components/FormActions'
 import Form from '@/components/Form'
+import usePrefetchRoute from '@/hooks/usePrefetchRoute'
 
 export default function UpdateCreatorVisualIdentityPage() {
 	const router = useRouter()
+
+	const nextPage = RoutePath.RegisterConnectSocials
 
 	const { data: me } = useFetchMe()
 	const { mutateAsync: updateCreatorFiles } = useUpdateCreatorFiles(me?.slug || '')
@@ -37,6 +40,7 @@ export default function UpdateCreatorVisualIdentityPage() {
 		resolver: yupResolver(visualIdentityValidationSchema) as Resolver<UpdateCreatorFilesData>,
 	})
 
+	usePrefetchRoute(nextPage)
 	useAuthenticatedRoute(RoutePath.Register)
 
 	const onNextClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -51,7 +55,7 @@ export default function UpdateCreatorVisualIdentityPage() {
 		if (data.banner) formData.append('banner', data.banner)
 
 		await updateCreatorFiles(formData)
-		router.push(RoutePath.RegisterConnectSocials)
+		router.push(nextPage)
 	}
 
 	return (
@@ -80,7 +84,7 @@ export default function UpdateCreatorVisualIdentityPage() {
 							id='banner-upload'
 							label='Upload cover'
 							className='banner-upload'
-							onFileObtain={(files) => {
+							onUpload={(files) => {
 								setValue('banner', files[0].file)
 							}}
 							ref={register('banner').ref}
@@ -90,7 +94,7 @@ export default function UpdateCreatorVisualIdentityPage() {
 							id='avatar-upload'
 							label='Upload avatar'
 							className='avatar-upload'
-							onFileObtain={(files) => {
+							onUpload={(files) => {
 								setValue('avatar', files[0].file)
 							}}
 							ref={register('avatar').ref}

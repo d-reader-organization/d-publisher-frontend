@@ -1,5 +1,7 @@
 export interface ComicStats {
 	favouritesCount: number
+	// bookmarksCount: number
+	// subscribersCount: number
 	ratersCount: number
 	averageRating: number | null
 	issuesCount: number

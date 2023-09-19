@@ -19,6 +19,7 @@ export const useUpdateComicIssuePages = (id: string | number) => {
 		onSuccess: () => {
 			toaster.add('Pages updated!', 'success')
 		},
+		onMutate: toaster.uploadingFiles,
 		onError: toaster.onQueryError,
 	})
 }

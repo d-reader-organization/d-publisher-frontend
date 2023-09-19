@@ -29,7 +29,7 @@ const Label: React.FC<Props> = ({
 		>
 			{children} {isRequired && '*'}
 			{tooltipText && (
-				<Tooltip title={tooltipText} arrow={true} placement='top'>
+				<Tooltip classes={{ tooltip: 'tooltip-text' }} title={tooltipText} arrow={true} placement='top'>
 					<div className='icon-wrapper'>
 						<InfoIcon />
 					</div>
