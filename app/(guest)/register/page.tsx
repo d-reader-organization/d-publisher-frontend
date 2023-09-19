@@ -60,7 +60,7 @@ export default function RegisterCreatorPage() {
 			<main className='register-page'>
 				<h1 className='title'>Tell us about yourself</h1>
 
-				<Form centered minSize='sm' className='form--register-creator'>
+				<Form padding centered minSize='sm' className='form--register-creator'>
 					<Label isRequired>Display name</Label>
 					<div className='description'>Your username will be visible to dReader community</div>
 					<Input {...register('name')} placeholder='John Doe' />
@@ -69,9 +69,7 @@ export default function RegisterCreatorPage() {
 					<Input {...register('email')} placeholder='john.doe@dreader.io' />
 
 					<Label isRequired>Password</Label>
-					<div className='description'>
-						8 characters minimum. At least 1 lowercase, 1 uppercase character and 1 number
-					</div>
+					<div className='description'>8 characters minimum. At least 1 lowercase, 1 uppercase and 1 number</div>
 					<Input {...register('password')} type='password' placeholder='********' />
 
 					<FormActions centered>

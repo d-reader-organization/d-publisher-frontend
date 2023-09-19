@@ -15,6 +15,7 @@ import { useFetchMe } from 'api/creator'
 import { RoutePath } from 'enums/routePath'
 import FormActions from '@/components/FormActions'
 import usePrefetchRoute from '@/hooks/usePrefetchRoute'
+import Form from '@/components/Form'
 
 export default function SubmitCreatorRegistrationPage() {
 	const router = useRouter()
@@ -47,7 +48,7 @@ export default function SubmitCreatorRegistrationPage() {
 			/>
 
 			<main className='register-page register-page--submit'>
-				<Container maxWidth='sm' className='container form form--submit-registration'>
+				<Form padding centered maxSize='sm' className='container form form--submit-registration'>
 					<SkeletonImage priority src={avatar} width={140} height={140} alt='' className='avatar-image' />
 					<h1 className='title'>
 						Welcome&nbsp;
@@ -68,7 +69,7 @@ export default function SubmitCreatorRegistrationPage() {
 							Start creating <ArrowRightIcon className='action-button-icon' />
 						</Button>
 					</FormActions>
-				</Container>
+				</Form>
 			</main>
 		</>
 	)
