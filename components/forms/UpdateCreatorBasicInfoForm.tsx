@@ -68,7 +68,7 @@ const UpdateBasicInfoForm: React.FC = () => {
 			<Input disabled placeholder={me?.name} />
 
 			<Label tooltipText={<TippingAddressTooltip />}>Tipping address</Label>
-			<Input placeholder='wallet address' />
+			<Input {...register('tippingAddress')} placeholder='wallet address' />
 
 			<Label>Short biography</Label>
 			<div className='description'>Your bio will be displayed on your dReader creator page</div>

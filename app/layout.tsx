@@ -9,7 +9,7 @@ import 'app/styles/app.scss'
 
 /**
  * TODO:
- * - fix the textarea number of characters remaining bug
+ * - fix the textarea number of characters remaining bug (and when submitting a form flash screen)
  * - Luka isPrimarySale, isSecondarySale
  * - email verification
 
