@@ -16,6 +16,8 @@ import Form from '@/components/Form'
 import { RoutePath } from '@/enums/routePath'
 import usePrefetchRoute from '@/hooks/usePrefetchRoute'
 import { useUpdateComicIssuePages } from '@/api/comicIssue'
+import IntegerInput from '@/components/IntegerInput'
+import { comicIssuePagesTooltipText, numberOfPagesTooltipText } from '@/constants/tooltips'
 
 export default function UploadComicIssuePagesPage() {
 	const toaster = useToaster()
@@ -26,6 +28,7 @@ export default function UploadComicIssuePagesPage() {
 	const nextPage = `${RoutePath.ComicIssuePublish}?id=${comicIssueId}`
 
 	const [pageFiles, setPageFiles] = useState<File[]>([])
+	const [numberOfPreviewPages, setNumberOfPreviewPages] = useState(3)
 	const { mutateAsync: updatePages } = useUpdateComicIssuePages(comicIssueId)
 
 	usePrefetchRoute(nextPage)
@@ -45,7 +48,6 @@ export default function UploadComicIssuePagesPage() {
 
 		const formData = new FormData()
 
-		const numberOfPreviewPages = 3
 		let i = 0
 		for (const pageFile of pageFiles) {
 			const pageNumber = i + 1
@@ -73,19 +75,39 @@ export default function UploadComicIssuePagesPage() {
 			/>
 
 			<main>
-				<Form padding minSize='sm' className='form--edit-comic-issue-pages'>
-					<Label isRequired tooltipText='optimized .jpg or .jpeg formats preferred for optimal download speed'>
+				<Form padding fullWidth className='form--edit-comic-issue-pages'>
+					<Label isRequired tooltipText={comicIssuePagesTooltipText}>
 						Add issue pages
 					</Label>
 					<FileUpload
-						id='pages-upload'
+						sortable
 						allowMultipleFiles
+						id='pages-upload'
 						className='upload-pages'
-						label='Upload multiple images'
+						label='Upload comic pages'
 						onUpload={(uploadedFiles) => {
 							handleUploadPages(uploadedFiles.map((file) => file.file))
+							setNumberOfPreviewPages((currentValue) => {
+								if (currentValue > uploadedFiles.length) return uploadedFiles.length
+								return currentValue
+							})
 						}}
 					/>
+
+					<div className='page-previews-number-wrapper'>
+						<div>
+							<Label tooltipText={numberOfPagesTooltipText}>Preview pages</Label>
+							<p className='description'>Set the number of previewable pages</p>
+						</div>
+						<IntegerInput
+							min={0}
+							max={pageFiles.length || 3}
+							value={numberOfPreviewPages}
+							onChange={(step) => {
+								setNumberOfPreviewPages((currentValue) => currentValue + step)
+							}}
+						/>
+					</div>
 
 					<Button type='submit' onClick={handleNextClick} backgroundColor='grey-100' className='action-button'>
 						Next <ArrowRightIcon className='action-button-icon' />

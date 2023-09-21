@@ -3,6 +3,7 @@
 import { useState, useMemo, useCallback, createContext, useContext } from 'react'
 import { Snackbar, Alert, AlertColor, CircularProgress } from '@mui/material'
 import axios, { AxiosError } from 'axios'
+import { FieldValues, FieldErrors } from 'react-hook-form'
 
 interface Toast {
 	message: React.ReactNode
@@ -13,14 +14,16 @@ interface Toast {
 
 interface ToastContextState {
 	add: (message: React.ReactNode, severity: AlertColor) => void
-	uploadingFiles: () => void
+	uploadingFiles: VoidFunction
 	onQueryError: (error: Error) => void
+	onFormError: <T extends FieldValues = FieldValues>(errors: FieldErrors<T>) => void
 }
 
 const initialContextValue: ToastContextState = {
 	add: () => {},
 	uploadingFiles: () => {},
 	onQueryError: () => {},
+	onFormError: () => {},
 }
 
 export const ToastContext = createContext<ToastContextState>(initialContextValue)
@@ -49,6 +52,13 @@ const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ children }) =>
 		setToast((prevToast) => ({ ...prevToast, isOpen: false, duration: defaultAutoHideDuration }))
 	}
 
+	function onFormError<T extends FieldValues = FieldValues>(errors: FieldErrors<T>) {
+		const [_, errorValue] = Object.entries(errors)[0]
+		if (errorValue?.message) {
+			add(<>{errorValue.message}</>, 'error')
+		}
+	}
+
 	const onQueryError = useCallback(
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		(error: any | AxiosError<any>) => {
@@ -66,7 +76,10 @@ const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ children }) =>
 		[add]
 	)
 
-	const value = useMemo(() => ({ add, uploadingFiles, onQueryError }), [add, uploadingFiles, onQueryError])
+	const value = useMemo(
+		() => ({ add, uploadingFiles, onQueryError, onFormError }),
+		[add, uploadingFiles, onQueryError, onFormError]
+	)
 
 	return (
 		<ToastContext.Provider value={value}>

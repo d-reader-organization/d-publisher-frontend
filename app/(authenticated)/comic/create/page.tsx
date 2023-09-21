@@ -1,6 +1,6 @@
 'use client'
 
-import { Resolver, useForm } from 'react-hook-form'
+import { FieldErrors, FieldValues, Resolver, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useRouter } from 'next/navigation'
 
@@ -22,6 +22,8 @@ import { createComicValidationSchema } from '../schemas'
 import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
 import FormActions from '@/components/FormActions'
 import Form from '@/components/Form'
+import { useToaster } from '@/providers/ToastProvider'
+import { audienceTypeTooltipText, currentStatusTooltipText, genresTooltipText } from '@/constants/tooltips'
 
 type LegalAgreement = {
 	ownershipConfirmation: boolean
@@ -30,6 +32,8 @@ type LegalAgreement = {
 
 export default function CreateComicPage() {
 	const router = useRouter()
+	const toaster = useToaster()
+
 	const {
 		register,
 		setValue,
@@ -55,12 +59,13 @@ export default function CreateComicPage() {
 
 	const handleSaveAndClose = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
-		onSubmit(handleFormSubmit)()
+		onSubmit(handleFormSubmit, toaster.onFormError)()
 	}
 
 	const handleSaveAndGoNext = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
-		onSubmit(handleFormSubmit)()
+		onSubmit(handleFormSubmit, toaster.onFormError)()
+		// move router.push here instead of on handleFormSubmit
 	}
 
 	const handleFormSubmit = async (data: CreateComicData) => {
@@ -83,7 +88,9 @@ export default function CreateComicPage() {
 				<Form padding maxSize='md' fullWidth className='form--create-comic'>
 					<Label isRequired>Comic title</Label>
 					<Input {...register('title')} />
-					<Label isRequired>Genres</Label>
+					<Label isRequired tooltipText={genresTooltipText}>
+						Genres
+					</Label>
 					<Select
 						isSearchable
 						isMultipleSelect
@@ -101,7 +108,9 @@ export default function CreateComicPage() {
 					/>
 					<div className='audience-status-wrapper'>
 						<div className='audience-status-container'>
-							<Label isRequired>Audience Type</Label>
+							<Label isRequired tooltipText={audienceTypeTooltipText}>
+								Audience Type
+							</Label>
 							<Select
 								className='audience-status-input'
 								placeholder='Mature / Teen / Everyone'
@@ -123,7 +132,9 @@ export default function CreateComicPage() {
 							/>
 						</div>
 						<div className='audience-status-container'>
-							<Label isRequired>Current Status</Label>
+							<Label isRequired tooltipText={currentStatusTooltipText}>
+								Current Status
+							</Label>
 							<Select
 								className='audience-status-input'
 								placeholder='Completed / Ongoing'

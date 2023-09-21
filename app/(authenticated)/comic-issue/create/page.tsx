@@ -23,13 +23,12 @@ import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
 import FormActions from '@/components/FormActions'
 import Form from '@/components/Form'
 import Checkbox from '@/components/Checkbox'
-
-const isComicFreeToReadTooltipText = `Do you want this comic episode to be available to read for free on the platform, Regardless if the user owns the digital copy or is a monthly subscriber?
-
-In other words, do you want this comic episode to be part of our freemium offer`
+import { useToaster } from '@/providers/ToastProvider'
+import { comicIssueAuthorsTooltipText, isComicFreeToReadTooltipText } from '@/constants/tooltips'
 
 export default function CreateComicIssuePage() {
 	const router = useRouter()
+	const toaster = useToaster()
 
 	const searchParams = useSearchParams()
 	const comicSlug = searchParams.get('comicSlug') || ''
@@ -55,20 +54,12 @@ export default function CreateComicIssuePage() {
 
 	const onSubmitClick = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
-		handleSubmit((data) => {
-			handleFormSubmit(data)
-		}, handleFormError)()
+		handleSubmit(handleFormSubmit, toaster.onFormError)()
 	}
 
 	const handleFormSubmit = async (data: CreateComicIssueData) => {
 		const comicIssue = await createComicIssue(data)
 		router.push(`${RoutePath.ComicIssueUploadCovers}?id=${comicIssue.id}`)
-	}
-
-	const handleFormError = (errors: FieldErrors<CreateComicIssueData>) => {
-		const [_, errorValue] = Object.entries(errors)[0]
-
-		console.log(errors, errorValue)
 	}
 
 	return (
@@ -103,7 +94,9 @@ export default function CreateComicIssuePage() {
 							}}
 						/>
 					</div>
-					<Label isRequired>Authors list</Label>
+					<Label isRequired tooltipText={comicIssueAuthorsTooltipText}>
+						Authors list
+					</Label>
 					<SelectWithInput
 						ref={register('collaborators').ref}
 						options={ROLE_SELECT_OPTIONS}

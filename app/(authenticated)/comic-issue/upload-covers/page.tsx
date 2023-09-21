@@ -27,13 +27,7 @@ import Form from '@/components/Form'
 import { useUpdateComicIssueStatelessCovers } from '@/api/comicIssue'
 import { RoutePath } from '@/enums/routePath'
 import usePrefetchRoute from '@/hooks/usePrefetchRoute'
-
-const coverVariantsTooltipText = `Comic episodes can have up to 5 rarities. You might opt into:
-- no rarities
-- 3 rarities (common, rare, legendary)
-- 5 rarities (common, uncommon, rare, epic, legendary)
-
-Ideally, these rarities would represent variants done by different featured cover artists`
+import { comicIssueCoverImageTooltipText, coverVariantsTooltipText } from '@/constants/tooltips'
 
 export default function UploadComicIssueCoversPage() {
 	const toaster = useToaster()
@@ -181,7 +175,7 @@ export default function UploadComicIssueCoversPage() {
 						<Expandable title={rarity} key={rarity}>
 							<div className='rarity-cover-wrapper'>
 								<div>
-									<Label isRequired tooltipText='.jpg or .jpeg formats preferred, .png allowed'>
+									<Label isRequired tooltipText={comicIssueCoverImageTooltipText}>
 										Cover image
 									</Label>
 									<FileUpload

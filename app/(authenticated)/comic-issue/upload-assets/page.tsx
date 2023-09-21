@@ -18,18 +18,12 @@ import { useUpdateComicIssueFiles } from '@/api/comicIssue/queries/useUpdateComi
 import { yupResolver } from '@hookform/resolvers/yup'
 import { uploadAssetsValidationSchema } from '../schemas'
 import FileUpload from '@/components/FileUpload'
-
-const signatureTooltipText = `.png format required
-
-This signature will be used when signing a digital copy for your fan.`
-
-const pdfTooltipText = `This file will be used for offline reading when users want to download offline content
-
-Furthermore, if your comic issue is an NFT collection, this pdf file will be attached the each NFT from the collection to guarantee the ownership of the content to collectors.
-`
+import { useToaster } from '@/providers/ToastProvider'
+import { signatureTooltipText, pdfTooltipText } from '@/constants/tooltips'
 
 export default function UploadComicIssueAssetsPage() {
 	const router = useRouter()
+	const toaster = useToaster()
 
 	const searchParams = useSearchParams()
 	const comicIssueId = searchParams.get('id') || ''
@@ -54,7 +48,7 @@ export default function UploadComicIssueAssetsPage() {
 	const handleNextClick = async (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
 
-		onSubmit(handleFormSubmit)()
+		onSubmit(handleFormSubmit, toaster.onFormError)()
 	}
 
 	const handleFormSubmit = async (data: UpdateComicIssueFilesData) => {

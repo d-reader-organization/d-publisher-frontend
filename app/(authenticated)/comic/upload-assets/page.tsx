@@ -18,9 +18,17 @@ import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
 import FormActions from '@/components/FormActions'
 import Form from '@/components/Form'
 import usePrefetchRoute from '@/hooks/usePrefetchRoute'
+import { useToaster } from '@/providers/ToastProvider'
+import {
+	comicBannerTooltipText,
+	comicCoverTooltipText,
+	comicLogoTooltipText,
+	comicPfpTooltipText,
+} from '@/constants/tooltips'
 
 export default function UploadComicAssetsPage() {
 	const router = useRouter()
+	const toaster = useToaster()
 
 	const searchParams = useSearchParams()
 	const comicSlug = searchParams.get('slug') || ''
@@ -46,12 +54,12 @@ export default function UploadComicAssetsPage() {
 
 	const handleSaveAndClose = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
-		onSubmit(handleFormSubmit)()
+		onSubmit(handleFormSubmit, toaster.onFormError)()
 	}
 
 	const handleSaveAndGoNext = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
-		onSubmit(handleFormSubmit)()
+		onSubmit(handleFormSubmit, toaster.onFormError)()
 	}
 
 	const handleFormSubmit = async (data: UpdateComicFilesData) => {
@@ -81,7 +89,7 @@ export default function UploadComicAssetsPage() {
 				<Form padding maxSize='xl' fullWidth className='form--edit-comic-assets'>
 					<div className='comic-file-wrapper'>
 						<div className='comic-file-container'>
-							<Label isRequired tooltipText='.png if transparent background, otherwise .jpg or .jpeg'>
+							<Label isRequired tooltipText={comicBannerTooltipText}>
 								Comic Banner
 							</Label>
 							<FileUpload
@@ -97,7 +105,7 @@ export default function UploadComicAssetsPage() {
 					</div>
 					<div className='comic-file-wrapper'>
 						<div className='comic-file-container'>
-							<Label isRequired tooltipText='.jpg or .jpeg formats preferred, .png allowed'>
+							<Label isRequired tooltipText={comicCoverTooltipText}>
 								Comic Cover
 							</Label>
 							<FileUpload
@@ -112,7 +120,7 @@ export default function UploadComicAssetsPage() {
 						</div>
 
 						<div className='comic-file-container'>
-							<Label isRequired tooltipText='.png if transparent background, otherwise .jpg, .jpeg, or .gif'>
+							<Label isRequired tooltipText={comicPfpTooltipText}>
 								Comic PFP
 							</Label>
 							<FileUpload
@@ -127,7 +135,7 @@ export default function UploadComicAssetsPage() {
 						</div>
 
 						<div className='comic-file-container'>
-							<Label isRequired tooltipText='.png or .gif with transparent background'>
+							<Label isRequired tooltipText={comicLogoTooltipText}>
 								Comic Logo
 							</Label>
 							<FileUpload

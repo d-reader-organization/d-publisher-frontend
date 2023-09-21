@@ -19,9 +19,11 @@ import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
 import FormActions from '@/components/FormActions'
 import Form from '@/components/Form'
 import usePrefetchRoute from '@/hooks/usePrefetchRoute'
+import { useToaster } from '@/providers/ToastProvider'
 
 export default function ConnectComicSocialsPage() {
 	const router = useRouter()
+	const toaster = useToaster()
 
 	const searchParams = useSearchParams()
 	const comicSlug = searchParams.get('slug') || ''
@@ -46,12 +48,12 @@ export default function ConnectComicSocialsPage() {
 
 	const handleSaveAndClose = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
-		onSubmit(handleFormSubmit)()
+		onSubmit(handleFormSubmit, toaster.onFormError)()
 	}
 
 	const handleSaveAndGoNext = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
-		onSubmit(handleFormSubmit)()
+		onSubmit(handleFormSubmit, toaster.onFormError)()
 	}
 
 	const handleFormSubmit = async (data: UpdateComicSocialsData) => {

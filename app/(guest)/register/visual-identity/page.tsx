@@ -19,9 +19,12 @@ import { visualIdentityValidationSchema } from '../schemas'
 import FormActions from '@/components/FormActions'
 import Form from '@/components/Form'
 import usePrefetchRoute from '@/hooks/usePrefetchRoute'
+import { useToaster } from '@/providers/ToastProvider'
+import { creatorVisualIdentityTooltipText } from '@/constants/tooltips'
 
 export default function UpdateCreatorVisualIdentityPage() {
 	const router = useRouter()
+	const toaster = useToaster()
 
 	const nextPage = RoutePath.RegisterConnectSocials
 
@@ -45,7 +48,7 @@ export default function UpdateCreatorVisualIdentityPage() {
 
 	const onNextClick = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
-		onSubmit(handleFormSubmit)()
+		onSubmit(handleFormSubmit, toaster.onFormError)()
 	}
 
 	const handleFormSubmit = async (data: UpdateCreatorFilesData) => {
@@ -75,7 +78,7 @@ export default function UpdateCreatorVisualIdentityPage() {
 				<h1 className='title'>Hello sexy!</h1>
 
 				<Form padding centered className='form--edit-visual-identity'>
-					<Label centered isRequired tooltipText='.jpg and .jpeg preferred if no transparency'>
+					<Label centered isRequired tooltipText={creatorVisualIdentityTooltipText}>
 						Add profile avatar & cover
 					</Label>
 					<div className='description'>Recommended sizes are 500 x 500px for avatar and 680 x 320px for cover</div>

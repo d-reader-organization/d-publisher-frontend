@@ -9,13 +9,10 @@ import 'app/styles/app.scss'
 
 /**
  * TODO:
- * - fix image ratios on dPublisher with Matan's input
- * - resolve handle client-side form errors on dPublisher
  * - fix the textarea number of characters remaining bug
  * - Luka isPrimarySale, isSecondarySale
  * - email verification
- * - number of preview pages
- * - revise input descriptions and tooltip texts
+
  * - upload stateful covers screen
  * - edit comic
  * - edit comic issue
@@ -30,6 +27,7 @@ import 'app/styles/app.scss'
  * fetch the latest comic issue of a comic and use that data to prefill the comic issue create form
  * number input for statelessCover.share
  * refactor localStorage auth handling to SWR
+ * sidebar should be closeable on mobile screens, shown as a hamburger menu
 
  * ATHAR
  * IMPORTANT: publish-on-chain (+isFullyUploaded checkbox) screen

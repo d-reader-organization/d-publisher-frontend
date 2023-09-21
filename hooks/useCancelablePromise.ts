@@ -5,7 +5,7 @@ export const useCancelablePromise = () => {
 	const isMounted = useIsMounted()
 
 	return useCallback(
-		<T>(promise: Promise<T>, onCancel?: () => void) =>
+		<T>(promise: Promise<T>, onCancel?: VoidFunction) =>
 			new Promise<T>((resolve, reject) => {
 				promise
 					.then((result) => {

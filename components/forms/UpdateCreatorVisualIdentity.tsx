@@ -12,6 +12,7 @@ import Form from '../Form'
 import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
 import { useUpdateCreatorFiles } from '@/api/creator/queries/useUpdateCreatorFiles'
 import FileUpload from '../FileUpload'
+import { creatorVisualIdentityTooltipText } from '@/constants/tooltips'
 
 const UpdateCreatorVisualIdentity: React.FC = () => {
 	const { data: me } = useFetchMe()
@@ -43,7 +44,7 @@ const UpdateCreatorVisualIdentity: React.FC = () => {
 
 	return (
 		<Form fullWidth className='form--edit-visual-identity'>
-			<Label centered isRequired tooltipText='.jpg and .jpeg preferred if no transparency'>
+			<Label centered isRequired tooltipText={creatorVisualIdentityTooltipText}>
 				Add profile avatar & cover
 			</Label>
 			<div className='description'>Recommended sizes are 500 x 500px for avatar and 680 x 320px for cover</div>

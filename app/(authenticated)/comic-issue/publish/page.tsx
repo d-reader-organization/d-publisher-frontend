@@ -7,7 +7,6 @@ import Header from 'components/layout/Header'
 import Label from 'components/Label'
 import Button from 'components/Button'
 import Steps from 'components/Steps'
-import FileUpload from '@/components/FileUpload'
 import ArrowRightIcon from 'public/assets/vector-icons/arrow-right.svg'
 import { useToaster } from '@/providers/ToastProvider'
 import { yupRequiredMessage } from '@/utils/error'
@@ -74,19 +73,7 @@ export default function PublishComicIssuePage() {
 
 			<main>
 				<Form padding className='form--edit-comic-issue-pages'>
-					<Label isRequired tooltipText='optimized .jpg or .jpeg formats preferred for optimal download speed'>
-						Add issue pages
-					</Label>
-					<FileUpload
-						id='pages-upload'
-						allowMultipleFiles
-						className='upload-pages'
-						label='Upload multiple images'
-						onUpload={(uploadedFiles) => {
-							handleUploadPages(uploadedFiles.map((file) => file.file))
-						}}
-					/>
-
+					Publish comic issue form
 					<Button type='submit' onClick={handleNextClick} backgroundColor='grey-100' className='action-button'>
 						Next <ArrowRightIcon className='action-button-icon' />
 					</Button>

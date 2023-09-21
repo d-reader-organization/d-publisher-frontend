@@ -1,20 +1,44 @@
+@use '../mixins/breakpoints.module.scss' as *;
+
 .form--edit-comic-issue-pages {
 	max-width: 100%;
 
 	.upload-pages {
 		width: 100%;
-		min-height: 420px;
-		max-height: 800px;
+		min-height: 256px;
+		height: max-content;
 
 		.preview-image-list {
-			overflow-x: auto;
-			// -webkit-overflow-scrolling: touch;
+			flex-wrap: wrap;
 		}
 
 		.preview-image-wrapper {
-			flex-shrink: 0;
-			width: auto;
-			padding: 4px 0;
+			margin: 0.5%;
+			width: 49%;
+
+			@include md {
+				margin: 0.5%;
+				width: 24%;
+			}
+
+			@include lg {
+				margin: 0.5%;
+				width: 19%;
+			}
+
+			@include xl {
+				margin: 0.5%;
+				width: 11.5%;
+			}
 		}
+	}
+
+	.page-previews-number-wrapper {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		width: 100%;
+		max-width: 460px;
+		margin-bottom: 34px;
 	}
 }

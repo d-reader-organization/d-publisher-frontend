@@ -22,7 +22,7 @@ interface CreatorAuthContextState {
 	isAuthenticating: boolean
 	addAuthorization: (auth: Authorization) => JwtPayload<CreatorPayload>
 	removeAuthorization: (refreshToken: string) => void
-	logout: () => void
+	logout: VoidFunction
 }
 
 const initialContextValue: CreatorAuthContextState = {
