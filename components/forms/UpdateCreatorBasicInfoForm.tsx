@@ -3,21 +3,30 @@ import React, { useEffect } from 'react'
 import Button from 'components/Button'
 import Label from 'components/Label'
 import Input from 'components/Input'
-import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { UpdateCreatorData } from 'models/creator'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { RoutePath } from 'enums/routePath'
 import { updateCreatorValidationSchema } from './schemas'
 import { useFetchMe, useUpdateCreator } from '@/api/creator'
 import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
 import FormActions from '../FormActions'
+import TooltipLink from '../TooltipLink'
 import Textarea from '../Textarea'
 import Form from '../Form'
 
-const UpdateBasicInfoForm: React.FC = () => {
-	const router = useRouter()
+const TippingAddressTooltip = () => {
+	return (
+		<>
+			{`SPL-token compatible wallet address used for receiving donations.
 
+To create a Solana wallet we recommend you start with `}
+			<TooltipLink href='https://phantom.app/download'>Phantom</TooltipLink> or{' '}
+			<TooltipLink href='https://solflare.com/'>Solflare</TooltipLink>
+		</>
+	)
+}
+
+const UpdateBasicInfoForm: React.FC = () => {
 	const { data: me } = useFetchMe()
 	const { mutateAsync: updateCreator } = useUpdateCreator(me?.slug || '')
 
@@ -47,21 +56,19 @@ const UpdateBasicInfoForm: React.FC = () => {
 
 		handleSubmit(async (data) => {
 			await updateCreator(data)
-			router.push(RoutePath.RegisterYourDetails)
 		})()
 	}
 
 	return (
 		<Form fullWidth className='form--update-basic-info'>
 			<Label isRequired>Email</Label>
-			<Input disabled value={me?.email} placeholder='john.doe@dreader.io' />
+			<Input disabled placeholder={me?.email} />
 
 			<Label isRequired>Display name</Label>
-			<Input disabled value={me?.name} placeholder='John Doe' />
+			<Input disabled placeholder={me?.name} />
 
-			<Label isRequired>Tipping address</Label>
-			<div className='description'>SPL-token compatible wallet address used for receiving tips</div>
-			<Input placeholder='7At..bCy' />
+			<Label tooltipText={<TippingAddressTooltip />}>Tipping address</Label>
+			<Input placeholder='wallet address' />
 
 			<Label>Short biography</Label>
 			<div className='description'>Your bio will be displayed on your dReader creator page</div>

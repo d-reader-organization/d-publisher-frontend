@@ -40,3 +40,8 @@ export const createComicIssueValidationSchema = yup.object().shape({
 		.required(yupRequiredMessage('Collaborators list'))
 		.min(1, yupRequiredMessage('Collaborators list')),
 })
+
+export const uploadAssetsValidationSchema = yup.object().shape({
+	signature: yup.mixed(),
+	pdf: yup.mixed(),
+})

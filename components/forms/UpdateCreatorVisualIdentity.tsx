@@ -1,25 +1,19 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import Button from 'components/Button'
 import Label from 'components/Label'
-import Input from 'components/Input'
-import { useRouter } from 'next/navigation'
 import { Resolver, useForm } from 'react-hook-form'
-import { UpdateCreatorData, UpdateCreatorFilesData } from 'models/creator'
+import { UpdateCreatorFilesData } from 'models/creator'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { RoutePath } from 'enums/routePath'
-import { updateCreatorValidationSchema, visualIdentityValidationSchema } from './schemas'
-import { useFetchMe, useUpdateCreator } from '@/api/creator'
+import { visualIdentityValidationSchema } from './schemas'
+import { useFetchMe } from '@/api/creator'
 import FormActions from '../FormActions'
-import Textarea from '../Textarea'
 import Form from '../Form'
 import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
 import { useUpdateCreatorFiles } from '@/api/creator/queries/useUpdateCreatorFiles'
 import FileUpload from '../FileUpload'
 
 const UpdateCreatorVisualIdentity: React.FC = () => {
-	const router = useRouter()
-
 	const { data: me } = useFetchMe()
 	const { mutateAsync: updateCreatorFiles } = useUpdateCreatorFiles(me?.slug || '')
 
@@ -44,7 +38,6 @@ const UpdateCreatorVisualIdentity: React.FC = () => {
 			if (data.logo) formData.append('logo', data.logo)
 
 			await updateCreatorFiles(formData)
-			router.push(RoutePath.RegisterConnectSocials)
 		})()
 	}
 

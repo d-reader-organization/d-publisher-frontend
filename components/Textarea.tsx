@@ -1,4 +1,4 @@
-import { TextareaHTMLAttributes, forwardRef, useState } from 'react'
+import { TextareaHTMLAttributes, forwardRef, useEffect, useState } from 'react'
 import clsx from 'clsx'
 
 interface Props extends TextareaHTMLAttributes<HTMLTextAreaElement> {
@@ -7,6 +7,7 @@ interface Props extends TextareaHTMLAttributes<HTMLTextAreaElement> {
 
 const Textarea = forwardRef<HTMLTextAreaElement, Props>(
 	({ className, onChange, maxCharacters = 200, ...props }, ref) => {
+		// TODO: this value can be prefilled, but it's currently always set to an empty string
 		const [value, setValue] = useState('')
 
 		const remainingCharactersCount = maxCharacters - value.split('').filter((character) => character !== ' ').length

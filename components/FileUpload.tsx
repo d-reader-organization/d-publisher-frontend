@@ -6,7 +6,6 @@ import clsx from 'clsx'
 import ImageIcon from 'public/assets/vector-icons/image.svg'
 import CloseIcon from 'public/assets/vector-icons/close.svg'
 import { convertFileToBlob } from 'utils/file'
-import Image from 'next/image'
 import SkeletonImage from './SkeletonImage'
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
@@ -22,7 +21,9 @@ type UploadedFile = { url: string; file: File }
 const FileUpload = forwardRef<HTMLInputElement, Props>(
 	({ id, label, allowMultipleFiles = false, previewUrl = '', onUpload = () => {}, className = '', ...props }, ref) => {
 		const componentRef = useRef<HTMLInputElement>(null)
-		const [assetUrls, setAssetUrls] = useState<string[]>(previewUrl ? [previewUrl] : [])
+		const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>(
+			previewUrl ? [{ url: previewUrl, file: undefined as unknown as any }] : []
+		)
 		const [draggingFileOver, setDraggingFileOver] = useState<boolean>(false)
 
 		const { getRootProps, getInputProps } = useDropzone({
@@ -37,17 +38,18 @@ const FileUpload = forwardRef<HTMLInputElement, Props>(
 
 				if (!allowMultipleFiles && files.length > 1) return
 
-				const urls: string[] = []
+				const uploads: UploadedFile[] = []
 
 				for (let i = 0; i < files.length; i++) {
-					const blob = await convertFileToBlob(files[i])
+					const file = files[i]
+					const blob = await convertFileToBlob(file)
 
 					const url = URL.createObjectURL(blob)
 
-					urls.push(url)
+					uploads.push({ url, file })
 				}
 
-				setAssetUrls(urls)
+				setUploadedFiles(uploads)
 			},
 		})
 
@@ -71,29 +73,27 @@ const FileUpload = forwardRef<HTMLInputElement, Props>(
 				uploads.push({ url, file })
 			}
 
-			const urls = uploads.map((upload) => upload.url)
-
-			setAssetUrls(urls)
+			setUploadedFiles(uploads)
 			onUpload(uploads)
 		}
 
-		const handleRemoveFile = (event: React.MouseEvent<HTMLButtonElement>, assetUrl: string) => {
+		const handleRemoveFile = (event: React.MouseEvent<HTMLButtonElement>, uploadedFile: UploadedFile) => {
 			if (!componentRef.current) return
 			event.preventDefault()
 			event.stopPropagation()
 
-			const deepClonedAssetUrls = cloneDeep(assetUrls)
+			const deepClonedUploadedFiles = cloneDeep(uploadedFiles)
 
-			remove(deepClonedAssetUrls, (deepClonedAssetUrl) => deepClonedAssetUrl === assetUrl)
+			remove(deepClonedUploadedFiles, (deepClonedUploadedFile) => deepClonedUploadedFile.url === uploadedFile.url)
 
-			setAssetUrls(deepClonedAssetUrls)
-			URL.revokeObjectURL(assetUrl)
+			setUploadedFiles(deepClonedUploadedFiles)
+			URL.revokeObjectURL(uploadedFile.url)
 			componentRef.current.value = ''
 		}
 
 		useEffect(() => {
 			if (previewUrl) {
-				setAssetUrls([previewUrl])
+				setUploadedFiles([{ url: previewUrl, file: undefined as unknown as File }])
 			}
 		}, [previewUrl])
 
@@ -101,26 +101,32 @@ const FileUpload = forwardRef<HTMLInputElement, Props>(
 			<label
 				htmlFor={id}
 				className={clsx('file-upload', className, {
-					'file-upload--no-pointer': assetUrls.length > 0,
+					'file-upload--no-pointer': uploadedFiles.length > 0,
 					'file-upload--dropping': draggingFileOver,
 				})}
 				{...getRootProps()}
 			>
-				{assetUrls.length > 0 && (
+				{uploadedFiles.length > 0 && (
 					<div className='preview-image-list'>
-						{assetUrls.map((assetUrl) => (
-							<div
-								key={assetUrl}
-								className={clsx('preview-image-wrapper', {
-									'preview-image-wrapper--cover': assetUrls.length === 1,
-								})}
-							>
-								<SkeletonImage fill src={assetUrl || previewUrl} alt='' className='preview-image' />
-								<button className='close-button' onClick={(event) => handleRemoveFile(event, assetUrl)}>
-									<CloseIcon className='close-icon' />
-								</button>
-							</div>
-						))}
+						{uploadedFiles.map((uploadedFile) => {
+							return (
+								<div
+									key={uploadedFile.url}
+									className={clsx('preview-image-wrapper', {
+										'preview-image-wrapper--cover': uploadedFiles.length === 1,
+									})}
+								>
+									{uploadedFile.file?.type.includes('pdf') ? (
+										<embed src={uploadedFile.url} width='100%' height='100%' />
+									) : (
+										<SkeletonImage fill src={uploadedFile.url || previewUrl} alt='' className='preview-image' />
+									)}
+									<button className='close-button' onClick={(event) => handleRemoveFile(event, uploadedFile)}>
+										<CloseIcon className='close-icon' />
+									</button>
+								</div>
+							)
+						})}
 					</div>
 				)}
 
@@ -132,9 +138,9 @@ const FileUpload = forwardRef<HTMLInputElement, Props>(
 					multiple={allowMultipleFiles}
 					onChange={handleFileChange}
 					ref={componentRef}
-					disabled={assetUrls.length > 0}
+					disabled={uploadedFiles.length > 0}
 				/>
-				{assetUrls.length === 0 && (
+				{uploadedFiles.length === 0 && (
 					<>
 						<ImageIcon className='image-icon' />
 						<span className='label'>{label}</span>

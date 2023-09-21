@@ -61,7 +61,11 @@ export default function SubmitCreatorRegistrationPage() {
 					<p className='subtitle'>
 						Account review pending
 						<br />
-						Review time is around 12-24 hours. In the meantime, you can start creating!
+						<br />
+						Verification mail has been sent to your email.
+						<br />
+						<br />
+						Review time is around 2-3 days. In the meantime, you can start creating!
 					</p>
 
 					<FormActions centered>

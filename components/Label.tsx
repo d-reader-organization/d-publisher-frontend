@@ -7,7 +7,7 @@ import InfoIcon from 'public/assets/vector-icons/info.svg'
 interface Props extends LabelHTMLAttributes<HTMLLabelElement> {
 	isRequired?: boolean
 	size?: 'small' | 'normal'
-	tooltipText?: string
+	tooltipText?: React.ReactNode
 	centered?: boolean
 	children: React.ReactNode
 }

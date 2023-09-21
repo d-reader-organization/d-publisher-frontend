@@ -16,6 +16,7 @@ export enum RoutePath {
 	ComicConnectSocials = '/comic/connect-socials',
 	ComicIssue = '/comic-issue',
 	CreateComicIssue = '/comic-issue/create',
+	ComicIssueUploadCovers = '/comic-issue/upload-covers',
 	ComicIssueUploadAssets = '/comic-issue/upload-assets',
 	ComicIssueUploadPages = '/comic-issue/upload-pages',
 	ComicIssuePublish = '/comic-issue/publish',

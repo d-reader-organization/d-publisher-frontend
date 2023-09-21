@@ -62,7 +62,7 @@ export default function CreateComicIssuePage() {
 
 	const handleFormSubmit = async (data: CreateComicIssueData) => {
 		const comicIssue = await createComicIssue(data)
-		router.push(`${RoutePath.ComicIssueUploadAssets}?id=${comicIssue.id}`)
+		router.push(`${RoutePath.ComicIssueUploadCovers}?id=${comicIssue.id}`)
 	}
 
 	const handleFormError = (errors: FieldErrors<CreateComicIssueData>) => {
@@ -77,9 +77,10 @@ export default function CreateComicIssuePage() {
 			<Steps
 				steps={[
 					{ label: '01 Create Issue', isActive: true },
-					{ label: '02 Upload assets', isActive: false },
-					{ label: '03 Upload pages', isActive: false },
-					{ label: '04 Publish', isActive: false },
+					{ label: '02 Upload covers', isActive: false },
+					{ label: '03 Upload assets', isActive: false },
+					{ label: '04 Upload pages', isActive: false },
+					{ label: '05 Publish', isActive: false },
 				]}
 			/>
 

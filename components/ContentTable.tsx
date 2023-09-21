@@ -35,7 +35,7 @@ const ContentTable = () => {
 					</tbody>
 				</table>
 			)}
-			{comics.length === 0 && <div className='content-table-empty'>No content to display!</div>}
+			{comics.length === 0 && <div className='content-table-empty'>No comics to display!</div>}
 		</div>
 	)
 }

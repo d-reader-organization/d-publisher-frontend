@@ -3,11 +3,9 @@ import React, { useEffect } from 'react'
 import Button from 'components/Button'
 import Label from 'components/Label'
 import Input from 'components/Input'
-import { useRouter } from 'next/navigation'
 import { Resolver, useForm } from 'react-hook-form'
 import { UpdateCreatorData } from 'models/creator'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { RoutePath } from 'enums/routePath'
 import { useFetchMe, useUpdateCreator } from '@/api/creator'
 import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
 import { connectSocialsValidationSchema } from './schemas'
@@ -25,8 +23,6 @@ import {
 } from '@/utils/helpers'
 
 const UpdateCreatorSocials: React.FC = () => {
-	const router = useRouter()
-
 	const { data: me } = useFetchMe()
 	const { mutateAsync: updateCreator } = useUpdateCreator(me?.slug || '')
 
@@ -65,7 +61,6 @@ const UpdateCreatorSocials: React.FC = () => {
 			}
 
 			await updateCreator(formattedData)
-			router.push(RoutePath.RegisterSubmit)
 		})()
 	}
 

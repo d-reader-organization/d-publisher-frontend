@@ -1,26 +1,23 @@
+@use '../variables/theme.module.scss' as *;
+
 .form--edit-comic-issue-assets {
-	.rarities-select {
-		width: 262px;
+	.comic-issue-file-container {
+		margin-right: 45px;
+
+		&:last-of-type {
+			margin-right: 0;
+		}
 	}
 
-	.rarity-cover-wrapper {
-		display: flex;
-		justify-content: center;
+	.comic-issue-signature-input {
+		aspect-ratio: $comic-issue-signature-aspect-ratio;
+		width: 512px;
+		height: auto;
 	}
 
-	.cover-image-upload {
-		margin-right: 50px;
-	}
-
-	.default-issue-checkbox {
-		margin-right: 12px;
-	}
-
-	.default-issue-checkbox-wrapper {
-		display: flex;
-		align-items: center;
-		font-weight: 500;
-		font-size: 16px;
-		line-height: 22px;
+	.comic-issue-pdf-input {
+		aspect-ratio: $comic-issue-cover-aspect-ratio;
+		width: 512px;
+		height: auto;
 	}
 }

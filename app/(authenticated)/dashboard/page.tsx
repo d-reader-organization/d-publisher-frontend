@@ -14,7 +14,7 @@ export default function DashboardPage() {
 	return (
 		<>
 			<Header title={me?.name ? `Hi, ${me.name}` : 'Hi,'} />
-			<DashboardStats />
+			{/* <DashboardStats /> */}
 			<ContentTable />
 		</>
 	)

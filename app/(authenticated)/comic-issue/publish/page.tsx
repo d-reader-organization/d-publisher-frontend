@@ -30,7 +30,6 @@ export default function PublishComicIssuePage() {
 
 	usePrefetchRoute(nextPage)
 	useAuthenticatedRoute()
-	// TODO: show different content depending on the user role
 
 	const handleUploadPages = (pageFiles: File[]) => {
 		setPageFiles(pageFiles)
@@ -66,9 +65,10 @@ export default function PublishComicIssuePage() {
 			<Steps
 				steps={[
 					{ label: '01 Create Issue', isActive: false },
-					{ label: '02 Upload assets', isActive: false },
-					{ label: '03 Upload pages', isActive: false },
-					{ label: '04 Publish', isActive: true },
+					{ label: '02 Upload covers', isActive: false },
+					{ label: '03 Upload assets', isActive: false },
+					{ label: '04 Upload pages', isActive: false },
+					{ label: '05 Publish', isActive: true },
 				]}
 			/>
 

@@ -65,9 +65,10 @@ export default function UploadComicIssuePagesPage() {
 			<Steps
 				steps={[
 					{ label: '01 Create Issue', isActive: false },
-					{ label: '02 Upload assets', isActive: false },
-					{ label: '03 Upload pages', isActive: true },
-					{ label: '04 Publish', isActive: false },
+					{ label: '02 Upload covers', isActive: false },
+					{ label: '03 Upload assets', isActive: false },
+					{ label: '04 Upload pages', isActive: true },
+					{ label: '05 Publish', isActive: false },
 				]}
 			/>
 

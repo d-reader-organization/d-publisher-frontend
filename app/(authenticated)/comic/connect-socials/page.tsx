@@ -81,7 +81,7 @@ export default function ConnectComicSocialsPage() {
 			/>
 
 			<main>
-				<Form className='form--edit-comic-socials'>
+				<Form padding minSize='md' className='form--edit-comic-socials'>
 					<Label className='group-label'>Additional Links</Label>
 					<Label size='small'>Website</Label>
 					<Input prefix='https://' {...register('website')} />

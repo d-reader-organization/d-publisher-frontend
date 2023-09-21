@@ -78,7 +78,7 @@ const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ children }) =>
 				}}
 				autoHideDuration={toast.duration}
 				open={toast.isOpen}
-				onClose={remove}
+				onClose={toast.duration === null ? undefined : remove}
 				style={{ zIndex: 2001 }}
 			>
 				<Alert
