@@ -1,7 +1,7 @@
 import { isNil } from 'lodash'
 import { Authorization } from 'models/auth'
 
-// TODO: refactor to a hook: https://usehooks-ts.com/react-hook/use-local-storage
+// refactor to a hook: https://usehooks-ts.com/react-hook/use-local-storage
 // use SWR instead of local storage so we can fetch these objects server side
 
 export const defaultAuthorization: Authorization = Object.freeze({

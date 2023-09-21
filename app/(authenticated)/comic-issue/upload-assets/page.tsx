@@ -63,7 +63,6 @@ export default function UploadComicIssueAssetsPage() {
 		router.push(nextPage)
 	}
 
-	// TODO: handle client-side form errors across the app
 	const handleFormError = (errors: FieldErrors<CreateComicIssueData>) => {
 		const [_, errorValue] = Object.entries(errors)[0]
 

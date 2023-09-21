@@ -9,25 +9,35 @@ import 'app/styles/app.scss'
 
 /**
  * TODO:
+ * - fix image ratios on dPublisher with Matan's input
+ * - resolve handle client-side form errors on dPublisher
+ * - fix the textarea number of characters remaining bug
+ * - Luka isPrimarySale, isSecondarySale
+ * - email verification
+ * - number of preview pages
+ * - revise input descriptions and tooltip texts
+ * - upload stateful covers screen
+ * - edit comic
+ * - edit comic issue
+ * - 404 page
+ */
+
+/**
+ * TODO:
  * deprecate next-sitemap and implement https://nextjs.org/docs/app/api-reference/file-conventions/metadata
  * fetch the comic series to see if the series are, in fact, existing (on comic issue create page)
  * fetch the latest comic issue of a comic and use that data to prefill the comic issue create form
- * upload stateful covers screen
-
  * number input for statelessCover.share
- * numberOfPreviewPages should work differently
+ * refactor localStorage auth handling to SWR
 
+ * ATHAR
  * IMPORTANT: publish-on-chain (+isFullyUploaded checkbox) screen
+ * IMPORTANT: comicIssue.releaseDate is missing when creating a comic issue
 
- * IMPORTANT: revise all image ratios, input descriptions, input tooltip texts
- * IMPORTANT: comicIssue.releaseDate is missing
- * IMPORTANT: verify-email webpage
- * IMPORTANT: edit comic
- * IMPORTANT: edit comic issue
+ * JOSIP
  * IMPORTANT: view comics
  * IMPORTANT: view comic issues
  * IMPORTANT: sign copies
- * IMPORTANT: 404 page
  */
 
 const satoshi = localFont({
