@@ -80,7 +80,7 @@ export default function CreateComicPage() {
 			/>
 
 			<main>
-				<Form padding minSize='md' className='form--create-comic'>
+				<Form padding maxSize='md' fullWidth className='form--create-comic'>
 					<Label isRequired>Comic title</Label>
 					<Input {...register('title')} />
 					<Label isRequired>Genres</Label>

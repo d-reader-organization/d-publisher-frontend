@@ -6,7 +6,7 @@ interface Props extends DetailedHTMLProps<HTMLAttributes<HTMLFormElement>, HTMLF
 	padding?: boolean
 	fullWidth?: boolean
 	minSize?: 'sm' | 'md' | 'lg'
-	maxSize?: 'sm' | 'md' | 'lg'
+	maxSize?: 'sm' | 'md' | 'lg' | 'xl'
 }
 
 const Form: React.FC<Props> = ({
@@ -29,6 +29,7 @@ const Form: React.FC<Props> = ({
 				'form--max-sm': maxSize === 'sm',
 				'form--max-md': maxSize === 'md',
 				'form--max-lg': maxSize === 'lg',
+				'form--max-xl': maxSize === 'xl',
 				'form--max-content': !fullWidth,
 				'form--width-100': fullWidth,
 			})}

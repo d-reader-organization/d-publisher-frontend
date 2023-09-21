@@ -19,6 +19,10 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { uploadAssetsValidationSchema } from '../schemas'
 import FileUpload from '@/components/FileUpload'
 
+const signatureTooltipText = `.png format required
+
+This signature will be used when signing a digital copy for your fan.`
+
 const pdfTooltipText = `This file will be used for offline reading when users want to download offline content
 
 Furthermore, if your comic issue is an NFT collection, this pdf file will be attached the each NFT from the collection to guarantee the ownership of the content to collectors.
@@ -83,38 +87,31 @@ export default function UploadComicIssueAssetsPage() {
 			/>
 
 			<main>
-				<Form padding minSize='md' className='form--edit-comic-issue-assets'>
-					<div className='comic-issue-file-container'>
-						<Label
-							isRequired
-							tooltipText='.png format required, this signature will be used when signing a digital copy'
-						>
-							Signature
-						</Label>
-						<FileUpload
-							id='signature-upload'
-							label='Choose a picture 500x1000px'
-							className='comic-issue-signature-input'
-							onUpload={(files) => {
-								setValue('signature', files[0].file)
-							}}
-							ref={register('signature').ref}
-						/>
-					</div>
-					<div className='comic-issue-file-container'>
-						<Label isRequired tooltipText={pdfTooltipText}>
-							PDF
-						</Label>
-						<FileUpload
-							id='pdf-upload'
-							label='Choose a PDF file'
-							className='comic-issue-pdf-input'
-							onUpload={(files) => {
-								setValue('pdf', files[0].file)
-							}}
-							ref={register('pdf').ref}
-						/>
-					</div>
+				<Form padding maxSize='md' fullWidth className='form--edit-comic-issue-assets'>
+					<Label isRequired tooltipText={signatureTooltipText}>
+						Signature
+					</Label>
+					<FileUpload
+						id='signature-upload'
+						label='Choose a picture 380x240px'
+						className='comic-issue-signature-input'
+						onUpload={(files) => {
+							setValue('signature', files[0].file)
+						}}
+						ref={register('signature').ref}
+					/>
+					<Label isRequired tooltipText={pdfTooltipText}>
+						Comic PDF
+					</Label>
+					<FileUpload
+						id='pdf-upload'
+						label='Choose a PDF file'
+						className='comic-issue-pdf-input'
+						onUpload={(files) => {
+							setValue('pdf', files[0].file)
+						}}
+						ref={register('pdf').ref}
+					/>
 
 					<FormActions marginTop>
 						<Button type='submit' onClick={handleNextClick} backgroundColor='grey-100' className='action-button'>

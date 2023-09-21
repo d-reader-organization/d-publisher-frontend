@@ -1,5 +1,6 @@
 @use '../variables/theme.module.scss' as *;
 @use '../mixins/common.module.scss' as *;
+@use '../mixins/breakpoints.module.scss' as *;
 
 .form {
 	min-width: $xs-width;
@@ -13,7 +14,15 @@
 	}
 
 	&--base-padding {
-		padding: 60px 120px;
+		padding: 20px;
+
+		@include md {
+			padding: 40px 80px;
+		}
+
+		@include lg {
+			padding: 60px 120px;
+		}
 	}
 
 	&--min-xs {
@@ -42,6 +51,10 @@
 
 	&--max-lg {
 		max-width: 980px;
+	}
+
+	&--max-xl {
+		max-width: 1200px;
 	}
 
 	&--centered {

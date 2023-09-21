@@ -20,6 +20,7 @@ import 'app/styles/app.scss'
  * - edit comic
  * - edit comic issue
  * - 404 page
+ * - SCREEN RECORDING
  */
 
 /**

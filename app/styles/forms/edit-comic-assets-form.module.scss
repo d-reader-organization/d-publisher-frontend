@@ -1,4 +1,6 @@
 @use '../variables/theme.module.scss' as *;
+@use '../mixins/breakpoints.module.scss' as *;
+@use '../mixins/common.module.scss' as *;
 
 .form--edit-comic-assets {
 	.comic-file-wrapper {
@@ -7,7 +9,13 @@
 	}
 
 	.comic-file-container {
-		margin-right: 45px;
+		width: 100%;
+		margin-right: 20px;
+		@include flexColumn;
+
+		@include lg {
+			margin-right: 40px;
+		}
 
 		&:last-of-type {
 			margin-right: 0;
@@ -15,26 +23,38 @@
 	}
 
 	.comic-cover-input {
-		aspect-ratio: 1;
-		width: 256px;
+		aspect-ratio: $comic-cover-aspect-ratio;
+		width: 100%;
 		height: auto;
-	}
 
-	.comic-logo-input {
-		aspect-ratio: 1;
-		width: 256px;
-		height: auto;
+		@include lg {
+			height: 100%;
+		}
 	}
 
 	.comic-banner-input {
-		aspect-ratio: 800/450;
-		width: 600px;
+		aspect-ratio: $comic-banner-aspect-ratio;
 		height: auto;
+		width: 100%;
+	}
+
+	.comic-logo-input {
+		aspect-ratio: $comic-logo-aspect-ratio;
+		height: auto;
+		width: 100%;
+
+		@include lg {
+			min-height: 140px;
+		}
 	}
 
 	.comic-pfp-input {
-		aspect-ratio: 1;
-		width: 256px;
+		aspect-ratio: $comic-pfp-aspect-ratio;
+		width: 100%;
 		height: auto;
+
+		@include lg {
+			height: 100%;
+		}
 	}
 }

@@ -73,7 +73,7 @@ export default function UploadComicIssuePagesPage() {
 			/>
 
 			<main>
-				<Form padding className='form--edit-comic-issue-pages'>
+				<Form padding minSize='sm' className='form--edit-comic-issue-pages'>
 					<Label isRequired tooltipText='optimized .jpg or .jpeg formats preferred for optimal download speed'>
 						Add issue pages
 					</Label>

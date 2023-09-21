@@ -85,7 +85,7 @@ export default function CreateComicIssuePage() {
 			/>
 
 			<main>
-				<Form padding minSize='md' className='form--create-comic-issue'>
+				<Form padding maxSize='md' fullWidth className='form--create-comic-issue'>
 					<Label isRequired>Issue title</Label>
 					<Input {...register('title')} placeholder='Name of the episode' />
 					<div className='issue-number-wrapper'>

@@ -158,7 +158,7 @@ export default function UploadComicIssueCoversPage() {
 			/>
 
 			<main>
-				<Form padding minSize='md' className='form--edit-comic-issue-covers'>
+				<Form padding maxSize='md' fullWidth className='form--edit-comic-issue-covers'>
 					<Label isRequired tooltipText={coverVariantsTooltipText}>
 						Issue Covers
 					</Label>

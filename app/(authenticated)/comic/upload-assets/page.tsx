@@ -78,29 +78,15 @@ export default function UploadComicAssetsPage() {
 			/>
 
 			<main>
-				<Form padding minSize='md' className='form--edit-comic-assets'>
+				<Form padding maxSize='xl' fullWidth className='form--edit-comic-assets'>
 					<div className='comic-file-wrapper'>
-						<div className='comic-file-container'>
-							<Label isRequired tooltipText='.jpg or .jpeg formats preferred, .png allowed'>
-								Comic Cover
-							</Label>
-							<FileUpload
-								id='cover-upload'
-								label='Choose a picture 663x1024px'
-								className='comic-cover-input'
-								onUpload={(files) => {
-									setValue('cover', files[0].file)
-								}}
-								ref={register('cover').ref}
-							/>
-						</div>
 						<div className='comic-file-container'>
 							<Label isRequired tooltipText='.png if transparent background, otherwise .jpg or .jpeg'>
 								Comic Banner
 							</Label>
 							<FileUpload
 								id='banner-upload'
-								label='Choose a picture 1600x900px'
+								label='Choose a picture 1920x900px'
 								className='comic-banner-input'
 								onUpload={(files) => {
 									setValue('banner', files[0].file)
@@ -111,31 +97,47 @@ export default function UploadComicAssetsPage() {
 					</div>
 					<div className='comic-file-wrapper'>
 						<div className='comic-file-container'>
-							<Label isRequired tooltipText='.png or .gif with transparent background'>
-								Comic Logo
+							<Label isRequired tooltipText='.jpg or .jpeg formats preferred, .png allowed'>
+								Comic Cover
 							</Label>
 							<FileUpload
-								id='logo-upload'
-								label='Choose a picture 512x512px'
-								className='comic-logo-input'
+								id='cover-upload'
+								label='1000x900px'
+								className='comic-cover-input'
 								onUpload={(files) => {
-									setValue('logo', files[0].file)
+									setValue('cover', files[0].file)
 								}}
-								ref={register('logo').ref}
+								ref={register('cover').ref}
 							/>
 						</div>
+
 						<div className='comic-file-container'>
 							<Label isRequired tooltipText='.png if transparent background, otherwise .jpg, .jpeg, or .gif'>
 								Comic PFP
 							</Label>
 							<FileUpload
 								id='pfp-upload'
-								label='Choose a picture 512x512px'
+								label='400x400px'
 								className='comic-pfp-input'
 								onUpload={(files) => {
 									setValue('pfp', files[0].file)
 								}}
 								ref={register('pfp').ref}
+							/>
+						</div>
+
+						<div className='comic-file-container'>
+							<Label isRequired tooltipText='.png or .gif with transparent background'>
+								Comic Logo
+							</Label>
+							<FileUpload
+								id='logo-upload'
+								label='800x450px'
+								className='comic-logo-input'
+								onUpload={(files) => {
+									setValue('logo', files[0].file)
+								}}
+								ref={register('logo').ref}
 							/>
 						</div>
 					</div>

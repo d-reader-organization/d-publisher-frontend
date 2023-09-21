@@ -1,23 +1,15 @@
 @use '../variables/theme.module.scss' as *;
 
 .form--edit-comic-issue-assets {
-	.comic-issue-file-container {
-		margin-right: 45px;
-
-		&:last-of-type {
-			margin-right: 0;
-		}
-	}
-
 	.comic-issue-signature-input {
 		aspect-ratio: $comic-issue-signature-aspect-ratio;
-		width: 512px;
+		width: 100%;
 		height: auto;
 	}
 
 	.comic-issue-pdf-input {
 		aspect-ratio: $comic-issue-cover-aspect-ratio;
-		width: 512px;
+		width: 100%;
 		height: auto;
 	}
 }

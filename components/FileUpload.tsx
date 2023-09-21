@@ -19,7 +19,19 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
 type UploadedFile = { url: string; file: File }
 
 const FileUpload = forwardRef<HTMLInputElement, Props>(
-	({ id, label, allowMultipleFiles = false, previewUrl = '', onUpload = () => {}, className = '', ...props }, ref) => {
+	(
+		{
+			id,
+			label,
+			allowMultipleFiles = false,
+			previewUrl = '',
+			onUpload = () => {},
+			onClick = () => {},
+			className = '',
+			...props
+		},
+		ref
+	) => {
 		const componentRef = useRef<HTMLInputElement>(null)
 		const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>(
 			previewUrl ? [{ url: previewUrl, file: undefined as unknown as any }] : []
@@ -55,7 +67,15 @@ const FileUpload = forwardRef<HTMLInputElement, Props>(
 
 		useImperativeHandle(ref, () => componentRef.current as HTMLInputElement)
 
+		const handleClick = (event: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
+			event.preventDefault()
+			event.stopPropagation()
+			onClick(event)
+		}
+
 		const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+			event.preventDefault()
+			event.stopPropagation()
 			if (!event.target) return
 
 			const files = event.target.files || []
@@ -137,8 +157,9 @@ const FileUpload = forwardRef<HTMLInputElement, Props>(
 					type='file'
 					multiple={allowMultipleFiles}
 					onChange={handleFileChange}
+					onClick={handleClick}
 					ref={componentRef}
-					disabled={uploadedFiles.length > 0}
+					// disabled={uploadedFiles.length > 0}
 				/>
 				{uploadedFiles.length === 0 && (
 					<>

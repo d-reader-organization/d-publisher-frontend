@@ -1,4 +1,5 @@
 @use '../variables/theme.module.scss' as *;
+@use '../mixins/breakpoints.module.scss' as *;
 
 .expandable {
 	width: 100%;
@@ -42,7 +43,19 @@
 	}
 
 	.expandable-content {
-		padding: 42px;
 		border-top: 1px solid $grey-400;
+		padding: 12px;
+
+		@include sm {
+			padding: 24px;
+		}
+
+		@include md {
+			padding: 36px;
+		}
+
+		@include lg {
+			padding: 48px;
+		}
 	}
 }

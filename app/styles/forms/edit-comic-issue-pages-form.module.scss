@@ -1,9 +1,20 @@
 .form--edit-comic-issue-pages {
 	max-width: 100%;
-	min-width: 820px;
 
 	.upload-pages {
 		width: 100%;
 		min-height: 420px;
+		max-height: 800px;
+
+		.preview-image-list {
+			overflow-x: auto;
+			// -webkit-overflow-scrolling: touch;
+		}
+
+		.preview-image-wrapper {
+			flex-shrink: 0;
+			width: auto;
+			padding: 4px 0;
+		}
 	}
 }

@@ -23,8 +23,17 @@ $md-width: 900px;
 $lg-width: 1200px;
 $xl-width: 1536px;
 
-$comic-issue-cover-aspect-ratio: 663/1024;
-$comic-issue-signature-aspect-ratio: 2/1;
+$comic-cover-aspect-ratio: 1000/900;
+$comic-banner-aspect-ratio: 1920/900;
+$comic-pfp-aspect-ratio: 400/400;
+$comic-logo-aspect-ratio: 800/450;
+
+$comic-issue-cover-aspect-ratio: 690/1000;
+$comic-issue-signature-aspect-ratio: 380/240;
+
+$creator-banner-aspect-ratio: 400/360;
+$creator-avatar-aspect-ratio: 400/400;
+$creator-logo-aspect-ratio: 800/450;
 
 // other
 $spacing: 8px;
