@@ -10,10 +10,10 @@ interface Props extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDi
 const FormActions: React.FC<Props> = ({ centered = false, column = false, marginTop = false, className, ...props }) => {
 	return (
 		<div
-			className={clsx(className, 'actions', {
-				'actions--centered': centered,
-				'actions--column': column,
-				'actions--margin-top': marginTop,
+			className={clsx(className, 'form-actions', {
+				'form-actions--centered': centered,
+				'form-actions--column': column,
+				'form-actions--margin-top': marginTop,
 			})}
 			{...props}
 		/>

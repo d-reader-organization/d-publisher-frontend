@@ -1,7 +1,7 @@
 @use '../variables/theme.module.scss' as *;
 @use '../mixins/common.module.scss' as *;
 
-.button {
+.button-link {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -13,10 +13,13 @@
 	font-size: 16px;
 	line-height: 19px;
 	font-weight: 600;
-	@include clickable;
 
 	&:hover {
 		filter: brightness(1.1);
+	}
+
+	&--clickable-effect {
+		@include clickable;
 	}
 
 	&--background-color-important {

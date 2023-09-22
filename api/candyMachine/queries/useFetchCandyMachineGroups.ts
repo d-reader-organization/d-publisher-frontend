@@ -6,6 +6,7 @@ import http from 'api/http'
 
 const { CANDY_MACHINE, GET, GROUPS } = CANDY_MACHINE_QUERY_KEYS
 
+// TODO v2: this endpoint is deprecated
 const fetchCandyMachineGroups = async (address: string): Promise<CandyMachineGroup[]> => {
 	const response = await http.get<CandyMachineGroup[]>(`${CANDY_MACHINE}/${GET}/${address}/${GROUPS}`)
 	return response.data

@@ -4,7 +4,11 @@ import Header from 'components/layout/Header'
 import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
 import { useFetchMe } from '@/api/creator'
 
-export default function ComicPage({ params }: { params: { slug: string } }) {
+interface Params {
+	slug: string
+}
+
+export default function ComicPage({ params }: { params: Params }) {
 	const { data: me } = useFetchMe()
 
 	useAuthenticatedRoute()

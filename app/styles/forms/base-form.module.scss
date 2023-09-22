@@ -69,37 +69,6 @@
 		color: $grey-100;
 	}
 
-	.actions {
-		@include flexRow;
-		align-items: center;
-		justify-content: left;
-
-		.action-button:not(:last-child) {
-			margin-right: 1rem;
-		}
-
-		&--column {
-			@include centeredColumn;
-
-			.action-button:not(:last-child) {
-				margin-bottom: 1rem;
-				margin-right: 0;
-			}
-		}
-
-		&--centered {
-			justify-content: center;
-		}
-
-		&--margin-top {
-			margin-top: 40px;
-		}
-	}
-
-	.action-button-icon {
-		margin-left: 8px;
-	}
-
 	.checkmark-row {
 		display: flex;
 		align-items: center;
@@ -120,5 +89,36 @@
 		&--highlighted {
 			color: $yellow;
 		}
+	}
+}
+
+.form-actions {
+	@include flexRow;
+	align-items: center;
+	justify-content: left;
+
+	.action-button:not(:last-child) {
+		margin-right: 1rem;
+	}
+
+	&--column {
+		@include centeredColumn;
+
+		.action-button:not(:last-child) {
+			margin-bottom: 1rem;
+			margin-right: 0;
+		}
+	}
+
+	&--centered {
+		justify-content: center;
+	}
+
+	&--margin-top {
+		margin-top: 40px;
+	}
+
+	.action-button-icon {
+		margin-left: 8px;
 	}
 }

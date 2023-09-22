@@ -5,6 +5,7 @@
 
 @use 'components/sidebar.module.scss';
 @use 'components/button.module.scss';
+@use 'components/button-link.module.scss';
 @use 'components/header.module.scss';
 @use 'components/dashboard-stats.module.scss';
 @use 'components/content-table.module.scss';
@@ -38,6 +39,7 @@
 @use 'pages/profile.module.scss';
 @use 'pages/register.module.scss';
 @use 'pages/login.module.scss';
+@use 'pages/verify-email.module.scss';
 
 // Variables
 @use 'variables/theme.module.scss';

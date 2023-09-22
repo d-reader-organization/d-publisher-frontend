@@ -9,10 +9,7 @@ import 'app/styles/app.scss'
 
 /**
  * TODO:
- * - fix the textarea number of characters remaining bug (and when submitting a form flash screen)
  * - Luka isPrimarySale, isSecondarySale
- * - email verification
-
  * - upload stateful covers screen
  * - edit comic
  * - edit comic issue
@@ -27,6 +24,7 @@ import 'app/styles/app.scss'
  * fetch the latest comic issue of a comic and use that data to prefill the comic issue create form
  * number input for statelessCover.share
  * refactor localStorage auth handling to SWR
+ * fix the textarea number of characters remaining bug (and when submitting a form flash screen)
  * sidebar should be closeable on mobile screens, shown as a hamburger menu
 
  * ATHAR

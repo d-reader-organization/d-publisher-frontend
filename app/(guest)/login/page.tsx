@@ -17,6 +17,7 @@ import useGuestRoute from 'hooks/useCreatorGuestRoute'
 import FormActions from '@/components/FormActions'
 import Form from '@/components/Form'
 import usePrefetchRoute from '@/hooks/usePrefetchRoute'
+import ButtonLink from '@/components/ButtonLink'
 
 export default function LoginPage() {
 	const router = useRouter()
@@ -64,15 +65,14 @@ export default function LoginPage() {
 							Let&apos;s go
 						</Button>
 
-						<Button
-							onClick={() => {
-								router.push(RoutePath.Register)
-							}}
+						<ButtonLink
+							href={RoutePath.Register}
+							clickableEffect={false}
 							backgroundColor='transparent'
 							className='action-button action-button--register'
 						>
 							No account? Register here
-						</Button>
+						</ButtonLink>
 					</FormActions>
 				</Form>
 			</main>
