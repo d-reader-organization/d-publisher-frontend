@@ -9,12 +9,17 @@ import 'app/styles/app.scss'
 
 /**
  * TODO:
- * - Luka isPrimarySale, isSecondarySale
+ * - SCREEN RECORDING
+
  * - upload stateful covers screen
  * - edit comic
  * - edit comic issue
  * - 404 page
- * - SCREEN RECORDING
+ * - view comics
+ * - view comic issues
+ * - publish-on-chain (+isFullyUploaded checkbox) screen
+ * - comicIssue.releaseDate is missing when creating a comic issue
+ * - sign copies
  */
 
 /**
@@ -26,15 +31,6 @@ import 'app/styles/app.scss'
  * refactor localStorage auth handling to SWR
  * fix the textarea number of characters remaining bug (and when submitting a form flash screen)
  * sidebar should be closeable on mobile screens, shown as a hamburger menu
-
- * ATHAR
- * IMPORTANT: publish-on-chain (+isFullyUploaded checkbox) screen
- * IMPORTANT: comicIssue.releaseDate is missing when creating a comic issue
-
- * JOSIP
- * IMPORTANT: view comics
- * IMPORTANT: view comic issues
- * IMPORTANT: sign copies
  */
 
 const satoshi = localFont({

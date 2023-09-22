@@ -18,6 +18,7 @@ import usePrefetchRoute from '@/hooks/usePrefetchRoute'
 import { useUpdateComicIssuePages } from '@/api/comicIssue'
 import IntegerInput from '@/components/IntegerInput'
 import { comicIssuePagesTooltipText, numberOfPagesTooltipText } from '@/constants/tooltips'
+import FormActions from '@/components/FormActions'
 
 export default function UploadComicIssuePagesPage() {
 	const toaster = useToaster()
@@ -109,9 +110,11 @@ export default function UploadComicIssuePagesPage() {
 						/>
 					</div>
 
-					<Button type='submit' onClick={handleNextClick} backgroundColor='grey-100' className='action-button'>
-						Next <ArrowRightIcon className='action-button-icon' />
-					</Button>
+					<FormActions marginTop>
+						<Button type='submit' onClick={handleNextClick} backgroundColor='grey-100' className='action-button'>
+							Next <ArrowRightIcon className='action-button-icon' />
+						</Button>
+					</FormActions>
 				</Form>
 			</main>
 		</>

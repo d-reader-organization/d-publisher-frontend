@@ -15,6 +15,7 @@ import Form from '@/components/Form'
 import { RoutePath } from '@/enums/routePath'
 import usePrefetchRoute from '@/hooks/usePrefetchRoute'
 import { useUpdateComicIssuePages } from '@/api/comicIssue'
+import FormActions from '@/components/FormActions'
 
 export default function PublishComicIssuePage() {
 	const toaster = useToaster()
@@ -74,9 +75,11 @@ export default function PublishComicIssuePage() {
 			<main>
 				<Form padding className='form--edit-comic-issue-pages'>
 					Publish comic issue form
-					<Button type='submit' onClick={handleNextClick} backgroundColor='grey-100' className='action-button'>
-						Next <ArrowRightIcon className='action-button-icon' />
-					</Button>
+					<FormActions marginTop>
+						<Button type='submit' onClick={handleNextClick} backgroundColor='grey-100' className='action-button'>
+							Next <ArrowRightIcon className='action-button-icon' />
+						</Button>
+					</FormActions>
 				</Form>
 			</main>
 		</>
