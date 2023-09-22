@@ -53,7 +53,7 @@ export default function LoginPage() {
 				<h1 className='title'>Welcome back</h1>
 				<p className='subtitle'>let&apos;s get back to building!</p>
 
-				<Form padding centered minSize='sm' className='form--login-creator'>
+				<Form padding centered maxSize='xs' fullWidth className='form--login-creator'>
 					<Label isRequired>Email</Label>
 					<Input {...register('nameOrEmail')} placeholder='john.doe@dreader.io' type='email' />
 

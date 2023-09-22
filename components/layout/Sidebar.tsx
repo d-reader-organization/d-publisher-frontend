@@ -79,9 +79,9 @@ const Sidebar: React.FC<Props> = ({ hidden = false }) => {
 			</div>
 			<div className='sidebar-lower'>
 				<div className='actions'>
-					<div className='action'>
+					{/* <div className='action'>
 						<Link href={RoutePath.Settings}>Settings </Link>
-					</div>
+					</div> */}
 					<div className='action' onClick={logout}>
 						Log out
 					</div>

@@ -47,7 +47,7 @@ const UpdateCreatorVisualIdentity: React.FC = () => {
 			<Label centered isRequired tooltipText={creatorVisualIdentityTooltipText}>
 				Add profile avatar & cover
 			</Label>
-			<div className='description'>Recommended sizes are 500 x 500px for avatar and 680 x 320px for cover</div>
+			<div className='description'>Recommended sizes are 400 x 400px for avatar and 1920 x 900px for cover</div>
 			<div className='profile-assets-upload'>
 				<FileUpload
 					id='banner-upload'

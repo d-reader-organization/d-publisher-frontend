@@ -47,7 +47,7 @@ export default function SubmitCreatorRegistrationPage() {
 			/>
 
 			<main className='register-page register-page--submit'>
-				<Form padding centered maxSize='sm' className='container form form--submit-registration'>
+				<Form padding centered fullWidth maxSize='sm' className='container form form--submit-registration'>
 					<SkeletonImage priority src={avatar} width={140} height={140} alt='' className='avatar-image' />
 					<h1 className='title'>
 						Welcome&nbsp;
@@ -62,7 +62,6 @@ export default function SubmitCreatorRegistrationPage() {
 						<br />
 						<br />
 						Verification mail has been sent to your email.
-						<br />
 						<br />
 						Review time is around 2-3 days. In the meantime, you can start creating!
 					</p>

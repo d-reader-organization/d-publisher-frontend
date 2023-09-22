@@ -24,6 +24,7 @@ import FormActions from '@/components/FormActions'
 import Form from '@/components/Form'
 import { useToaster } from '@/providers/ToastProvider'
 import { audienceTypeTooltipText, currentStatusTooltipText, genresTooltipText } from '@/constants/tooltips'
+import usePrefetchRoute from '@/hooks/usePrefetchRoute'
 
 type LegalAgreement = {
 	ownershipConfirmation: boolean
@@ -56,16 +57,17 @@ export default function CreateComicPage() {
 	const { mutateAsync: createComic } = useCreateComic()
 
 	useAuthenticatedRoute()
+	usePrefetchRoute([RoutePath.Dashboard])
 
-	const handleSaveAndClose = (event: React.MouseEvent<HTMLButtonElement>) => {
+	const handleSaveAndClose = async (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
-		onSubmit(handleFormSubmit, toaster.onFormError)()
+		await onSubmit(handleFormSubmit, toaster.onFormError)()
+		router.push(RoutePath.Dashboard)
 	}
 
 	const handleSaveAndGoNext = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
 		onSubmit(handleFormSubmit, toaster.onFormError)()
-		// move router.push here instead of on handleFormSubmit
 	}
 
 	const handleFormSubmit = async (data: CreateComicData) => {

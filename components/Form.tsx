@@ -5,8 +5,8 @@ interface Props extends DetailedHTMLProps<HTMLAttributes<HTMLFormElement>, HTMLF
 	centered?: boolean
 	padding?: boolean
 	fullWidth?: boolean
-	minSize?: 'sm' | 'md' | 'lg'
-	maxSize?: 'sm' | 'md' | 'lg' | 'xl'
+	minSize?: 'xs' | 'sm' | 'md' | 'lg'
+	maxSize?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 }
 
 const Form: React.FC<Props> = ({
@@ -23,9 +23,11 @@ const Form: React.FC<Props> = ({
 			className={clsx(className, 'form', {
 				'form--base-padding': padding,
 				'form--centered': centered,
+				'form--min-xs': minSize === 'xs',
 				'form--min-sm': minSize === 'sm',
 				'form--min-md': minSize === 'md',
 				'form--min-lg': minSize === 'lg',
+				'form--max-xs': maxSize === 'xs',
 				'form--max-sm': maxSize === 'sm',
 				'form--max-md': maxSize === 'md',
 				'form--max-lg': maxSize === 'lg',

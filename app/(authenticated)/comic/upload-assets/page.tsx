@@ -49,17 +49,19 @@ export default function UploadComicAssetsPage() {
 	})
 	const { mutateAsync: updateComicFiles } = useUpdateComicFiles(comicSlug)
 
-	usePrefetchRoute(nextPage)
+	usePrefetchRoute([nextPage, RoutePath.Dashboard])
 	useAuthenticatedRoute()
 
-	const handleSaveAndClose = (event: React.MouseEvent<HTMLButtonElement>) => {
+	const handleSaveAndClose = async (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
-		onSubmit(handleFormSubmit, toaster.onFormError)()
+		await onSubmit(handleFormSubmit, toaster.onFormError)()
+		router.push(RoutePath.Dashboard)
 	}
 
-	const handleSaveAndGoNext = (event: React.MouseEvent<HTMLButtonElement>) => {
+	const handleSaveAndGoNext = async (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
-		onSubmit(handleFormSubmit, toaster.onFormError)()
+		await onSubmit(handleFormSubmit, toaster.onFormError)()
+		router.push(nextPage)
 	}
 
 	const handleFormSubmit = async (data: UpdateComicFilesData) => {
@@ -71,7 +73,6 @@ export default function UploadComicAssetsPage() {
 		if (data.logo) formData.append('logo', data.logo)
 
 		await updateComicFiles(formData)
-		router.push(nextPage)
 	}
 
 	return (
@@ -86,7 +87,7 @@ export default function UploadComicAssetsPage() {
 			/>
 
 			<main>
-				<Form padding maxSize='xl' fullWidth className='form--edit-comic-assets'>
+				<Form padding maxSize='lg' fullWidth className='form--edit-comic-assets'>
 					<div className='comic-file-wrapper'>
 						<div className='comic-file-container'>
 							<Label isRequired tooltipText={comicBannerTooltipText}>

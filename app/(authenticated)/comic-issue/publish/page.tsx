@@ -74,7 +74,6 @@ export default function PublishComicIssuePage() {
 
 			<main>
 				<Form padding className='form--edit-comic-issue-pages'>
-					Publish comic issue form
 					<FormActions marginTop>
 						<Button type='submit' onClick={handleNextClick} backgroundColor='grey-100' className='action-button'>
 							Next <ArrowRightIcon className='action-button-icon' />

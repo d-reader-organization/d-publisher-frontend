@@ -43,17 +43,19 @@ export default function ConnectComicSocialsPage() {
 	})
 	const { mutateAsync: updateComic } = useUpdateComic(comicSlug)
 
-	usePrefetchRoute(nextPage)
+	usePrefetchRoute([nextPage, RoutePath.Dashboard])
 	useAuthenticatedRoute()
 
-	const handleSaveAndClose = (event: React.MouseEvent<HTMLButtonElement>) => {
+	const handleSaveAndClose = async (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
-		onSubmit(handleFormSubmit, toaster.onFormError)()
+		await onSubmit(handleFormSubmit, toaster.onFormError)()
+		router.push(RoutePath.Dashboard)
 	}
 
-	const handleSaveAndGoNext = (event: React.MouseEvent<HTMLButtonElement>) => {
+	const handleSaveAndGoNext = async (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
 		onSubmit(handleFormSubmit, toaster.onFormError)()
+		router.push(nextPage)
 	}
 
 	const handleFormSubmit = async (data: UpdateComicSocialsData) => {
@@ -68,7 +70,6 @@ export default function ConnectComicSocialsPage() {
 		}
 
 		await updateComic(requestData)
-		router.push(nextPage)
 	}
 
 	return (

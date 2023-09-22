@@ -4,8 +4,13 @@
 	display: flex;
 	justify-content: space-between;
 	width: 100%;
-	padding: 40px;
 	border-bottom: 1px solid $grey-300;
+
+	padding: 24px;
+
+	@media (min-height: $md-height) and (min-width: $md-width) {
+		padding: 40px;
+	}
 
 	.title {
 		font-weight: 600;

@@ -16,17 +16,17 @@
 	&--base-padding {
 		padding: 20px;
 
-		@include md {
-			padding: 40px 80px;
+		@include sm {
+			padding: 40px 60px;
 		}
 
-		@include lg {
-			padding: 60px 120px;
+		@include md {
+			padding: 40px 80px;
 		}
 	}
 
 	&--min-xs {
-		min-width: 640px;
+		min-width: 480px;
 	}
 
 	&--min-sm {
@@ -39,6 +39,10 @@
 
 	&--min-lg {
 		min-width: 980px;
+	}
+
+	&--max-xs {
+		max-width: 480px;
 	}
 
 	&--max-sm {
