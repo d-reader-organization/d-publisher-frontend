@@ -3,11 +3,11 @@
 import { useEffect } from 'react'
 import LogoWithTextIcon from 'public/assets/vector-icons/logo-with-text.svg'
 import { useFetchMe, useVerifyCreatorEmail } from '@/api/creator'
-import FormActions from '@/components/FormActions'
 import { useCreatorAuth } from '@/providers/CreatorAuthProvider'
 import ArrowRightIcon from 'public/assets/vector-icons/arrow-right.svg'
 import { RoutePath } from '@/enums/routePath'
 import ButtonLink from '@/components/ButtonLink'
+import FormActions from '@/components/forms/FormActions'
 
 interface Params {
 	verificationToken: string

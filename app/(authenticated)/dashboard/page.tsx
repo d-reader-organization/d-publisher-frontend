@@ -2,8 +2,7 @@
 
 import Header from 'components/layout/Header'
 import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
-import DashboardStats from '@/components/DashboardStats'
-import ContentTable from '@/components/ContentTable'
+import ComicList from '@/components/ComicList'
 import { useFetchMe } from '@/api/creator'
 
 export default function DashboardPage() {
@@ -15,7 +14,7 @@ export default function DashboardPage() {
 		<>
 			<Header title={me?.name ? `Hi, ${me.name}` : 'Hi,'} />
 			{/* <DashboardStats /> */}
-			<ContentTable />
+			<ComicList />
 		</>
 	)
 }

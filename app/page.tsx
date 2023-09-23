@@ -3,8 +3,8 @@
 import LogoWithTextIcon from 'public/assets/vector-icons/logo-with-text.svg'
 import { RoutePath } from 'enums/routePath'
 import useGuestRoute from '@/hooks/useCreatorGuestRoute'
-import FormActions from '@/components/FormActions'
 import ButtonLink from '@/components/ButtonLink'
+import FormActions from '@/components/forms/FormActions'
 
 export default function Home() {
 	useGuestRoute()

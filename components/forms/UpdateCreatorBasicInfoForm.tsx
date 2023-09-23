@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 
 import Button from 'components/Button'
-import Label from 'components/Label'
 import Input from '@/components/forms/Input'
 import { useForm } from 'react-hook-form'
 import { UpdateCreatorData } from 'models/creator'
@@ -9,10 +8,11 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { updateCreatorValidationSchema } from './schemas'
 import { useFetchMe, useUpdateCreator } from '@/api/creator'
 import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
-import FormActions from '../FormActions'
 import TooltipLink from '../TooltipLink'
-import Textarea from '../Textarea'
 import Form from './Form'
+import Label from './Label'
+import Textarea from './Textarea'
+import FormActions from './FormActions'
 
 const TippingAddressTooltip = () => {
 	return (

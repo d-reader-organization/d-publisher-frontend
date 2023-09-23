@@ -2,8 +2,7 @@ import React, { forwardRef } from 'react'
 
 import PlusIcon from 'public/assets/vector-icons/plus.svg'
 import MinusIcon from 'public/assets/vector-icons/minus.svg'
-
-import Button from './Button'
+import Button from '../Button'
 
 interface Props {
 	value?: number

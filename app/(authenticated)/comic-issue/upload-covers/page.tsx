@@ -5,13 +5,10 @@ import { FieldErrors } from 'react-hook-form'
 import { useRouter, useSearchParams } from 'next/navigation'
 
 import Header from 'components/layout/Header'
-import Label from 'components/Label'
 import Button from 'components/Button'
 import Input from '@/components/forms/Input'
 import Steps from 'components/Steps'
-import Select from 'components/Select'
 import Expandable from '@/components/Expandable'
-import FileUpload from '@/components/FileUpload'
 import Checkbox from '@/components/Checkbox'
 import ArrowRightIcon from 'public/assets/vector-icons/arrow-right.svg'
 import { CreateComicIssueData } from 'models/comicIssue'
@@ -22,12 +19,16 @@ import { generateRequiredArrayElementErrorMessage } from '@/utils/error'
 import { ComicRarity } from '@/enums/comicRarity'
 import { cloneDeep } from 'lodash'
 import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
-import FormActions from '@/components/FormActions'
 import Form from '@/components/forms/Form'
 import { useUpdateComicIssueStatelessCovers } from '@/api/comicIssue'
 import { RoutePath } from '@/enums/routePath'
 import usePrefetchRoute from '@/hooks/usePrefetchRoute'
 import { comicIssueCoverImageTooltipText, coverVariantsTooltipText } from '@/constants/tooltips'
+import FileUpload from '@/components/forms/FileUpload'
+import FormActions from '@/components/forms/FormActions'
+import Label from '@/components/forms/Label'
+import Select from '@/components/forms/Select'
+import { imageTypes } from '@/constants/fileTypes'
 
 export default function UploadComicIssueCoversPage() {
 	const toaster = useToaster()
@@ -182,8 +183,9 @@ export default function UploadComicIssueCoversPage() {
 										id={`${rarity}-cover`}
 										className='cover-image-upload'
 										onUpload={(files) => {
-											handleChangeCoverImage(rarity, files[0].file ?? '')
+											handleChangeCoverImage(rarity, files[0]?.file ?? '')
 										}}
+										options={{ accept: imageTypes, maxFiles: 1 }}
 									/>
 								</div>
 								<div>

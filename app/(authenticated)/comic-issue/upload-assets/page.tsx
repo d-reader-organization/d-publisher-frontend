@@ -4,22 +4,23 @@ import { FieldErrors, Resolver, useForm } from 'react-hook-form'
 import { useRouter, useSearchParams } from 'next/navigation'
 
 import Header from 'components/layout/Header'
-import Label from 'components/Label'
 import Button from 'components/Button'
 import Steps from 'components/Steps'
 import ArrowRightIcon from 'public/assets/vector-icons/arrow-right.svg'
 import { CreateComicIssueData, UpdateComicIssueFilesData } from 'models/comicIssue'
 import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
-import FormActions from '@/components/FormActions'
 import Form from '@/components/forms/Form'
 import { RoutePath } from '@/enums/routePath'
 import usePrefetchRoute from '@/hooks/usePrefetchRoute'
 import { useUpdateComicIssueFiles } from '@/api/comicIssue/queries/useUpdateComicIssueFiles'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { uploadAssetsValidationSchema } from '../schemas'
-import FileUpload from '@/components/FileUpload'
+import { uploadComicIssueAssetsValidationSchema } from '@/components/forms/schemas'
 import { useToaster } from '@/providers/ToastProvider'
 import { signatureTooltipText, pdfTooltipText } from '@/constants/tooltips'
+import Label from '@/components/forms/Label'
+import FileUpload from '@/components/forms/FileUpload'
+import FormActions from '@/components/forms/FormActions'
+import { pdfType, transparentImageTypes } from '@/constants/fileTypes'
 
 export default function UploadComicIssueAssetsPage() {
 	const router = useRouter()
@@ -38,7 +39,7 @@ export default function UploadComicIssueAssetsPage() {
 			signature: undefined,
 			pdf: undefined,
 		},
-		resolver: yupResolver(uploadAssetsValidationSchema) as Resolver<UpdateComicIssueFilesData>,
+		resolver: yupResolver(uploadComicIssueAssetsValidationSchema) as Resolver<UpdateComicIssueFilesData>,
 	})
 	const { mutateAsync: updateComicIssueFiles } = useUpdateComicIssueFiles(comicIssueId)
 
@@ -81,30 +82,34 @@ export default function UploadComicIssueAssetsPage() {
 			/>
 
 			<main>
-				<Form padding maxSize='md' fullWidth className='form--edit-comic-issue-assets'>
+				<Form padding maxSize='sm' fullWidth className='form--edit-comic-issue-assets'>
 					<Label isRequired tooltipText={signatureTooltipText}>
 						Signature
 					</Label>
+					<p className='description'>Your personal signature which will be used when signing digital copies.</p>
 					<FileUpload
 						id='signature-upload'
 						label='Choose a picture 380x240px'
 						className='comic-issue-signature-input'
 						onUpload={(files) => {
-							setValue('signature', files[0].file)
+							setValue('signature', files[0]?.file)
 						}}
 						ref={register('signature').ref}
+						options={{ accept: transparentImageTypes, maxFiles: 1 }}
 					/>
 					<Label isRequired tooltipText={pdfTooltipText}>
 						Comic PDF
 					</Label>
+					<p className='description'>PDF file of the comic episode which will be used for offline reading</p>
 					<FileUpload
 						id='pdf-upload'
 						label='Choose a PDF file'
 						className='comic-issue-pdf-input'
 						onUpload={(files) => {
-							setValue('pdf', files[0].file)
+							setValue('pdf', files[0]?.file)
 						}}
 						ref={register('pdf').ref}
+						options={{ accept: pdfType, maxFiles: 1 }}
 					/>
 
 					<FormActions marginTop>

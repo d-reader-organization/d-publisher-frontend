@@ -23,7 +23,7 @@ import {
 	removeTwitter,
 } from 'utils/helpers'
 import { RoutePath } from 'enums/routePath'
-import { connectSocialsValidationSchema } from '../schemas'
+import { connectSocialsValidationSchema } from '@/components/forms/schemas'
 import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
 import Form from '@/components/forms/Form'
 import usePrefetchRoute from '@/hooks/usePrefetchRoute'

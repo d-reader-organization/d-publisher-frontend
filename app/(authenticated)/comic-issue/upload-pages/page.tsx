@@ -4,10 +4,8 @@ import { useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 
 import Header from 'components/layout/Header'
-import Label from 'components/Label'
 import Button from 'components/Button'
 import Steps from 'components/Steps'
-import FileUpload from '@/components/FileUpload'
 import ArrowRightIcon from 'public/assets/vector-icons/arrow-right.svg'
 import { useToaster } from '@/providers/ToastProvider'
 import { yupRequiredMessage } from '@/utils/error'
@@ -16,9 +14,12 @@ import Form from '@/components/forms/Form'
 import { RoutePath } from '@/enums/routePath'
 import usePrefetchRoute from '@/hooks/usePrefetchRoute'
 import { useUpdateComicIssuePages } from '@/api/comicIssue'
-import IntegerInput from '@/components/IntegerInput'
 import { comicIssuePagesTooltipText, numberOfPagesTooltipText } from '@/constants/tooltips'
-import FormActions from '@/components/FormActions'
+import FileUpload from '@/components/forms/FileUpload'
+import FormActions from '@/components/forms/FormActions'
+import IntegerInput from '@/components/forms/IntegerInput'
+import Label from '@/components/forms/Label'
+import { imageTypes, nonTransparentImageTypes } from '@/constants/fileTypes'
 
 export default function UploadComicIssuePagesPage() {
 	const toaster = useToaster()
@@ -77,24 +78,6 @@ export default function UploadComicIssuePagesPage() {
 
 			<main>
 				<Form padding fullWidth className='form--edit-comic-issue-pages'>
-					<Label isRequired tooltipText={comicIssuePagesTooltipText}>
-						Add issue pages
-					</Label>
-					<FileUpload
-						sortable
-						allowMultipleFiles
-						id='pages-upload'
-						className='upload-pages'
-						label='Upload comic pages'
-						onUpload={(uploadedFiles) => {
-							handleUploadPages(uploadedFiles.map((file) => file.file))
-							setNumberOfPreviewPages((currentValue) => {
-								if (currentValue > uploadedFiles.length) return uploadedFiles.length
-								return currentValue
-							})
-						}}
-					/>
-
 					<div className='page-previews-number-wrapper'>
 						<div>
 							<Label tooltipText={numberOfPagesTooltipText}>Preview pages</Label>
@@ -109,6 +92,25 @@ export default function UploadComicIssuePagesPage() {
 							}}
 						/>
 					</div>
+
+					<Label isRequired tooltipText={comicIssuePagesTooltipText}>
+						Add issue pages
+					</Label>
+					<FileUpload
+						sortable
+						allowMultipleFiles
+						id='pages-upload'
+						className='upload-pages'
+						label='Upload comic pages 690x1000px'
+						onUpload={(uploadedFiles) => {
+							handleUploadPages(uploadedFiles.map((file) => file.file))
+							setNumberOfPreviewPages((currentValue) => {
+								if (currentValue > uploadedFiles.length) return uploadedFiles.length
+								return currentValue
+							})
+						}}
+						options={{ accept: nonTransparentImageTypes }}
+					/>
 
 					<FormActions marginTop>
 						<Button type='submit' onClick={handleNextClick} backgroundColor='grey-100' className='action-button'>

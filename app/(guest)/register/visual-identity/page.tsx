@@ -13,7 +13,7 @@ import { RoutePath } from 'enums/routePath'
 import { UpdateCreatorFilesData } from 'models/creator'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm, Resolver } from 'react-hook-form'
-import { visualIdentityValidationSchema } from '../schemas'
+import { visualIdentityValidationSchema } from '@/components/forms/schemas'
 import Form from '@/components/forms/Form'
 import usePrefetchRoute from '@/hooks/usePrefetchRoute'
 import { useToaster } from '@/providers/ToastProvider'
@@ -21,6 +21,7 @@ import { creatorVisualIdentityTooltipText } from '@/constants/tooltips'
 import FileUpload from '@/components/forms/FileUpload'
 import FormActions from '@/components/forms/FormActions'
 import Label from '@/components/forms/Label'
+import { imageTypes } from '@/constants/fileTypes'
 
 export default function UpdateCreatorVisualIdentityPage() {
 	const router = useRouter()
@@ -88,20 +89,22 @@ export default function UpdateCreatorVisualIdentityPage() {
 							label='Upload cover'
 							className='banner-upload'
 							onUpload={(files) => {
-								setValue('banner', files[0].file)
+								setValue('banner', files[0]?.file)
 							}}
 							ref={register('banner').ref}
 							previewUrl={me?.banner}
+							options={{ accept: imageTypes, maxFiles: 1 }}
 						/>
 						<FileUpload
 							id='avatar-upload'
 							label='Upload avatar'
 							className='avatar-upload'
 							onUpload={(files) => {
-								setValue('avatar', files[0].file)
+								setValue('avatar', files[0]?.file)
 							}}
 							ref={register('avatar').ref}
 							previewUrl={me?.avatar}
+							options={{ accept: imageTypes, maxFiles: 1 }}
 						/>
 					</div>
 					<FormActions centered marginTop>

@@ -9,16 +9,13 @@ import 'app/styles/app.scss'
 
 /**
  * TODO:
- * - SCREEN RECORDING
  * - view comic issues
  * - upload stateful covers screen
  * - edit comic
  * - edit comic issue
- * - 404 page
  * - publish-on-chain (+isFullyUploaded checkbox) screen
  * - comicIssue.releaseDate is missing when creating a comic issue
  * - sign copies
- * - enforce file upload types and sizes
  */
 
 /**

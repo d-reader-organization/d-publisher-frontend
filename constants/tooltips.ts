@@ -15,7 +15,7 @@ In other words, do you want this comic episode to be part of our freemium offer`
 
 export const signatureTooltipText = `.png format required
 
-This signature will be used when signing a digital copy for your fan.`
+This signature image will be used when you sign a digital copy for your fan.`
 
 export const pdfTooltipText = `This file will be used for offline reading when users want to download offline content
 

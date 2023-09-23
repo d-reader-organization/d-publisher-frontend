@@ -6,7 +6,7 @@ import Grid from '@mui/material/Grid'
 import CircularProgress from '@mui/material/CircularProgress'
 import FlexColumn from './FlexColumn'
 
-const ContentTable = () => {
+const ComicList = () => {
 	const { data: me } = useFetchMe()
 	const { flatData: comics, isLoading } = useFetchRawComics({ creatorSlug: me?.slug, skip: 0, take: 20 })
 
@@ -14,7 +14,7 @@ const ContentTable = () => {
 
 	if (isLoading) {
 		return (
-			<div className='comic-content-wrapper'>
+			<div className='raw-comic-list-wrapper'>
 				<FlexColumn centered>
 					<CircularProgress size={18} />
 					<div className='content-empty'>Fetching comics</div>
@@ -24,10 +24,10 @@ const ContentTable = () => {
 	}
 
 	return (
-		<div className='comic-content-wrapper'>
+		<div className='raw-comic-list-wrapper'>
 			<h2 className='title'>📖 my comics</h2>
 			{hasComics && (
-				<Grid container spacing={1} className='comic-list'>
+				<Grid container spacing={1} className='raw-comic-list'>
 					{comics.map((comic) => (
 						<Grid item key={comic.slug} xs={6} sm={4} md={3} lg={2}>
 							<RawComicItem comic={comic} key={comic.slug} />
@@ -40,4 +40,4 @@ const ContentTable = () => {
 	)
 }
 
-export default ContentTable
+export default ComicList

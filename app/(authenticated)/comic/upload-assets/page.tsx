@@ -11,7 +11,7 @@ import ArrowRightIcon from 'public/assets/vector-icons/arrow-right.svg'
 import { UpdateComicFilesData } from 'models/comic'
 import { RoutePath } from 'enums/routePath'
 import { useUpdateComicFiles } from 'api/comic'
-import { uploadAssetsValidationSchema } from '../schemas'
+import { uploadComicAssetsValidationSchema } from '@/components/forms/schemas'
 import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
 import Form from '@/components/forms/Form'
 import usePrefetchRoute from '@/hooks/usePrefetchRoute'
@@ -25,6 +25,7 @@ import {
 import FileUpload from '@/components/forms/FileUpload'
 import FormActions from '@/components/forms/FormActions'
 import Label from '@/components/forms/Label'
+import { imageTypes, transparentImageTypes } from '@/constants/fileTypes'
 
 export default function UploadComicAssetsPage() {
 	const router = useRouter()
@@ -45,7 +46,7 @@ export default function UploadComicAssetsPage() {
 			pfp: undefined,
 			banner: undefined,
 		},
-		resolver: yupResolver(uploadAssetsValidationSchema) as Resolver<UpdateComicFilesData>,
+		resolver: yupResolver(uploadComicAssetsValidationSchema) as Resolver<UpdateComicFilesData>,
 	})
 	const { mutateAsync: updateComicFiles } = useUpdateComicFiles(comicSlug)
 
@@ -98,9 +99,10 @@ export default function UploadComicAssetsPage() {
 								label='Choose a picture 1920x900px'
 								className='comic-banner-input'
 								onUpload={(files) => {
-									setValue('banner', files[0].file)
+									setValue('banner', files[0]?.file)
 								}}
 								ref={register('banner').ref}
+								options={{ accept: imageTypes, maxFiles: 1 }}
 							/>
 						</div>
 					</div>
@@ -114,9 +116,10 @@ export default function UploadComicAssetsPage() {
 								label='1000x900px'
 								className='comic-cover-input'
 								onUpload={(files) => {
-									setValue('cover', files[0].file)
+									setValue('cover', files[0]?.file)
 								}}
 								ref={register('cover').ref}
+								options={{ accept: imageTypes, maxFiles: 1 }}
 							/>
 						</div>
 
@@ -129,9 +132,10 @@ export default function UploadComicAssetsPage() {
 								label='400x400px'
 								className='comic-pfp-input'
 								onUpload={(files) => {
-									setValue('pfp', files[0].file)
+									setValue('pfp', files[0]?.file)
 								}}
 								ref={register('pfp').ref}
+								options={{ accept: imageTypes, maxFiles: 1 }}
 							/>
 						</div>
 
@@ -144,9 +148,10 @@ export default function UploadComicAssetsPage() {
 								label='800x450px'
 								className='comic-logo-input'
 								onUpload={(files) => {
-									setValue('logo', files[0].file)
+									setValue('logo', files[0]?.file)
 								}}
 								ref={register('logo').ref}
+								options={{ accept: transparentImageTypes, maxFiles: 1 }}
 							/>
 						</div>
 					</div>

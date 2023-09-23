@@ -1,5 +1,5 @@
 import React, { InputHTMLAttributes, forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react'
-import { useDropzone } from 'react-dropzone'
+import { DropzoneOptions, useDropzone } from 'react-dropzone'
 import { cloneDeep, remove } from 'lodash'
 import clsx from 'clsx'
 
@@ -63,6 +63,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
 	onUpload?: (uploadedFiles: UploadedFile[]) => void
 	previewUrl?: string
 	sortable?: boolean
+	options?: Omit<DropzoneOptions, 'onDragEnter' | 'onDragLeave' | 'onDrop'>
 }
 
 const FileUpload = forwardRef<HTMLInputElement, Props>(
@@ -76,6 +77,7 @@ const FileUpload = forwardRef<HTMLInputElement, Props>(
 			onClick = () => {},
 			className = '',
 			sortable = false,
+			options,
 			...props
 		},
 		ref
@@ -112,6 +114,7 @@ const FileUpload = forwardRef<HTMLInputElement, Props>(
 				setUploadedFiles(uploads)
 				onUpload(uploads)
 			},
+			...options,
 		})
 
 		useImperativeHandle(ref, () => componentRef.current as HTMLInputElement)
@@ -207,7 +210,7 @@ const FileUpload = forwardRef<HTMLInputElement, Props>(
 
 					<input
 						{...props}
-						{...getInputProps}
+						{...getInputProps()}
 						id={id}
 						type='file'
 						multiple={allowMultipleFiles}

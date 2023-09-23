@@ -4,7 +4,7 @@ import Button from 'components/Button'
 import { Resolver, useForm } from 'react-hook-form'
 import { UpdateCreatorFilesData } from 'models/creator'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { visualIdentityValidationSchema } from './schemas'
+import { visualIdentityValidationSchema } from '@/components/forms/schemas'
 import { useFetchMe } from '@/api/creator'
 import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
 import { useUpdateCreatorFiles } from '@/api/creator/queries/useUpdateCreatorFiles'
@@ -13,6 +13,7 @@ import FileUpload from './FileUpload'
 import FormActions from './FormActions'
 import Form from './Form'
 import Label from './Label'
+import { imageTypes } from '@/constants/fileTypes'
 
 const UpdateCreatorVisualIdentity: React.FC = () => {
 	const { data: me } = useFetchMe()
@@ -54,20 +55,22 @@ const UpdateCreatorVisualIdentity: React.FC = () => {
 					label='Upload cover'
 					className='banner-upload'
 					onUpload={(files) => {
-						setValue('banner', files[0].file)
+						setValue('banner', files[0]?.file)
 					}}
 					ref={register('banner').ref}
 					previewUrl={me?.banner}
+					options={{ accept: imageTypes, maxFiles: 1 }}
 				/>
 				<FileUpload
 					id='avatar-upload'
 					label='Upload avatar'
 					className='avatar-upload'
 					onUpload={(files) => {
-						setValue('avatar', files[0].file)
+						setValue('avatar', files[0]?.file)
 					}}
 					ref={register('avatar').ref}
 					previewUrl={me?.avatar}
+					options={{ accept: imageTypes, maxFiles: 1 }}
 				/>
 			</div>
 

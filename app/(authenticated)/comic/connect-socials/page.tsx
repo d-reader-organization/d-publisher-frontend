@@ -13,7 +13,7 @@ import { RoutePath } from 'enums/routePath'
 import { prependHttps, prependTwitter, prependInstagram, prependTikTok, prependYouTube } from 'utils/helpers'
 import { UpdateComicSocialsData } from 'models/comic'
 import { useUpdateComic } from 'api/comic'
-import { connectSocialsValidationSchema } from '../schemas'
+import { connectComicSocialsValidationSchema } from '@/components/forms/schemas'
 import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
 import Form from '@/components/forms/Form'
 import usePrefetchRoute from '@/hooks/usePrefetchRoute'
@@ -39,7 +39,7 @@ export default function ConnectComicSocialsPage() {
 			tikTok: undefined,
 			youTube: undefined,
 		},
-		resolver: yupResolver(connectSocialsValidationSchema) as Resolver<UpdateComicSocialsData>,
+		resolver: yupResolver(connectComicSocialsValidationSchema) as Resolver<UpdateComicSocialsData>,
 	})
 	const { mutateAsync: updateComic } = useUpdateComic(comicSlug)
 

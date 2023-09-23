@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 
 import Header from 'components/layout/Header'
-import Label from 'components/Label'
 import Button from 'components/Button'
 import Steps from 'components/Steps'
 import ArrowRightIcon from 'public/assets/vector-icons/arrow-right.svg'
@@ -15,7 +14,7 @@ import Form from '@/components/forms/Form'
 import { RoutePath } from '@/enums/routePath'
 import usePrefetchRoute from '@/hooks/usePrefetchRoute'
 import { useUpdateComicIssuePages } from '@/api/comicIssue'
-import FormActions from '@/components/FormActions'
+import FormActions from '@/components/forms/FormActions'
 
 export default function PublishComicIssuePage() {
 	const toaster = useToaster()
