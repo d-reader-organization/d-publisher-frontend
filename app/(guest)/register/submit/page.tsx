@@ -12,9 +12,9 @@ import SkeletonText from '@/components/SkeletonText'
 import { useRouter } from 'next/navigation'
 import { useFetchMe } from 'api/creator'
 import { RoutePath } from 'enums/routePath'
-import FormActions from '@/components/FormActions'
 import usePrefetchRoute from '@/hooks/usePrefetchRoute'
-import Form from '@/components/Form'
+import Form from '@/components/forms/Form'
+import FormActions from '@/components/forms/FormActions'
 
 export default function SubmitCreatorRegistrationPage() {
 	const router = useRouter()

@@ -5,8 +5,6 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useRouter, useSearchParams } from 'next/navigation'
 
 import Header from 'components/layout/Header'
-import Label from 'components/Label'
-import FileUpload from 'components/FileUpload'
 import Button from 'components/Button'
 import Steps from 'components/Steps'
 import ArrowRightIcon from 'public/assets/vector-icons/arrow-right.svg'
@@ -15,8 +13,7 @@ import { RoutePath } from 'enums/routePath'
 import { useUpdateComicFiles } from 'api/comic'
 import { uploadAssetsValidationSchema } from '../schemas'
 import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
-import FormActions from '@/components/FormActions'
-import Form from '@/components/Form'
+import Form from '@/components/forms/Form'
 import usePrefetchRoute from '@/hooks/usePrefetchRoute'
 import { useToaster } from '@/providers/ToastProvider'
 import {
@@ -25,6 +22,9 @@ import {
 	comicLogoTooltipText,
 	comicPfpTooltipText,
 } from '@/constants/tooltips'
+import FileUpload from '@/components/forms/FileUpload'
+import FormActions from '@/components/forms/FormActions'
+import Label from '@/components/forms/Label'
 
 export default function UploadComicAssetsPage() {
 	const router = useRouter()

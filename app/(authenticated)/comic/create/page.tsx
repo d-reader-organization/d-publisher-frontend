@@ -1,14 +1,11 @@
 'use client'
 
-import { FieldErrors, FieldValues, Resolver, useForm } from 'react-hook-form'
+import { Resolver, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useRouter } from 'next/navigation'
 
 import Header from 'components/layout/Header'
-import Input from 'components/Input'
-import Label from 'components/Label'
-import Select from 'components/Select'
-import Textarea from 'components/Textarea'
+import Input from '@/components/forms/Input'
 import Checkbox from 'components/Checkbox'
 import Button from 'components/Button'
 import Steps from 'components/Steps'
@@ -20,11 +17,14 @@ import { AudienceType } from 'enums/audienceType'
 import { RoutePath } from 'enums/routePath'
 import { createComicValidationSchema } from '../schemas'
 import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
-import FormActions from '@/components/FormActions'
-import Form from '@/components/Form'
+import Form from '@/components/forms/Form'
 import { useToaster } from '@/providers/ToastProvider'
 import { audienceTypeTooltipText, currentStatusTooltipText, genresTooltipText } from '@/constants/tooltips'
 import usePrefetchRoute from '@/hooks/usePrefetchRoute'
+import Label from '@/components/forms/Label'
+import Select from '@/components/forms/Select'
+import Textarea from '@/components/forms/Textarea'
+import FormActions from '@/components/forms/FormActions'
 
 type LegalAgreement = {
 	ownershipConfirmation: boolean

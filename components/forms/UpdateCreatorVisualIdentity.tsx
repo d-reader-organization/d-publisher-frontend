@@ -1,18 +1,18 @@
 import React from 'react'
 
 import Button from 'components/Button'
-import Label from 'components/Label'
 import { Resolver, useForm } from 'react-hook-form'
 import { UpdateCreatorFilesData } from 'models/creator'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { visualIdentityValidationSchema } from './schemas'
 import { useFetchMe } from '@/api/creator'
-import FormActions from '../FormActions'
-import Form from '../Form'
 import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
 import { useUpdateCreatorFiles } from '@/api/creator/queries/useUpdateCreatorFiles'
-import FileUpload from '../FileUpload'
 import { creatorVisualIdentityTooltipText } from '@/constants/tooltips'
+import FileUpload from './FileUpload'
+import FormActions from './FormActions'
+import Form from './Form'
+import Label from './Label'
 
 const UpdateCreatorVisualIdentity: React.FC = () => {
 	const { data: me } = useFetchMe()

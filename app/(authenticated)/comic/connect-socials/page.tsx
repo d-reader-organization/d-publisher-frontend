@@ -5,8 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useRouter, useSearchParams } from 'next/navigation'
 
 import Header from 'components/layout/Header'
-import Label from 'components/Label'
-import Input from 'components/Input'
+import Input from '@/components/forms/Input'
 import Button from 'components/Button'
 import Steps from 'components/Steps'
 import ArrowRightIcon from 'public/assets/vector-icons/arrow-right.svg'
@@ -16,10 +15,11 @@ import { UpdateComicSocialsData } from 'models/comic'
 import { useUpdateComic } from 'api/comic'
 import { connectSocialsValidationSchema } from '../schemas'
 import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
-import FormActions from '@/components/FormActions'
-import Form from '@/components/Form'
+import Form from '@/components/forms/Form'
 import usePrefetchRoute from '@/hooks/usePrefetchRoute'
 import { useToaster } from '@/providers/ToastProvider'
+import FormActions from '@/components/forms/FormActions'
+import Label from '@/components/forms/Label'
 
 export default function ConnectComicSocialsPage() {
 	const router = useRouter()

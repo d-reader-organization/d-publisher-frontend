@@ -10,20 +10,18 @@ import 'app/styles/app.scss'
 /**
  * TODO:
  * - SCREEN RECORDING
-
+ * - view comic issues
  * - upload stateful covers screen
  * - edit comic
  * - edit comic issue
  * - 404 page
- * - view comics
- * - view comic issues
  * - publish-on-chain (+isFullyUploaded checkbox) screen
  * - comicIssue.releaseDate is missing when creating a comic issue
  * - sign copies
+ * - enforce file upload types and sizes
  */
 
 /**
- * TODO:
  * deprecate next-sitemap and implement https://nextjs.org/docs/app/api-reference/file-conventions/metadata
  * fetch the comic series to see if the series are, in fact, existing (on comic issue create page)
  * fetch the latest comic issue of a comic and use that data to prefill the comic issue create form

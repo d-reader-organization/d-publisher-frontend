@@ -3,8 +3,7 @@
 import Header from 'components/layout/Header'
 import Steps from 'components/Steps'
 import Button from 'components/Button'
-import Label from 'components/Label'
-import Input from 'components/Input'
+import Input from '@/components/forms/Input'
 import LogoIcon from 'public/assets/vector-icons/logo-with-text.svg'
 import ArrowRightIcon from 'public/assets/vector-icons/arrow-right.svg'
 import { useRouter } from 'next/navigation'
@@ -14,9 +13,10 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useRegisterCreator } from 'api/auth'
 import { RoutePath } from 'enums/routePath'
 import { registerValidationSchema } from './schemas'
-import FormActions from '@/components/FormActions'
-import Form from '@/components/Form'
+import Form from '@/components/forms/Form'
 import usePrefetchRoute from '@/hooks/usePrefetchRoute'
+import FormActions from '@/components/forms/FormActions'
+import Label from '@/components/forms/Label'
 
 export default function RegisterCreatorPage() {
 	const router = useRouter()

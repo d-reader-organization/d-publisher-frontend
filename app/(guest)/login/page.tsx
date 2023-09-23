@@ -1,10 +1,8 @@
 'use client'
 
 import Header from 'components/layout/Header'
-import Steps from 'components/Steps'
 import Button from 'components/Button'
-import Label from 'components/Label'
-import Input from 'components/Input'
+import Input from '@/components/forms/Input'
 import LogoIcon from 'public/assets/vector-icons/logo-with-text.svg'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
@@ -14,10 +12,11 @@ import { RoutePath } from 'enums/routePath'
 import { LoginData } from 'models/auth/login'
 import { loginValidationSchema } from './schemas'
 import useGuestRoute from 'hooks/useCreatorGuestRoute'
-import FormActions from '@/components/FormActions'
-import Form from '@/components/Form'
+import Form from '@/components/forms/Form'
 import usePrefetchRoute from '@/hooks/usePrefetchRoute'
 import ButtonLink from '@/components/ButtonLink'
+import FormActions from '@/components/forms/FormActions'
+import Label from '@/components/forms/Label'
 
 export default function LoginPage() {
 	const router = useRouter()

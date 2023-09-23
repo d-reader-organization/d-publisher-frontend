@@ -1,41 +1,41 @@
 import React from 'react'
-import { useFetchComics } from '@/api/comic/queries/useFetchComics'
+import { useFetchRawComics } from '@/api/comic/queries/useFetchRawComics'
 import { useFetchMe } from '@/api/creator'
-import Image from 'next/image'
+import RawComicItem from './comic/RawComicItem'
+import Grid from '@mui/material/Grid'
+import CircularProgress from '@mui/material/CircularProgress'
+import FlexColumn from './FlexColumn'
 
 const ContentTable = () => {
 	const { data: me } = useFetchMe()
-	const { flatData: comics } = useFetchComics({ creatorSlug: me?.slug, skip: 0, take: 20 })
+	const { flatData: comics, isLoading } = useFetchRawComics({ creatorSlug: me?.slug, skip: 0, take: 20 })
+
+	const hasComics = comics.length > 0
+
+	if (isLoading) {
+		return (
+			<div className='comic-content-wrapper'>
+				<FlexColumn centered>
+					<CircularProgress size={18} />
+					<div className='content-empty'>Fetching comics</div>
+				</FlexColumn>
+			</div>
+		)
+	}
 
 	return (
-		<div className='content-table-wrapper'>
-			{comics.length > 0 && (
-				<table className='content-table'>
-					<thead className='content-table-head'>
-						<tr className='content-table-row'>
-							<td className='content-table-cell'></td>
-							<td className='content-table-cell'>Comic Title</td>
-							<td className='content-table-cell'>Number of issues</td>
-							<td className='content-table-cell'>Verified / not</td>
-						</tr>
-					</thead>
-					<tbody>
-						{comics.map((comic) => {
-							return (
-								<tr className='content-table-row' key={comic.slug}>
-									<td className='content-table-cell'>
-										<Image className='comic-cover' src={comic.cover} height={60} width={60} alt='' />
-									</td>
-									<td className='content-table-cell'>{comic.title}</td>
-									<td className='content-table-cell center'>{comic.stats?.issuesCount}</td>
-									<td className='content-table-cell center'>{comic.isVerified ? '✅' : '❌'}</td>
-								</tr>
-							)
-						})}
-					</tbody>
-				</table>
+		<div className='comic-content-wrapper'>
+			<h2 className='title'>📖 my comics</h2>
+			{hasComics && (
+				<Grid container spacing={1} className='comic-list'>
+					{comics.map((comic) => (
+						<Grid item key={comic.slug} xs={6} sm={4} md={3} lg={2}>
+							<RawComicItem comic={comic} key={comic.slug} />
+						</Grid>
+					))}
+				</Grid>
 			)}
-			{comics.length === 0 && <div className='content-table-empty'>No comics to display!</div>}
+			{!hasComics && <div className='content-empty'>No comics to display!</div>}
 		</div>
 	)
 }

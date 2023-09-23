@@ -3,7 +3,6 @@
 import Header from 'components/layout/Header'
 import Steps from 'components/Steps'
 import Button from 'components/Button'
-import Label from 'components/Label'
 import LogoIcon from 'public/assets/vector-icons/logo-with-text.svg'
 import ArrowRightIcon from 'public/assets/vector-icons/arrow-right.svg'
 import { Resolver, useForm } from 'react-hook-form'
@@ -12,7 +11,7 @@ import { useFetchMe, useUpdateCreator } from 'api/creator'
 import { UpdateCreatorData } from 'models/creator'
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import Input from 'components/Input'
+import Input from '@/components/forms/Input'
 import {
 	prependHttps,
 	prependInstagram,
@@ -24,12 +23,12 @@ import {
 	removeTwitter,
 } from 'utils/helpers'
 import { RoutePath } from 'enums/routePath'
-import Box from '@mui/material/Box'
 import { connectSocialsValidationSchema } from '../schemas'
 import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
-import FormActions from '@/components/FormActions'
-import Form from '@/components/Form'
+import Form from '@/components/forms/Form'
 import usePrefetchRoute from '@/hooks/usePrefetchRoute'
+import FormActions from '@/components/forms/FormActions'
+import Label from '@/components/forms/Label'
 
 export default function ConnectCreatorSocialsPage() {
 	const router = useRouter()

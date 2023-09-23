@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 
 import Button from 'components/Button'
 import Label from 'components/Label'
-import Input from 'components/Input'
+import Input from '@/components/forms/Input'
 import { Resolver, useForm } from 'react-hook-form'
 import { UpdateCreatorData } from 'models/creator'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -10,7 +10,7 @@ import { useFetchMe, useUpdateCreator } from '@/api/creator'
 import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
 import { connectSocialsValidationSchema } from './schemas'
 import FormActions from '../FormActions'
-import Form from '../Form'
+import Form from './Form'
 import {
 	removeTwitter,
 	removeInstagram,

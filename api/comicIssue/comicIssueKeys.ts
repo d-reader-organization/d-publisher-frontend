@@ -1,8 +1,9 @@
-import { ComicIssueParams } from 'models/comicIssue/comicIssueParams'
+import { ComicIssueParams, RawComicIssueParams } from 'models/comicIssue/comicIssueParams'
 
 export const COMIC_ISSUE_QUERY_KEYS = Object.freeze({
 	COMIC_ISSUE: 'comic-issue',
 	GET: 'get',
+	GET_RAW: 'get-raw',
 	CREATE: 'create',
 	BY_OWNER: 'by-owner',
 	PAGES: 'pages',
@@ -36,7 +37,20 @@ export const comicKeys = Object.freeze({
 		params.skip,
 		params.take,
 	],
+	getManyRaw: (params: RawComicIssueParams) => [
+		COMIC_ISSUE_QUERY_KEYS.COMIC_ISSUE,
+		COMIC_ISSUE_QUERY_KEYS.GET_RAW,
+		params.comicSlug,
+		params.creatorSlug,
+		params.genreSlugs,
+		params.titleSubstring,
+		params.sortOrder,
+		params.sortTag,
+		params.skip,
+		params.take,
+	],
 	get: (id: string | number) => [COMIC_ISSUE_QUERY_KEYS.COMIC_ISSUE, COMIC_ISSUE_QUERY_KEYS.GET, `${id}`],
+	getRaw: (id: string | number) => [COMIC_ISSUE_QUERY_KEYS.COMIC_ISSUE, COMIC_ISSUE_QUERY_KEYS.GET_RAW, `${id}`],
 	getByOwner: (userId: string) => [
 		COMIC_ISSUE_QUERY_KEYS.COMIC_ISSUE,
 		COMIC_ISSUE_QUERY_KEYS.GET,
