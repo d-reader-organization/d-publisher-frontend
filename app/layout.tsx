@@ -17,6 +17,7 @@ import 'app/styles/app.scss'
  * - stateful covers
  * - publish-on-chain (+isFullyUploaded checkbox) screen
  * - comicIssue.releaseDate is missing when creating a comic issue
+ * - comic.collaborators necessary or not?
 
  * - sign copies
  */

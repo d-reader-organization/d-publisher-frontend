@@ -109,7 +109,7 @@ export default function ComicPage({ params }: { params: Params }) {
 								<IconLink href={comic.tikTok} Icon={TikTokIcon} blank />
 								<IconLink href={comic.youTube} Icon={YouTubeIcon} blank />
 							</FlexRow>
-
+							<p>Note: Comic "edit" and comic issue "view" and "edit" screens are coming soon</p>
 							{/* TODO: stats */}
 							{/* <FlexRow>
 								<p>{comic.stats.ratersCount}</p>
