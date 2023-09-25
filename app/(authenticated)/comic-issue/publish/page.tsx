@@ -73,11 +73,13 @@ export default function PublishComicIssuePage() {
 
 			<main>
 				<Form padding className='form--edit-comic-issue-pages'>
-					<FormActions marginTop>
+					<p>Thanks for publishing your comic episode 🎉</p>
+					<p>We'll review it soon and get back to you</p>
+					{/* <FormActions marginTop>
 						<Button type='submit' onClick={handleNextClick} backgroundColor='grey-100' className='action-button'>
 							Next <ArrowRightIcon className='action-button-icon' />
 						</Button>
-					</FormActions>
+					</FormActions> */}
 				</Form>
 			</main>
 		</>

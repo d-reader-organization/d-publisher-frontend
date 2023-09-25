@@ -94,7 +94,7 @@ export default function UploadComicIssueAssetsPage() {
 					<Grid container spacing={2}>
 						<Grid item xs={12} md={12}>
 							<Label tooltipText={signatureTooltipText}>Signature</Label>
-							<p className='description'>Sign this copy or upload an existing signature</p>
+							<p className='description'>Upload a signature image which would be used to sign comic copies</p>
 							<div className='comic-issue-signature-input-wrapper'>
 								{/* <SkeletonImage src={comicIssue?.cover} alt='' fill className='cover-image' />
 								<SignatureCanvas
