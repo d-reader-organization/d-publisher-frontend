@@ -87,13 +87,13 @@ export default function ComicPage({ params }: { params: Params }) {
 								) : (
 									<span className='badge badge--under-review'>⌛ under review</span>
 								)}
-								{!comic.completedAt ? (
+								{comic.completedAt ? (
 									<span className='badge badge--is-completed'>✅ completed</span>
 								) : (
 									<span className='badge badge--is-ongoing'>➡️ ongoing</span>
 								)}
-								{!comic.publishedAt && <span className='badge badge--is-published'>📗 published</span>}
-								{!comic.popularizedAt && <span className='badge badge--is-popular'>🔥 popular</span>}
+								{comic.publishedAt && <span className='badge badge--is-published'>📗 published</span>}
+								{comic.popularizedAt && <span className='badge badge--is-popular'>🔥 popular</span>}
 							</FlexRow>
 							<p className='subtitle'>slug: {comic.slug}</p>
 							<p>Audience type (age): {comic.audienceType}</p>
