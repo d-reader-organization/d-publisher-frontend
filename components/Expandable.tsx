@@ -6,10 +6,11 @@ import ArrowDownIcon from 'public/assets/vector-icons/arrow-down-2.svg'
 interface Props {
 	title: string
 	children?: React.ReactNode
+	open?: boolean
 }
 
-const Expandable: React.FC<Props> = ({ title, children }) => {
-	const [isExpanded, setIsExpanded] = useState(false)
+const Expandable: React.FC<Props> = ({ title, open = false, children }) => {
+	const [isExpanded, setIsExpanded] = useState(open)
 
 	const [contentRef, setContentRef] = useState<HTMLDivElement | null>(null)
 

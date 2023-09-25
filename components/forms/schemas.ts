@@ -75,6 +75,16 @@ export const createComicValidationSchema = yup.object().shape({
 		.min(0, generateMinLengthErrorMessage('description', 0))
 		.max(256, generateMaxLengthErrorMessage('description', 256)),
 	flavorText: yup.string().notOneOf([undefined]).max(128, generateMaxLengthErrorMessage('flavorText', 128)),
+	// collaborators: yup
+	// 	.array()
+	// 	.of(
+	// 		yup.object({
+	// 			role: yup.string().required(generateRequiredArrayElementErrorMessage('collaborators list')),
+	// 			name: yup.string().required(generateRequiredArrayElementErrorMessage('collaborators list')),
+	// 		})
+	// 	)
+	// 	.required(yupRequiredMessage('Collaborators list'))
+	// 	.min(1, yupRequiredMessage('Collaborators list')),
 	ownershipConfirmation: yup
 		.boolean()
 		.required()

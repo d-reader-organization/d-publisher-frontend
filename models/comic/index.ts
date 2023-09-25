@@ -1,8 +1,9 @@
 import { ComicStats } from './comicStats'
 import { ComicMyStats } from './comicMyStats'
 import { Creator } from '../creator'
-import { Genre } from '../genre'
+import { Genre, PartialGenre } from '../genre'
 import { AudienceType } from 'enums/audienceType'
+import { ComicCollaborator } from '../comicIssue/comicCollaborator'
 
 export interface BasicComic {
 	title: string
@@ -31,7 +32,7 @@ export interface BasicComic {
 export interface Comic extends BasicComic {
 	stats?: ComicStats
 	myStats?: ComicMyStats
-	genres?: Array<Pick<Genre, 'name' | 'slug' | 'color' | 'icon'>>
+	genres?: PartialGenre[]
 	creator?: Pick<Creator, 'name' | 'slug' | 'isVerified' | 'avatar'>
 }
 
@@ -53,6 +54,7 @@ export interface CreateComicData
 	tikTok?: BasicComic['tikTok']
 	youTube?: BasicComic['youTube']
 	genres: string[]
+	// collaborators?: ComicCollaborator[]
 }
 
 export type UpdateComicData = Partial<

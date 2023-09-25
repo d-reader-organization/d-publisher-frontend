@@ -48,6 +48,7 @@ export default function CreateComicPage() {
 			isCompleted: false,
 			description: '',
 			flavorText: '',
+			// collaborators: [],
 			ownershipConfirmation: false,
 			authorAgreement: false,
 		},
@@ -156,10 +157,32 @@ export default function CreateComicPage() {
 							/>
 						</div>
 					</div>
+
 					<Label isRequired>Description</Label>
 					<Textarea maxCharacters={256} rows={6} {...register('description')} placeholder='My comic description' />
+
 					<Label>Flavor text</Label>
 					<Textarea maxCharacters={128} rows={2} {...register('flavorText')} placeholder='Some sweet flavor text' />
+
+					{/* <Label isRequired tooltipText={comicIssueAuthorsTooltipText}>
+						Authors list
+					</Label>
+					<SelectWithInput
+						ref={register('collaborators').ref}
+						options={ROLE_SELECT_OPTIONS}
+						onChange={(inputs) => {
+							setValue(
+								'collaborators',
+								inputs.map((input) => {
+									return {
+										role: input.selectValue as CollaboratorRole,
+										name: input.inputValue,
+									}
+								})
+							)
+						}}
+					/> */}
+
 					<div className='checkmark-row'>
 						<Checkbox
 							checked={watch('ownershipConfirmation')}

@@ -19,7 +19,7 @@ import FileUpload from '@/components/forms/FileUpload'
 import FormActions from '@/components/forms/FormActions'
 import IntegerInput from '@/components/forms/IntegerInput'
 import Label from '@/components/forms/Label'
-import { imageTypes, nonTransparentImageTypes } from '@/constants/fileTypes'
+import { optimalImageTypes } from '@/constants/fileTypes'
 
 export default function UploadComicIssuePagesPage() {
 	const toaster = useToaster()
@@ -101,7 +101,7 @@ export default function UploadComicIssuePagesPage() {
 						allowMultipleFiles
 						id='pages-upload'
 						className='upload-pages'
-						label='Upload comic pages 690x1000px'
+						label={`Upload pages\nImages should have atleast 690x1000px`}
 						onUpload={(uploadedFiles) => {
 							handleUploadPages(uploadedFiles.map((file) => file.file))
 							setNumberOfPreviewPages((currentValue) => {
@@ -109,7 +109,7 @@ export default function UploadComicIssuePagesPage() {
 								return currentValue
 							})
 						}}
-						options={{ accept: nonTransparentImageTypes }}
+						options={{ accept: optimalImageTypes }}
 					/>
 
 					<FormActions marginTop>

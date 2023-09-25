@@ -1,6 +1,6 @@
 import { AudienceType } from '@/enums/audienceType'
 import { RawComicStats } from './rawComicStats'
-import { Genre } from '../genre'
+import { Genre, PartialGenre } from '../genre'
 
 export interface RawComic {
 	title: string
@@ -25,5 +25,5 @@ export interface RawComic {
 	tikTok: string
 	youTube: string
 	stats: RawComicStats
-	genres: Array<Pick<Genre, 'name' | 'slug' | 'color' | 'icon'>>
+	genres: PartialGenre[]
 }

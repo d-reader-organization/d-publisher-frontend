@@ -1,0 +1,37 @@
+@use '../variables/theme.module.scss' as *;
+
+.form--edit-comic-issue-stateful-covers {
+	.rarity-cover-wrapper {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		margin-right: 40px;
+		text-align: center;
+
+		.label {
+			justify-content: center;
+		}
+	}
+
+	.cover-upload-wrapper {
+		position: relative;
+		aspect-ratio: $comic-issue-cover-aspect-ratio;
+		width: 200px;
+
+		.cover-upload,
+		.signature-overlay {
+			aspect-ratio: $comic-issue-cover-aspect-ratio;
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+	}
+
+	.expandable {
+		max-width: 100%;
+	}
+
+	.expandable-content {
+		display: flex;
+	}
+}

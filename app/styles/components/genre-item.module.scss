@@ -1,0 +1,21 @@
+@use '../mixins/common.module.scss' as *;
+
+.genre-item {
+	@include centeredRow;
+	width: 100%;
+	height: 40px;
+	padding: 1rem;
+	border-radius: 0.5rem;
+	white-space: nowrap;
+	max-width: 160px;
+
+	&:not(:last-child) {
+		margin-right: 0.5rem;
+	}
+}
+
+.genre-icon {
+	width: 32px;
+	height: 32px;
+	margin-right: 0.5rem;
+}

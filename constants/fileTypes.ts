@@ -1,4 +1,4 @@
-export const nonTransparentImageTypes = {
+export const optimalImageTypes = {
 	'image/jpeg': ['.jpg', '.jpeg'],
 	'image/webp': ['.webp'],
 }
@@ -6,11 +6,14 @@ export const nonTransparentImageTypes = {
 export const transparentImageTypes = {
 	'image/png': ['.png'],
 	'image/gif': ['.gif'],
+	'image/webp': ['.webp'],
 }
 
 export const imageTypes = {
-	...nonTransparentImageTypes,
-	...transparentImageTypes,
+	'image/jpeg': ['.jpg', '.jpeg'],
+	'image/webp': ['.webp'],
+	'image/png': ['.png'],
+	'image/gif': ['.gif'],
 }
 
 export const pdfType = {

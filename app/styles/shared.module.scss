@@ -10,6 +10,10 @@ svg {
 	color: $important-color;
 }
 
+.text--underline {
+	text-decoration: underline;
+}
+
 /* Scroll bar stylings */
 ::-webkit-scrollbar {
 	width: 12px;

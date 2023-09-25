@@ -52,8 +52,10 @@ const Sidebar: React.FC<Props> = ({ hidden = false }) => {
 	return (
 		<div className='sidebar'>
 			<div className='sidebar-upper'>
-				<LogoIcon />
-				<Link href='/comic/create' replace={true} className='create-button-link'>
+				<Link href={RoutePath.Dashboard}>
+					<LogoIcon />
+				</Link>
+				<Link href={RoutePath.CreateComic} replace={true} className='create-button-link'>
 					<Button backgroundColor='important' className='create-button'>
 						<DocumentIcon className='document-icon' />
 						Create

@@ -12,6 +12,8 @@ export enum RoutePath {
 	RegisterVisualIdentity = '/register/visual-identity',
 	RegisterConnectSocials = '/register/connect-socials',
 	Comic = '/comic',
+	CreateComic = '/comic/create',
+	EditComic = '/comic/edit',
 	ComicUploadAssets = '/comic/upload-assets',
 	ComicConnectSocials = '/comic/connect-socials',
 	ComicIssue = '/comic-issue',

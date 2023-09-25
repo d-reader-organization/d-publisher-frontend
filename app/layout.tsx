@@ -9,12 +9,15 @@ import 'app/styles/app.scss'
 
 /**
  * TODO:
- * - view comic issues
- * - upload stateful covers screen
  * - edit comic
  * - edit comic issue
+ * - view comic issues
+
+ * TOMORROW:
+ * - stateful covers
  * - publish-on-chain (+isFullyUploaded checkbox) screen
  * - comicIssue.releaseDate is missing when creating a comic issue
+
  * - sign copies
  */
 
@@ -26,6 +29,8 @@ import 'app/styles/app.scss'
  * refactor localStorage auth handling to SWR
  * fix the textarea number of characters remaining bug (and when submitting a form flash screen)
  * sidebar should be closeable on mobile screens, shown as a hamburger menu
+ * eslint rules for dependency array checks, unused imports etc.
+ * IMPORTANT: somewhere within the app explain which assets the creator will need. e.g. when starting to create an issue let the creator know what they'll need to attach
  */
 
 const satoshi = localFont({

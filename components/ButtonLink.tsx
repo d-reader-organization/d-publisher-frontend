@@ -26,7 +26,7 @@ const ButtonLink: React.FC<Props> = ({
 				'button-link--border-color-transparent': borderColor === 'transparent',
 				'button-link--border-color-grey-100': borderColor === 'grey-100',
 				'button-link--border-color-grey-300': borderColor === 'grey-300',
-				'button-link--clickable': clickableEffect,
+				'button-link--clickable-effect': clickableEffect,
 			})}
 			{...props}
 		></Link>

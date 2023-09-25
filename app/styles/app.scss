@@ -6,10 +6,12 @@
 @use 'components/sidebar.module.scss';
 @use 'components/button.module.scss';
 @use 'components/button-link.module.scss';
+@use 'components/icon-link.module.scss';
 @use 'components/header.module.scss';
 @use 'components/dashboard-stats.module.scss';
 @use 'components/raw-comic-list.module.scss';
 @use 'components/raw-comic-item.module.scss';
+@use 'components/genre-item.module.scss';
 @use 'components/steps.module.scss';
 @use 'components/input.module.scss';
 @use 'components/label.module.scss';
@@ -29,6 +31,7 @@
 @use 'forms/edit-comic-assets-form.module.scss';
 @use 'forms/edit-comic-socials-form.module.scss';
 @use 'forms/edit-comic-issue-covers-form.module.scss';
+@use 'forms/edit-comic-issue-stateful-covers-form.module.scss';
 @use 'forms/edit-comic-issue-assets-form.module.scss';
 @use 'forms/edit-comic-issue-pages-form.module.scss';
 @use 'forms/edit-creator-visual-identity-form.module.scss';
@@ -42,6 +45,7 @@
 @use 'pages/login.module.scss';
 @use 'pages/verify-email.module.scss';
 @use 'pages/not-found.module.scss';
+@use 'pages/comic.module.scss';
 
 // Variables
 @use 'variables/theme.module.scss';

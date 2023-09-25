@@ -1,4 +1,4 @@
-import { Genre } from '../genre'
+import { Genre, PartialGenre } from '../genre'
 import { RawComicIssueStats } from './rawComicIssueStats'
 import { StatefulCover } from './statefulCover'
 import { StatelessCover } from './statelessCover'
@@ -26,7 +26,7 @@ export interface RawComicIssue {
 	deletedAt: Date
 	verifiedAt: Date
 	comicSlug: string
-	genres: Array<Pick<Genre, 'name' | 'slug' | 'color' | 'icon'>>
+	genres: PartialGenre[]
 	stats: RawComicIssueStats
 	creatorAddress: string
 	creatorBackupAddress: string

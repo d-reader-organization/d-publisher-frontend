@@ -14,7 +14,7 @@ import ArrowRightIcon from 'public/assets/vector-icons/arrow-right.svg'
 import { CreateComicIssueData } from 'models/comicIssue'
 import { useToaster } from '@/providers/ToastProvider'
 import { CreateStatelessCoverData } from '@/models/comicIssue/statelessCover'
-import { NO_RARITIES, THREE_RARITIES, FIVE_RARITIES } from '@/constants/rarities'
+import { getRarityShares } from '@/constants/rarities'
 import { generateRequiredArrayElementErrorMessage } from '@/utils/error'
 import { ComicRarity } from '@/enums/comicRarity'
 import { cloneDeep } from 'lodash'
@@ -30,7 +30,7 @@ import Label from '@/components/forms/Label'
 import Select from '@/components/forms/Select'
 import { imageTypes } from '@/constants/fileTypes'
 
-export default function UploadComicIssueCoversPage() {
+export default function UploadComicIssueStatelessCoversPage() {
 	const toaster = useToaster()
 	const router = useRouter()
 
@@ -47,21 +47,12 @@ export default function UploadComicIssueCoversPage() {
 	useAuthenticatedRoute()
 
 	useEffect(() => {
-		const newIssueCovers: CreateStatelessCoverData[] = []
-
-		newIssueCovers.push(
-			...(
-				(numberOfRarities === 1 && NO_RARITIES) ||
-				(numberOfRarities === 3 && THREE_RARITIES) ||
-				(numberOfRarities === 5 && FIVE_RARITIES) ||
-				[]
-			).map((rarity) => ({
-				rarity,
-				artist: '',
-				isDefault: false,
-				image: undefined,
-			}))
-		)
+		const newIssueCovers: CreateStatelessCoverData[] = getRarityShares(numberOfRarities).map((rarity) => ({
+			rarity,
+			artist: '',
+			isDefault: false,
+			image: undefined,
+		}))
 
 		setIssueCovers(newIssueCovers)
 	}, [numberOfRarities])
@@ -75,30 +66,27 @@ export default function UploadComicIssueCoversPage() {
 
 		if (unsetArtist) {
 			toaster.add(generateRequiredArrayElementErrorMessage('artist'), 'error')
-			return
-		}
-		if (unsetImage) {
+		} else if (unsetImage) {
 			toaster.add(generateRequiredArrayElementErrorMessage('image'), 'error')
-			return
-		}
-		if (noDefaultCover) {
+		} else if (noDefaultCover) {
 			toaster.add('Default cover must be selected', 'error')
-			return
+		} else {
+			const formData = new FormData()
+
+			let i = 0
+			console.log(issueCovers)
+			for (const cover of issueCovers) {
+				console.log(cover.isDefault)
+				if (cover.image) formData.append(`covers[${i}][image]`, cover.image)
+				formData.append(`covers[${i}][artist]`, cover.artist)
+				formData.append(`covers[${i}][isDefault]`, cover.isDefault.toString())
+				formData.append(`covers[${i}][rarity]`, cover.rarity)
+				i = i + 1
+			}
+
+			await updateStatelessCovers(formData)
+			router.push(nextPage)
 		}
-
-		const formData = new FormData()
-
-		let i = 0
-		for (const cover of issueCovers) {
-			if (cover.image) formData.append(`covers[${i}][image]`, cover.image)
-			formData.append(`covers[${i}][artist]`, cover.artist)
-			formData.append(`covers[${i}][isDefault]`, cover.isDefault.toString())
-			formData.append(`covers[${i}][rarity]`, cover.rarity)
-			i = i + 1
-		}
-
-		await updateStatelessCovers(formData)
-		router.push(nextPage)
 	}
 
 	const handleChangeCoverImage = (rarity: ComicRarity, value: File) => {
@@ -131,12 +119,6 @@ export default function UploadComicIssueCoversPage() {
 			issueCoverToUpdate.isDefault = value
 			return deepClonedIssueCovers
 		})
-	}
-
-	const handleFormError = (errors: FieldErrors<CreateComicIssueData>) => {
-		const [_, errorValue] = Object.entries(errors)[0]
-
-		console.log(errors, errorValue)
 	}
 
 	return (
@@ -173,7 +155,7 @@ export default function UploadComicIssueCoversPage() {
 						className='rarities-select'
 					/>
 					{issueCovers.map(({ rarity, artist, isDefault }) => (
-						<Expandable title={rarity} key={rarity}>
+						<Expandable open={issueCovers.length === 1} title={rarity} key={rarity}>
 							<div className='rarity-cover-wrapper'>
 								<div>
 									<Label isRequired tooltipText={comicIssueCoverImageTooltipText}>
@@ -181,6 +163,7 @@ export default function UploadComicIssueCoversPage() {
 									</Label>
 									<FileUpload
 										id={`${rarity}-cover`}
+										label='Choose a picture 690x1000px'
 										className='cover-image-upload'
 										onUpload={(files) => {
 											handleChangeCoverImage(rarity, files[0]?.file ?? '')

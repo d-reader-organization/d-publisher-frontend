@@ -2,7 +2,7 @@ import { Comic } from '../comic'
 import { ComicIssueMyStats } from './comicIssueMyStats'
 import { ComicIssueStats } from './comicIssueStats'
 import { Creator } from '../creator'
-import { Genre } from '../genre'
+import { Genre, PartialGenre } from '../genre'
 import { ComicIssueCollaborator } from './comicIssueCollaborator'
 import { StatefulCover } from './statefulCover'
 import { StatelessCover } from './statelessCover'
@@ -36,7 +36,7 @@ export interface ComicIssue extends BasicComicIssue {
 	candyMachineAddress?: string
 	creator?: Pick<Creator, 'name' | 'slug' | 'isVerified' | 'avatar'>
 	comic?: Pick<Comic, 'title' | 'slug' | 'audienceType'>
-	genres?: Array<Pick<Genre, 'name' | 'slug' | 'color' | 'icon'>>
+	genres?: PartialGenre[]
 	collaborators?: ComicIssueCollaborator[]
 	statefulCovers?: StatefulCover[]
 	statelessCovers?: StatelessCover[]

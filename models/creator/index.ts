@@ -1,4 +1,4 @@
-import { Genre } from 'models/genre'
+import { Genre, PartialGenre } from 'models/genre'
 import { CreatorStats } from './creatorStats'
 import { CreatorMyStats } from './creatorMyStats'
 
@@ -24,7 +24,7 @@ export interface BasicCreator {
 export interface Creator extends BasicCreator {
 	stats: CreatorStats
 	myStats: CreatorMyStats
-	genres: Array<Pick<Genre, 'name' | 'slug' | 'color' | 'icon'>>
+	genres: PartialGenre[]
 }
 
 export type UpdateCreatorData = Partial<

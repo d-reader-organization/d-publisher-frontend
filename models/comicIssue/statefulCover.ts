@@ -8,4 +8,7 @@ export interface StatefulCover {
 	image: string
 }
 
-export type CreateStatefulCoverData = Pick<StatefulCover, 'artist' | 'isSigned' | 'isUsed' | 'rarity' | 'image'>
+export interface CreateStatefulCoverData
+	extends Pick<StatefulCover, 'artist' | 'isSigned' | 'isUsed' | 'rarity' | 'image'> {
+	// image?: File
+}

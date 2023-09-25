@@ -25,7 +25,7 @@ import {
 import FileUpload from '@/components/forms/FileUpload'
 import FormActions from '@/components/forms/FormActions'
 import Label from '@/components/forms/Label'
-import { imageTypes, transparentImageTypes } from '@/constants/fileTypes'
+import { imageTypes } from '@/constants/fileTypes'
 
 export default function UploadComicAssetsPage() {
 	const router = useRouter()
@@ -129,7 +129,7 @@ export default function UploadComicAssetsPage() {
 							</Label>
 							<FileUpload
 								id='pfp-upload'
-								label='400x400px'
+								label='500x500px'
 								className='comic-pfp-input'
 								onUpload={(files) => {
 									setValue('pfp', files[0]?.file)
@@ -151,7 +151,7 @@ export default function UploadComicAssetsPage() {
 									setValue('logo', files[0]?.file)
 								}}
 								ref={register('logo').ref}
-								options={{ accept: transparentImageTypes, maxFiles: 1 }}
+								options={{ accept: imageTypes, maxFiles: 1 }}
 							/>
 						</div>
 					</div>
