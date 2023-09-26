@@ -10,6 +10,7 @@ import http from 'api/http'
 const { COMIC, GET_RAW } = COMIC_QUERY_KEYS
 
 const fetchRawComics = async (params: RawComicParams): Promise<RawComic[]> => {
+	if (!params.creatorSlug) return []
 	const response = await http.get<RawComic[]>(`${COMIC}/${GET_RAW}`, { params })
 	return response.data
 }
