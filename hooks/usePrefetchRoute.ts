@@ -1,4 +1,4 @@
-import { PrefetchOptions } from 'next/dist/shared/lib/app-router-context.shared-runtime'
+import { PrefetchOptions } from 'next/dist/shared/lib/app-router-context'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 
@@ -15,7 +15,7 @@ export const usePrefetchRoute: ToggleHook = (href, options) => {
 		} else {
 			router.prefetch(href, options)
 		}
-	}, [])
+	}, [href, options, router])
 }
 
 export default usePrefetchRoute
