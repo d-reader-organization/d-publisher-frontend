@@ -105,7 +105,7 @@ export default function UploadComicIssueStatefulCoversPage() {
 						Issue Covers
 					</Label>
 					<p className='description'>
-						Covers with "signed" and "used" states. These will be used for collecting/gamification purposes
+						{`Covers with "signed" and "used" states. These will be used for collecting/gamification purposes`}
 					</p>
 
 					{map(groupedCovers, (covers, key) => {

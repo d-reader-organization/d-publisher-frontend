@@ -84,7 +84,8 @@ const FileUpload = forwardRef<HTMLInputElement, Props>(
 	) => {
 		const componentRef = useRef<HTMLInputElement>(null)
 		const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>(
-			previewUrl ? [{ url: previewUrl, file: undefined as unknown as any }] : []
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			previewUrl ? [{ url: previewUrl, file: undefined as any }] : []
 		)
 		const [draggingFileOver, setDraggingFileOver] = useState<boolean>(false)
 
@@ -172,7 +173,7 @@ const FileUpload = forwardRef<HTMLInputElement, Props>(
 				setUploadedFiles(previewFile)
 				onUpload(previewFile)
 			}
-		}, [previewUrl])
+		}, [onUpload, previewUrl])
 
 		return (
 			<>

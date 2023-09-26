@@ -5,7 +5,11 @@ interface Props extends LinkProps {
 }
 
 export const TooltipLink: React.FC<Props> = ({ href, children }) => {
-	return <Link href={href} style={{ textDecoration: 'underline' }} target='_blank' children={children} />
+	return (
+		<Link href={href} style={{ textDecoration: 'underline' }} target='_blank'>
+			{children}
+		</Link>
+	)
 }
 
 export default TooltipLink

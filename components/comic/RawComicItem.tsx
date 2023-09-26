@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import { Box, BoxProps, Skeleton } from '@mui/material'
+import { Box, BoxProps } from '@mui/material'
 import { RawComic } from '@/models/comic/rawComic'
 import { RoutePath } from 'enums/routePath'
 import SkeletonImage from '../SkeletonImage'

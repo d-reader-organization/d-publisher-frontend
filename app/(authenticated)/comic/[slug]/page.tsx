@@ -10,7 +10,6 @@ import InstagramIcon from 'public/assets/vector-icons/instagram-icon.svg'
 import TikTokIcon from 'public/assets/vector-icons/tiktok-icon.svg'
 import YouTubeIcon from 'public/assets/vector-icons/youtube-icon.svg'
 import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
-import { useFetchMe } from '@/api/creator'
 import { useFetchRawComic } from '@/api/comic'
 import FlexColumn from '@/components/FlexColumn'
 import { CircularProgress, Grid } from '@mui/material'
@@ -20,19 +19,24 @@ import ButtonLink from '@/components/ButtonLink'
 import { RoutePath } from '@/enums/routePath'
 import GenreItem from '@/components/GenreItem'
 import IconLink from '@/components/IconLink'
+// import { useFetchRawComicIssues } from '@/api/comicIssue'
 
 interface Params {
 	slug: string
 }
 
 export default function ComicPage({ params }: { params: Params }) {
-	const { data: me } = useFetchMe()
-	const { data: comic, isLoading } = useFetchRawComic(params.slug)
+	const { data: comic, isLoading: isLoadingComic } = useFetchRawComic(params.slug)
+	// const { flatData: comicIssues, isLoading: isLoadingComicIssues } = useFetchRawComicIssues({
+	// 	comicSlug: params.slug,
+	// 	skip: 0,
+	// 	take: 20,
+	// })
 
 	useAuthenticatedRoute()
 
 	if (!comic) return <Header title='📖' />
-	const hasComics = comic.stats.issuesCount > 0
+	// const hasComics = comic.stats.issuesCount > 0
 
 	return (
 		<>
@@ -41,14 +45,14 @@ export default function ComicPage({ params }: { params: Params }) {
 			<main className='comic-page'>
 				<h2 className='title'></h2>
 
-				{isLoading && (
+				{isLoadingComic && (
 					<FlexColumn centered>
 						<CircularProgress size={18} />
 						<div className='content-empty'>Fetching comic data</div>
 					</FlexColumn>
 				)}
 
-				{!isLoading && (
+				{!isLoadingComic && (
 					<Grid container spacing={4}>
 						<Grid item xs={12} md={3}>
 							<FlexColumn className='comic-actions'>
@@ -109,7 +113,7 @@ export default function ComicPage({ params }: { params: Params }) {
 								<IconLink href={comic.tikTok} Icon={TikTokIcon} blank />
 								<IconLink href={comic.youTube} Icon={YouTubeIcon} blank />
 							</FlexRow>
-							<p>Note: Comic "edit" and comic issue "view" and "edit" screens are coming soon</p>
+							<p>{`Note: Comic "edit" and comic issue "view" and "edit" screens are coming soon`}</p>
 							{/* TODO: stats */}
 							{/* <FlexRow>
 								<p>{comic.stats.ratersCount}</p>
@@ -119,6 +123,36 @@ export default function ComicPage({ params }: { params: Params }) {
 								<p>{comic.stats.readersCount}</p>
 								<p>{comic.stats.viewersCount}</p>
 							</FlexRow> */}
+							<table className='content-table'>
+								<thead className='content-table-head'>
+									<tr className='content-table-row'>
+										<td className='content-table-cell'></td>
+										<td className='content-table-cell'>Comic Title</td>
+										<td className='content-table-cell'>Number of issues</td>
+										<td className='content-table-cell'>Verified / not</td>
+									</tr>
+								</thead>
+								<tbody>
+									{/* {comicIssues.map((issue) => {
+										return (
+											<tr className='content-table-row' key={issue.slug}>
+												<td className='content-table-cell'>
+													<SkeletonImage
+														className='comic-issue-cover'
+														src={issue.cover}
+														height={60}
+														width={60}
+														alt=''
+													/>
+												</td>
+												<td className='content-table-cell'>{issue.title}</td>
+												<td className='content-table-cell center'>{issue.isFreeToRead}</td>
+												<td className='content-table-cell center'>{issue.verifiedAt ? '✅' : '❌'}</td>
+											</tr>
+										)
+									})} */}
+								</tbody>
+							</table>
 						</Grid>
 					</Grid>
 				)}

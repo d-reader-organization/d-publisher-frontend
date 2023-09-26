@@ -7,7 +7,7 @@ interface Props extends Omit<ImageProps, 'src'> {
 	onLoaded?: () => void
 }
 
-const SkeletonImage: React.FC<Props> = ({ src, width, height, className, style, onLoaded, ...props }) => {
+const SkeletonImage: React.FC<Props> = ({ src, width, height, className, style, alt, onLoaded, ...props }) => {
 	const [isLoaded, setIsLoaded] = useState(false)
 
 	const transparentStyles: CSSProperties = { opacity: 0, position: 'absolute' }
@@ -35,6 +35,7 @@ const SkeletonImage: React.FC<Props> = ({ src, width, height, className, style, 
 							onLoaded()
 						}
 					}}
+					alt={alt}
 					className={className}
 					style={{ ...maybeTransparentStyles, ...style }}
 					{...props}

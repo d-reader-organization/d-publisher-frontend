@@ -1,12 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client'
 
 import { useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 
 import Header from 'components/layout/Header'
-import Button from 'components/Button'
 import Steps from 'components/Steps'
-import ArrowRightIcon from 'public/assets/vector-icons/arrow-right.svg'
 import { useToaster } from '@/providers/ToastProvider'
 import { yupRequiredMessage } from '@/utils/error'
 import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
@@ -14,7 +13,6 @@ import Form from '@/components/forms/Form'
 import { RoutePath } from '@/enums/routePath'
 import usePrefetchRoute from '@/hooks/usePrefetchRoute'
 import { useUpdateComicIssuePages } from '@/api/comicIssue'
-import FormActions from '@/components/forms/FormActions'
 
 export default function PublishComicIssuePage() {
 	const toaster = useToaster()
@@ -74,7 +72,7 @@ export default function PublishComicIssuePage() {
 			<main>
 				<Form padding className='form--edit-comic-issue-pages'>
 					<p>Thanks for publishing your comic episode 🎉</p>
-					<p>We'll review it soon and get back to you</p>
+					<p>We&apos;ll review it soon and get back to you</p>
 					{/* <FormActions marginTop>
 						<Button type='submit' onClick={handleNextClick} backgroundColor='grey-100' className='action-button'>
 							Next <ArrowRightIcon className='action-button-icon' />

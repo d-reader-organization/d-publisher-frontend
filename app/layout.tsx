@@ -12,6 +12,10 @@ import 'app/styles/app.scss'
  * - edit comic
  * - edit comic issue
  * - view comic issues
+ * - fix 500 errors: https://dev-devnet.dpublisher.app/comic/the-dark-portal
+ * - finish comic details screen
+ * - fix skeleton image (skeleton shown below the image in FileUploads)
+ * - main mainnet CDN URL fix
 
  * TOMORROW:
  * - stateful covers

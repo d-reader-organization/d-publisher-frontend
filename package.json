@@ -2,6 +2,7 @@
 	"name": "d-publisher-frontend",
 	"version": "1.0.0",
 	"private": false,
+	"license": "BSD-3-Clause",
 	"scripts": {
 		"dev": "next dev",
 		"dev:ts": "yarn dev & yarn ts:watch",

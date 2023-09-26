@@ -1,6 +1,6 @@
 'use client'
 
-import { FieldErrors, Resolver, useForm } from 'react-hook-form'
+import { Resolver, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useRouter, useSearchParams } from 'next/navigation'
 

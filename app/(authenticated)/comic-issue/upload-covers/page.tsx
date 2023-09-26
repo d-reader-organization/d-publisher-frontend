@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { FieldErrors } from 'react-hook-form'
 import { useRouter, useSearchParams } from 'next/navigation'
 
 import Header from 'components/layout/Header'
@@ -11,7 +10,6 @@ import Steps from 'components/Steps'
 import Expandable from '@/components/Expandable'
 import Checkbox from '@/components/Checkbox'
 import ArrowRightIcon from 'public/assets/vector-icons/arrow-right.svg'
-import { CreateComicIssueData } from 'models/comicIssue'
 import { useToaster } from '@/providers/ToastProvider'
 import { CreateStatelessCoverData } from '@/models/comicIssue/statelessCover'
 import { getRarityShares } from '@/constants/rarities'

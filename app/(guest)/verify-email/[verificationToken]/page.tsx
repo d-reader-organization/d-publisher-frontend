@@ -24,7 +24,7 @@ export default function VerifyEmailPage({ params }: { params: Params }) {
 		if (verificationToken) {
 			verifyEmail(verificationToken)
 		}
-	}, [])
+	}, [verificationToken, verifyEmail])
 
 	const name = creator?.name || me?.name || ''
 
