@@ -2,7 +2,7 @@
 
 import { endpoint, network } from '@/constants/environment'
 import { getWallets } from '@/constants/wallets'
-import { ThemeProvider } from '@mui/material'
+import { ThemeProvider } from '@mui/material/styles'
 import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react'
 import { WalletModalProvider } from '@solana/wallet-adapter-react-ui'
 import { createContext, useContext } from 'react'

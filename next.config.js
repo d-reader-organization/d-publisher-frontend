@@ -1,31 +1,24 @@
 /** @type {import('next').NextConfig} */
 const path = require('path')
 
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE === 'true',
-})
-
 const withPWA = require('next-pwa')({
 	dest: 'public',
 	disable: process.env.NODE_ENV === 'development',
 	mode: 'production',
 })
 
-module.exports = withBundleAnalyzer(withPWA({
+module.exports = withPWA({
 	reactStrictMode: true,
 	sassOptions: {
 		includePaths: [path.join(__dirname, 'styles')],
 	},
 	images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: '**.amazonaws.com',
-      }
-    ],
-  },
-	experimental: {
-		appDir: true,
+		remotePatterns: [
+			{
+				protocol: 'https',
+				hostname: '**.amazonaws.com',
+			}
+		],
 	},
 	webpack(config) {
 		config.module.rules.push({
@@ -35,4 +28,4 @@ module.exports = withBundleAnalyzer(withPWA({
 
 		return config
 	},
-}))
+})
