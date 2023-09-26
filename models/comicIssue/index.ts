@@ -2,7 +2,7 @@ import { Comic } from '../comic'
 import { ComicIssueMyStats } from './comicIssueMyStats'
 import { ComicIssueStats } from './comicIssueStats'
 import { Creator } from '../creator'
-import { Genre, PartialGenre } from '../genre'
+import { PartialGenre } from '../genre'
 import { ComicIssueCollaborator } from './comicIssueCollaborator'
 import { StatefulCover } from './statefulCover'
 import { StatelessCover } from './statelessCover'
@@ -28,7 +28,6 @@ export interface BasicComicIssue {
 	isFullyUploaded: boolean
 	isPublished: boolean
 	isPopular: boolean
-	isDeleted: boolean
 	isVerified: boolean
 }
 

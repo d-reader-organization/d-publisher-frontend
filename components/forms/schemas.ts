@@ -66,7 +66,8 @@ export const createComicValidationSchema = yup.object().shape({
 		.array()
 		.of(yup.string())
 		.required(yupRequiredMessage('Genres'))
-		.min(1, 'At least 1 genre should be selected'),
+		.min(1, 'At least 1 genre should be selected')
+		.max(5, 'Maximum 5 genres can be selected'),
 	audienceType: yup.string().required(yupRequiredMessage('Audience type')),
 	isCompleted: yup.boolean().required(yupRequiredMessage('Current status')),
 	description: yup

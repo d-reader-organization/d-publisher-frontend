@@ -1,4 +1,4 @@
-import { Genre, PartialGenre } from 'models/genre'
+import { PartialGenre } from 'models/genre'
 import { CreatorStats } from './creatorStats'
 import { CreatorMyStats } from './creatorMyStats'
 
@@ -7,7 +7,6 @@ export interface BasicCreator {
 	email: string
 	name: string
 	slug: string
-	isDeleted: boolean
 	isVerified: boolean
 	avatar: string
 	banner: string

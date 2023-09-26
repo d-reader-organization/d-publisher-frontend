@@ -59,7 +59,9 @@ export const comicCoverTooltipText = `Following formats are allowed:
 Preferrably a jpg or webp format.
 Make sure the image has no transparent background.
 
-Pick an image with a ratio 1000:900 and at least 1000x900 resolution.
+Pick an image with a ratio 10:9 and at least 1000x900 resolution.
+
+Ideally, your cover image will not have the comic "title" art on top of it
 `
 
 export const comicPfpTooltipText = `Following formats are allowed:

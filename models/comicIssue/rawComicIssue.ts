@@ -1,4 +1,4 @@
-import { Genre, PartialGenre } from '../genre'
+import { PartialGenre } from '../genre'
 import { RawComicIssueStats } from './rawComicIssueStats'
 import { StatefulCover } from './statefulCover'
 import { StatelessCover } from './statelessCover'
@@ -23,7 +23,6 @@ export interface RawComicIssue {
 	isFullyUploaded: boolean
 	publishedAt: Date
 	popularizedAt: Date
-	deletedAt: Date
 	verifiedAt: Date
 	comicSlug: string
 	genres: PartialGenre[]

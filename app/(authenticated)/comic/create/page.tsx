@@ -90,10 +90,13 @@ export default function CreateComicPage() {
 			<main>
 				<Form padding maxSize='md' fullWidth className='form--create-comic'>
 					<Label isRequired>Comic title</Label>
+					<p className='description'>Title of your comic series</p>
 					<Input {...register('title')} />
+
 					<Label isRequired tooltipText={genresTooltipText}>
 						Genres
 					</Label>
+					<p className='description'>Select up to 5 genres</p>
 					<Select
 						isSearchable
 						isMultipleSelect
@@ -201,6 +204,7 @@ export default function CreateComicPage() {
 							}}
 							ref={register('authorAgreement').ref}
 						/>
+						{/* TODO: add link to TOS */}
 						<span className='checkmark-text'>
 							I agree to dReader&apos;s&nbsp;
 							<span className='checkmark-text--highlighted'>Author Registration and Uploading Agreement</span>

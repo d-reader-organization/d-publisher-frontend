@@ -109,7 +109,7 @@ export default function UploadComicAssetsPage() {
 					<div className='comic-file-wrapper'>
 						<div className='comic-file-container'>
 							<Label isRequired tooltipText={comicCoverTooltipText}>
-								Comic Cover
+								Comic Cover (without title)
 							</Label>
 							<FileUpload
 								id='cover-upload'
@@ -124,9 +124,7 @@ export default function UploadComicAssetsPage() {
 						</div>
 
 						<div className='comic-file-container'>
-							<Label isRequired tooltipText={comicPfpTooltipText}>
-								Comic PFP
-							</Label>
+							<Label tooltipText={comicPfpTooltipText}>Comic PFP</Label>
 							<FileUpload
 								id='pfp-upload'
 								label='500x500px'
@@ -141,7 +139,7 @@ export default function UploadComicAssetsPage() {
 
 						<div className='comic-file-container'>
 							<Label isRequired tooltipText={comicLogoTooltipText}>
-								Comic Logo
+								Comic Logo (title)
 							</Label>
 							<FileUpload
 								id='logo-upload'

@@ -1,12 +1,11 @@
 import { AudienceType } from '@/enums/audienceType'
 import { RawComicStats } from './rawComicStats'
-import { Genre, PartialGenre } from '../genre'
+import { PartialGenre } from '../genre'
 
 export interface RawComic {
 	title: string
 	slug: string
 	audienceType: AudienceType
-	deletedAt: string
 	completedAt: string
 	verifiedAt: string
 	publishedAt: string

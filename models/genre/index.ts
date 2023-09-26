@@ -4,7 +4,6 @@ export interface Genre {
 	icon: string
 	color: string
 	priority: number
-	isDeleted: boolean
 }
 
 export type CreateGenreData = Pick<Genre, 'name' | 'icon' | 'color' | 'priority'>

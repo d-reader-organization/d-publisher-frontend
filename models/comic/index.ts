@@ -1,15 +1,13 @@
 import { ComicStats } from './comicStats'
 import { ComicMyStats } from './comicMyStats'
 import { Creator } from '../creator'
-import { Genre, PartialGenre } from '../genre'
+import { PartialGenre } from '../genre'
 import { AudienceType } from 'enums/audienceType'
-import { ComicCollaborator } from '../comicIssue/comicCollaborator'
 
 export interface BasicComic {
 	title: string
 	slug: string
 	audienceType: AudienceType
-	isDeleted: boolean
 	isCompleted: boolean
 	isVerified: boolean
 	isPublished: boolean
