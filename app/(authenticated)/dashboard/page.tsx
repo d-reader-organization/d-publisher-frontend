@@ -18,7 +18,7 @@ export default function DashboardPage() {
 			{/* <DashboardStats /> */}
 			<ComicList />
 			<Box px={3}>
-				<h3>At any point of the comic creation feel free to reach out for help</h3>
+				<h4>At any point of the comic creation feel free to reach out for help</h4>
 				<p>
 					✉️ email:&nbsp;
 					<Link className='text--important text--underline' href='mailto:support@dreader.io' target='_blank'>

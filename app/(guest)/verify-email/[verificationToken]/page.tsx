@@ -33,7 +33,7 @@ export default function VerifyEmailPage({ params }: { params: Params }) {
 			<h1 className='title'>
 				Welcome
 				<br />
-				<span className='subtitle'>{'Josip test 1' || name}</span>
+				<span className='subtitle'>{name}</span>
 			</h1>
 			<p className='description'>
 				Your email has been <span className='description--highlighted'>successfully verified </span>! Now lets get

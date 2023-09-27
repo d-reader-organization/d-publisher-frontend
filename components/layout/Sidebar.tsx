@@ -52,7 +52,7 @@ const Sidebar: React.FC<Props> = ({ hidden = false }) => {
 	return (
 		<div className='sidebar'>
 			<div className='sidebar-upper'>
-				<Link href={RoutePath.Dashboard}>
+				<Link className='logo-link' href={RoutePath.Dashboard}>
 					<LogoIcon />
 				</Link>
 				<Link href={RoutePath.CreateComic} replace={true} className='create-button-link'>
@@ -81,12 +81,9 @@ const Sidebar: React.FC<Props> = ({ hidden = false }) => {
 			</div>
 			<div className='sidebar-lower'>
 				<div className='actions'>
-					{/* <div className='action'>
-						<Link href={RoutePath.Settings}>Settings </Link>
-					</div> */}
-					<div className='action' onClick={logout}>
+					<Button className='action' backgroundColor='transparent' borderColor='grey-100' onClick={logout}>
 						Log out
-					</div>
+					</Button>
 				</div>
 			</div>
 		</div>

@@ -198,7 +198,13 @@ const FileUpload = forwardRef<HTMLInputElement, Props>(
 										{uploadedFile.file?.type.includes('pdf') ? (
 											<embed src={uploadedFile.url} width='100%' height='100%' />
 										) : (
-											<SkeletonImage fill src={uploadedFile.url || previewUrl} alt='' className='preview-image' />
+											<SkeletonImage
+												fill
+												sizes='100vw' // TODO: is this necessary?
+												src={uploadedFile.url || previewUrl}
+												alt=''
+												className='preview-image'
+											/>
 										)}
 										<button className='close-button' onClick={(event) => handleRemoveFile(event, uploadedFile)}>
 											<CloseIcon className='close-icon' />

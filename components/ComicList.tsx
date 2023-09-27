@@ -29,7 +29,7 @@ const ComicList = () => {
 			{hasComics && (
 				<Grid container spacing={1} className='raw-comic-list'>
 					{comics.map((comic) => (
-						<Grid item key={comic.slug} xs={6} sm={4} md={3} lg={2}>
+						<Grid item key={comic.slug} xs={6} md={4} lg={3} xl={2}>
 							<RawComicItem comic={comic} key={comic.slug} />
 						</Grid>
 					))}

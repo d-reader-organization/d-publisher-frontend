@@ -65,7 +65,7 @@ const UpdateCreatorSocials: React.FC = () => {
 	}
 
 	return (
-		<Form fullWidth minSize='sm'>
+		<Form fullWidth>
 			<div className='social-media-wrapper'>
 				<div className='social-media-container'>
 					<Label size='small'>Twitter</Label>
