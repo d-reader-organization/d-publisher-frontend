@@ -10,7 +10,6 @@ import http from 'api/http'
 const { COMIC, GET_RAW } = COMIC_QUERY_KEYS
 
 const fetchRawComics = async (params: RawComicParams): Promise<RawComic[]> => {
-	if (!params.creatorSlug) return []
 	const response = await http.get<RawComic[]>(`${COMIC}/${GET_RAW}`, { params })
 	return response.data
 }
@@ -26,7 +25,7 @@ export const useFetchRawComics = (params: RawComicParams, enabled = true) => {
 			if (lastPage.length >= params.take) return allPages.length
 		},
 		staleTime: 1000 * 60 * 30, // stale for 30 minutes
-		enabled: isAuthenticated && enabled,
+		enabled: isAuthenticated && enabled && !!params.creatorSlug,
 		onError: toaster.onQueryError,
 	})
 

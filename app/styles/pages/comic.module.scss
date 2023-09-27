@@ -18,6 +18,18 @@
 		& > *:not(:last-child) {
 			margin-bottom: 1rem;
 		}
+
+		.socials {
+			& > *:not(:last-child) {
+				margin-right: 0.5rem;
+			}
+
+			.icon-link {
+				background-color: $grey-300;
+				padding: 0.25rem;
+				border-radius: 0.5rem;
+			}
+		}
 	}
 
 	.comic-cover-wrapper {
@@ -31,19 +43,27 @@
 	}
 
 	.comic-details-wrapper {
-		.title-row {
-			margin-top: 1rem;
+		.badge-row {
+			margin: 1rem 0;
+			@include flexRow {
+				align-items: center;
+			}
+
 			svg {
 				margin-left: 1rem;
 				height: 20px;
 			}
 
 			.badge {
-				border-radius: 1rem;
+				border-radius: 0.5rem;
 				padding: 0.15rem 0.6rem;
-				margin-left: 1rem;
 				border-width: 1px;
 				border-style: solid;
+				white-space: nowrap;
+
+				&:not(:first-child) {
+					margin-left: 1rem;
+				}
 
 				&--under-review {
 					border-color: $grey-100;
@@ -76,8 +96,17 @@
 			}
 		}
 
+		.title {
+			margin-right: 1rem;
+		}
+
+		.subtitle {
+			line-height: 16px;
+		}
+
 		.title,
 		.subtitle {
+			white-space: nowrap;
 			margin: 0;
 		}
 
@@ -87,20 +116,6 @@
 			padding-left: 0.5rem;
 			margin-bottom: 0.5rem;
 			color: $grey-100;
-		}
-
-		.socials {
-			margin-top: 1rem;
-
-			& > *:not(:last-child) {
-				margin-right: 0.5rem;
-			}
-
-			.icon-link {
-				background-color: $grey-300;
-				padding: 0.25rem;
-				border-radius: 0.5rem;
-			}
 		}
 	}
 }

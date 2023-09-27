@@ -54,7 +54,7 @@ export default function ComicPage({ params }: { params: Params }) {
 
 				{!isLoadingComic && (
 					<Grid container spacing={4}>
-						<Grid item xs={12} md={3}>
+						<Grid item xs={12} md={4} lg={3}>
 							<FlexColumn className='comic-actions'>
 								<div className='comic-cover-wrapper'>
 									<SkeletonImage className='comic-cover' src={comic.cover} alt='' fill />
@@ -76,16 +76,25 @@ export default function ComicPage({ params }: { params: Params }) {
 								>
 									Add episode
 								</ButtonLink>
+								<FlexRow className='socials'>
+									<IconLink href={comic.website} Icon={WebsiteIcon} blank />
+									<IconLink href={comic.twitter} Icon={TwitterIcon} blank />
+									<IconLink href={comic.discord} Icon={DiscordIcon} blank />
+									<IconLink href={comic.telegram} Icon={TelegramIcon} blank />
+									<IconLink href={comic.instagram} Icon={InstagramIcon} blank />
+									<IconLink href={comic.tikTok} Icon={TikTokIcon} blank />
+									<IconLink href={comic.youTube} Icon={YouTubeIcon} blank />
+								</FlexRow>
 							</FlexColumn>
 						</Grid>
-						<Grid item xs={12} md={6} className='comic-details-wrapper'>
-							<FlexRow>
+						<Grid item xs={12} md={8} lg={9} className='comic-details-wrapper'>
+							<FlexRow overflow='scroll'>
 								{comic.genres.map((genre) => (
 									<GenreItem genre={genre} key={genre.slug} />
 								))}
 							</FlexRow>
-							<FlexRow centered className='title-row'>
-								<h2 className='title'>{comic.title}</h2>
+
+							<FlexRow overflow='scroll' className='badge-row'>
 								{comic.verifiedAt ? (
 									<VerifiedIcon />
 								) : (
@@ -99,20 +108,16 @@ export default function ComicPage({ params }: { params: Params }) {
 								{comic.publishedAt && <span className='badge badge--is-published'>📗 published</span>}
 								{comic.popularizedAt && <span className='badge badge--is-popular'>🔥 popular</span>}
 							</FlexRow>
-							<p className='subtitle'>slug: {comic.slug}</p>
+							<h2 className='title'>{comic.title}</h2>
+
+							<p className='subtitle'>
+								slug: <em>{comic.slug}</em>
+							</p>
 							<p>Audience type (age): {comic.audienceType}</p>
 							{/* TODO: show banner, logo, and pfp */}
 							<p className='description'>{comic.description}</p>
 							<p className='flavor-text'>{comic.flavorText}</p>
-							<FlexRow className='socials'>
-								<IconLink href={comic.website} Icon={WebsiteIcon} blank />
-								<IconLink href={comic.twitter} Icon={TwitterIcon} blank />
-								<IconLink href={comic.discord} Icon={DiscordIcon} blank />
-								<IconLink href={comic.telegram} Icon={TelegramIcon} blank />
-								<IconLink href={comic.instagram} Icon={InstagramIcon} blank />
-								<IconLink href={comic.tikTok} Icon={TikTokIcon} blank />
-								<IconLink href={comic.youTube} Icon={YouTubeIcon} blank />
-							</FlexRow>
+
 							<p>{`Note: Comic "edit" and comic issue "view" and "edit" screens are coming soon`}</p>
 							{/* TODO: stats */}
 							{/* <FlexRow>
