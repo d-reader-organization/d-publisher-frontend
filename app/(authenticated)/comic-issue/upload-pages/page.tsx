@@ -101,7 +101,7 @@ export default function UploadComicIssuePagesPage() {
 						allowMultipleFiles
 						id='pages-upload'
 						className='upload-pages'
-						label={`Upload pages\nImages should have at least 690x1000px`}
+						label={`Upload pages\nImages should have at least 1024x1484px`}
 						onUpload={(uploadedFiles) => {
 							handleUploadPages(uploadedFiles.map((file) => file.file))
 							setNumberOfPreviewPages((currentValue) => {

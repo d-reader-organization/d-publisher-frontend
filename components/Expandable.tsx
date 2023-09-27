@@ -17,6 +17,7 @@ const Expandable: React.FC<Props> = ({ title, open = false, children }) => {
 	const contentHeight = useMemo(() => {
 		if (!contentRef) return 0
 
+		console.log('CONTENT HEIGHT: ', contentRef.clientHeight)
 		return (
 			contentRef.clientHeight +
 			+contentRef.style.getPropertyValue('padding-top').split('px')[0] +

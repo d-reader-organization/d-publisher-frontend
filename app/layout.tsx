@@ -13,7 +13,7 @@ import 'app/styles/app.scss'
  * - query raw comic issues fix
  * - edit comic
  * - edit comic issue
- * - UPDATE PSEUDORECOVER AND PSEUDODELETE HOOKS
+ * - UPDATE ALL ENDPOINTS (pseudorecover etc.)
 
  * - view comic issues
  * - fix skeleton image (skeleton shown below the image in FileUploads)

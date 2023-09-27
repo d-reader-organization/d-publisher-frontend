@@ -18,6 +18,8 @@ export const signatureTooltipText = `.png format required
 This signature image will be used when you sign a digital copy to your fan (collector).
 
 If you're unsure what to put in here, feel free to skip the step or contact us for advice.
+
+Ideally, signature image would have the same resolution (width, height) as the comic cover which you've previously uploaded
 `
 
 export const pdfTooltipText = `This file will be used for offline reading when users want to download offline content
@@ -61,7 +63,10 @@ Make sure the image has no transparent background.
 
 Pick an image with a ratio 10:9 and at least 1000x900 resolution.
 
-Ideally, your cover image will not have the comic "title" art on top of it
+Your cover image should not have the comic "title" art on top of it.
+This image will be used within the app to promote different comic series.
+
+If you don't have a "comic series" art, feel free to crop the cover art any of your comic issues
 `
 
 export const comicPfpTooltipText = `Following formats are allowed:
@@ -71,6 +76,8 @@ export const comicPfpTooltipText = `Following formats are allowed:
 Preferrably a jpg or webp format if the image has no transparency.
 
 Pick an image with a ratio 1920:900 and at least 1920x900 resolution.
+
+This image will be used around the app on places like leaderboards.
 `
 
 export const comicLogoTooltipText = `Following formats are allowed:
@@ -87,7 +94,7 @@ export const comicIssueCoverImageTooltipText = `Following formats are allowed:
 Preferrably a jpg or webp format.
 Make sure the image has no transparent background.
 
-Pick an image with a ratio 690:1000 and at least 690x1000px resolution.
+Pick an image with a ratio 690:1000 and (ideally) at least 1024x1484px resolution.
 `
 
 export const comicIssuePagesTooltipText = `Following formats are allowed:
@@ -95,7 +102,7 @@ export const comicIssuePagesTooltipText = `Following formats are allowed:
 
 Preferrably a jpg or webp format and optimize your assets for best download speed
 
-Ratio 690:1000 and at least 690x1000px resolution is preferred but not a necessity.
+Ratio 690:1000 and at least 1024x1484px resolution is preferred for optimal display, but not a necessity.
 `
 
 export const creatorVisualIdentityTooltipText = `Following formats are allowed:

@@ -200,7 +200,7 @@ const FileUpload = forwardRef<HTMLInputElement, Props>(
 										) : (
 											<SkeletonImage
 												fill
-												sizes='100vw' // TODO: is this necessary?
+												sizes='100vw' // TODO: is there a better way to do this?
 												src={uploadedFile.url || previewUrl}
 												alt=''
 												className='preview-image'

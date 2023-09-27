@@ -161,7 +161,7 @@ export default function UploadComicIssueStatelessCoversPage() {
 									</Label>
 									<FileUpload
 										id={`${rarity}-cover`}
-										label='Choose a picture 690x1000px'
+										label='Choose a picture 1024x1484px'
 										className='cover-image-upload'
 										onUpload={(files) => {
 											handleChangeCoverImage(rarity, files[0]?.file ?? '')

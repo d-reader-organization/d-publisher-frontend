@@ -79,9 +79,6 @@ export default function UploadComicIssueStatefulCoversPage() {
 		router.push(nextPage)
 	}
 
-	// TODO: should cover ALWAYS be 690 x 1000? If yes, can we autoresize images somehow?
-	// signature should have the same ratio as the comic cover
-	// sort covers by rarity (priority)
 	const groupedCovers = groupBy(issueCovers, 'rarity')
 
 	console.log(groupedCovers, comicIssue.signature)
@@ -98,7 +95,6 @@ export default function UploadComicIssueStatefulCoversPage() {
 				]}
 			/>
 
-			{/* TODO: make this form a bit more responsive / resize friendly */}
 			<main>
 				<Form padding maxSize='xl' fullWidth className='form--edit-comic-issue-stateful-covers'>
 					<Label isRequired tooltipText={statefulCoverVariantsTooltipText}>

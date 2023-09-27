@@ -109,7 +109,7 @@ export default function UploadComicAssetsPage() {
 					<div className='comic-file-wrapper'>
 						<div className='comic-file-container'>
 							<Label isRequired tooltipText={comicCoverTooltipText}>
-								Comic Cover (without title)
+								Comic series cover
 							</Label>
 							<FileUpload
 								id='cover-upload'
@@ -124,7 +124,7 @@ export default function UploadComicAssetsPage() {
 						</div>
 
 						<div className='comic-file-container'>
-							<Label tooltipText={comicPfpTooltipText}>Comic PFP</Label>
+							<Label tooltipText={comicPfpTooltipText}>Comic &quot;Avatar&quot; (PFP)</Label>
 							<FileUpload
 								id='pfp-upload'
 								label='500x500px'
