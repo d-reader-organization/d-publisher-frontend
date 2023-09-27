@@ -9,16 +9,17 @@ import 'app/styles/app.scss'
 
 /**
  * TODO:
+ * - finish comic details screen
+ * - query raw comic issues fix
  * - edit comic
  * - edit comic issue
+ * - UPDATE PSEUDORECOVER AND PSEUDODELETE HOOKS
+
  * - view comic issues
- * - finish comic details screen
  * - fix skeleton image (skeleton shown below the image in FileUploads)
  * - main mainnet CDN URL fix
  * - Nyanpasu Brave (can't click to upload images), add "drag & drop" to upload text, d&d shouldn't override the current state if multiple file upload
  * - Degenghosty ios (safari mobile) bug + mobile responsiveness
- * - query raw comic issues fix
- * - UPDATE PSEUDORECOVER AND PSEUDODELETE HOOKS
  * - Link TOS somewhere
 
  * TOMORROW:
