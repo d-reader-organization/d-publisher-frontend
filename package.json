@@ -34,7 +34,7 @@
 		"eslint-plugin-prettier": "^5.0.0",
 		"lodash": "^4.17.21",
 		"lokijs": "1.x",
-		"next": "13.4.9",
+		"next": "13.4.7",
 		"next-pwa": "^5.6.0",
 		"pino-pretty": "^10.2.0",
 		"prettier": "^3.0.3",
