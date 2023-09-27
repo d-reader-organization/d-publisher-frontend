@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { CssBaseline } from '@mui/material'
+import CssBaseline from '@mui/material/CssBaseline'
 import ClientContext from '@/providers/ClientContextProvider'
 import CreatorAuthProvider from 'providers/CreatorAuthProvider'
 import ToastProvider from 'providers/ToastProvider'
@@ -19,6 +19,7 @@ import 'app/styles/app.scss'
  * - Degenghosty ios (safari mobile) bug + mobile responsiveness
  * - query raw comic issues fix
  * - UPDATE PSEUDORECOVER AND PSEUDODELETE HOOKS
+ * - Link TOS somewhere
 
  * TOMORROW:
  * - stateful covers

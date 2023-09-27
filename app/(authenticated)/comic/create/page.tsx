@@ -204,7 +204,6 @@ export default function CreateComicPage() {
 							}}
 							ref={register('authorAgreement').ref}
 						/>
-						{/* TODO: add link to TOS */}
 						<span className='checkmark-text'>
 							I agree to dReader&apos;s&nbsp;
 							<span className='checkmark-text--highlighted'>Author Registration and Uploading Agreement</span>

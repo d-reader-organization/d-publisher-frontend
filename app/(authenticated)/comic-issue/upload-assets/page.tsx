@@ -27,7 +27,7 @@ import { pdfType, transparentImageTypes } from '@/constants/fileTypes'
 import { useFetchRawComicIssue } from '@/api/comicIssue'
 // import SkeletonImage from '@/components/SkeletonImage'
 import ReactSignatureCanvas from 'react-signature-canvas'
-import { Grid } from '@mui/material'
+import Grid from '@mui/material/Grid'
 
 export default function UploadComicIssueAssetsPage() {
 	const router = useRouter()
@@ -141,8 +141,6 @@ export default function UploadComicIssueAssetsPage() {
 						</Grid>
 					</Grid>
 
-					{/* also offer a "back" button on all these steps */}
-					{/* TODO: this should either ask "Advanced cover edit" or "Next" */}
 					<FormActions marginTop>
 						<Button type='submit' onClick={handleNextClick} backgroundColor='grey-100' className='action-button'>
 							Next <ArrowRightIcon className='action-button-icon' />

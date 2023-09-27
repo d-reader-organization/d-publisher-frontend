@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
-import { Typography } from '@mui/material'
+import Typography from '@mui/material/Typography'
 import clsx from 'clsx'
 
 import LogoIcon from 'public/assets/vector-icons/logo-with-text.svg'

@@ -1,5 +1,5 @@
 import { CSSProperties, useState } from 'react'
-import { Skeleton } from '@mui/material'
+import Skeleton from '@mui/material/Skeleton'
 import Image, { ImageProps } from 'next/image'
 
 interface Props extends Omit<ImageProps, 'src'> {

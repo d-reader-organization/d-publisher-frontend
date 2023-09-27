@@ -12,7 +12,8 @@ import YouTubeIcon from 'public/assets/vector-icons/youtube-icon.svg'
 import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
 import { useFetchRawComic } from '@/api/comic'
 import FlexColumn from '@/components/FlexColumn'
-import { CircularProgress, Grid } from '@mui/material'
+import CircularProgress from '@mui/material/CircularProgress'
+import Grid from '@mui/material/Grid'
 import SkeletonImage from '@/components/SkeletonImage'
 import FlexRow from '@/components/FlexRow'
 import ButtonLink from '@/components/ButtonLink'
@@ -114,7 +115,7 @@ export default function ComicPage({ params }: { params: Params }) {
 								slug: <em>{comic.slug}</em>
 							</p>
 							<p>Audience type (age): {comic.audienceType}</p>
-							{/* TODO: show banner, logo, and pfp */}
+							{/* show banner, logo, and pfp */}
 							<p className='description'>{comic.description}</p>
 							<p className='flavor-text'>{comic.flavorText}</p>
 

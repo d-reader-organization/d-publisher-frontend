@@ -1,7 +1,10 @@
 'use client'
 
 import { useState, useMemo, useCallback, createContext, useContext } from 'react'
-import { Snackbar, Alert, AlertColor, CircularProgress } from '@mui/material'
+
+import Snackbar from '@mui/material/Snackbar'
+import Alert, { AlertColor } from '@mui/material/Alert'
+import CircularProgress from '@mui/material/CircularProgress'
 import { FieldValues, FieldErrors } from 'react-hook-form'
 import axios, { AxiosError } from 'axios'
 

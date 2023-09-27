@@ -1,6 +1,6 @@
 import { LabelHTMLAttributes } from 'react'
+import Tooltip from '@mui/material/Tooltip'
 import clsx from 'clsx'
-import { Tooltip } from '@mui/material'
 
 import InfoIcon from 'public/assets/vector-icons/info.svg'
 

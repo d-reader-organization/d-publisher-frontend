@@ -80,8 +80,8 @@ export default function UploadComicIssueStatefulCoversPage() {
 	}
 
 	// TODO: should cover ALWAYS be 690 x 1000? If yes, can we autoresize images somehow?
-	// TODO: signature should have the same ratio as the comic cover
-	// TODO: sort covers by rarity (priority)
+	// signature should have the same ratio as the comic cover
+	// sort covers by rarity (priority)
 	const groupedCovers = groupBy(issueCovers, 'rarity')
 
 	console.log(groupedCovers, comicIssue.signature)

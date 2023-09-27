@@ -1,6 +1,6 @@
 import { InputHTMLAttributes, forwardRef, useMemo, useState } from 'react'
+import ClickAwayListener from '@mui/material/ClickAwayListener'
 import { cloneDeep, remove } from 'lodash'
-import { ClickAwayListener } from '@mui/material'
 import Image from 'next/image'
 import clsx from 'clsx'
 

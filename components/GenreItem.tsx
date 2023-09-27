@@ -1,4 +1,5 @@
-import { Box, BoxProps, Typography } from '@mui/material'
+import Box, { BoxProps } from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
 import { PartialGenre } from '@/models/genre'
 import clsx from 'clsx'
 

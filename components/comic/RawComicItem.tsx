@@ -1,4 +1,4 @@
-import { Box, BoxProps } from '@mui/material'
+import Box, { BoxProps } from '@mui/material/Box'
 import { RawComic } from '@/models/comic/rawComic'
 import { RoutePath } from 'enums/routePath'
 import SkeletonImage from '../SkeletonImage'
