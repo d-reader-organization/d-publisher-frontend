@@ -119,7 +119,7 @@ export default function ComicPage({ params }: { params: Params }) {
 							<p className='flavor-text'>{comic.flavorText}</p>
 
 							<p>{`Note: Comic "edit" and comic issue "view" and "edit" screens are coming soon`}</p>
-							{/* TODO: stats */}
+							{/* stats */}
 							{/* <FlexRow>
 								<p>{comic.stats.ratersCount}</p>
 								<p>{comic.stats.averageRating}</p>
