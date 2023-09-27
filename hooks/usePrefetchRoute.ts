@@ -1,4 +1,4 @@
-import { PrefetchOptions } from 'next/dist/shared/lib/app-router-context.shared-runtime'
+import { PrefetchOptions } from 'next/dist/shared/lib/app-router-context'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 
