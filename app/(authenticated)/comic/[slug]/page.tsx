@@ -96,11 +96,7 @@ export default function ComicPage({ params }: { params: Params }) {
 							</FlexRow>
 
 							<FlexRow overflow='scroll' className='badge-row'>
-								{comic.verifiedAt ? (
-									<VerifiedIcon />
-								) : (
-									<span className='badge badge--under-review'>⌛ under review</span>
-								)}
+								{!comic.verifiedAt && <span className='badge badge--under-review'>⌛ under review</span>}
 								{comic.completedAt ? (
 									<span className='badge badge--is-completed'>✅ completed</span>
 								) : (
@@ -109,7 +105,9 @@ export default function ComicPage({ params }: { params: Params }) {
 								{comic.publishedAt && <span className='badge badge--is-published'>📗 published</span>}
 								{comic.popularizedAt && <span className='badge badge--is-popular'>🔥 popular</span>}
 							</FlexRow>
-							<h2 className='title'>{comic.title}</h2>
+							<h2 className='title'>
+								{comic.title} {comic.verifiedAt && <VerifiedIcon />}
+							</h2>
 
 							<p className='subtitle'>
 								slug: <em>{comic.slug}</em>
@@ -119,6 +117,8 @@ export default function ComicPage({ params }: { params: Params }) {
 							<p className='description'>{comic.description}</p>
 							<p className='flavor-text'>{comic.flavorText}</p>
 
+							<br />
+							<br />
 							<p>{`Note: Comic "edit" and comic issue "view" and "edit" screens are coming soon`}</p>
 							{/* stats */}
 							{/* <FlexRow>
@@ -129,7 +129,7 @@ export default function ComicPage({ params }: { params: Params }) {
 								<p>{comic.stats.readersCount}</p>
 								<p>{comic.stats.viewersCount}</p>
 							</FlexRow> */}
-							<table className='content-table'>
+							{/* <table className='content-table'>
 								<thead className='content-table-head'>
 									<tr className='content-table-row'>
 										<td className='content-table-cell'></td>
@@ -139,7 +139,7 @@ export default function ComicPage({ params }: { params: Params }) {
 									</tr>
 								</thead>
 								<tbody>
-									{/* {comicIssues.map((issue) => {
+									{comicIssues.map((issue) => {
 										return (
 											<tr className='content-table-row' key={issue.slug}>
 												<td className='content-table-cell'>
@@ -156,9 +156,9 @@ export default function ComicPage({ params }: { params: Params }) {
 												<td className='content-table-cell center'>{issue.verifiedAt ? '✅' : '❌'}</td>
 											</tr>
 										)
-									})} */}
+									})}
 								</tbody>
-							</table>
+							</table> */}
 						</Grid>
 					</Grid>
 				)}

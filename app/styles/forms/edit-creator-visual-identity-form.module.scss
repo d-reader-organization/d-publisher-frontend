@@ -1,11 +1,11 @@
 .form--edit-visual-identity {
 	text-align: center;
-	height: max-content;
+	// height: max-content;
 
 	.profile-assets-upload {
 		position: relative;
-		// width: max-content;
-		width: 100%;
+		width: max-content;
+		// width: 100%;
 		margin: 0 auto;
 
 		.avatar-upload {
@@ -24,9 +24,9 @@
 		}
 
 		.banner-upload {
-			// width: 680px;
-			// height: 320px;
-			width: 100%;
+			width: 680px;
+			height: 320px;
+			// width: 100%;
 			height: auto;
 			margin: 1rem auto;
 			padding: 0.5rem;
