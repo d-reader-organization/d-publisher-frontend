@@ -9,14 +9,11 @@ import 'app/styles/app.scss'
 
 /**
  * TODO:
- * - finish comic details screen
- * - query raw comic issues fix
  * - UPDATE ALL ENDPOINTS (pseudorecover etc.)
  * - fix skeleton image (skeleton shown below the image in FileUploads)
  * - edit comic
  * - edit comic issue
 
- * TODO:
  * - stateful covers
  * - view comic issues
  * - main mainnet CDN URL fix
@@ -31,9 +28,9 @@ import 'app/styles/app.scss'
  * deprecate next-sitemap and implement https://nextjs.org/docs/app/api-reference/file-conventions/metadata
  * fetch the comic series to see if the series are, in fact, existing (on comic issue create page)
  * fetch the latest comic issue of a comic and use that data to prefill the comic issue create form
+ * fix the textarea number of characters remaining bug (and when submitting a form flash screen)
  * number input for statelessCover.share
  * refactor localStorage auth handling to SWR
- * fix the textarea number of characters remaining bug (and when submitting a form flash screen)
  */
 
 const satoshi = localFont({

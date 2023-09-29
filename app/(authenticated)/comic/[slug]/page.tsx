@@ -20,7 +20,7 @@ import ButtonLink from '@/components/ButtonLink'
 import { RoutePath } from '@/enums/routePath'
 import GenreItem from '@/components/GenreItem'
 import IconLink from '@/components/IconLink'
-// import { useFetchRawComicIssues } from '@/api/comicIssue'
+import { useFetchRawComicIssues } from '@/api/comicIssue'
 
 interface Params {
 	slug: string
@@ -28,16 +28,16 @@ interface Params {
 
 export default function ComicPage({ params }: { params: Params }) {
 	const { data: comic, isLoading: isLoadingComic } = useFetchRawComic(params.slug)
-	// const { flatData: comicIssues, isLoading: isLoadingComicIssues } = useFetchRawComicIssues({
-	// 	comicSlug: params.slug,
-	// 	skip: 0,
-	// 	take: 20,
-	// })
+	const { flatData: comicIssues } = useFetchRawComicIssues({
+		comicSlug: params.slug,
+		skip: 0,
+		take: 20,
+	})
 
 	useAuthenticatedRoute()
 
 	if (!comic) return <Header title='📖' />
-	// const hasComics = comic.stats.issuesCount > 0
+	const hasComicIssues = comicIssues.length > 0
 
 	return (
 		<>
@@ -119,7 +119,6 @@ export default function ComicPage({ params }: { params: Params }) {
 
 							<br />
 							<br />
-							<p>{`Note: Comic "edit" and comic issue "view" and "edit" screens are coming soon`}</p>
 							{/* stats */}
 							{/* <FlexRow>
 								<p>{comic.stats.ratersCount}</p>
@@ -129,38 +128,45 @@ export default function ComicPage({ params }: { params: Params }) {
 								<p>{comic.stats.readersCount}</p>
 								<p>{comic.stats.viewersCount}</p>
 							</FlexRow> */}
-							{/* <table className='content-table'>
-								<thead className='content-table-head'>
-									<tr className='content-table-row'>
-										<td className='content-table-cell'></td>
-										<td className='content-table-cell'>Comic Title</td>
-										<td className='content-table-cell'>Number of issues</td>
-										<td className='content-table-cell'>Verified / not</td>
-									</tr>
-								</thead>
-								<tbody>
-									{comicIssues.map((issue) => {
-										return (
-											<tr className='content-table-row' key={issue.slug}>
-												<td className='content-table-cell'>
-													<SkeletonImage
-														className='comic-issue-cover'
-														src={issue.cover}
-														height={60}
-														width={60}
-														alt=''
-													/>
-												</td>
-												<td className='content-table-cell'>{issue.title}</td>
-												<td className='content-table-cell center'>{issue.isFreeToRead}</td>
-												<td className='content-table-cell center'>{issue.verifiedAt ? '✅' : '❌'}</td>
-											</tr>
-										)
-									})}
-								</tbody>
-							</table> */}
 						</Grid>
 					</Grid>
+				)}
+
+				{hasComicIssues && (
+					<table className='content-table'>
+						<thead>
+							<tr>
+								<td></td>
+								<td>Title</td>
+								<td className='centered'>Viewers</td>
+								<td className='centered'>Readers</td>
+								<td className='centered'>Likes</td>
+								<td className='centered'>Rating</td>
+								<td className='centered'>Status</td>
+								<td></td>
+							</tr>
+						</thead>
+						<tbody>
+							{comicIssues.map((issue) => {
+								return (
+									<tr key={issue.slug}>
+										<td className='centered'>#{issue.number}</td>
+										<td>{issue.title}</td>
+										<td className='centered'>{issue.stats.viewersCount}</td>
+										<td className='centered'>{issue.stats.readersCount}</td>
+										<td className='centered'>{issue.stats.favouritesCount}</td>
+										<td className='centered'>{issue.stats.averageRating}</td>
+										<td className='centered'>{issue.verifiedAt ? '✅' : '❌'}</td>
+										<td className='centered'>
+											<ButtonLink noMinWidth backgroundColor='transparent' href='#'>
+												Edit
+											</ButtonLink>
+										</td>
+									</tr>
+								)
+							})}
+						</tbody>
+					</table>
 				)}
 			</main>
 		</>

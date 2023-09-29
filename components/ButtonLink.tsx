@@ -6,12 +6,14 @@ type Props = LinkProps &
 		backgroundColor?: 'important' | 'transparent' | 'grey-100' | 'green-100'
 		borderColor?: 'important' | 'transparent' | 'grey-100' | 'grey-300'
 		clickableEffect?: boolean
+		noMinWidth?: boolean
 	}
 
 const ButtonLink: React.FC<Props> = ({
 	backgroundColor = 'grey-100',
 	borderColor = 'transparent',
 	clickableEffect = true,
+	noMinWidth = false,
 	className,
 	...props
 }) => {
@@ -27,6 +29,7 @@ const ButtonLink: React.FC<Props> = ({
 				'button-link--border-color-grey-100': borderColor === 'grey-100',
 				'button-link--border-color-grey-300': borderColor === 'grey-300',
 				'button-link--clickable-effect': clickableEffect,
+				'button-link--no-min-width': noMinWidth,
 			})}
 			{...props}
 		></Link>

@@ -112,4 +112,25 @@
 			color: $grey-100;
 		}
 	}
+
+	.content-table {
+		margin-top: 2rem;
+		width: 100%;
+
+		thead {
+			background-color: $primary-color-light;
+		}
+
+		td {
+			padding: 0.5rem;
+		}
+
+		tr:nth-child(2n) {
+			background-color: rgba($primary-color-light, 0.6);
+		}
+
+		.centered {
+			text-align: center;
+		}
+	}
 }

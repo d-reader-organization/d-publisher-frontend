@@ -20,10 +20,10 @@ export const visualIdentityValidationSchema = yup.object().shape({
 })
 
 export const connectSocialsValidationSchema = yup.object().shape({
-	website: yup.string().max(30, generateMaxLengthErrorMessage('website', 30)),
-	twitter: yup.string().max(30, generateMaxLengthErrorMessage('twitter', 30)),
-	instagram: yup.string().max(30, generateMaxLengthErrorMessage('instagram', 30)),
-	lynkfire: yup.string().max(30, generateMaxLengthErrorMessage('lynkfire', 30)),
+	website: yup.string(),
+	twitter: yup.string(),
+	instagram: yup.string(),
+	lynkfire: yup.string(),
 })
 
 export const loginValidationSchema = yup.object().shape({
@@ -47,21 +47,21 @@ export const yourDetailsValidationSchema = yup.object().shape({
 })
 
 export const connectComicSocialsValidationSchema = yup.object().shape({
-	website: yup.string().max(30, generateMaxLengthErrorMessage('website', 30)),
-	twitter: yup.string().max(30, generateMaxLengthErrorMessage('twitter', 30)),
-	discord: yup.string().max(30, generateMaxLengthErrorMessage('discord', 30)),
-	instagram: yup.string().max(30, generateMaxLengthErrorMessage('instagram', 30)),
-	telegram: yup.string().max(30, generateMaxLengthErrorMessage('telegram', 30)),
-	tikTok: yup.string().max(30, generateMaxLengthErrorMessage('tikTok', 30)),
-	youTube: yup.string().max(30, generateMaxLengthErrorMessage('youTube', 30)),
+	website: yup.string(),
+	twitter: yup.string(),
+	discord: yup.string(),
+	instagram: yup.string(),
+	telegram: yup.string(),
+	tikTok: yup.string(),
+	youTube: yup.string(),
 })
 
 export const createComicValidationSchema = yup.object().shape({
 	title: yup
 		.string()
 		.required(yupRequiredMessage('Title'))
-		.min(3, generateMinLengthErrorMessage('title', 3))
-		.max(20, generateMaxLengthErrorMessage('title', 20)),
+		.min(1, generateMinLengthErrorMessage('title', 1))
+		.max(48, generateMaxLengthErrorMessage('title', 48)),
 	genres: yup
 		.array()
 		.of(yup.string())
@@ -108,7 +108,7 @@ export const createComicIssueValidationSchema = yup.object().shape({
 		.string()
 		.required(yupRequiredMessage('Title'))
 		.min(3, generateMinLengthErrorMessage('title', 3))
-		.max(20, generateMaxLengthErrorMessage('title', 20)),
+		.max(48, generateMaxLengthErrorMessage('title', 48)),
 	number: yup
 		.number()
 		.required(yupRequiredMessage('Issue number'))
