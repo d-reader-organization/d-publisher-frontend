@@ -2,7 +2,7 @@
 
 import { Resolver, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter, useParams } from 'next/navigation'
 
 import Header from 'components/layout/Header'
 import Input from '@/components/forms/Input'
@@ -24,10 +24,9 @@ import Label from '@/components/forms/Label'
 export default function ConnectComicSocialsPage() {
 	const router = useRouter()
 	const toaster = useToaster()
-
-	const searchParams = useSearchParams()
-	const comicSlug = searchParams.get('slug') || ''
-	const nextPage = `${RoutePath.CreateComicIssue}?comicSlug=${comicSlug}`
+	const params = useParams()
+	const comicSlug = params['slug'] || ''
+	const nextPage = RoutePath.CreateComicIssue(comicSlug)
 
 	const { register, handleSubmit: onSubmit } = useForm<UpdateComicSocialsData>({
 		defaultValues: {

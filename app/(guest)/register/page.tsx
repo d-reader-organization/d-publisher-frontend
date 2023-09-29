@@ -20,7 +20,6 @@ import Label from '@/components/forms/Label'
 
 export default function RegisterCreatorPage() {
 	const router = useRouter()
-
 	const nextPage = RoutePath.RegisterYourDetails
 
 	const { mutateAsync: registerCreator } = useRegisterCreator()

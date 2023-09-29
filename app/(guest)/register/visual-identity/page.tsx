@@ -26,7 +26,6 @@ import { imageTypes } from '@/constants/fileTypes'
 export default function UpdateCreatorVisualIdentityPage() {
 	const router = useRouter()
 	const toaster = useToaster()
-
 	const nextPage = RoutePath.RegisterConnectSocials
 
 	const { data: me } = useFetchMe()

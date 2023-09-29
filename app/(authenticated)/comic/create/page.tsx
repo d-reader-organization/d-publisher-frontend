@@ -73,7 +73,7 @@ export default function CreateComicPage() {
 
 	const handleFormSubmit = async (data: CreateComicData) => {
 		const comic = await createComic(data)
-		router.push(`${RoutePath.ComicUploadAssets}?slug=${comic.slug}`)
+		router.push(RoutePath.ComicUploadAssets(comic.slug))
 	}
 
 	return (

@@ -18,7 +18,6 @@ import FormActions from '@/components/forms/FormActions'
 
 export default function SubmitCreatorRegistrationPage() {
 	const router = useRouter()
-
 	const nextPage = RoutePath.Dashboard
 
 	const { data: me } = useFetchMe()

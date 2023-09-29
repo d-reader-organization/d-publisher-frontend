@@ -61,7 +61,7 @@ export default function ComicPage({ params }: { params: Params }) {
 									<SkeletonImage className='comic-cover' src={comic.cover} alt='' fill />
 								</div>
 								<ButtonLink
-									href={`${RoutePath.EditComic}?comicSlug=${comic.slug}`}
+									href={RoutePath.EditComic(comic.slug)}
 									backgroundColor='transparent'
 									borderColor='grey-100'
 									className='action-button'
@@ -70,7 +70,7 @@ export default function ComicPage({ params }: { params: Params }) {
 									Edit details
 								</ButtonLink>
 								<ButtonLink
-									href={`${RoutePath.CreateComicIssue}?comicSlug=${comic.slug}`}
+									href={RoutePath.CreateComicIssue(comic.slug)}
 									backgroundColor='green-100'
 									className='action-button'
 									clickableEffect

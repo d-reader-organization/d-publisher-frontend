@@ -3,7 +3,7 @@
 
 import { FieldErrors, Resolver, useForm } from 'react-hook-form'
 import { useRef } from 'react'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter, useParams } from 'next/navigation'
 
 import Header from 'components/layout/Header'
 import Button from 'components/Button'
@@ -32,10 +32,9 @@ import Grid from '@mui/material/Grid'
 export default function UploadComicIssueAssetsPage() {
 	const router = useRouter()
 	const toaster = useToaster()
-
-	const searchParams = useSearchParams()
-	const comicIssueId = searchParams.get('id') || ''
-	const nextPage = `${RoutePath.ComicIssueUploadPages}?id=${comicIssueId}`
+	const params = useParams()
+	const comicIssueId = params['id'] || ''
+	const nextPage = RoutePath.ComicIssueUploadPages(comicIssueId)
 
 	const {
 		register,

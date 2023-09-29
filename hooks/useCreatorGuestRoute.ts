@@ -9,14 +9,14 @@ import { RoutePath } from 'enums/routePath'
 type GuestRouteHook = (redirectTo?: string) => void
 
 export const useGuestRoute: GuestRouteHook = (redirectTo = RoutePath.Dashboard) => {
-	const router = useRouter()
+	const { push } = useRouter()
 	const { isAuthenticated, isAuthenticating } = useCreatorAuth()
 
 	useEffect(() => {
 		if (isAuthenticated && !isAuthenticating) {
-			router.push(redirectTo)
+			push(redirectTo)
 		}
-	}, [isAuthenticated, isAuthenticating, router])
+	}, [isAuthenticated, isAuthenticating, redirectTo, push])
 
 	return
 }

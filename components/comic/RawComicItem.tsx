@@ -10,7 +10,7 @@ interface Props extends BoxProps {
 }
 
 const RawComicItem: React.FC<Props> = ({ comic, className, ...props }) => {
-	const nextPage = `${RoutePath.Comic}/${comic.slug}`
+	const nextPage = RoutePath.Comic(comic.slug)
 
 	return (
 		<Box className={clsx('raw-comic-item', className)} {...props}>

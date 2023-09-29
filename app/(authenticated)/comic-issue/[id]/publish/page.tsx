@@ -2,7 +2,7 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter, useParams } from 'next/navigation'
 
 import Header from 'components/layout/Header'
 import Steps from 'components/Steps'
@@ -17,10 +17,9 @@ import { useUpdateComicIssuePages } from '@/api/comicIssue'
 export default function PublishComicIssuePage() {
 	const toaster = useToaster()
 	const router = useRouter()
-
-	const searchParams = useSearchParams()
-	const comicIssueId = searchParams.get('id') || ''
-	const nextPage = `${RoutePath.ComicIssuePublish}?id=${comicIssueId}`
+	const params = useParams()
+	const comicIssueId = params['id'] || ''
+	const nextPage = RoutePath.ComicIssuePublish(comicIssueId)
 
 	const [pageFiles, setPageFiles] = useState<File[]>([])
 	const { mutateAsync: updatePages } = useUpdateComicIssuePages(comicIssueId)

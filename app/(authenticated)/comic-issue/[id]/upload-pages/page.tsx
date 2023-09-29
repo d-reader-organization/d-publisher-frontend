@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter, useParams } from 'next/navigation'
 
 import Header from 'components/layout/Header'
 import Button from 'components/Button'
@@ -24,10 +24,9 @@ import { optimalImageTypes } from '@/constants/fileTypes'
 export default function UploadComicIssuePagesPage() {
 	const toaster = useToaster()
 	const router = useRouter()
-
-	const searchParams = useSearchParams()
-	const comicIssueId = searchParams.get('id') || ''
-	const nextPage = `${RoutePath.ComicIssuePublish}?id=${comicIssueId}`
+	const params = useParams()
+	const comicIssueId = params['id'] || ''
+	const nextPage = RoutePath.ComicIssuePublish(comicIssueId)
 
 	const [pageFiles, setPageFiles] = useState<File[]>([])
 	const [numberOfPreviewPages, setNumberOfPreviewPages] = useState(3)

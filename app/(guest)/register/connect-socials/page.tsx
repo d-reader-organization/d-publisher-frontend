@@ -32,7 +32,6 @@ import Label from '@/components/forms/Label'
 
 export default function ConnectCreatorSocialsPage() {
 	const router = useRouter()
-
 	const nextPage = RoutePath.RegisterSubmit
 
 	const { data: me } = useFetchMe()
@@ -79,7 +78,7 @@ export default function ConnectCreatorSocialsPage() {
 			}
 
 			await updateCreator(formattedData)
-			router.push(RoutePath.RegisterSubmit)
+			router.push(nextPage)
 		})()
 	}
 

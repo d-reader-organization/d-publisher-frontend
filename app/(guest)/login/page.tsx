@@ -20,7 +20,6 @@ import Label from '@/components/forms/Label'
 
 export default function LoginPage() {
 	const router = useRouter()
-
 	const nextPage = RoutePath.Dashboard
 
 	const { mutateAsync: login } = useLoginCreator()
