@@ -12,16 +12,15 @@ import 'app/styles/app.scss'
  * - finish comic details screen
  * - query raw comic issues fix
  * - UPDATE ALL ENDPOINTS (pseudorecover etc.)
+ * - fix skeleton image (skeleton shown below the image in FileUploads)
  * - edit comic
  * - edit comic issue
 
- * - view comic issues
- * - fix skeleton image (skeleton shown below the image in FileUploads)
- * - main mainnet CDN URL fix
- * - Link TOS somewhere
-
  * TODO:
  * - stateful covers
+ * - view comic issues
+ * - main mainnet CDN URL fix
+ * - Link TOS somewhere
  * - publish-on-chain (+isFullyUploaded checkbox) screen
  * - comicIssue.releaseDate is missing when creating a comic issue
  * - comic.collaborators necessary or not?

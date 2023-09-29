@@ -49,24 +49,22 @@ const NAVIGATION_LIST_ITEMS = [
 const Sidebar: React.FC = () => {
 	const { logout } = useCreatorAuth()
 	const [open, toggleSidebar, closeSidebar] = useToggle()
-
 	const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'))
 
-	const menuButton = (
-		<button
-			className={clsx('menu-button', {
-				'menu-button--open': !open,
-				'menu-button--close': open,
-			})}
-			onClick={toggleSidebar}
-		>
-			{open ? <CloseIcon /> : <MenuIcon />}
-		</button>
-	)
+	console.log('OPEN, IS MOBILE: ', open, isMobile)
+	console.log('Hide sidebar: ', !open && isMobile)
 
 	return (
 		<>
-			{menuButton}
+			<button
+				className={clsx('menu-button', {
+					'menu-button--open': !open,
+					'menu-button--close': open,
+				})}
+				onClick={toggleSidebar}
+			>
+				{open ? <CloseIcon /> : <MenuIcon />}
+			</button>
 			<div
 				className={clsx('sidebar', {
 					'sidebar--hidden': !open && isMobile,

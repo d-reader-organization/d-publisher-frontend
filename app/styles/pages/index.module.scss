@@ -1,5 +1,6 @@
 @use '../variables/theme.module.scss' as *;
 @use '../mixins/breakpoints.module.scss' as *;
+@use '../mixins/common.module.scss' as *;
 
 .index {
 	display: flex;
@@ -7,20 +8,23 @@
 	justify-content: space-between;
 	width: 100%;
 	height: 100%;
-	padding: 58px;
 	background: url('~/public/assets/images/background.jpg');
 	background-size: cover;
+	@include pagePadding(20px, 30px, 40px, 50px);
 
 	.title {
+		padding-top: 20px;
 		max-width: 100%;
 		font-weight: 700;
 		font-size: 44px;
 		line-height: 44px;
 		color: $white;
+		text-align: center;
 
 		@include sm {
 			font-size: 66px;
 			line-height: 66px;
+			text-align: left;
 		}
 
 		@include md {
@@ -36,7 +40,8 @@
 	}
 
 	.description {
-		width: 358px;
+		width: 100%;
+		max-width: 360px;
 		font-weight: 500;
 		font-size: 20px;
 		line-height: 20px;
@@ -48,12 +53,18 @@
 	}
 
 	.actions {
-		margin-bottom: auto;
-		margin-top: 2rem;
-		display: flex;
+		margin: 2rem auto auto auto;
 
-		.action-button:not(:last-child) {
-			margin-right: 1rem;
+		.action-button {
+			min-width: 120px;
+		}
+
+		@include sm {
+			margin: 2rem 0 auto 0;
+
+			.action-button {
+				min-width: 160px;
+			}
 		}
 	}
 }
