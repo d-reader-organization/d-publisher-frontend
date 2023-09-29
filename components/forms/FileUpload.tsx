@@ -1,4 +1,12 @@
-import React, { InputHTMLAttributes, forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react'
+import React, {
+	InputHTMLAttributes,
+	forwardRef,
+	useCallback,
+	useEffect,
+	useImperativeHandle,
+	useRef,
+	useState,
+} from 'react'
 import { DropzoneOptions, useDropzone } from 'react-dropzone'
 import { cloneDeep, remove } from 'lodash'
 import clsx from 'clsx'
@@ -25,18 +33,26 @@ interface SortableItemProps {
 	handleRemoveFile: (event: React.MouseEvent<HTMLButtonElement>, uploadedFile: UploadedFile) => void
 }
 
-const SortableItem = SortableElement<SortableItemProps>(({ uploadedFile, handleRemoveFile }: SortableItemProps) => (
-	<div className={clsx('preview-image-wrapper')}>
-		<button className='close-button' onClick={(event) => handleRemoveFile(event, uploadedFile)}>
-			<CloseIcon className='close-icon' />
-		</button>
-		{uploadedFile.file?.type.includes('pdf') ? (
-			<embed src={uploadedFile.url} width='100%' height='100%' />
-		) : (
-			<SkeletonImage fill src={uploadedFile.url} alt='' className='preview-image' />
-		)}
-	</div>
-))
+const SortableItem = SortableElement<SortableItemProps>(({ uploadedFile, handleRemoveFile }: SortableItemProps) => {
+	return (
+		<div className={clsx('preview-image-wrapper')}>
+			<button className='close-button' onClick={(event) => handleRemoveFile(event, uploadedFile)}>
+				<CloseIcon className='close-icon' />
+			</button>
+			{uploadedFile.file?.type.includes('pdf') ? (
+				<embed src={uploadedFile.url} width='100%' height='100%' />
+			) : (
+				<SkeletonImage
+					src={uploadedFile.url}
+					className='preview-image'
+					sizes='100vw' // TODO: is there a better way to do this?
+					fill
+					alt=''
+				/>
+			)}
+		</div>
+	)
+})
 
 interface SortableListProps {
 	items: UploadedFile[]
@@ -74,7 +90,6 @@ const FileUpload = forwardRef<HTMLInputElement, Props>(
 			allowMultipleFiles = false,
 			previewUrl = '',
 			onUpload = () => {},
-			onClick = () => {},
 			className = '',
 			sortable = false,
 			options,
@@ -89,18 +104,8 @@ const FileUpload = forwardRef<HTMLInputElement, Props>(
 		)
 		const [draggingFileOver, setDraggingFileOver] = useState<boolean>(false)
 
-		const { getRootProps, getInputProps } = useDropzone({
-			onDragEnter: () => {
-				setDraggingFileOver(true)
-			},
-			onDragLeave: () => {
-				setDraggingFileOver(false)
-			},
-			onDrop: async (files) => {
-				setDraggingFileOver(false)
-
-				if (!allowMultipleFiles && files.length > 1) return
-
+		const updateUploadedFiles = useCallback(
+			async (files: File[] | never[] | FileList) => {
 				const uploads: UploadedFile[] = []
 
 				for (let i = 0; i < files.length; i++) {
@@ -112,44 +117,48 @@ const FileUpload = forwardRef<HTMLInputElement, Props>(
 					uploads.push({ url, file })
 				}
 
-				setUploadedFiles(uploads)
-				onUpload(uploads)
+				if (allowMultipleFiles) {
+					const concatenatedFiles = uploadedFiles.concat(uploads)
+					setUploadedFiles(concatenatedFiles)
+					onUpload(concatenatedFiles)
+				} else {
+					setUploadedFiles(uploads)
+					onUpload(uploads)
+				}
 			},
+			[allowMultipleFiles, onUpload, uploadedFiles]
+		)
+
+		const handleDrop = useCallback(
+			async (files: File[]) => {
+				setDraggingFileOver(false)
+
+				if (!allowMultipleFiles && files.length > 1) return
+				await updateUploadedFiles(files)
+			},
+			[allowMultipleFiles, updateUploadedFiles]
+		)
+
+		const { getRootProps, getInputProps } = useDropzone({
+			onDragEnter: () => {
+				setDraggingFileOver(true)
+			},
+			onDragLeave: () => {
+				setDraggingFileOver(false)
+			},
+			onDrop: handleDrop,
 			...options,
+			noClick: true,
 		})
 
 		useImperativeHandle(ref, () => componentRef.current as HTMLInputElement)
-
-		const handleClick = (event: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
-			if (navigator.userAgent.toLowerCase().includes('chrome')) {
-				event.preventDefault()
-				event.stopPropagation()
-			}
-			onClick(event)
-		}
 
 		const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
 			event.preventDefault()
 			event.stopPropagation()
 			if (!event.target) return
-
 			const files = event.target.files || []
-
-			if (!allowMultipleFiles && files.length > 1) return
-
-			const uploads: UploadedFile[] = []
-
-			for (let i = 0; i < files.length; i++) {
-				const file = files[i]
-				const blob = await convertFileToBlob(file)
-
-				const url = URL.createObjectURL(blob)
-
-				uploads.push({ url, file })
-			}
-
-			setUploadedFiles(uploads)
-			onUpload(uploads)
+			await updateUploadedFiles(files)
 		}
 
 		const handleRemoveFile = (event: React.MouseEvent<HTMLButtonElement>, uploadedFile: UploadedFile) => {
@@ -199,11 +208,11 @@ const FileUpload = forwardRef<HTMLInputElement, Props>(
 											<embed src={uploadedFile.url} width='100%' height='100%' />
 										) : (
 											<SkeletonImage
-												fill
-												sizes='100vw' // TODO: is there a better way to do this?
 												src={uploadedFile.url || previewUrl}
-												alt=''
 												className='preview-image'
+												sizes='100vw' // TODO: is there a better way to do this?
+												fill
+												alt=''
 											/>
 										)}
 										<button className='close-button' onClick={(event) => handleRemoveFile(event, uploadedFile)}>
@@ -222,7 +231,6 @@ const FileUpload = forwardRef<HTMLInputElement, Props>(
 						type='file'
 						multiple={allowMultipleFiles}
 						onChange={handleFileChange}
-						onClick={handleClick}
 						ref={componentRef}
 						disabled={!sortable && uploadedFiles.length > 0}
 						style={{ display: 'none' }}
@@ -234,6 +242,7 @@ const FileUpload = forwardRef<HTMLInputElement, Props>(
 						</>
 					)}
 				</label>
+
 				{sortable && (
 					<div className='file-preview'>
 						{uploadedFiles.length > 0 && (

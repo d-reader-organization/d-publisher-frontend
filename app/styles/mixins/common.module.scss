@@ -1,3 +1,5 @@
+@use './breakpoints.module.scss' as *;
+
 @mixin clickable($x: 0px, $y: 0px) {
 	cursor: pointer;
 	pointer-events: all;
@@ -39,4 +41,12 @@
 	@include flexRow;
 	@include centeredFlex;
 	@content;
+}
+
+@mixin pagePadding {
+	padding: 20px;
+
+	@include md {
+		padding: 40px;
+	}
 }

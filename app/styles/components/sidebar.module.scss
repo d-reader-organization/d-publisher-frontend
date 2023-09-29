@@ -1,5 +1,6 @@
 @use '../variables/theme.module.scss' as *;
 @use '../mixins/breakpoints.module.scss' as *;
+@use '../mixins/common.module.scss' as *;
 
 .sidebar {
 	display: flex;
@@ -8,7 +9,7 @@
 	justify-content: space-between;
 	flex-shrink: 0;
 	height: 100%;
-	padding: 50px 0;
+	padding: 1.5rem 0;
 	background: $grey-400;
 	border-right: 1px solid $grey-300;
 
@@ -16,6 +17,10 @@
 
 	@include sm {
 		width: 240px;
+	}
+
+	&--hidden {
+		display: none;
 	}
 
 	.sidebar-upper {
@@ -34,29 +39,27 @@
 
 	.logo-link {
 		padding: 0 1.5rem;
+		width: min-content;
 	}
 
 	.create-button-link {
-		padding: 0 1.5rem;
-
-		margin-top: 20px;
+		width: 196px;
+		margin: 20px 1.5rem;
 
 		@include sm {
-			margin-top: 40px;
+			margin: 40px 1.5rem;
 		}
-	}
-
-	.create-button {
-		width: 196px;
 	}
 
 	.document-icon {
 		margin-right: 6px;
+		height: 16px;
+		width: 16px;
+		fill: none;
 	}
 
 	.navigation-list {
 		width: 100%;
-		margin-top: 32px;
 	}
 
 	.navigation-item {
@@ -131,6 +134,37 @@
 
 		&:last-of-type {
 			margin-bottom: 0;
+		}
+	}
+}
+
+.menu-button {
+	position: absolute;
+	right: 0;
+	top: 0;
+	z-index: 999;
+	border: 1px solid $grey-100;
+	border-radius: 8px;
+	padding: 0.55rem;
+	margin: 1rem;
+	cursor: pointer;
+	@include centeredRow;
+	height: 40px;
+	width: 40px;
+
+	@include sm {
+		display: none;
+	}
+
+	&--open {
+		background-color: black;
+	}
+
+	&--close {
+		background-color: transparent;
+
+		svg {
+			padding: 0.25rem;
 		}
 	}
 }

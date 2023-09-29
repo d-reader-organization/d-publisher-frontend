@@ -11,23 +11,20 @@ import 'app/styles/app.scss'
  * TODO:
  * - finish comic details screen
  * - query raw comic issues fix
+ * - UPDATE ALL ENDPOINTS (pseudorecover etc.)
  * - edit comic
  * - edit comic issue
- * - UPDATE ALL ENDPOINTS (pseudorecover etc.)
 
  * - view comic issues
  * - fix skeleton image (skeleton shown below the image in FileUploads)
  * - main mainnet CDN URL fix
- * - Nyanpasu Brave (can't click to upload images), add "drag & drop" to upload text, d&d shouldn't override the current state if multiple file upload
- * - Degenghosty ios (safari mobile) bug + mobile responsiveness
  * - Link TOS somewhere
 
- * TOMORROW:
+ * TODO:
  * - stateful covers
  * - publish-on-chain (+isFullyUploaded checkbox) screen
  * - comicIssue.releaseDate is missing when creating a comic issue
  * - comic.collaborators necessary or not?
-
  * - sign copies
  */
 
@@ -38,9 +35,6 @@ import 'app/styles/app.scss'
  * number input for statelessCover.share
  * refactor localStorage auth handling to SWR
  * fix the textarea number of characters remaining bug (and when submitting a form flash screen)
- * sidebar should be closeable on mobile screens, shown as a hamburger menu
- * eslint rules for dependency array checks, unused imports etc.
- * IMPORTANT: somewhere within the app explain which assets the creator will need. e.g. when starting to create an issue let the creator know what they'll need to attach
  */
 
 const satoshi = localFont({

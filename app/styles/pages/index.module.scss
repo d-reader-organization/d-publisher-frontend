@@ -1,4 +1,5 @@
 @use '../variables/theme.module.scss' as *;
+@use '../mixins/breakpoints.module.scss' as *;
 
 .index {
 	display: flex;
@@ -11,11 +12,22 @@
 	background-size: cover;
 
 	.title {
-		max-width: 402px;
+		max-width: 100%;
 		font-weight: 700;
-		font-size: 88px;
-		line-height: 88px;
+		font-size: 44px;
+		line-height: 44px;
 		color: $white;
+
+		@include sm {
+			font-size: 66px;
+			line-height: 66px;
+		}
+
+		@include md {
+			font-size: 88px;
+			line-height: 88px;
+			max-width: 402px;
+		}
 	}
 
 	.logo {

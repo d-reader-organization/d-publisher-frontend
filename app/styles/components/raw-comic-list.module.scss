@@ -1,18 +1,12 @@
 @use '../variables/theme.module.scss' as *;
 @use '../mixins/common.module.scss' as *;
-@use '../mixins/breakpoints.module.scss' as *;
 
 .raw-comic-list-wrapper {
 	width: calc(100% - 48px);
 	margin: 24px;
 	border: 1px solid $grey-300;
 	border-radius: 8px;
-
-	padding: 20px;
-
-	@include md {
-		padding: 40px;
-	}
+	@include pagePadding;
 
 	.title {
 		margin-bottom: 16px;

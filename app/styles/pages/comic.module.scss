@@ -1,18 +1,12 @@
 @use '../variables/theme.module.scss' as *;
 @use '../mixins/common.module.scss' as *;
-@use '../mixins/breakpoints.module.scss' as *;
 
 .comic-page {
 	width: calc(100% - 48px);
 	margin: 24px;
 	border: 1px solid $grey-300;
 	border-radius: 8px;
-
-	padding: 20px;
-
-	@include md {
-		padding: 40px;
-	}
+	@include pagePadding;
 
 	.comic-actions {
 		& > *:not(:last-child) {

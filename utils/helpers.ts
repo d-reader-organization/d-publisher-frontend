@@ -101,3 +101,15 @@ export function removeLynkfire(string?: string) {
 		return string.substring(21)
 	} else return ''
 }
+
+export function isBrave() {
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
+	if (window.navigator.brave != undefined) {
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		// @ts-ignore
+		return window.navigator.brave.isBrave.name == 'isBrave'
+	} else {
+		return false
+	}
+}
