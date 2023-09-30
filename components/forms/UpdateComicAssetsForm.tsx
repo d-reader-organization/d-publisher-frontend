@@ -99,7 +99,7 @@ const UpdateComicAssetsForm: React.FC<Props> = ({ comic }) => {
 				</div>
 
 				<div className='comic-file-container'>
-					<Label tooltipText={comicPfpTooltipText}>Comic &quot;Avatar&quot; (PFP)</Label>
+					<Label tooltipText={comicPfpTooltipText}>Comic Avatar/PFP</Label>
 					<FileUpload
 						id='pfp-upload'
 						label='500x500px'

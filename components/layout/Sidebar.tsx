@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import Link from 'next/link'
 import Typography from '@mui/material/Typography'
 import clsx from 'clsx'
@@ -51,7 +51,7 @@ const Sidebar: React.FC = () => {
 	const { width } = useWindowSize()
 	const theme = useTheme()
 
-	const isMobile = width < theme.breakpoints.values.sm
+	const isDesktop = useMemo(() => width > theme.breakpoints.values.sm, [theme.breakpoints.values.sm, width])
 
 	return (
 		<>
@@ -64,7 +64,7 @@ const Sidebar: React.FC = () => {
 			>
 				{open ? <CloseIcon /> : <MenuIcon />}
 			</button>
-			<div className={clsx('sidebar', !open && isMobile ? 'sidebar--hidden' : '')}>
+			<div className={clsx('sidebar', !open && !isDesktop ? 'sidebar--hidden' : '')}>
 				<div className='sidebar-upper'>
 					<Link className='logo-link' onClick={closeSidebar} href={RoutePath.Dashboard}>
 						<LogoIcon />

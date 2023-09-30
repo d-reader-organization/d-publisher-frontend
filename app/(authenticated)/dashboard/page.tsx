@@ -18,8 +18,8 @@ export default function DashboardPage() {
 			{/* <DashboardStats /> */}
 			<ComicList />
 			<Box px={3}>
-				<p>{`You'll notice '?' help buttons thrown around the app. Make sure to hover over those for help!`}</p>
-				<h4>At any point of the comic creation feel free to reach out if you need additional help/advice</h4>
+				<p>{`We've placed '?' buttons across the app. Hover over them for help!`}</p>
+				<h4>At any point feel free to reach out if you need help/advice</h4>
 				<p>
 					✉️ email:&nbsp;
 					<Link className='text--important text--underline' href='mailto:support@dreader.io' target='_blank'>
