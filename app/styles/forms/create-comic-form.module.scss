@@ -1,9 +1,16 @@
 @use '../variables/theme.module.scss' as *;
+@use '../mixins/breakpoints.module.scss' as *;
 
-.form--create-comic {
+.form--create-comic,
+.form--update-comic-basic-info {
 	.audience-status-wrapper {
 		display: flex;
-		flex-direction: row;
+		flex-direction: column;
+		margin-top: -8px;
+
+		@include sm {
+			flex-direction: row;
+		}
 	}
 
 	.audience-status-container {

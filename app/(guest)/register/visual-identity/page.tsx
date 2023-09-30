@@ -23,7 +23,7 @@ import FormActions from '@/components/forms/FormActions'
 import Label from '@/components/forms/Label'
 import { imageTypes } from '@/constants/fileTypes'
 
-export default function UpdateCreatorVisualIdentityPage() {
+export default function UpdateCreatorVisualIdentityFormPage() {
 	const router = useRouter()
 	const toaster = useToaster()
 	const nextPage = RoutePath.RegisterConnectSocials

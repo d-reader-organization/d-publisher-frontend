@@ -9,7 +9,6 @@ import 'app/styles/app.scss'
 
 /**
  * TODO:
- * - UPDATE ALL ENDPOINTS (pseudorecover etc.)
  * - edit comic issue
  * - fix form reset values issues
 

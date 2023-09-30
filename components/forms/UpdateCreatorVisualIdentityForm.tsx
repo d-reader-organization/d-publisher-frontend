@@ -15,7 +15,7 @@ import Form from './Form'
 import Label from './Label'
 import { imageTypes } from '@/constants/fileTypes'
 
-const UpdateCreatorVisualIdentity: React.FC = () => {
+const UpdateCreatorVisualIdentityForm: React.FC = () => {
 	const { data: me } = useFetchMe()
 	const { mutateAsync: updateCreatorFiles } = useUpdateCreatorFiles(me?.slug || '')
 
@@ -83,4 +83,4 @@ const UpdateCreatorVisualIdentity: React.FC = () => {
 	)
 }
 
-export default UpdateCreatorVisualIdentity
+export default UpdateCreatorVisualIdentityForm

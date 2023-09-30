@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 
 import Button from 'components/Button'
 import { Resolver, useForm } from 'react-hook-form'
@@ -24,7 +24,7 @@ interface Props {
 	comic: RawComic
 }
 
-const UpdateComicAssets: React.FC<Props> = ({ comic }) => {
+const UpdateComicAssetsForm: React.FC<Props> = ({ comic }) => {
 	const toaster = useToaster()
 
 	const {
@@ -142,4 +142,4 @@ const UpdateComicAssets: React.FC<Props> = ({ comic }) => {
 	)
 }
 
-export default UpdateComicAssets
+export default UpdateComicAssetsForm

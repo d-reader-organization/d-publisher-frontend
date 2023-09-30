@@ -22,7 +22,7 @@ import {
 	prependLynkfire,
 } from '@/utils/helpers'
 
-const UpdateCreatorSocials: React.FC = () => {
+const UpdateCreatorSocialsForm: React.FC = () => {
 	const { data: me } = useFetchMe()
 	const { mutateAsync: updateCreator } = useUpdateCreator(me?.slug || '')
 
@@ -94,4 +94,4 @@ const UpdateCreatorSocials: React.FC = () => {
 	)
 }
 
-export default UpdateCreatorSocials
+export default UpdateCreatorSocialsForm

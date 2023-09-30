@@ -58,7 +58,7 @@ export default function ConnectComicSocialsPage() {
 
 	const handleFormSubmit = async (data: UpdateComicSocialsData) => {
 		const requestData: UpdateComicSocialsData = {
-			...data,
+			website: prependHttps(data.website),
 			twitter: prependTwitter(data.twitter),
 			instagram: prependInstagram(data.instagram),
 			tikTok: prependTikTok(data.tikTok),

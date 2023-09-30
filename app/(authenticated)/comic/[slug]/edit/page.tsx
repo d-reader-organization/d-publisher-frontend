@@ -3,8 +3,8 @@
 import Header from 'components/layout/Header'
 import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
 import UpdateComicBasicInfoForm from '@/components/forms/UpdateComicBasicInfoForm'
-import UpdateComicAssets from '@/components/forms/UpdateComicAssets'
-// import UpdateComicSocials from '@/components/forms/UpdateComicSocials'
+import UpdateComicAssetsForm from '@/components/forms/UpdateComicAssetsForm'
+import UpdateComicSocialsForm from '@/components/forms/UpdateComicSocialsForm'
 import Expandable from '@/components/Expandable'
 import { useFetchRawComic } from '@/api/comic'
 import { useFetchGenres } from '@/api/genre'
@@ -29,10 +29,11 @@ export default function EditPage({ params }: { params: Params }) {
 					<UpdateComicBasicInfoForm comic={comic} genres={genres} />
 				</Expandable>
 				<Expandable title='Visual assets'>
-					<UpdateComicAssets comic={comic} />
+					<UpdateComicAssetsForm comic={comic} />
 				</Expandable>
-				{/* TODO */}
-				<Expandable title='Socials'>{/* <UpdateComicSocials /> */}</Expandable>
+				<Expandable title='Socials'>
+					<UpdateComicSocialsForm comic={comic} />
+				</Expandable>
 			</main>
 		</>
 	)

@@ -1,8 +1,13 @@
 @use '../variables/theme.module.scss' as *;
 @use '../mixins/common.module.scss' as *;
+@use '../mixins/breakpoints.module.scss' as *;
 
 .input-wrapper {
-	margin-bottom: 34px;
+	margin-bottom: 28px;
+
+	@include sm {
+		margin-bottom: 32px;
+	}
 
 	&--prefix {
 		@include flexRow;

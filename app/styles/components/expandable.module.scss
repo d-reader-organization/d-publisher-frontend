@@ -4,10 +4,13 @@
 .expandable {
 	width: 100%;
 	max-width: 912px;
-	margin-bottom: 20px;
 	background: $grey-600;
 	border: 1px solid $grey-300;
-	border-radius: 8px;
+
+	@include sm {
+		margin-bottom: 20px;
+		border-radius: 8px;
+	}
 
 	.expandable-header {
 		display: flex;

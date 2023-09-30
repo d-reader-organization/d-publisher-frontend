@@ -43,7 +43,7 @@
 	@content;
 }
 
-@mixin pagePadding($xs: 20px, $sm: 20px, $md: 40px, $lg: 40px) {
+@mixin pagePadding($xs: 0px, $sm: 20px, $md: 40px, $lg: 40px) {
 	padding: $xs;
 
 	@include sm {

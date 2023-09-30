@@ -3,8 +3,8 @@
 import Header from 'components/layout/Header'
 import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
 import UpdateCreatorBasicInfoForm from '@/components/forms/UpdateCreatorBasicInfoForm'
-import UpdateCreatorVisualIdentity from '@/components/forms/UpdateCreatorVisualIdentity'
-import UpdateCreatorSocials from '@/components/forms/UpdateCreatorSocials'
+import UpdateCreatorVisualIdentityForm from '@/components/forms/UpdateCreatorVisualIdentityForm'
+import UpdateCreatorSocialsForm from '@/components/forms/UpdateCreatorSocialsForm'
 import Expandable from '@/components/Expandable'
 import { useFetchMe } from '@/api/creator'
 
@@ -25,10 +25,10 @@ export default function ProfilePage() {
 					<UpdateCreatorBasicInfoForm />
 				</Expandable>
 				<Expandable title='Visual identity'>
-					<UpdateCreatorVisualIdentity />
+					<UpdateCreatorVisualIdentityForm />
 				</Expandable>
 				<Expandable title='Socials'>
-					<UpdateCreatorSocials />
+					<UpdateCreatorSocialsForm />
 				</Expandable>
 			</main>
 		</>
