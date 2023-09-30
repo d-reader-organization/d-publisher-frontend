@@ -7,7 +7,7 @@ export const audienceTypeTooltipText = `Pick an audience for your comic series:
 (M) MATURE - Appropriate for readers age 17 and older. May contain intense violence, extensive profanity, nudity, sexual themes and other content suitable only for older readers`
 
 export const currentStatusTooltipText =
-	'Are your series complete and expect no more releases or is the an ongoing series?'
+	'Are your series complete and expect no more releases or is it an ongoing series?'
 
 export const isComicFreeToReadTooltipText = `Do you want this comic episode to be available to read for free on the platform, Regardless if the user owns the digital copy or is a monthly subscriber?
 

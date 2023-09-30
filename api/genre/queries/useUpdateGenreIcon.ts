@@ -1,7 +1,7 @@
-import { GENRE_QUERY_KEYS } from 'api/genre/genreKeys'
+import { GENRE_QUERY_KEYS, genreKeys } from 'api/genre/genreKeys'
 import { useToaster } from 'providers/ToastProvider'
 import { Genre } from 'models/genre'
-import { useMutation } from 'react-query'
+import { useMutation, useQueryClient } from 'react-query'
 import http from 'api/http'
 
 const { GENRE, UPDATE, ICON } = GENRE_QUERY_KEYS
@@ -13,11 +13,14 @@ const updateGenreIcon = async (slug: string, request: FormData): Promise<Genre> 
 
 export const useUpdateGenreIcon = (slug: string) => {
 	const toaster = useToaster()
+	const queryClient = useQueryClient()
 
 	return useMutation({
 		mutationFn: (request: FormData) => updateGenreIcon(slug, request),
 		onSuccess: () => {
-			toaster.add('Icon updated! 🎉', 'success')
+			toaster.add('Genre updated!', 'success')
+			queryClient.invalidateQueries(genreKeys.get(slug))
+			queryClient.invalidateQueries(genreKeys.getMany())
 		},
 		onMutate: toaster.uploadingFiles,
 		onError: toaster.onQueryError,

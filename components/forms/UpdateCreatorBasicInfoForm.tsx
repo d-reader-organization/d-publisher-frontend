@@ -26,7 +26,7 @@ To create a Solana wallet we recommend you start with `}
 	)
 }
 
-const UpdateBasicInfoForm: React.FC = () => {
+const UpdateCreatorBasicInfoForm: React.FC = () => {
 	const { data: me } = useFetchMe()
 	const { mutateAsync: updateCreator } = useUpdateCreator(me?.slug || '')
 
@@ -60,7 +60,7 @@ const UpdateBasicInfoForm: React.FC = () => {
 	}
 
 	return (
-		<Form fullWidth className='form--update-basic-info'>
+		<Form fullWidth className='form--update-creator-basic-info'>
 			<Label isRequired>Email</Label>
 			<Input disabled placeholder={me?.email} />
 
@@ -76,6 +76,7 @@ const UpdateBasicInfoForm: React.FC = () => {
 				maxCharacters={256}
 				rows={5}
 				{...register('description')}
+				defaultValue={me?.description}
 				placeholder='Emmy award winning visual development studio. Film, television, gaming, publishing...'
 			/>
 			<Label>Flavor text</Label>
@@ -84,6 +85,7 @@ const UpdateBasicInfoForm: React.FC = () => {
 				maxCharacters={128}
 				rows={2}
 				{...register('flavorText')}
+				defaultValue={me?.flavorText}
 				placeholder="Best studio I've ever worked with - my mom"
 			/>
 
@@ -96,4 +98,4 @@ const UpdateBasicInfoForm: React.FC = () => {
 	)
 }
 
-export default UpdateBasicInfoForm
+export default UpdateCreatorBasicInfoForm

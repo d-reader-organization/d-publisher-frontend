@@ -24,7 +24,7 @@ export default function ProfilePage() {
 				<Expandable title='Basic info'>
 					<UpdateCreatorBasicInfoForm />
 				</Expandable>
-				<Expandable title='Visual Identity'>
+				<Expandable title='Visual identity'>
 					<UpdateCreatorVisualIdentity />
 				</Expandable>
 				<Expandable title='Socials'>

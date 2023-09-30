@@ -1,23 +1,27 @@
-import { USER_QUERY_KEYS } from 'api/user/userKeys'
+import { USER_QUERY_KEYS, userKeys } from 'api/user/userKeys'
 import { useToaster } from 'providers/ToastProvider'
 import { User } from 'models/user'
-import { useMutation } from 'react-query'
+import { useMutation, useQueryClient } from 'react-query'
 import http from 'api/http'
 
 const { USER, UPDATE, AVATAR } = USER_QUERY_KEYS
 
-const updateUserAvatar = async (slug: string, request: FormData): Promise<User> => {
-	const response = await http.patch<User>(`${USER}/${UPDATE}/${slug}/${AVATAR}`, request)
+const updateUserAvatar = async (id: string | number, request: FormData): Promise<User> => {
+	const response = await http.patch<User>(`${USER}/${UPDATE}/${id}/${AVATAR}`, request)
 	return response.data
 }
 
-export const useUpdateUserAvatar = (slug: string) => {
+export const useUpdateUserAvatar = (id: string) => {
 	const toaster = useToaster()
+	const queryClient = useQueryClient()
 
 	return useMutation({
-		mutationFn: (updateData: FormData) => updateUserAvatar(slug, updateData),
+		mutationFn: (updateData: FormData) => updateUserAvatar(id, updateData),
+
 		onSuccess: () => {
 			toaster.add('Avatar updated!', 'success')
+			queryClient.invalidateQueries(userKeys.get(id))
+			queryClient.invalidateQueries(userKeys.getMe)
 		},
 		onMutate: toaster.uploadingFiles,
 		onError: toaster.onQueryError,

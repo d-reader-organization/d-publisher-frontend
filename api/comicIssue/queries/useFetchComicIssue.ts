@@ -1,4 +1,4 @@
-import { comicKeys, COMIC_ISSUE_QUERY_KEYS } from 'api/comicIssue/comicIssueKeys'
+import { comicIssueKeys, COMIC_ISSUE_QUERY_KEYS } from 'api/comicIssue/comicIssueKeys'
 import { useUserAuth } from 'providers/UserAuthProvider'
 import { useToaster } from 'providers/ToastProvider'
 import { ComicIssue } from 'models/comicIssue'
@@ -19,7 +19,7 @@ export const useFetchComicIssue = (id: string | number) => {
 
 	return useQuery({
 		queryFn: () => fetchComicIssue(id),
-		queryKey: comicKeys.get(id),
+		queryKey: comicIssueKeys.get(id),
 		staleTime: 1000 * 60 * 60 * 1, // stale for 1 hour
 		enabled: isAuthenticated && !isNil(id),
 		onError: toaster.onQueryError,

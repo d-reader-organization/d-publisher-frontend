@@ -6,12 +6,7 @@ interface Props {
 }
 
 const Header: React.FC<Props> = ({ title, image }) => {
-	return (
-		<header className='header'>
-			{title && <h1 className='title'>{title}</h1>}
-			{image}
-		</header>
-	)
+	return <header className='header'>{image || <h1 className='title'>{title}</h1>}</header>
 }
 
 export default Header

@@ -1,6 +1,6 @@
 import { ComicRarity } from 'enums/comicRarity'
 
-export const NO_RARITIES: ComicRarity[] = [ComicRarity.None]
+export const NO_RARITIES: ComicRarity[] = [ComicRarity.Common]
 
 export const THREE_RARITIES: ComicRarity[] = [ComicRarity.Common, ComicRarity.Rare, ComicRarity.Legendary]
 

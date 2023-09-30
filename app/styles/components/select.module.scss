@@ -6,6 +6,7 @@
 	.input-wrapper {
 		width: 100%;
 		margin-bottom: 13px;
+		// position: relative;
 	}
 
 	.select-search {
@@ -40,6 +41,8 @@
 		border-bottom-left-radius: 8px;
 		border-bottom-right-radius: 8px;
 		overflow-y: auto;
+		// width: 100%;
+		// position: absolute;
 	}
 
 	.option {
@@ -81,5 +84,7 @@
 
 	.selected-option-close-icon {
 		margin-left: 8px;
+		width: 8px;
+		height: 8px;
 	}
 }

@@ -1,7 +1,7 @@
-import { COMIC_ISSUE_QUERY_KEYS } from 'api/comicIssue/comicIssueKeys'
+import { comicIssueKeys, COMIC_ISSUE_QUERY_KEYS } from 'api/comicIssue/comicIssueKeys'
 import { useToaster } from 'providers/ToastProvider'
 import { BasicComicIssue } from 'models/comicIssue'
-import { useMutation } from 'react-query'
+import { useMutation, useQueryClient } from 'react-query'
 import http from 'api/http'
 
 const { COMIC_ISSUE, UPDATE, FILES } = COMIC_ISSUE_QUERY_KEYS
@@ -13,11 +13,14 @@ const updateComicIssueFiles = async (id: string | number, request: FormData): Pr
 
 export const useUpdateComicIssueFiles = (id: string | number) => {
 	const toaster = useToaster()
+	const queryClient = useQueryClient()
 
 	return useMutation({
 		mutationFn: (updateData: FormData) => updateComicIssueFiles(id, updateData),
-		onSuccess: () => {
+		onSuccess: (comicIssue) => {
 			toaster.add('Files updated!', 'success')
+			queryClient.invalidateQueries(comicIssueKeys.getRaw(comicIssue.id))
+			queryClient.invalidateQueries(comicIssueKeys.get(comicIssue.id))
 		},
 		onMutate: toaster.uploadingFiles,
 		onError: toaster.onQueryError,

@@ -17,7 +17,6 @@ export const useVerifyCreatorEmail = () => {
 	return useMutation({
 		mutationFn: (verificationToken: string) => verifyCreatorEmail(verificationToken),
 		onSuccess: () => {
-			console.log('VERIFIED')
 			toaster.add('Email address verified!', 'success')
 		},
 		onError: toaster.onQueryError,

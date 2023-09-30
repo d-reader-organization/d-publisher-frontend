@@ -79,8 +79,6 @@ export default function UploadComicIssueStatefulCoversPage() {
 	}
 
 	const groupedCovers = groupBy(issueCovers, 'rarity')
-
-	console.log(groupedCovers, comicIssue.signature)
 	return (
 		<>
 			<Header title='Create issue' />

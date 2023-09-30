@@ -54,7 +54,6 @@ export default function ConnectComicSocialsPage() {
 	const handleSaveAndGoNext = async (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
 		onSubmit(handleFormSubmit, toaster.onFormError)()
-		router.push(nextPage)
 	}
 
 	const handleFormSubmit = async (data: UpdateComicSocialsData) => {
@@ -69,6 +68,7 @@ export default function ConnectComicSocialsPage() {
 		}
 
 		await updateComic(requestData)
+		router.push(nextPage)
 	}
 
 	return (

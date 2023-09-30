@@ -1,13 +1,14 @@
 import { TextareaHTMLAttributes, forwardRef, useState } from 'react'
 import clsx from 'clsx'
 
-interface Props extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+interface Props extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'defaultValue'> {
 	maxCharacters?: number
+	defaultValue?: string
 }
 
 const Textarea = forwardRef<HTMLTextAreaElement, Props>(
-	({ className, onChange, maxCharacters = 200, ...props }, ref) => {
-		const [value, setValue] = useState('')
+	({ className, onChange, maxCharacters = 200, defaultValue = '', ...props }, ref) => {
+		const [value, setValue] = useState(defaultValue)
 
 		const remainingCharactersCount = maxCharacters - value.split('').filter((character) => character !== ' ').length
 
@@ -20,7 +21,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, Props>(
 
 		return (
 			<div className='textarea-wrapper'>
-				<textarea {...props} className={clsx('textarea', className)} value={value} onChange={handleChange} ref={ref} />
+				<textarea {...props} className={clsx('textarea', className)} onChange={handleChange} ref={ref} />
 				<div className='remaining-characters'>{remainingCharactersCount} characters remaining</div>
 			</div>
 		)

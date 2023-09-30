@@ -1,3 +1,4 @@
+import { PartialGenre } from '@/models/genre'
 import { LAMPORTS_PER_SOL } from '@solana/web3.js'
 
 export function sleep(ms: number): Promise<void> {
@@ -112,4 +113,8 @@ export function isBrave() {
 	} else {
 		return false
 	}
+}
+
+export function genresToSlugs(genres: PartialGenre[]): string[] {
+	return genres.map((genre) => genre.slug)
 }

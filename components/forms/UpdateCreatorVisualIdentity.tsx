@@ -52,7 +52,7 @@ const UpdateCreatorVisualIdentity: React.FC = () => {
 			<div className='profile-assets-upload'>
 				<FileUpload
 					id='banner-upload'
-					label='Upload cover'
+					label='Choose a picture 1920x900px'
 					className='banner-upload'
 					onUpload={(files) => {
 						setValue('banner', files[0]?.file)
@@ -63,7 +63,7 @@ const UpdateCreatorVisualIdentity: React.FC = () => {
 				/>
 				<FileUpload
 					id='avatar-upload'
-					label='Upload avatar'
+					label='500x500px'
 					className='avatar-upload'
 					onUpload={(files) => {
 						setValue('avatar', files[0]?.file)

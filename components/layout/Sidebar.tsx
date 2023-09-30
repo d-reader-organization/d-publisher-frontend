@@ -13,10 +13,10 @@ import AnalyticsIcon from 'public/assets/vector-icons/analytics.svg'
 import InboxIcon from 'public/assets/vector-icons/inbox.svg'
 import Button from 'components/Button'
 import ButtonLink from '../ButtonLink'
-import Hidden from '@mui/material/Hidden'
 import { useCreatorAuth } from 'providers/CreatorAuthProvider'
 import { RoutePath } from 'enums/routePath'
-import { useToggle } from '@/hooks'
+import { useToggle, useWindowSize } from '@/hooks'
+import { useTheme } from '@mui/material/styles'
 
 const NAVIGATION_LIST_ITEMS = [
 	{
@@ -48,82 +48,73 @@ const NAVIGATION_LIST_ITEMS = [
 const Sidebar: React.FC = () => {
 	const { logout } = useCreatorAuth()
 	const [open, toggleSidebar, closeSidebar] = useToggle()
+	const { width } = useWindowSize()
+	const theme = useTheme()
 
-	const menuButton = (
-		<button
-			className={clsx('menu-button', {
-				'menu-button--open': !open,
-				'menu-button--close': open,
-			})}
-			onClick={toggleSidebar}
-		>
-			{open ? <CloseIcon /> : <MenuIcon />}
-		</button>
-	)
-
-	const content = (
-		<>
-			<div className='sidebar-upper'>
-				<Link className='logo-link' onClick={closeSidebar} href={RoutePath.Dashboard}>
-					<LogoIcon />
-				</Link>
-
-				<ButtonLink
-					href={RoutePath.CreateComic}
-					replace={true}
-					onClick={closeSidebar}
-					backgroundColor='important'
-					className='create-button-link'
-				>
-					<DocumentIcon className='document-icon' />
-					Create
-				</ButtonLink>
-				<ul className='navigation-list'>
-					{NAVIGATION_LIST_ITEMS.map((item) => (
-						<Link
-							key={item.title}
-							href={item.href}
-							onClick={closeSidebar}
-							className={clsx('navigation-item', {
-								'navigation-item--disabled': item.comingSoon,
-							})}
-						>
-							<li>
-								{item.icon}
-								<Typography fontWeight={600}>{item.title}</Typography>
-								{item.comingSoon && <span className='soon-tag'>soon</span>}
-							</li>
-						</Link>
-					))}
-				</ul>
-			</div>
-			<div className='sidebar-lower'>
-				<div className='actions'>
-					<Button
-						className='action'
-						backgroundColor='transparent'
-						borderColor='grey-100'
-						onClick={() => {
-							logout()
-							closeSidebar()
-						}}
-					>
-						Log out
-					</Button>
-				</div>
-			</div>
-		</>
-	)
+	const isMobile = width < theme.breakpoints.values.sm
 
 	return (
 		<>
-			{menuButton}
-			<Hidden smDown>
-				<div className='sidebar'>{content}</div>
-			</Hidden>
-			<Hidden smUp>
-				<div className={clsx('sidebar', { 'sidebar--hidden': !open })}>{content}</div>
-			</Hidden>
+			<button
+				className={clsx('menu-button', {
+					'menu-button--open': !open,
+					'menu-button--close': open,
+				})}
+				onClick={toggleSidebar}
+			>
+				{open ? <CloseIcon /> : <MenuIcon />}
+			</button>
+			<div className={clsx('sidebar', !open && isMobile ? 'sidebar--hidden' : '')}>
+				<div className='sidebar-upper'>
+					<Link className='logo-link' onClick={closeSidebar} href={RoutePath.Dashboard}>
+						<LogoIcon />
+					</Link>
+
+					<ButtonLink
+						href={RoutePath.CreateComic}
+						replace={true}
+						onClick={closeSidebar}
+						backgroundColor='important'
+						className='create-button-link'
+					>
+						<DocumentIcon className='document-icon' />
+						Create
+					</ButtonLink>
+					<ul className='navigation-list'>
+						{NAVIGATION_LIST_ITEMS.map((item) => (
+							<Link
+								key={item.title}
+								href={item.href}
+								onClick={closeSidebar}
+								className={clsx('navigation-item', {
+									'navigation-item--disabled': item.comingSoon,
+								})}
+							>
+								<li>
+									{item.icon}
+									<Typography fontWeight={600}>{item.title}</Typography>
+									{item.comingSoon && <span className='soon-tag'>soon</span>}
+								</li>
+							</Link>
+						))}
+					</ul>
+				</div>
+				<div className='sidebar-lower'>
+					<div className='actions'>
+						<Button
+							className='action'
+							backgroundColor='transparent'
+							borderColor='grey-100'
+							onClick={() => {
+								logout()
+								closeSidebar()
+							}}
+						>
+							Log out
+						</Button>
+					</div>
+				</div>
+			</div>
 		</>
 	)
 }

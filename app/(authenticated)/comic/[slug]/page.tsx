@@ -58,7 +58,7 @@ export default function ComicPage({ params }: { params: Params }) {
 						<Grid item xs={12} md={4} lg={3}>
 							<FlexColumn className='comic-actions'>
 								<div className='comic-cover-wrapper'>
-									<SkeletonImage className='comic-cover' src={comic.cover} alt='' fill />
+									<SkeletonImage priority className='comic-cover' src={comic.cover} alt='' fill />
 								</div>
 								<ButtonLink
 									href={RoutePath.EditComic(comic.slug)}

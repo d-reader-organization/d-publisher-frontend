@@ -45,7 +45,8 @@ const SortableItem = SortableElement<SortableItemProps>(({ uploadedFile, handleR
 				<SkeletonImage
 					src={uploadedFile.url}
 					className='preview-image'
-					sizes='100vw' // TODO: is there a better way to do this?
+					// is there a better way to do 'sizes'?
+					sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw'
 					fill
 					alt=''
 				/>
@@ -79,6 +80,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
 	onUpload?: (uploadedFiles: UploadedFile[]) => void
 	previewUrl?: string
 	sortable?: boolean
+	isUploading?: boolean
 	options?: Omit<DropzoneOptions, 'onDragEnter' | 'onDragLeave' | 'onDrop'>
 }
 
@@ -92,6 +94,7 @@ const FileUpload = forwardRef<HTMLInputElement, Props>(
 			onUpload = () => {},
 			className = '',
 			sortable = false,
+			isUploading = false,
 			options,
 			...props
 		},
@@ -209,8 +212,9 @@ const FileUpload = forwardRef<HTMLInputElement, Props>(
 										) : (
 											<SkeletonImage
 												src={uploadedFile.url || previewUrl}
+												isLoading={isUploading}
 												className='preview-image'
-												sizes='100vw' // TODO: is there a better way to do this?
+												sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw'
 												fill
 												alt=''
 											/>

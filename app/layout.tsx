@@ -10,9 +10,8 @@ import 'app/styles/app.scss'
 /**
  * TODO:
  * - UPDATE ALL ENDPOINTS (pseudorecover etc.)
- * - fix skeleton image (skeleton shown below the image in FileUploads)
- * - edit comic
  * - edit comic issue
+ * - fix form reset values issues
 
  * - stateful covers
  * - view comic issues
@@ -22,16 +21,10 @@ import 'app/styles/app.scss'
  * - comicIssue.releaseDate is missing when creating a comic issue
  * - comic.collaborators necessary or not?
  * - sign copies
- */
-
-/**
- * deprecate next-sitemap and implement https://nextjs.org/docs/app/api-reference/file-conventions/metadata
- * fetch the comic series to see if the series are, in fact, existing (on comic issue create page)
- * fetch the latest comic issue of a comic and use that data to prefill the comic issue create form
- * fix the textarea number of characters remaining bug (and when submitting a form flash screen)
- * number input for statelessCover.share
- * refactor localStorage auth handling to SWR
- */
+ * - number input for statelessCover.share
+ * - refactor localStorage auth handling to SWR
+ * - deprecate next-sitemap and implement https://nextjs.org/docs/app/api-reference/file-conventions/metadata
+*/
 
 const satoshi = localFont({
 	src: [

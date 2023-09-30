@@ -14,6 +14,23 @@ export const updateCreatorValidationSchema = yup.object().shape({
 	tippingAddress: yup.string().max(128, generateMaxLengthErrorMessage('tipping address', 128)),
 })
 
+export const updateComicValidationSchema = yup.object().shape({
+	genres: yup
+		.array()
+		.of(yup.string())
+		.required(yupRequiredMessage('Genres'))
+		.min(1, 'At least 1 genre should be selected')
+		.max(5, 'Maximum 5 genres can be selected'),
+	audienceType: yup.string().required(yupRequiredMessage('Audience type')),
+	isCompleted: yup.boolean().required(yupRequiredMessage('Current status')),
+	description: yup
+		.string()
+		.required(yupRequiredMessage('Description'))
+		.min(0, generateMinLengthErrorMessage('description', 0))
+		.max(256, generateMaxLengthErrorMessage('description', 256)),
+	flavorText: yup.string().notOneOf([undefined]).max(128, generateMaxLengthErrorMessage('flavorText', 128)),
+})
+
 export const visualIdentityValidationSchema = yup.object().shape({
 	avatar: yup.mixed(),
 	banner: yup.mixed(),

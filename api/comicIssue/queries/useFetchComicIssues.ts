@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { comicKeys, COMIC_ISSUE_QUERY_KEYS } from 'api/comicIssue/comicIssueKeys'
+import { comicIssueKeys, COMIC_ISSUE_QUERY_KEYS } from 'api/comicIssue/comicIssueKeys'
 import { useToaster } from 'providers/ToastProvider'
 import { ComicIssue } from 'models/comicIssue'
 import { ComicIssueParams } from 'models/comicIssue/comicIssueParams'
@@ -17,7 +17,7 @@ export const useFetchComicIssues = (params: ComicIssueParams, enabled = true) =>
 	const toaster = useToaster()
 
 	const infiniteQuery = useInfiniteQuery({
-		queryKey: comicKeys.getMany(params),
+		queryKey: comicIssueKeys.getMany(params),
 		queryFn: ({ pageParam = 0 }) => fetchComicIssues({ ...params, skip: pageParam * params.take }),
 		getNextPageParam: (lastPage, allPages) => {
 			if (lastPage.length >= params.take) return allPages.length

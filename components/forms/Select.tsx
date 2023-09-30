@@ -1,6 +1,5 @@
-import { InputHTMLAttributes, forwardRef, useMemo, useState } from 'react'
+import { InputHTMLAttributes, forwardRef, useCallback, useMemo, useState } from 'react'
 import ClickAwayListener from '@mui/material/ClickAwayListener'
-import { cloneDeep, remove } from 'lodash'
 import Image from 'next/image'
 import clsx from 'clsx'
 
@@ -33,7 +32,7 @@ const Select = forwardRef<HTMLInputElement, Props>(
 		},
 		ref
 	) => {
-		const [searchTerm, setSearchTerm] = useState(defaultSelectedOptions[0]?.label ?? '')
+		const [searchTerm, setSearchTerm] = useState(isMultipleSelect ? '' : defaultSelectedOptions[0]?.label ?? '')
 		const [selectedOptions, setSelectedOptions] = useState<SelectOption[]>(defaultSelectedOptions)
 		const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 
@@ -54,16 +53,14 @@ const Select = forwardRef<HTMLInputElement, Props>(
 			setSearchTerm(event.target.value)
 		}
 
-		const unselectOption = (value: string): SelectOption[] => {
-			let updatedSelectedOptions: SelectOption[] = []
-			setSelectedOptions((currentSelectedOptions) => {
-				const deepClonedCurrentSelectedOptions = cloneDeep(currentSelectedOptions)
-				remove(deepClonedCurrentSelectedOptions, (selectedOption) => selectedOption.value === value)
-				updatedSelectedOptions = deepClonedCurrentSelectedOptions
-				return deepClonedCurrentSelectedOptions
-			})
-			return updatedSelectedOptions
-		}
+		const unselectOption = useCallback(
+			(value: string): SelectOption[] => {
+				const filteredOptions = selectedOptions.filter((option) => option.value !== value)
+				setSelectedOptions(filteredOptions)
+				return filteredOptions
+			},
+			[selectedOptions]
+		)
 
 		const checkIsOptionSelected = (value: string) => {
 			return selectedOptions.some((selectedOption) => selectedOption.value === value)
@@ -117,8 +114,8 @@ const Select = forwardRef<HTMLInputElement, Props>(
 								className={clsx('select-search', { 'select-search--disabled': !isSearchable })}
 								ref={ref}
 								onChange={handleSearchTermChange}
-								value={searchTerm}
 								onFocus={() => setIsDropdownOpen(true)}
+								value={searchTerm}
 							/>
 							<DropdownIcon className={clsx('dropdown-icon', { 'dropdown-icon--open': isDropdownOpen })} />
 						</div>

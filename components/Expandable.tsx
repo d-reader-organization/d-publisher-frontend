@@ -1,7 +1,8 @@
-import React, { useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import clsx from 'clsx'
 
 import ArrowDownIcon from 'public/assets/vector-icons/arrow-down-2.svg'
+import useEventListener from '@/hooks/useEventListener'
 
 interface Props {
 	title: string
@@ -11,19 +12,23 @@ interface Props {
 
 const Expandable: React.FC<Props> = ({ title, open = false, children }) => {
 	const [isExpanded, setIsExpanded] = useState(open)
-
+	const [contentHeight, setContentHeight] = useState(0)
 	const [contentRef, setContentRef] = useState<HTMLDivElement | null>(null)
 
-	const contentHeight = useMemo(() => {
+	const handleContentHeightChange = useCallback(() => {
 		if (!contentRef) return 0
 
-		console.log('CONTENT HEIGHT: ', contentRef.clientHeight)
-		return (
+		setContentHeight(
 			contentRef.clientHeight +
-			+contentRef.style.getPropertyValue('padding-top').split('px')[0] +
-			+contentRef.style.getPropertyValue('padding-bottom').split('px')[0]
+				+contentRef.style.getPropertyValue('padding-top').split('px')[0] +
+				+contentRef.style.getPropertyValue('padding-bottom').split('px')[0]
 		)
 	}, [contentRef])
+
+	useEffect(() => {
+		handleContentHeightChange()
+	}, [handleContentHeightChange])
+	useEventListener('resize', handleContentHeightChange)
 
 	return (
 		<div className='expandable'>

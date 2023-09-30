@@ -1,6 +1,6 @@
-import { COMIC_ISSUE_QUERY_KEYS } from 'api/comicIssue/comicIssueKeys'
+import { COMIC_ISSUE_QUERY_KEYS, comicIssueKeys } from 'api/comicIssue/comicIssueKeys'
 import { useToaster } from 'providers/ToastProvider'
-import { useMutation } from 'react-query'
+import { useMutation, useQueryClient } from 'react-query'
 import http from 'api/http'
 
 const { COMIC_ISSUE, UPDATE, STATEFUL_COVERS } = COMIC_ISSUE_QUERY_KEYS
@@ -13,11 +13,14 @@ const updateComicIssueStatefulCovers = async (id: string | number, request: Form
 
 export const useUpdateComicIssueStatefulCovers = (id: string | number) => {
 	const toaster = useToaster()
+	const queryClient = useQueryClient()
 
 	return useMutation({
 		mutationFn: (updateData: FormData) => updateComicIssueStatefulCovers(id, updateData),
 		onSuccess: () => {
 			toaster.add('Covers updated!', 'success')
+			queryClient.invalidateQueries(comicIssueKeys.get(id))
+			queryClient.invalidateQueries(comicIssueKeys.getRaw(id))
 		},
 		onMutate: toaster.uploadingFiles,
 		onError: toaster.onQueryError,

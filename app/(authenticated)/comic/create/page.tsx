@@ -25,6 +25,12 @@ import Label from '@/components/forms/Label'
 import Select from '@/components/forms/Select'
 import Textarea from '@/components/forms/Textarea'
 import FormActions from '@/components/forms/FormActions'
+import {
+	AUDIENCE_TYPE_SELECT_OPTIONS,
+	IS_ONGOING_SELECT_OPTIONS,
+	findOptions,
+	genresToSelectOptions,
+} from '@/constants/selectOptions'
 
 type LegalAgreement = {
 	ownershipConfirmation: boolean
@@ -101,9 +107,7 @@ export default function CreateComicPage() {
 						isSearchable
 						isMultipleSelect
 						placeholder='Search genres...'
-						options={genres.map((genre) => {
-							return { label: genre.name, value: genre.slug, icon: genre.icon }
-						})}
+						options={genresToSelectOptions(genres)}
 						onSelect={(selectedOptions = []) => {
 							setValue(
 								'genres',
@@ -120,12 +124,7 @@ export default function CreateComicPage() {
 							<Select
 								className='audience-status-input'
 								placeholder='Mature / Teen / Everyone'
-								options={[
-									{ label: 'Everyone', value: AudienceType.Everyone },
-									{ label: 'Mature', value: AudienceType.Mature },
-									{ label: 'Teen', value: AudienceType.Teen },
-									{ label: 'Teen+', value: AudienceType.TeenPlus },
-								]}
+								options={AUDIENCE_TYPE_SELECT_OPTIONS}
 								onSelect={(selectedOptions) => {
 									if (!selectedOptions[0]) {
 										setValue('audienceType', AudienceType.Everyone)
@@ -133,7 +132,7 @@ export default function CreateComicPage() {
 									setValue('audienceType', (selectedOptions[0]?.value as AudienceType) ?? '')
 								}}
 								unselectableIfAlreadySelected
-								defaultSelectedOptions={[{ label: 'Everyone', value: 'false' }]}
+								defaultSelectedOptions={findOptions(AUDIENCE_TYPE_SELECT_OPTIONS, AudienceType.Everyone)}
 								ref={register('audienceType').ref}
 							/>
 						</div>
@@ -144,18 +143,15 @@ export default function CreateComicPage() {
 							<Select
 								className='audience-status-input'
 								placeholder='Completed / Ongoing'
-								options={[
-									{ label: 'Ongoing', value: 'false' },
-									{ label: 'Completed', value: 'true' },
-								]}
+								options={IS_ONGOING_SELECT_OPTIONS}
 								onSelect={(selectedOptions) => {
 									if (!selectedOptions[0]) {
 										setValue('isCompleted', false)
 									}
-									setValue('isCompleted', Boolean(selectedOptions[0]?.value) ?? false)
+									setValue('isCompleted', selectedOptions[0]?.value === 'true')
 								}}
 								unselectableIfAlreadySelected
-								defaultSelectedOptions={[{ label: 'Ongoing', value: 'false' }]}
+								defaultSelectedOptions={findOptions(IS_ONGOING_SELECT_OPTIONS, 'false')}
 								ref={register('isCompleted').ref}
 							/>
 						</div>

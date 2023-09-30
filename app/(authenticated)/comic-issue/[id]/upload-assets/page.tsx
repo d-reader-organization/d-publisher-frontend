@@ -70,12 +70,6 @@ export default function UploadComicIssueAssetsPage() {
 		router.push(nextPage)
 	}
 
-	const handleFormError = (errors: FieldErrors<CreateComicIssueData>) => {
-		const [_, errorValue] = Object.entries(errors)[0]
-
-		console.log(errors, errorValue)
-	}
-
 	return (
 		<>
 			<Header title='Create issue' />

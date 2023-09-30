@@ -14,7 +14,7 @@ export default function DashboardPage() {
 
 	return (
 		<>
-			<Header title={me?.name ? `Hi, ${me.name}` : 'Hi,'} />
+			<Header title={me?.name ? `Hi, ${me.name}` : ''} />
 			{/* <DashboardStats /> */}
 			<ComicList />
 			<Box px={3}>

@@ -23,7 +23,7 @@ export const COMIC_ISSUE_QUERY_KEYS = Object.freeze({
 	RECOVER: 'recover',
 })
 
-export const comicKeys = Object.freeze({
+export const comicIssueKeys = Object.freeze({
 	getMany: (params: ComicIssueParams) => [
 		COMIC_ISSUE_QUERY_KEYS.COMIC_ISSUE,
 		COMIC_ISSUE_QUERY_KEYS.GET,

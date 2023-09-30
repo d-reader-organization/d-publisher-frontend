@@ -27,6 +27,7 @@ import FormActions from '@/components/forms/FormActions'
 import Label from '@/components/forms/Label'
 import Select from '@/components/forms/Select'
 import { imageTypes } from '@/constants/fileTypes'
+import { RARITY_SELECT_OPTIONS, findOptions } from '@/constants/selectOptions'
 
 export default function UploadComicIssueStatelessCoversPage() {
 	const toaster = useToaster()
@@ -71,9 +72,7 @@ export default function UploadComicIssueStatelessCoversPage() {
 			const formData = new FormData()
 
 			let i = 0
-			console.log(issueCovers)
 			for (const cover of issueCovers) {
-				console.log(cover.isDefault)
 				if (cover.image) formData.append(`covers[${i}][image]`, cover.image)
 				formData.append(`covers[${i}][artist]`, cover.artist)
 				formData.append(`covers[${i}][isDefault]`, cover.isDefault.toString())
@@ -138,12 +137,8 @@ export default function UploadComicIssueStatelessCoversPage() {
 					</Label>
 					<Label>Cover variants (rarities)</Label>
 					<Select
-						options={[
-							{ label: 'no rarities', value: '1' },
-							{ label: '3 rarities', value: '3' },
-							{ label: '5 rarities', value: '5' },
-						]}
-						defaultSelectedOptions={[{ label: 'no rarities', value: '1' }]}
+						options={RARITY_SELECT_OPTIONS}
+						defaultSelectedOptions={findOptions(RARITY_SELECT_OPTIONS, '1')}
 						onSelect={(selectedOptions) => {
 							setNumberOfRarities(+selectedOptions[0]?.value ?? 0)
 						}}

@@ -25,8 +25,8 @@ export default function UpdateYourCreatorDetailsPage() {
 	const { mutateAsync: updateCreator } = useUpdateCreator(me?.slug || '')
 	const { register, handleSubmit, reset } = useForm<UpdateCreatorData>({
 		defaultValues: {
-			description: me?.description || '',
-			flavorText: me?.flavorText || '',
+			description: '',
+			flavorText: '',
 		},
 		resolver: yupResolver(yourDetailsValidationSchema) as Resolver<UpdateCreatorData>,
 	})
