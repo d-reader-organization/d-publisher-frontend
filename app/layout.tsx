@@ -9,13 +9,12 @@ import 'app/styles/app.scss'
 
 /**
  * TODO:
- * - edit comic issue
- * - fix form reset values issues
-
- * - stateful covers
- * - view comic issues
  * - main mainnet CDN URL fix
  * - Link TOS somewhere
+
+ * - view & edit comic issue
+ * - fix form reset values issues
+ * - stateful covers
  * - publish-on-chain (+isFullyUploaded checkbox) screen
  * - comicIssue.releaseDate is missing when creating a comic issue
  * - comic.collaborators necessary or not?
@@ -23,7 +22,7 @@ import 'app/styles/app.scss'
  * - number input for statelessCover.share
  * - refactor localStorage auth handling to SWR
  * - deprecate next-sitemap and implement https://nextjs.org/docs/app/api-reference/file-conventions/metadata
-*/
+ */
 
 const satoshi = localFont({
 	src: [
@@ -66,6 +65,7 @@ export const metadata: Metadata = {
 		site: undefined,
 		card: 'summary_large_image',
 	},
+	manifest: '/manifest.json',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
