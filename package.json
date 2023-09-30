@@ -48,9 +48,7 @@
 		"sass": "^1.66.1",
 		"sharp": "^0.32.5",
 		"typescript": "5.2.2",
-		"yup": "^1.2.0"
-	},
-	"devDependencies": {
+		"yup": "^1.2.0",
 		"@types/lodash": "^4.14.198",
 		"@types/node": "^20.7.0",
 		"@types/react": "^18.2.22",
