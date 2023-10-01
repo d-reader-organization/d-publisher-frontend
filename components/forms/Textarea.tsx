@@ -10,7 +10,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, Props>(
 	({ className, onChange, maxCharacters = 200, defaultValue = '', ...props }, ref) => {
 		const [value, setValue] = useState(defaultValue)
 
-		const remainingCharactersCount = maxCharacters - value.split('').filter((character) => character !== ' ').length
+		const remainingCharactersCount = maxCharacters - value.length
 
 		const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
 			const hasFreeCharacters = remainingCharactersCount > 0 || event.target.value.length < value.length
