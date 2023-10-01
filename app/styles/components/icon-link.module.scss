@@ -4,6 +4,7 @@
 	width: 32px;
 	height: 32px;
 	line-height: 0;
+	@include centeredRow;
 
 	&:hover {
 		filter: brightness(1.1);

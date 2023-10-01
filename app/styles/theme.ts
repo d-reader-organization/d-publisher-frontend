@@ -1,6 +1,6 @@
 import { createTheme, responsiveFontSizes } from '@mui/material/styles'
-import { isNil } from 'lodash'
 import variables from './variables/theme.module.scss'
+import { isNil } from 'lodash'
 
 const spacing = parseInt(variables.spacing || '8')
 
@@ -13,25 +13,25 @@ const getSpacing = (x: number, y?: number, z?: number, q?: number) => {
 const defaultTheme = createTheme({
 	spacing,
 	palette: {
-		background: { default: variables.primaryColor },
-		primary: { main: variables.primaryColor },
-		secondary: { main: variables.secondaryColor },
-		text: { primary: variables.textColor },
+		background: { default: variables.grey_600 },
+		primary: { main: variables.grey_600 },
+		secondary: { main: variables.white },
+		text: { primary: variables.text_color },
 	},
 	breakpoints: {
 		values: {
-			xs: pxToInt(variables.xsWidth),
-			sm: pxToInt(variables.smWidth),
-			md: pxToInt(variables.mdWidth),
-			lg: pxToInt(variables.lgWidth),
-			xl: pxToInt(variables.xlWidth),
+			xs: pxToInt(variables.xs_width),
+			sm: pxToInt(variables.sm_width),
+			md: pxToInt(variables.md_width),
+			lg: pxToInt(variables.lg_width),
+			xl: pxToInt(variables.xl_width),
 		},
 	},
 	typography: {
 		fontSize: 16,
-		fontFamily: 'Urbanist, sans-serif',
+		fontFamily: 'Satoshi, sans-serif',
 		// body1: { fontWeight: 500 },
-		// body2: { fontWeight: 500, fontFamily: 'Urbanist, sans-serif' },
+		// body2: { fontWeight: 500, fontFamily: 'Satoshi, sans-serif' },
 		// h1: { fontWeight: 'bold', fontSize: '5rem', lineHeight: 1.08 },
 	},
 	components: {
@@ -41,13 +41,13 @@ const defaultTheme = createTheme({
 				root: {
 					textTransform: 'none',
 					'&.Mui-disabled': {
-						backgroundColor: variables.primaryColorDark,
+						backgroundColor: variables.grey_700,
 						border: 'none',
-						color: variables.secondaryColor,
+						color: variables.white,
 					},
 				},
 				contained: {
-					backgroundColor: variables.primaryColorLight,
+					backgroundColor: variables.grey_500,
 					borderRadius: '6px',
 					border: 'none',
 					minWidth: '40px',
@@ -55,9 +55,15 @@ const defaultTheme = createTheme({
 					textTransform: 'none',
 					fontWeight: 'bold',
 					'&:hover': {
-						backgroundColor: variables.primaryColor,
+						backgroundColor: variables.grey_600,
 						filter: 'brightness(0.85)',
 						border: 'none',
+					},
+				},
+				outlined: {
+					borderColor: variables.grey_300,
+					'&:hover': {
+						borderColor: variables.grey_300,
 					},
 				},
 			},
@@ -71,7 +77,7 @@ const defaultTheme = createTheme({
 					overflowX: 'visible',
 					border: 'none',
 					'.MuiDialogTitle-root': {
-						textShadow: `2px 2px ${variables.primaryColorDark}`,
+						textShadow: `2px 2px ${variables.grey_700}`,
 						padding: getSpacing(1, 2),
 						alignItems: 'center',
 						backgroundColor: 'unset',
@@ -95,7 +101,7 @@ const defaultTheme = createTheme({
 			styleOverrides: {
 				root: {
 					borderRadius: '6px',
-					backgroundColor: variables.primaryColor,
+					backgroundColor: variables.grey_600,
 					border: '2px solid black',
 				},
 			},

@@ -2,7 +2,7 @@ import Skeleton from '@mui/material/Skeleton'
 
 interface Props {
 	isLoading: boolean
-	className: string
+	className?: string
 	children: React.ReactNode
 }
 

@@ -3,7 +3,7 @@
 @use 'mixins/breakpoints.module.scss' as *;
 
 svg {
-	color: $secondary-color;
+	color: $white;
 }
 
 .text--important {
@@ -21,16 +21,16 @@ svg {
 }
 
 ::-webkit-scrollbar-thumb {
-	background: $primary-color-dark;
+	background: $grey-600;
 	border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-	background: $primary-color;
+	background: $grey-600;
 }
 
 html {
-	scrollbar-color: $primary-color-dark transparent;
+	scrollbar-color: $grey-600 transparent;
 	scrollbar-width: thin;
 }
 

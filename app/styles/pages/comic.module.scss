@@ -79,15 +79,15 @@
 				}
 
 				&--is-published {
-					border-color: $green-100;
-					color: $green-100;
-					background-color: transparentize($green-100, 0.9);
+					border-color: $green-500;
+					color: $green-500;
+					background-color: transparentize($green-500, 0.9);
 				}
 
 				&--is-completed {
-					border-color: $green-100;
-					color: $green-100;
-					background-color: transparentize($green-100, 0.9);
+					border-color: $green-500;
+					color: $green-500;
+					background-color: transparentize($green-500, 0.9);
 				}
 
 				&--is-ongoing {
@@ -119,7 +119,7 @@
 
 		.flavor-text {
 			font-style: italic;
-			border-left: 4px solid $green-100;
+			border-left: 4px solid $green-500;
 			padding-left: 0.5rem;
 			margin-bottom: 0.5rem;
 			color: $grey-100;
@@ -144,7 +144,7 @@
 		}
 
 		thead {
-			background-color: $primary-color-light;
+			background-color: $grey-500;
 		}
 
 		td {
@@ -152,7 +152,7 @@
 		}
 
 		tr:nth-child(2n) {
-			background-color: rgba($primary-color-light, 0.6);
+			background-color: rgba($grey-500, 0.6);
 		}
 
 		.centered {

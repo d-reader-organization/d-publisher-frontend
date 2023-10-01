@@ -72,7 +72,7 @@ export default function ComicPage({ params }: { params: Params }) {
 									</ButtonLink>
 									<ButtonLink
 										href={RoutePath.CreateComicIssue(comic.slug)}
-										backgroundColor='green-100'
+										backgroundColor='green-500'
 										className='action-button'
 										clickableEffect
 									>

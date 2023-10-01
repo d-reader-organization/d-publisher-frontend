@@ -46,7 +46,7 @@ export const metadata: Metadata = {
 	description:
 		'📚 An on-chain platform for self-publishing digital comics, tracking user analytics, and capturing the audience',
 	keywords: 'NFT, dReader, dPublisher, Comic, Solana, SOL, mint, collection, manga, manwha',
-	themeColor: '#181A20',
+	themeColor: '#15171c',
 	viewport: 'minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover',
 	openGraph: {
 		type: 'website',
@@ -56,6 +56,10 @@ export const metadata: Metadata = {
 		images: '/assets/images/home-metadata.jpg',
 		url: process.env.NEXT_PUBLIC_SITE_URL,
 		siteName: 'Home for comics',
+	},
+	appleWebApp: {
+		title: 'dPublisher',
+		startupImage: '/assets/apple-touch-icon.png',
 	},
 	twitter: {
 		title: 'dPublisher',

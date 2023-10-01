@@ -4,7 +4,7 @@
 
 .raw-comic-item {
 	position: relative;
-	border: 0.2rem solid $primary-color-light;
+	border: 0.2rem solid $grey-500;
 	border-radius: 1.1rem;
 	aspect-ratio: $comic-cover-aspect-ratio;
 	width: 100%;
@@ -34,7 +34,7 @@
 		border: 2px solid $grey-300;
 		@include unclickable;
 		opacity: 0.4;
-		background-color: $primary-color-light;
+		background-color: $grey-500;
 		height: auto;
 		filter: brightness(0.7);
 	}

@@ -55,12 +55,15 @@ const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ children }) =>
 		setToast((prevToast) => ({ ...prevToast, isOpen: false, duration: defaultAutoHideDuration }))
 	}
 
-	function onFormError<T extends FieldValues = FieldValues>(errors: FieldErrors<T>) {
-		const [_, errorValue] = Object.entries(errors)[0]
-		if (errorValue?.message) {
-			add(<>{errorValue.message}</>, 'error')
-		}
-	}
+	const onFormError = useCallback(
+		<T extends FieldValues = FieldValues>(errors: FieldErrors<T>) => {
+			const [, errorValue] = Object.entries(errors)[0]
+			if (errorValue?.message) {
+				add(<>{errorValue.message}</>, 'error')
+			}
+		},
+		[add]
+	)
 
 	const onQueryError = useCallback(
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any

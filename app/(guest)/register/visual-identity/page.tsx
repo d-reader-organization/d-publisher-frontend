@@ -107,7 +107,7 @@ export default function UpdateCreatorVisualIdentityFormPage() {
 						/>
 					</div>
 					<FormActions centered marginTop>
-						<Button onClick={onNextClick} backgroundColor='green-100' className='action-button'>
+						<Button onClick={onNextClick} backgroundColor='green-500' className='action-button'>
 							Next <ArrowRightIcon className='action-button-icon' />
 						</Button>
 					</FormActions>

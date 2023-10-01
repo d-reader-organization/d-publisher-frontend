@@ -1,23 +1,26 @@
 // colors
 $white: #ffffff;
-
-$green-100: #49c187;
-$yellow-100: #cabc41;
 $red-100: #cf5656;
 $blue-100: #00a6ed;
+
 $grey-100: #c2c5ce;
 $grey-200: #777d8c;
 $grey-300: #414756;
 $grey-400: #2f333e;
 $grey-500: #1f222a;
-$grey-600: #15171c;
-$primary-color-light: #1f222a;
-$primary-color: #15171c;
-$primary-color-dark: #12141c;
-$secondary-color: #fff;
+$grey-600: #15171c; // main
+$grey-700: #12141c;
+
+$green-400: #5fe1a2;
+$green-500: #49c187; // main
+$green-600: #34a26d;
+
+$yellow-400: #fff174;
+$yellow-500: #fceb54; // main
+$yellow-600: #cabc41;
+
 $important-color: #49c187;
 $text-color: #fafafa;
-$yellow: #fceb54;
 
 // breakpoints
 $xs-width: 0px;
@@ -48,16 +51,28 @@ $creator-logo-aspect-ratio: 800/450;
 $spacing: 8px;
 
 :export {
-	primaryColorLight: $primary-color-light;
-	primaryColor: $primary-color;
-	primaryColorDark: $primary-color-dark;
-	secondaryColor: $secondary-color;
-	importantColor: $important-color;
-	textColor: $text-color;
-	xsWidth: $xs-width;
-	smWidth: $sm-width;
-	mdWidth: $md-width;
-	lgWidth: $lg-width;
-	xlWidth: $xl-width;
+	white: $white;
+	red_100: $red-100;
+	blue_100: $blue-100;
+	grey_100: $grey-100;
+	grey_200: $grey-200;
+	grey_300: $grey-300;
+	grey_400: $grey-400;
+	grey_500: $grey-500;
+	grey_600: $grey-600;
+	green_400: $green-400;
+	green_500: $green-500;
+	green_600: $green-600;
+	yellow_500_400: $yellow-400;
+	yellow_500_500: $yellow-500;
+	yellow_500_600: $yellow-600;
+	important_color: $important-color;
+	text_color: $text-color;
+
+	xs_width: $xs-width;
+	sm_width: $sm-width;
+	md_width: $md-width;
+	lg_width: $lg-width;
+	xl_width: $xl-width;
 	spacing: $spacing;
 }

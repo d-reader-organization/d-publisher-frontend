@@ -90,7 +90,7 @@ const UpdateCreatorBasicInfoForm: React.FC = () => {
 			/>
 
 			<FormActions>
-				<Button type='submit' onClick={onSubmitClick} backgroundColor='green-100' className='action-button'>
+				<Button type='submit' onClick={onSubmitClick} backgroundColor='green-500' className='action-button'>
 					Update
 				</Button>
 			</FormActions>

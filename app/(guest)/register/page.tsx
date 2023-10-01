@@ -72,7 +72,7 @@ export default function RegisterCreatorPage() {
 					<Input {...register('password')} type='password' placeholder='********' />
 
 					<FormActions centered>
-						<Button type='submit' onClick={onSubmitClick} backgroundColor='green-100' className='action-button'>
+						<Button type='submit' onClick={onSubmitClick} backgroundColor='green-500' className='action-button'>
 							Next <ArrowRightIcon className='action-button-icon' />
 						</Button>
 					</FormActions>

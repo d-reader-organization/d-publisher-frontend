@@ -33,7 +33,7 @@ export default function PageNotFound() {
 						>
 							Go Back
 						</Button>
-						<ButtonLink href={RoutePath.Dashboard} backgroundColor='green-100' className='action-button'>
+						<ButtonLink href={RoutePath.Dashboard} backgroundColor='green-500' className='action-button'>
 							Dashboard
 							<ArrowRightIcon className='action-button-icon' />
 						</ButtonLink>
@@ -43,7 +43,7 @@ export default function PageNotFound() {
 						<ButtonLink href={RoutePath.Register} backgroundColor='grey-100' className='action-button'>
 							Register
 						</ButtonLink>
-						<ButtonLink href={RoutePath.Login} backgroundColor='green-100' className='action-button'>
+						<ButtonLink href={RoutePath.Login} backgroundColor='green-500' className='action-button'>
 							Login
 						</ButtonLink>
 					</>

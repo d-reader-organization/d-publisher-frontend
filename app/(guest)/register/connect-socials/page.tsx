@@ -129,7 +129,7 @@ export default function ConnectCreatorSocialsPage() {
 						>
 							Skip
 						</Button>
-						<Button type='submit' onClick={onSubmitClick} backgroundColor='green-100' className='action-button'>
+						<Button type='submit' onClick={onSubmitClick} backgroundColor='green-500' className='action-button'>
 							Submit <ArrowRightIcon className='action-button-icon' />
 						</Button>
 					</FormActions>

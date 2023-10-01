@@ -66,7 +66,7 @@ export default function SubmitCreatorRegistrationPage() {
 					</p>
 
 					<FormActions centered>
-						<Button onClick={onSubmit} backgroundColor='green-100' className='action-button'>
+						<Button onClick={onSubmit} backgroundColor='green-500' className='action-button'>
 							Start creating <ArrowRightIcon className='action-button-icon' />
 						</Button>
 					</FormActions>
