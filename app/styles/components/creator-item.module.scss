@@ -2,7 +2,7 @@
 @use '../mixins/common.module.scss' as *;
 @use '../mixins/breakpoints.module.scss' as *;
 
-.raw-comic-item {
+.creator-item {
 	position: relative;
 	border: 0.2rem solid $grey-500;
 	border-radius: 1.1rem;
@@ -18,7 +18,7 @@
 		}
 	}
 
-	.comic-item-link {
+	.creator-item-link {
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -26,8 +26,8 @@
 		height: 100%;
 	}
 
-	.comic-cover {
-		aspect-ratio: $comic-cover-aspect-ratio;
+	.creator-banner {
+		aspect-ratio: $creator-banner-aspect-ratio;
 		z-index: -1;
 		object-fit: cover;
 		border-radius: 1rem;
@@ -39,15 +39,16 @@
 		filter: brightness(0.7);
 	}
 
-	.comic-logo {
-		// aspect-ratio: $comic-logo-aspect-ratio;
+	.creator-avatar {
+		aspect-ratio: $creator-avatar-aspect-ratio;
 		z-index: 0;
 		max-width: 180px;
-		width: 80% !important;
+		width: 50% !important;
 		height: auto !important;
 		position: absolute;
 		top: 50% !important;
 		left: 50% !important;
+		border-radius: 90%;
 		transform: translate(-50%, -50%);
 		@include unclickable;
 	}

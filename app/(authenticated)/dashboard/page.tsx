@@ -12,11 +12,12 @@ export default function DashboardPage() {
 
 	useAuthenticatedRoute()
 
+	if (!me) return null
+
 	return (
 		<>
-			<Header title={me?.name ? `Hi, ${me.name}` : ''} />
-			{/* <DashboardStats /> */}
-			<ComicList />
+			<Header title={`Hi, ${me.name}`} />
+			<ComicList title='📖 my comics' params={{ creatorSlug: me.slug }} enabled hideItemsCount />
 			<Box px={3}>
 				<p>{`We've placed '?' buttons across the app. Hover over them for help!`}</p>
 				<h4>At any point feel free to reach out if you need help/advice</h4>

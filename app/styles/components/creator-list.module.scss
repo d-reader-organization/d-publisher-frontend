@@ -2,7 +2,7 @@
 @use '../mixins/common.module.scss' as *;
 @use '../mixins/breakpoints.module.scss' as *;
 
-.raw-comic-list-wrapper {
+.creator-list-wrapper {
 	width: calc(100% - 48px);
 	margin: 24px;
 	@include pagePadding;
@@ -26,7 +26,7 @@
 		color: $grey-200;
 	}
 
-	.raw-comic-list {
+	.creator-list {
 		@include flexRow;
 	}
 

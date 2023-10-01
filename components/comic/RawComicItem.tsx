@@ -15,8 +15,8 @@ const RawComicItem: React.FC<Props> = ({ comic, className, ...props }) => {
 	return (
 		<Box className={clsx('raw-comic-item', className)} {...props}>
 			<Link className='comic-item-link' href={nextPage}>
-				<SkeletonImage sizes='1000px' className='cover-image' src={comic.cover} loading='lazy' alt='' fill />
-				<SkeletonImage sizes='450px' className='cover-logo' src={comic.logo} loading='lazy' alt='' fill />
+				<SkeletonImage sizes='1000px' className='comic-cover' src={comic.cover} loading='lazy' alt='' fill />
+				<SkeletonImage sizes='450px' className='comic-logo' src={comic.logo} loading='lazy' alt='' fill />
 			</Link>
 		</Box>
 	)
