@@ -54,12 +54,12 @@ const ComicList: React.FC<Props> = ({ title, params, enabled, narrow = false, hi
 				</Grid>
 			)}
 			{!hasComics && <div className='content-empty'>No comics to display!</div>}
-			{(isFetching || showItemsCount) && (
-				<div ref={showMoreRef} className='loading-more'>
+			<div ref={showMoreRef}>
+				<div className='loading-more'>
 					{isFetching && <CircularProgress size={32} />}
 					{showItemsCount && `${comics.length} ${comics.length === 1 ? 'item' : 'items'} found`}
 				</div>
-			)}
+			</div>
 		</div>
 	)
 }

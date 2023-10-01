@@ -36,6 +36,7 @@ const CreatorList: React.FC<Props> = ({ title, params, enabled, narrow = false, 
 
 	const hasCreators = creators.length > 0
 	const showItemsCount = !hasNextPage && !isFetching && !hideItemsCount
+	console.log(hasNextPage, isFetching, hideItemsCount)
 
 	useEffect(() => {
 		if (showMore && hasNextPage && !isFetching) fetchNextPage()
@@ -54,12 +55,12 @@ const CreatorList: React.FC<Props> = ({ title, params, enabled, narrow = false, 
 				</Grid>
 			)}
 			{!hasCreators && <div className='content-empty'>No creators to display!</div>}
-			{(isFetching || showItemsCount) && (
-				<div ref={showMoreRef} className='loading-more'>
+			<div ref={showMoreRef}>
+				<div className='loading-more'>
 					{isFetching && <CircularProgress size={32} />}
 					{showItemsCount && `${creators.length} ${creators.length === 1 ? 'item' : 'items'} found`}
 				</div>
-			)}
+			</div>
 		</div>
 	)
 }
