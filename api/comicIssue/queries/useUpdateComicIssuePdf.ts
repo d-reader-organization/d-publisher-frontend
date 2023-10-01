@@ -19,8 +19,10 @@ export const useUpdateComicIssuePdf = (id: string | number) => {
 		mutationFn: (updateData: FormData) => updateComicIssuePdf(id, updateData),
 		onSuccess: () => {
 			toaster.add('PDF updated!', 'success')
-			queryClient.invalidateQueries(comicIssueKeys.get(id))
 			queryClient.invalidateQueries(comicIssueKeys.getRaw(id))
+			// queryClient.invalidateQueries(comicIssueKeys.getManyRaw())
+			// 👇 TODO: this also invalidates all the individual comic issues
+			queryClient.invalidateQueries([COMIC_ISSUE_QUERY_KEYS.COMIC_ISSUE, COMIC_ISSUE_QUERY_KEYS.GET_RAW])
 		},
 		onMutate: toaster.uploadingFiles,
 		onError: toaster.onQueryError,

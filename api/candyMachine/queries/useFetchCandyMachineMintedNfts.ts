@@ -6,7 +6,7 @@ import http from 'api/http'
 const { CANDY_MACHINE, GET, MINTED_NFTS } = CANDY_MACHINE_QUERY_KEYS
 
 const fetchCandyMachineMintedNfts = async (address: string): Promise<string[]> => {
-	const response = await http.get<string[]>(`${CANDY_MACHINE}/${GET}/${address}/${MINTED_NFTS}`)
+	const response = await http.get<string[]>(`${CANDY_MACHINE}/${GET}/${MINTED_NFTS}/${address}`)
 	return response.data
 }
 

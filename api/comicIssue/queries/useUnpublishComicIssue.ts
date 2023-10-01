@@ -1,6 +1,6 @@
-import { COMIC_ISSUE_QUERY_KEYS } from 'api/comicIssue/comicIssueKeys'
+import { COMIC_ISSUE_QUERY_KEYS, comicIssueKeys } from 'api/comicIssue/comicIssueKeys'
 import { useToaster } from 'providers/ToastProvider'
-import { useMutation } from 'react-query'
+import { useMutation, useQueryClient } from 'react-query'
 import http from 'api/http'
 
 const { COMIC_ISSUE, UNPUBLISH } = COMIC_ISSUE_QUERY_KEYS
@@ -12,9 +12,15 @@ const unpublishComicIssue = async (id: string | number): Promise<void> => {
 
 export const useUnpublishComicIssue = (id: string | number) => {
 	const toaster = useToaster()
+	const queryClient = useQueryClient()
 
 	return useMutation({
 		mutationFn: () => unpublishComicIssue(id),
+		onSuccess: () => {
+			queryClient.invalidateQueries(comicIssueKeys.get(id))
+			// 👇 TODO: this
+			// queryClient.invalidateQueries(comicIssueKeys.getManyRaw())
+		},
 		onError: toaster.onQueryError,
 	})
 }

@@ -55,28 +55,30 @@ export default function ComicPage({ params }: { params: Params }) {
 
 				{!isLoadingComic && (
 					<Grid container spacing={4}>
-						<Grid item xs={12} md={4} lg={3}>
+						<Grid item xs={12} md={4} lg={4} xl={3}>
 							<FlexColumn className='comic-actions'>
 								<div className='comic-cover-wrapper'>
 									<SkeletonImage priority className='comic-cover' src={comic.cover} alt='' fill />
 								</div>
-								<ButtonLink
-									href={RoutePath.EditComic(comic.slug)}
-									backgroundColor='transparent'
-									borderColor='grey-100'
-									className='action-button'
-									clickableEffect
-								>
-									Edit details
-								</ButtonLink>
-								<ButtonLink
-									href={RoutePath.CreateComicIssue(comic.slug)}
-									backgroundColor='green-100'
-									className='action-button'
-									clickableEffect
-								>
-									Add episode
-								</ButtonLink>
+								<FlexRow>
+									<ButtonLink
+										href={RoutePath.EditComic(comic.slug)}
+										backgroundColor='transparent'
+										borderColor='grey-100'
+										className='action-button'
+										clickableEffect
+									>
+										Edit
+									</ButtonLink>
+									<ButtonLink
+										href={RoutePath.CreateComicIssue(comic.slug)}
+										backgroundColor='green-100'
+										className='action-button'
+										clickableEffect
+									>
+										+Episode
+									</ButtonLink>
+								</FlexRow>
 								<FlexRow className='socials'>
 									<IconLink href={comic.website} Icon={WebsiteIcon} blank />
 									<IconLink href={comic.twitter} Icon={TwitterIcon} blank />
@@ -88,7 +90,7 @@ export default function ComicPage({ params }: { params: Params }) {
 								</FlexRow>
 							</FlexColumn>
 						</Grid>
-						<Grid item xs={12} md={8} lg={9} className='comic-details-wrapper'>
+						<Grid item xs={12} md={8} lg={8} xl={9} className='comic-details-wrapper'>
 							<FlexRow overflow='scroll'>
 								{comic.genres.map((genre) => (
 									<GenreItem genre={genre} key={genre.slug} />
@@ -133,40 +135,42 @@ export default function ComicPage({ params }: { params: Params }) {
 				)}
 
 				{hasComicIssues && (
-					<table className='content-table'>
-						<thead>
-							<tr>
-								<td></td>
-								<td>Title</td>
-								<td className='centered'>Viewers</td>
-								<td className='centered'>Readers</td>
-								<td className='centered'>Likes</td>
-								<td className='centered'>Rating</td>
-								<td className='centered'>Status</td>
-								<td></td>
-							</tr>
-						</thead>
-						<tbody>
-							{comicIssues.map((issue) => {
-								return (
-									<tr key={issue.slug}>
-										<td className='centered'>#{issue.number}</td>
-										<td>{issue.title}</td>
-										<td className='centered'>{issue.stats.viewersCount}</td>
-										<td className='centered'>{issue.stats.readersCount}</td>
-										<td className='centered'>{issue.stats.favouritesCount}</td>
-										<td className='centered'>{issue.stats.averageRating}</td>
-										<td className='centered'>{issue.verifiedAt ? '✅' : '❌'}</td>
-										<td className='centered'>
-											<ButtonLink noMinWidth backgroundColor='transparent' href='#'>
-												Edit
-											</ButtonLink>
-										</td>
-									</tr>
-								)
-							})}
-						</tbody>
-					</table>
+					<div className='content-table-wrapper'>
+						<table className='content-table'>
+							<thead>
+								<tr>
+									<td></td>
+									<td>Title</td>
+									<td className='centered'>Viewers</td>
+									<td className='centered'>Readers</td>
+									<td className='centered'>Likes</td>
+									<td className='centered'>Rating</td>
+									<td className='centered'>Status</td>
+									<td></td>
+								</tr>
+							</thead>
+							<tbody>
+								{comicIssues.map((issue) => {
+									return (
+										<tr key={issue.slug}>
+											<td className='centered'>#{issue.number}</td>
+											<td className='no-wrap'>{issue.title}</td>
+											<td className='centered'>{issue.stats.viewersCount}</td>
+											<td className='centered'>{issue.stats.readersCount}</td>
+											<td className='centered'>{issue.stats.favouritesCount}</td>
+											<td className='centered'>{issue.stats.averageRating}</td>
+											<td className='centered'>{issue.verifiedAt ? '✅' : '❌'}</td>
+											<td className='centered'>
+												<ButtonLink noMinWidth backgroundColor='transparent' href='#'>
+													Edit
+												</ButtonLink>
+											</td>
+										</tr>
+									)
+								})}
+							</tbody>
+						</table>
+					</div>
 				)}
 			</main>
 		</>

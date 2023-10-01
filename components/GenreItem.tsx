@@ -5,12 +5,13 @@ import clsx from 'clsx'
 
 interface Props extends BoxProps {
 	genre: PartialGenre
+	hideIcon?: boolean
 }
 
-const GenreItem: React.FC<Props> = ({ genre, className, ...props }) => {
+const GenreItem: React.FC<Props> = ({ genre, hideIcon = false, className, ...props }) => {
 	return (
 		<Box className={clsx('genre-item', className)} style={{ backgroundColor: genre.color }} {...props}>
-			<img src={genre.icon} alt='' className='genre-icon' />
+			{!hideIcon && <img src={genre.icon} alt='' className='genre-icon' />}
 			<Typography variant='body1'>{genre.name}</Typography>
 		</Box>
 	)

@@ -19,7 +19,6 @@ export const useUpdateGenreIcon = (slug: string) => {
 		mutationFn: (request: FormData) => updateGenreIcon(slug, request),
 		onSuccess: () => {
 			toaster.add('Genre updated!', 'success')
-			queryClient.invalidateQueries(genreKeys.get(slug))
 			queryClient.invalidateQueries(genreKeys.getMany())
 		},
 		onMutate: toaster.uploadingFiles,

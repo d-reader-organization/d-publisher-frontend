@@ -1,3 +1,4 @@
+import { MintParams } from '@/models/transaction/mint'
 import { CancelBidParams } from 'models/transaction/cancelBid'
 import { CancelListingParams } from 'models/transaction/cancelListing'
 import { InstantBuyParams } from 'models/transaction/instantBuy'
@@ -12,6 +13,7 @@ import { UseComicIssueNftParams } from 'models/transaction/useComicIssueNft'
 export const TRANSACTION_QUERY_KEYS = Object.freeze({
 	TRANSACTION: 'transaction',
 	MINT_ONE: 'mint-one',
+	MINT: 'mint',
 	SIGN_COMIC: 'sign-comic',
 	USE_COMIC_ISSUE_NFT: 'use-comic-issue-nft',
 	LIST: 'list',
@@ -28,6 +30,14 @@ export const transactionKeys = Object.freeze({
 		TRANSACTION_QUERY_KEYS.TRANSACTION,
 		TRANSACTION_QUERY_KEYS.MINT_ONE,
 		params.candyMachineAddress,
+		params.minterAddress,
+	],
+
+	mint: (params: MintParams) => [
+		TRANSACTION_QUERY_KEYS.TRANSACTION,
+		TRANSACTION_QUERY_KEYS.MINT_ONE,
+		params.candyMachineAddress,
+		params.mintCount,
 		params.minterAddress,
 	],
 	signComic: (params: SignComicParams) => [

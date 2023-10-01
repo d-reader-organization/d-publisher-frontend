@@ -19,7 +19,6 @@ export const useUpdateComicIssueStatelessCovers = (id: string | number) => {
 		mutationFn: (updateData: FormData) => updateComicIssueStatelessCovers(id, updateData),
 		onSuccess: () => {
 			toaster.add('Covers updated!', 'success')
-			queryClient.invalidateQueries(comicIssueKeys.get(id))
 			queryClient.invalidateQueries(comicIssueKeys.getRaw(id))
 		},
 		onMutate: toaster.uploadingFiles,

@@ -1,6 +1,6 @@
-import { USER_QUERY_KEYS } from 'api/user/userKeys'
+import { USER_QUERY_KEYS, userKeys } from 'api/user/userKeys'
 import { useToaster } from 'providers/ToastProvider'
-import { useMutation } from 'react-query'
+import { useMutation, useQueryClient } from 'react-query'
 import { User } from '@/models/user'
 import http from 'api/http'
 
@@ -13,11 +13,13 @@ const verifyUserEmail = async (verificationToken: string): Promise<User> => {
 
 export const useVerifyUserEmail = () => {
 	const toaster = useToaster()
+	const queryClient = useQueryClient()
 
 	return useMutation({
 		mutationFn: (verificationToken: string) => verifyUserEmail(verificationToken),
 		onSuccess: () => {
 			toaster.add('Email address verified!', 'success')
+			queryClient.invalidateQueries(userKeys.getMe)
 		},
 		onError: toaster.onQueryError,
 	})

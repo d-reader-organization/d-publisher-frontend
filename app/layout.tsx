@@ -11,7 +11,6 @@ import 'app/styles/app.scss'
  * TODO:
  * - main mainnet CDN URL fix
  * - Link TOS somewhere
-
  * - view & edit comic issue
  * - fix form reset values issues
  * - stateful covers

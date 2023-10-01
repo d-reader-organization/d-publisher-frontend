@@ -4,21 +4,21 @@ import { BasicComic } from 'models/comic'
 import { useMutation, useQueryClient } from 'react-query'
 import http from 'api/http'
 
-const { COMIC, UPDATE, LOGO } = COMIC_QUERY_KEYS
+const { COMIC, UPDATE, PFP } = COMIC_QUERY_KEYS
 
-const updateComicLogo = async (slug: string, request: FormData): Promise<BasicComic> => {
-	const response = await http.patch<BasicComic>(`${COMIC}/${UPDATE}/${slug}/${LOGO}`, request)
+const updateComicPfp = async (slug: string, request: FormData): Promise<BasicComic> => {
+	const response = await http.patch<BasicComic>(`${COMIC}/${UPDATE}/${slug}/${PFP}`, request)
 	return response.data
 }
 
-export const useUpdateComicLogo = (slug: string) => {
+export const useUpdateComicPfp = (slug: string) => {
 	const toaster = useToaster()
 	const queryClient = useQueryClient()
 
 	return useMutation({
-		mutationFn: (updateData: FormData) => updateComicLogo(slug, updateData),
+		mutationFn: (updateData: FormData) => updateComicPfp(slug, updateData),
 		onSuccess: () => {
-			toaster.add('Logo updated!', 'success')
+			toaster.add('Pfp updated!', 'success')
 			queryClient.invalidateQueries(comicKeys.getRaw(slug))
 			// 👇 TODO: this also invalidates all the individual comics
 			queryClient.invalidateQueries([COMIC_QUERY_KEYS.COMIC, COMIC_QUERY_KEYS.GET_RAW])

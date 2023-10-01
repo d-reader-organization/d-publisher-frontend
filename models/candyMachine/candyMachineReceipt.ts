@@ -7,4 +7,5 @@ export interface CandyMachineReceipt {
 	candyMachineAddress: string
 	price: number
 	timestamp: string
+	splTokenAddress: string
 }

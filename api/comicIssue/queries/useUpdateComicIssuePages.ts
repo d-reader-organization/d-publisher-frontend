@@ -20,7 +20,6 @@ export const useUpdateComicIssuePages = (id: string | number) => {
 		onSuccess: () => {
 			toaster.add('Pages updated!', 'success')
 			queryClient.invalidateQueries(comicIssueKeys.getPages(id))
-			queryClient.invalidateQueries(comicIssueKeys.get(id))
 			queryClient.invalidateQueries(comicIssueKeys.getRaw(id))
 		},
 		onMutate: toaster.uploadingFiles,

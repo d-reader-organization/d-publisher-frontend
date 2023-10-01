@@ -1,6 +1,6 @@
 import { CREATOR_QUERY_KEYS } from 'api/creator/creatorKeys'
 import { useToaster } from 'providers/ToastProvider'
-import { useMutation } from 'react-query'
+import { useMutation, useQueryClient } from 'react-query'
 import http from 'api/http'
 
 const { CREATOR, DELETE } = CREATOR_QUERY_KEYS
@@ -12,11 +12,13 @@ const deleteCreator = async (slug: string): Promise<void> => {
 
 export const useDeleteCreator = (slug: string) => {
 	const toaster = useToaster()
+	const queryClient = useQueryClient()
 
 	return useMutation({
 		mutationFn: () => deleteCreator(slug),
 		onSuccess: () => {
-			toaster.add('Creator deleted!', 'success')
+			toaster.add('Account deleted!', 'success')
+			queryClient.invalidateQueries([CREATOR_QUERY_KEYS.CREATOR, CREATOR_QUERY_KEYS.GET])
 		},
 		onError: toaster.onQueryError,
 	})

@@ -1,7 +1,7 @@
 import { COMIC_ISSUE_QUERY_KEYS } from 'api/comicIssue/comicIssueKeys'
 import { useToaster } from 'providers/ToastProvider'
 import { BasicComicIssue, CreateComicIssueData } from 'models/comicIssue'
-import { useMutation } from 'react-query'
+import { useMutation, useQueryClient } from 'react-query'
 import http from 'api/http'
 
 const { COMIC_ISSUE, CREATE } = COMIC_ISSUE_QUERY_KEYS
@@ -13,11 +13,14 @@ const createComicIssue = async (request: CreateComicIssueData): Promise<BasicCom
 
 export const useCreateComicIssue = () => {
 	const toaster = useToaster()
+	const queryClient = useQueryClient()
 
 	return useMutation({
 		mutationFn: (request: CreateComicIssueData) => createComicIssue(request),
 		onSuccess: () => {
 			toaster.add('Comic Issue created! 🎉', 'success')
+			// 👇 TODO: this also invalidates all the individual comic issues
+			queryClient.invalidateQueries([COMIC_ISSUE_QUERY_KEYS.COMIC_ISSUE, COMIC_ISSUE_QUERY_KEYS.GET_RAW])
 		},
 		onError: toaster.onQueryError,
 	})

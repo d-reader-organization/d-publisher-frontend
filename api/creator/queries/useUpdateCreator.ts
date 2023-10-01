@@ -18,8 +18,9 @@ export const useUpdateCreator = (slug: string) => {
 	return useMutation({
 		mutationFn: (updateData: UpdateCreatorData) => updateCreator(slug, updateData),
 		onSuccess: () => {
+			toaster.add('Account updated!', 'success')
 			queryClient.invalidateQueries(creatorKeys.getMe)
-			toaster.add('Creator updated!', 'success')
+			queryClient.invalidateQueries(creatorKeys.get(slug))
 		},
 		onError: toaster.onQueryError,
 	})

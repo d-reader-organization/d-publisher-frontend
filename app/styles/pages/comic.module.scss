@@ -28,6 +28,15 @@
 				border-radius: 0.5rem;
 			}
 		}
+
+		.action-button {
+			min-width: unset;
+			width: 100%;
+
+			&:not(:last-child) {
+				margin-right: 0.5rem;
+			}
+		}
 	}
 
 	.comic-cover-wrapper {
@@ -117,9 +126,22 @@
 		}
 	}
 
-	.content-table {
+	.content-table-wrapper {
 		margin-top: 2rem;
+		overflow-x: auto;
+	}
+
+	.content-table {
 		width: 100%;
+		font-size: 14px;
+
+		@include sm {
+			font-size: 16px;
+		}
+
+		@include md {
+			font-size: 18px;
+		}
 
 		thead {
 			background-color: $primary-color-light;
@@ -135,6 +157,10 @@
 
 		.centered {
 			text-align: center;
+		}
+
+		.no-wrap {
+			white-space: nowrap;
 		}
 	}
 }

@@ -1,5 +1,4 @@
-import { CandyMachineEligibleGroupsParams } from 'models/candyMachine/candyMachineEligibleGroupsParams'
-import { CandyMachineReceiptParams } from 'models/candyMachine/candyMachineParams'
+import { CandyMachineParams, CandyMachineReceiptParams } from 'models/candyMachine/candyMachineParams'
 
 export const CANDY_MACHINE_QUERY_KEYS = Object.freeze({
 	CANDY_MACHINE: 'candy-machine',
@@ -11,7 +10,12 @@ export const CANDY_MACHINE_QUERY_KEYS = Object.freeze({
 })
 
 export const candyMachineKeys = Object.freeze({
-	get: (address: string) => [CANDY_MACHINE_QUERY_KEYS.CANDY_MACHINE, CANDY_MACHINE_QUERY_KEYS.GET, address],
+	get: (params: CandyMachineParams) => [
+		CANDY_MACHINE_QUERY_KEYS.CANDY_MACHINE,
+		CANDY_MACHINE_QUERY_KEYS.GET,
+		params.candyMachineAddress,
+		params.walletAddress,
+	],
 	getReceipts: (params: CandyMachineReceiptParams) => [
 		CANDY_MACHINE_QUERY_KEYS.CANDY_MACHINE,
 		CANDY_MACHINE_QUERY_KEYS.GET,
@@ -25,18 +29,5 @@ export const candyMachineKeys = Object.freeze({
 		CANDY_MACHINE_QUERY_KEYS.GET,
 		candyMachineAddress,
 		CANDY_MACHINE_QUERY_KEYS.MINTED_NFTS,
-	],
-	getEligibleGroups: (params: CandyMachineEligibleGroupsParams) => [
-		CANDY_MACHINE_QUERY_KEYS.CANDY_MACHINE,
-		CANDY_MACHINE_QUERY_KEYS.GET,
-		CANDY_MACHINE_QUERY_KEYS.ELIGIBLE_GROUPS,
-		params.candyMachineAddress,
-		params.walletAddress,
-	],
-	getGroups: (candyMachineAddress: string) => [
-		CANDY_MACHINE_QUERY_KEYS.CANDY_MACHINE,
-		CANDY_MACHINE_QUERY_KEYS.GET,
-		CANDY_MACHINE_QUERY_KEYS.GROUPS,
-		candyMachineAddress,
 	],
 })

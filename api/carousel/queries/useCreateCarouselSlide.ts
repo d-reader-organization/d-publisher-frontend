@@ -1,7 +1,7 @@
-import { CAROUSEL_QUERY_KEYS } from 'api/carousel/carouselKeys'
+import { CAROUSEL_QUERY_KEYS, carouselKeys } from 'api/carousel/carouselKeys'
 import { useToaster } from 'providers/ToastProvider'
 import { CarouselSlide } from 'models/carousel/carouselSlide'
-import { useMutation } from 'react-query'
+import { useMutation, useQueryClient } from 'react-query'
 import http from 'api/http'
 
 const { CAROUSEL, SLIDES, CREATE } = CAROUSEL_QUERY_KEYS
@@ -14,11 +14,13 @@ const createCarouselSlide = async (request: FormData): Promise<CarouselSlide> =>
 
 export const useCreateCarouselSlide = () => {
 	const toaster = useToaster()
+	const queryClient = useQueryClient()
 
 	return useMutation({
 		mutationFn: (request: FormData) => createCarouselSlide(request),
 		onSuccess: () => {
 			toaster.add('Carousel slide created! 🎉', 'success')
+			queryClient.invalidateQueries(carouselKeys.getMany)
 		},
 		onError: toaster.onQueryError,
 	})
