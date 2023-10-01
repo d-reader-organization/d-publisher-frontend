@@ -28,7 +28,7 @@ export default function ConnectComicSocialsPage() {
 	const comicSlug = params['slug'] || ''
 	const nextPage = RoutePath.CreateComicIssue(comicSlug)
 
-	const { register, handleSubmit: onSubmit } = useForm<UpdateComicSocialsData>({
+	const { register, handleSubmit } = useForm<UpdateComicSocialsData>({
 		defaultValues: {
 			website: undefined,
 			twitter: undefined,
@@ -47,13 +47,13 @@ export default function ConnectComicSocialsPage() {
 
 	const handleSaveAndClose = async (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
-		await onSubmit(handleFormSubmit, toaster.onFormError)()
+		await handleSubmit(handleFormSubmit, toaster.onFormError)()
 		router.push(RoutePath.Dashboard)
 	}
 
 	const handleSaveAndGoNext = async (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
-		onSubmit(handleFormSubmit, toaster.onFormError)()
+		handleSubmit(handleFormSubmit, toaster.onFormError)()
 	}
 
 	const handleFormSubmit = async (data: UpdateComicSocialsData) => {

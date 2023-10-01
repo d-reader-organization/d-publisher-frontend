@@ -27,11 +27,7 @@ interface Props {
 const UpdateComicAssetsForm: React.FC<Props> = ({ comic }) => {
 	const toaster = useToaster()
 
-	const {
-		register,
-		setValue,
-		handleSubmit: onSubmit,
-	} = useForm<UpdateComicFilesData>({
+	const { register, setValue, handleSubmit } = useForm<UpdateComicFilesData>({
 		defaultValues: {
 			cover: undefined,
 			logo: undefined,
@@ -44,7 +40,7 @@ const UpdateComicAssetsForm: React.FC<Props> = ({ comic }) => {
 
 	const onSubmitClick = async (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
-		await onSubmit(handleFormSubmit, toaster.onFormError)()
+		await handleSubmit(handleFormSubmit, toaster.onFormError)()
 	}
 
 	const handleFormSubmit = async (data: UpdateComicFilesData) => {

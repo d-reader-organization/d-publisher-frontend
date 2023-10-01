@@ -41,12 +41,7 @@ export default function CreateComicPage() {
 	const router = useRouter()
 	const toaster = useToaster()
 
-	const {
-		register,
-		setValue,
-		watch,
-		handleSubmit: onSubmit,
-	} = useForm<CreateComicData & LegalAgreement>({
+	const { register, setValue, watch, handleSubmit } = useForm<CreateComicData & LegalAgreement>({
 		defaultValues: {
 			title: '',
 			genres: [],
@@ -68,13 +63,13 @@ export default function CreateComicPage() {
 
 	const handleSaveAndClose = async (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
-		await onSubmit(handleFormSubmit, toaster.onFormError)()
+		await handleSubmit(handleFormSubmit, toaster.onFormError)()
 		router.push(RoutePath.Dashboard)
 	}
 
 	const handleSaveAndGoNext = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
-		onSubmit(handleFormSubmit, toaster.onFormError)()
+		handleSubmit(handleFormSubmit, toaster.onFormError)()
 	}
 
 	const handleFormSubmit = async (data: CreateComicData) => {

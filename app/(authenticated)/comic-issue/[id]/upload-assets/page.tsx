@@ -36,11 +36,7 @@ export default function UploadComicIssueAssetsPage() {
 	const comicIssueId = params['id'] || ''
 	const nextPage = RoutePath.ComicIssueUploadPages(comicIssueId)
 
-	const {
-		register,
-		setValue,
-		handleSubmit: onSubmit,
-	} = useForm<UpdateComicIssueFilesData>({
+	const { register, setValue, handleSubmit } = useForm<UpdateComicIssueFilesData>({
 		defaultValues: {
 			signature: undefined,
 			pdf: undefined,
@@ -57,7 +53,7 @@ export default function UploadComicIssueAssetsPage() {
 	const handleNextClick = async (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
 
-		onSubmit(handleFormSubmit, toaster.onFormError)()
+		handleSubmit(handleFormSubmit, toaster.onFormError)()
 	}
 
 	const handleFormSubmit = async (data: UpdateComicIssueFilesData) => {

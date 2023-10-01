@@ -29,9 +29,11 @@ import Form from '@/components/forms/Form'
 import usePrefetchRoute from '@/hooks/usePrefetchRoute'
 import FormActions from '@/components/forms/FormActions'
 import Label from '@/components/forms/Label'
+import { useToaster } from '@/providers/ToastProvider'
 
 export default function ConnectCreatorSocialsPage() {
 	const router = useRouter()
+	const toaster = useToaster()
 	const nextPage = RoutePath.RegisterSubmit
 
 	const { data: me } = useFetchMe()
@@ -79,7 +81,7 @@ export default function ConnectCreatorSocialsPage() {
 
 			await updateCreator(formattedData)
 			router.push(nextPage)
-		})()
+		}, toaster.onFormError)()
 	}
 
 	return (

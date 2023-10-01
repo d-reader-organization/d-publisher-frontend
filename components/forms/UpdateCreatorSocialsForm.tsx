@@ -21,8 +21,11 @@ import {
 	prependHttps,
 	prependLynkfire,
 } from '@/utils/helpers'
+import { useToaster } from '@/providers/ToastProvider'
 
 const UpdateCreatorSocialsForm: React.FC = () => {
+	const toaster = useToaster()
+
 	const { data: me } = useFetchMe()
 	const { mutateAsync: updateCreator } = useUpdateCreator(me?.slug || '')
 
@@ -61,7 +64,7 @@ const UpdateCreatorSocialsForm: React.FC = () => {
 			}
 
 			await updateCreator(formattedData)
-		})()
+		}, toaster.onFormError)()
 	}
 
 	return (

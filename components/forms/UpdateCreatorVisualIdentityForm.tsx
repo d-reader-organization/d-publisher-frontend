@@ -14,8 +14,11 @@ import FormActions from './FormActions'
 import Form from './Form'
 import Label from './Label'
 import { imageTypes } from '@/constants/fileTypes'
+import { useToaster } from '@/providers/ToastProvider'
 
 const UpdateCreatorVisualIdentityForm: React.FC = () => {
+	const toaster = useToaster()
+
 	const { data: me } = useFetchMe()
 	const { mutateAsync: updateCreatorFiles } = useUpdateCreatorFiles(me?.slug || '')
 
@@ -40,7 +43,7 @@ const UpdateCreatorVisualIdentityForm: React.FC = () => {
 			if (data.logo) formData.append('logo', data.logo)
 
 			await updateCreatorFiles(formData)
-		})()
+		}, toaster.onFormError)()
 	}
 
 	return (

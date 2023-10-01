@@ -13,6 +13,7 @@ import Form from './Form'
 import Label from './Label'
 import Textarea from './Textarea'
 import FormActions from './FormActions'
+import { useToaster } from '@/providers/ToastProvider'
 
 const TippingAddressTooltip = () => {
 	return (
@@ -27,6 +28,8 @@ To create a Solana wallet we recommend you start with `}
 }
 
 const UpdateCreatorBasicInfoForm: React.FC = () => {
+	const toaster = useToaster()
+
 	const { data: me } = useFetchMe()
 	const { mutateAsync: updateCreator } = useUpdateCreator(me?.slug || '')
 
@@ -56,7 +59,7 @@ const UpdateCreatorBasicInfoForm: React.FC = () => {
 
 		handleSubmit(async (data) => {
 			await updateCreator(data)
-		})()
+		}, toaster.onFormError)()
 	}
 
 	return (

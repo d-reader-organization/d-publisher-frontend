@@ -18,9 +18,12 @@ import Form from '@/components/forms/Form'
 import FormActions from '@/components/forms/FormActions'
 import Label from '@/components/forms/Label'
 import Textarea from '@/components/forms/Textarea'
+import { useToaster } from '@/providers/ToastProvider'
 
 export default function UpdateYourCreatorDetailsPage() {
 	const router = useRouter()
+	const toaster = useToaster()
+
 	const { data: me } = useFetchMe()
 	const { mutateAsync: updateCreator } = useUpdateCreator(me?.slug || '')
 	const { register, handleSubmit, reset } = useForm<UpdateCreatorData>({
@@ -48,7 +51,7 @@ export default function UpdateYourCreatorDetailsPage() {
 		handleSubmit(async (data) => {
 			await updateCreator(data)
 			router.push(RoutePath.RegisterVisualIdentity)
-		})()
+		}, toaster.onFormError)()
 	}
 
 	return (

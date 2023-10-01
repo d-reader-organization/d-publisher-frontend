@@ -34,11 +34,7 @@ export default function UploadComicAssetsPage() {
 	const comicSlug = params['slug'] || ''
 	const nextPage = RoutePath.ComicConnectSocials(comicSlug)
 
-	const {
-		register,
-		setValue,
-		handleSubmit: onSubmit,
-	} = useForm<UpdateComicFilesData>({
+	const { register, setValue, handleSubmit } = useForm<UpdateComicFilesData>({
 		defaultValues: {
 			cover: undefined,
 			logo: undefined,
@@ -54,13 +50,13 @@ export default function UploadComicAssetsPage() {
 
 	const handleSaveAndClose = async (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
-		await onSubmit(handleFormSubmit, toaster.onFormError)()
+		await handleSubmit(handleFormSubmit, toaster.onFormError)()
 		router.push(RoutePath.Dashboard)
 	}
 
 	const handleSaveAndGoNext = async (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
-		await onSubmit(handleFormSubmit, toaster.onFormError)()
+		await handleSubmit(handleFormSubmit, toaster.onFormError)()
 		router.push(nextPage)
 	}
 

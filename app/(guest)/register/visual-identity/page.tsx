@@ -31,11 +31,7 @@ export default function UpdateCreatorVisualIdentityFormPage() {
 	const { data: me } = useFetchMe()
 	const { mutateAsync: updateCreatorFiles } = useUpdateCreatorFiles(me?.slug || '')
 
-	const {
-		register,
-		setValue,
-		handleSubmit: onSubmit,
-	} = useForm<UpdateCreatorFilesData>({
+	const { register, setValue, handleSubmit } = useForm<UpdateCreatorFilesData>({
 		defaultValues: {
 			avatar: undefined,
 			banner: undefined,
@@ -48,7 +44,7 @@ export default function UpdateCreatorVisualIdentityFormPage() {
 
 	const onNextClick = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
-		onSubmit(handleFormSubmit, toaster.onFormError)()
+		handleSubmit(handleFormSubmit, toaster.onFormError)()
 	}
 
 	const handleFormSubmit = async (data: UpdateCreatorFilesData) => {

@@ -17,9 +17,11 @@ import usePrefetchRoute from '@/hooks/usePrefetchRoute'
 import ButtonLink from '@/components/ButtonLink'
 import FormActions from '@/components/forms/FormActions'
 import Label from '@/components/forms/Label'
+import { useToaster } from '@/providers/ToastProvider'
 
 export default function LoginPage() {
 	const router = useRouter()
+	const toaster = useToaster()
 	const nextPage = RoutePath.Dashboard
 
 	const { mutateAsync: login } = useLoginCreator()
@@ -40,7 +42,7 @@ export default function LoginPage() {
 		handleSubmit(async (data) => {
 			await login(data)
 			router.push(nextPage)
-		})()
+		}, toaster.onFormError)()
 	}
 
 	return (

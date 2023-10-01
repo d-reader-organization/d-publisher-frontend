@@ -17,9 +17,11 @@ import Form from '@/components/forms/Form'
 import usePrefetchRoute from '@/hooks/usePrefetchRoute'
 import FormActions from '@/components/forms/FormActions'
 import Label from '@/components/forms/Label'
+import { useToaster } from '@/providers/ToastProvider'
 
 export default function RegisterCreatorPage() {
 	const router = useRouter()
+	const toaster = useToaster()
 	const nextPage = RoutePath.RegisterYourDetails
 
 	const { mutateAsync: registerCreator } = useRegisterCreator()
@@ -40,7 +42,7 @@ export default function RegisterCreatorPage() {
 		handleSubmit(async (data) => {
 			await registerCreator(data)
 			router.push(nextPage)
-		})()
+		}, toaster.onFormError)()
 	}
 
 	return (
