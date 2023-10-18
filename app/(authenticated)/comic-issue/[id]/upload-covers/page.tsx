@@ -65,6 +65,8 @@ export default function UploadComicIssueStatelessCoversPage() {
 		if (unsetArtist) {
 			toaster.add(generateRequiredArrayElementErrorMessage('artist'), 'error')
 		} else if (unsetImage) {
+			// TODO: this error was thrown to the Star Atlas guys for some reason.
+			// maybe it has something to do with changing number of rarities...
 			toaster.add(generateRequiredArrayElementErrorMessage('image'), 'error')
 		} else if (noDefaultCover) {
 			toaster.add('Default cover must be selected', 'error')

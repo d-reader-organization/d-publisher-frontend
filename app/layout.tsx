@@ -9,7 +9,6 @@ import 'app/styles/app.scss'
 
 /**
  * TODO:
- * - main mainnet CDN URL fix
  * - Link TOS somewhere
  * - view & edit comic issue
  * - fix form reset values issues
@@ -21,6 +20,7 @@ import 'app/styles/app.scss'
  * - number input for statelessCover.share
  * - refactor localStorage auth handling to SWR
  * - deprecate next-sitemap and implement https://nextjs.org/docs/app/api-reference/file-conventions/metadata
+ * - use https://github.com/atlassian/react-beautiful-dnd for comic pages upload
  */
 
 const satoshi = localFont({

@@ -55,7 +55,7 @@ export default function LoginPage() {
 
 				<Form padding centered maxSize='xs' fullWidth className='form--login-creator'>
 					<Label isRequired>Email</Label>
-					<Input {...register('nameOrEmail')} placeholder='john.doe@dreader.io' type='email' />
+					<Input {...register('nameOrEmail')} type='email' placeholder='john.doe@dreader.io' />
 
 					<Label isRequired>Password</Label>
 					<Input {...register('password')} type='password' placeholder='********' />
