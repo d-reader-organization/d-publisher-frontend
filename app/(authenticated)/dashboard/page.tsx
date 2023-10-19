@@ -22,19 +22,19 @@ export default function DashboardPage() {
 				<p>{`We've placed '?' buttons across the app. Hover over them for help!`}</p>
 				<h4>At any point feel free to reach out if you need help/advice</h4>
 				<p>
-					✉️ email:&nbsp;
+					email:&nbsp;
 					<Link className='text--important text--underline' href='mailto:support@dreader.io' target='_blank'>
 						support@dreader.io
 					</Link>
 				</p>
 				<p>
-					🐦 twitter:&nbsp;
+					twitter:&nbsp;
 					<Link className='text--important text--underline' href='https://x.com/dPublisherApp' target='_blank'>
 						dPublisherApp
 					</Link>
 				</p>
 				<p>
-					🫂 discord:&nbsp;
+					discord:&nbsp;
 					<Link className='text--important text--underline' href='https://discord.gg/rrZsRvC9mh' target='_blank'>
 						invite link
 					</Link>
