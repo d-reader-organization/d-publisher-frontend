@@ -24,21 +24,21 @@
 		text-align: center;
 
 		@include sm {
-			font-size: 66px;
-			line-height: 66px;
+			font-size: 55px;
+			line-height: 55px;
 			text-align: left;
 		}
 
 		@include md {
-			font-size: 88px;
-			line-height: 88px;
+			font-size: 66px;
+			line-height: 66px;
 			max-width: 402px;
 		}
 	}
 
 	.subtitle {
-		font-size: 88px;
-		line-height: 88px;
+		font-size: 66px;
+		line-height: 66px;
 		word-break: keep-all;
 	}
 

@@ -1,7 +1,10 @@
 @use '../variables/theme.module.scss' as *;
 @use '../mixins/common.module.scss' as *;
+@use '../mixins/breakpoints.module.scss' as *;
 
 .register-page {
+	@include pagePadding(10px, 0px, 0px, 0px);
+
 	.loading-spinner {
 		width: 100%;
 		text-align: center;
@@ -10,7 +13,23 @@
 
 	.title {
 		text-align: center;
-		padding-top: 40px;
+		padding: 20px 0;
+
+		@include sm {
+			padding: 40px 0;
+		}
+	}
+
+	.form {
+		padding: 0;
+
+		@include sm {
+			padding: 20px 40px;
+		}
+
+		@include md {
+			padding: 40px 80px;
+		}
 	}
 
 	.subtitle {
@@ -22,6 +41,8 @@
 	}
 
 	&--submit {
+		padding-top: 20px;
+
 		.title {
 			padding-top: 20px;
 		}

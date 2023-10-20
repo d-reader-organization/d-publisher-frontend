@@ -61,7 +61,7 @@ export default function RegisterCreatorPage() {
 			<main className='register-page'>
 				<h1 className='title'>Tell us about yourself</h1>
 
-				<Form padding centered fullWidth maxSize='sm' className='form--register-creator'>
+				<Form centered fullWidth maxSize='sm' className='form--register-creator'>
 					<Label isRequired>Display name</Label>
 					<div className='description'>Your username will be visible to dReader community</div>
 					<Input {...register('name')} placeholder='John Doe' />

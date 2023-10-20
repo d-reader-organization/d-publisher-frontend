@@ -14,6 +14,7 @@
 
 	.title {
 		padding-top: 20px;
+		margin-top: auto;
 		max-width: 100%;
 		font-weight: 700;
 		color: $white;
@@ -22,14 +23,14 @@
 		text-align: center;
 
 		@include sm {
-			font-size: 66px;
-			line-height: 66px;
+			font-size: 55px;
+			line-height: 55px;
 			text-align: left;
 		}
 
 		@include md {
-			font-size: 88px;
-			line-height: 88px;
+			font-size: 66px;
+			line-height: 66px;
 			max-width: 402px;
 		}
 	}
@@ -43,8 +44,8 @@
 		width: 100%;
 		max-width: 360px;
 		font-weight: 500;
-		font-size: 20px;
-		line-height: 20px;
+		font-size: 16px;
+		line-height: 18px;
 		color: $white;
 
 		&--highlighted {

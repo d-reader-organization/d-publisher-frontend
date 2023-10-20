@@ -73,7 +73,7 @@ export default function UpdateYourCreatorDetailsPage() {
 						Hi {me?.name}
 					</h1>
 
-					<Form padding centered fullWidth maxSize='md'>
+					<Form centered fullWidth maxSize='md'>
 						<Label>Short biography</Label>
 						<div className='description'>Your bio will be displayed on your dReader creator page</div>
 						<Textarea

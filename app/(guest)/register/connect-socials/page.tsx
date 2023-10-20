@@ -101,7 +101,7 @@ export default function ConnectCreatorSocialsPage() {
 				<h1 className='title'>Connect socials</h1>
 				<p className='subtitle'>Artists with connected socials perform 30% greater</p>
 
-				<Form padding centered fullWidth maxSize='sm'>
+				<Form centered fullWidth maxSize='sm'>
 					<div className='social-media-wrapper'>
 						<div className='social-media-container'>
 							<Label size='small'>Twitter</Label>

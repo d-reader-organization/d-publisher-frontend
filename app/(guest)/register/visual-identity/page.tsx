@@ -71,9 +71,9 @@ export default function UpdateCreatorVisualIdentityFormPage() {
 			/>
 
 			<main className='register-page'>
-				<h1 className='title'>Lets see your pretty face!</h1>
+				<h1 className='title'>Show yourself!</h1>
 
-				<Form padding centered className='form--edit-visual-identity'>
+				<Form centered className='form--edit-visual-identity'>
 					<Label centered isRequired tooltipText={creatorVisualIdentityTooltipText}>
 						Add profile avatar & cover
 					</Label>
