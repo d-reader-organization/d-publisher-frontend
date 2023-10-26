@@ -1,7 +1,6 @@
 'use client'
 
 import dynamic from 'next/dynamic'
-import 'app/styles/app.scss'
 
 const DynamicSidebar = dynamic(() => import('components/layout/Sidebar'), { ssr: false })
 
