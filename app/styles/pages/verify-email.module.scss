@@ -17,28 +17,29 @@
 	.title {
 		font-weight: 700;
 		color: $white;
-		margin: auto auto 2rem auto;
-
-		font-size: 44px;
-		line-height: 44px;
+		margin: auto auto 1rem auto;
+		padding-top: 20px;
+		width: 100%;
+		min-width: min-content;
+		max-width: 480px;
+		font-size: 33px;
+		line-height: 33px;
 		text-align: center;
+		text-shadow: 2px 2px 2px black;
 
 		@include sm {
-			font-size: 55px;
-			line-height: 55px;
-			text-align: left;
+			font-size: 44px;
+			line-height: 44px;
+			max-width: 420px;
 		}
 
 		@include md {
-			font-size: 66px;
-			line-height: 66px;
-			max-width: 402px;
+			font-size: 55px;
+			line-height: 55px;
 		}
 	}
 
 	.subtitle {
-		font-size: 66px;
-		line-height: 66px;
 		word-break: keep-all;
 	}
 

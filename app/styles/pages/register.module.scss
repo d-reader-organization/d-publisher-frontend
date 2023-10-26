@@ -24,11 +24,11 @@
 		padding: 0;
 
 		@include sm {
-			padding: 20px 40px;
+			padding: 0 40px;
 		}
 
 		@include md {
-			padding: 40px 80px;
+			padding: 0 80px;
 		}
 	}
 
