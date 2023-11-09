@@ -20,6 +20,7 @@ export const useFetchMintTransaction = (params: MintParams) => {
 		queryFn: () => fetchMintTransaction(params),
 		queryKey: transactionKeys.mint(params),
 		staleTime: 1000 * 60 * 10, // stale for 10 minutes
+		enabled: !!params.candyMachineAddress && !!params.minterAddress && !!params.label,
 		onError: toaster.onQueryError,
 	})
 }

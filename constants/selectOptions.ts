@@ -4,12 +4,18 @@ import { PartialGenre } from '@/models/genre'
 import { SelectOption } from '@/models/selectOption'
 
 export const ROLE_SELECT_OPTIONS: SelectOption[] = [
-	{ label: 'Writer', value: CollaboratorRole.Writer },
+	{ label: 'Advisor', value: CollaboratorRole.Advisor },
 	{ label: 'Artist', value: CollaboratorRole.Artist },
+	{ label: 'Co-writer', value: CollaboratorRole.CoWriter },
 	{ label: 'Colorist', value: CollaboratorRole.Colorist },
-	{ label: 'Editor', value: CollaboratorRole.Editor },
-	{ label: 'Letterer', value: CollaboratorRole.Letterer },
 	{ label: 'Cover Artist', value: CollaboratorRole.CoverArtist },
+	{ label: 'Editor', value: CollaboratorRole.Editor },
+	{ label: 'Illustrator', value: CollaboratorRole.Illustrator },
+	{ label: 'Inker', value: CollaboratorRole.Inker },
+	{ label: 'Letterer', value: CollaboratorRole.Letterer },
+	{ label: 'Penciler', value: CollaboratorRole.Penciler },
+	{ label: 'Translator', value: CollaboratorRole.Translator },
+	{ label: 'Writer', value: CollaboratorRole.Writer },
 ]
 
 export const AUDIENCE_TYPE_SELECT_OPTIONS: SelectOption[] = [
