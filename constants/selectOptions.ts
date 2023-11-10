@@ -9,6 +9,7 @@ export const ROLE_SELECT_OPTIONS: SelectOption[] = [
 	{ label: 'Co-writer', value: CollaboratorRole.CoWriter },
 	{ label: 'Colorist', value: CollaboratorRole.Colorist },
 	{ label: 'Cover Artist', value: CollaboratorRole.CoverArtist },
+	{ label: 'Creative Director', value: CollaboratorRole.CreativeDirector },
 	{ label: 'Editor', value: CollaboratorRole.Editor },
 	{ label: 'Illustrator', value: CollaboratorRole.Illustrator },
 	{ label: 'Inker', value: CollaboratorRole.Inker },
