@@ -5,10 +5,11 @@ export interface User {
 	name: string
 	email: string
 	avatar: boolean
-	isEmailVerified: string
+	isEmailVerified: boolean
+	hasBetaAccess: boolean
 	role: Role
 }
 
 export interface UpdateUserData extends Partial<Pick<User, 'email' | 'name'>> {
-	referrer: string
+	referrer?: string
 }

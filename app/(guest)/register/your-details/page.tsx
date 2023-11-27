@@ -68,38 +68,36 @@ export default function UpdateYourCreatorDetailsPage() {
 			/>
 
 			<main className='register-page'>
-				<>
-					<h1 className='title' style={{ visibility: me?.name ? 'visible' : 'hidden' }}>
-						Hi {me?.name}
-					</h1>
+				<h1 className='title' style={{ visibility: me?.name ? 'visible' : 'hidden' }}>
+					Hi {me?.name}
+				</h1>
 
-					<Form centered fullWidth maxSize='md'>
-						<Label>Short biography</Label>
-						<div className='description'>Your bio will be displayed on your dReader creator page</div>
-						<Textarea
-							maxCharacters={256}
-							rows={5}
-							{...register('description')}
-							placeholder='Emmy award winning visual development studio. Film, television, gaming, publishing...'
-						/>
-						<Label>Flavor text</Label>
-						<div className='description'>
-							Flavor text will be displayed beneath the description, as a small testimonial
-						</div>
-						<Textarea
-							maxCharacters={128}
-							rows={2}
-							{...register('flavorText')}
-							placeholder="Best studio I've ever worked with - my mom"
-						/>
+				<Form centered fullWidth maxSize='md'>
+					<Label>Short biography</Label>
+					<div className='description'>Your bio will be displayed on your dReader creator page</div>
+					<Textarea
+						maxCharacters={256}
+						rows={5}
+						{...register('description')}
+						placeholder='Emmy award winning visual development studio. Film, television, gaming, publishing...'
+					/>
+					<Label>Flavor text</Label>
+					<div className='description'>
+						Flavor text will be displayed beneath the description, as a small testimonial
+					</div>
+					<Textarea
+						maxCharacters={128}
+						rows={2}
+						{...register('flavorText')}
+						placeholder="Best studio I've ever worked with - my mom"
+					/>
 
-						<FormActions centered>
-							<Button type='submit' onClick={onSubmitClick} backgroundColor='green-500' className='action-button'>
-								Next <ArrowRightIcon className='action-button-icon' />
-							</Button>
-						</FormActions>
-					</Form>
-				</>
+					<FormActions centered>
+						<Button type='submit' onClick={onSubmitClick} backgroundColor='green-500' className='action-button'>
+							Next <ArrowRightIcon className='action-button-icon' />
+						</Button>
+					</FormActions>
+				</Form>
 			</main>
 		</>
 	)
