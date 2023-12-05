@@ -3,53 +3,39 @@
 @use '../mixins/breakpoints.module.scss' as *;
 
 .creator-item {
-	position: relative;
-	border: 0.2rem solid $grey-500;
-	border-radius: 1.1rem;
-	aspect-ratio: $comic-cover-aspect-ratio;
 	width: 100%;
 	cursor: pointer;
-	pointer-events: all;
-	transition: transform 0.2s ease;
-
+	
 	&:hover {
-		.cover-image {
-			filter: brightness(1);
-		}
+		background-color: black !important;
 	}
 
-	.creator-item-link {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-	}
 
-	.creator-banner {
-		aspect-ratio: $creator-banner-aspect-ratio;
-		z-index: -1;
-		object-fit: cover;
-		border-radius: 1rem;
-		border: 2px solid $grey-300;
-		@include unclickable;
-		opacity: 0.4;
-		background-color: $grey-500;
-		height: auto;
-		filter: brightness(0.7);
+	.creator-image {
+		position:  relative !important;
+		aspect-ratio: $creator-avatar-aspect-ratio;
+		height: auto !important;
+		max-height: 150px;
+		margin: auto;
 	}
 
 	.creator-avatar {
-		aspect-ratio: $creator-avatar-aspect-ratio;
-		z-index: 0;
-		max-width: 180px;
-		width: 50% !important;
-		height: auto !important;
-		position: absolute;
-		top: 50% !important;
-		left: 50% !important;
-		border-radius: 90%;
-		transform: translate(-50%, -50%);
-		@include unclickable;
+		@extend .creator-image;
+		border-radius: 100%;
+		max-width: 100px;
+	}
+
+	.creator-logo {
+		@extend .creator-image;
+		border-radius: 10%;
+		aspect-ratio: $creator-logo-aspect-ratio;
+		max-width: 150px
+	}
+
+	.creator-banner {
+		@extend .creator-image;
+		aspect-ratio: $creator-banner-aspect-ratio;
+		max-width: 250px;
+		border-radius: 10%;
 	}
 }

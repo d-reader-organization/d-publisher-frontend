@@ -17,6 +17,7 @@ export interface BasicCreator {
 	twitter: string
 	instagram: string
 	lynkfire: string
+	emailVerifiedAt: string
 }
 
 export interface Creator extends BasicCreator {

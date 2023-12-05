@@ -3,52 +3,22 @@
 @use '../mixins/breakpoints.module.scss' as *;
 
 .raw-comic-item {
-	position: relative;
-	border: 0.2rem solid $grey-500;
-	border-radius: 1.1rem;
-	aspect-ratio: $comic-cover-aspect-ratio;
-	width: 100%;
 	cursor: pointer;
-	pointer-events: all;
-	transition: transform 0.2s ease;
+	width: 100%;
 
 	&:hover {
-		.cover-image {
-			filter: brightness(1);
-		}
+		background-color: black !important;
 	}
 
-	.comic-item-link {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
+	.comic-image {
+		position: relative !important;
+		max-height: 150px;
+		border-radius: 10%;
 	}
 
-	.comic-cover {
-		aspect-ratio: $comic-cover-aspect-ratio;
-		z-index: -1;
-		object-fit: cover;
-		border-radius: 1rem;
-		border: 2px solid $grey-300;
-		@include unclickable;
-		opacity: 0.4;
-		background-color: $grey-500;
-		height: auto;
-		filter: brightness(0.7);
-	}
-
-	.comic-logo {
-		// aspect-ratio: $comic-logo-aspect-ratio;
-		z-index: 0;
-		max-width: 180px;
-		width: 80% !important;
-		height: auto !important;
-		position: absolute;
-		top: 50% !important;
-		left: 50% !important;
-		transform: translate(-50%, -50%);
-		@include unclickable;
+	.comic-banner {
+		@extend .comic-image;
+		aspect-ratio: $creator-banner-aspect-ratio;
+		width: 250px;
 	}
 }

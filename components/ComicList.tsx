@@ -4,7 +4,6 @@ import { RawComicParams } from '@/models/comic/comicParams'
 import { useFetchRawComics } from '@/api/comic/queries/useFetchRawComics'
 import { useBreakpoints, useOnScreen } from '@/hooks'
 import RawComicItem from './comic/RawComicItem'
-import Grid from '@mui/material/Grid'
 
 interface Props {
 	title: string
@@ -45,13 +44,24 @@ const ComicList: React.FC<Props> = ({ title, params, enabled, narrow = false, hi
 		<div className='raw-comic-list-wrapper'>
 			<h2 className='title'>{title}</h2>
 			{hasComics && (
-				<Grid container spacing={1} className='raw-comic-list'>
-					{comics.map((comic) => (
-						<Grid item key={comic.slug} xs={6} md={4} lg={3} xl={2}>
-							<RawComicItem comic={comic} key={comic.slug} />
-						</Grid>
-					))}
-				</Grid>
+				<table>
+					<thead>
+						<tr>
+							<td>Title</td>
+							<td>Description</td>
+							<td>Flavour text</td>
+							<td>Cover</td>
+							<td>Logo</td>
+							<td>Pfp</td>
+							<td>Banner</td>
+							<td>Is Completed</td>
+							<td>Is Verified</td>
+						</tr>
+					</thead>
+					<tbody>
+						{comics.map((comic)=> <RawComicItem key={comic.title} comic={comic}/>)}
+					</tbody>
+				</table>
 			)}
 			{!hasComics && <div className='content-empty'>No comics to display!</div>}
 			<div ref={showMoreRef}>
