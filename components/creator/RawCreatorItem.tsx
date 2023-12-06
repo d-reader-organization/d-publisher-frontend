@@ -1,15 +1,15 @@
 import { BoxProps } from '@mui/material/Box'
-import { Creator } from '@/models/creator'
 import { RoutePath } from 'enums/routePath'
 import SkeletonImage from '../SkeletonImage'
 import { useRouter } from 'next/navigation'
 import clsx from 'clsx'
+import { RawCreator } from '@/models/creator/rawCreator'
 
 interface Props extends BoxProps {
-	creator: Creator
+	creator: RawCreator
 }
 
-const CreatorItem: React.FC<Props> = ({ creator,className, ...props }) => {
+const RawCreatorItem: React.FC<Props> = ({ creator,className, ...props }) => {
 	const nextPage = RoutePath.Creator(creator.slug)
 	const router = useRouter();
 
@@ -28,9 +28,9 @@ const CreatorItem: React.FC<Props> = ({ creator,className, ...props }) => {
 			</td>
 			<td>{creator.twitter ? creator.twitter.split('/').at(-1) : '❌'}</td>
 			<td>{creator.emailVerifiedAt ? '✅' : '❌'}</td>
-			<td>{creator.isVerified ? '✅' : '❌'}</td>
+			<td>{creator.verifiedAt ? '✅' : '❌'}</td>
 		</tr>				
 	)
 }
 
-export default CreatorItem
+export default RawCreatorItem

@@ -1,19 +1,18 @@
 import React, { useEffect, useMemo } from 'react'
 import CircularProgress from '@mui/material/CircularProgress'
-import { CreatorParams } from '@/models/creator/creatorParams'
-import { useFetchCreators } from '@/api/creator/queries/useFetchCreators'
+import { useFetchRawCreators } from '@/api/creator/queries/useFetchRawCreators'
 import { useBreakpoints, useOnScreen } from '@/hooks'
-import CreatorItem from './creator/CreatorItem'
+import RawCreatorItem from './creator/RawCreatorItem'
+import { RawCreatorParams } from '@/models/creator/rawCreatorParams'
 
 interface Props {
 	title: string
-	params?: Partial<CreatorParams>
-	enabled: boolean
+	params?: Partial<RawCreatorParams>
 	narrow?: boolean
 	hideItemsCount?: boolean
 }
 
-const CreatorList: React.FC<Props> = ({ title, params, enabled, narrow = false, hideItemsCount = false }) => {
+const CreatorList: React.FC<Props> = ({ title, params, narrow = false, hideItemsCount = false }) => {
 	const [, showMore, showMoreRef] = useOnScreen()
 	const { xs, sm, md, lg, xl } = useBreakpoints()
 
@@ -31,7 +30,7 @@ const CreatorList: React.FC<Props> = ({ title, params, enabled, narrow = false, 
 		fetchNextPage,
 		hasNextPage,
 		isFetching,
-	} = useFetchCreators({ skip: 0, take, ...params }, enabled)
+	} = useFetchRawCreators({ skip: 0, take, ...params })
 
 	const hasCreators = creators.length > 0
 	const showItemsCount = !hasNextPage && !isFetching && !hideItemsCount
@@ -59,7 +58,7 @@ const CreatorList: React.FC<Props> = ({ title, params, enabled, narrow = false, 
 						</tr>
 					</thead>
 					<tbody>
-						{creators.map((creator)=> <CreatorItem key={creator.name} creator={creator}/>)}
+						{creators.map((creator)=> <RawCreatorItem key={creator.name} creator={creator}/>)}
 					</tbody>
 			</table>
 			)}
