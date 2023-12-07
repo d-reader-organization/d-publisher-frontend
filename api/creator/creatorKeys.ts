@@ -1,8 +1,10 @@
+import { RawCreatorParams } from '@/models/creator/rawCreatorParams'
 import { CreatorParams } from 'models/creator/creatorParams'
 
 export const CREATOR_QUERY_KEYS = Object.freeze({
 	CREATOR: 'creator',
 	GET: 'get',
+	GET_RAW: 'get-raw',
 	ME: 'me',
 	UPDATE: 'update',
 	UPDATE_PASSWORD: 'update-password',
@@ -30,6 +32,14 @@ export const creatorKeys = Object.freeze({
 		params.skip,
 		params.take,
 	],
+	getManyRaw: (params: RawCreatorParams) => [
+		CREATOR_QUERY_KEYS.CREATOR,
+		CREATOR_QUERY_KEYS.GET,
+		params.nameSubstring,
+		params.skip,
+		params.take,
+	],
 	get: (slug: string) => [CREATOR_QUERY_KEYS.CREATOR, CREATOR_QUERY_KEYS.GET, slug],
+	getRaw: (slug: string) => [CREATOR_QUERY_KEYS.CREATOR, CREATOR_QUERY_KEYS.GET_RAW, slug],
 	getMe: [CREATOR_QUERY_KEYS.CREATOR, CREATOR_QUERY_KEYS.GET, CREATOR_QUERY_KEYS.ME],
 })

@@ -16,7 +16,7 @@ export default function AdminPage() {
 	return (
 		<>
 			<Header title={`Hi, ${me.name}`} />
-			<CreatorList title='creators' enabled />
+			<CreatorList title='creators' />
 			<ComicList title='comics' enabled />
 		</>
 	)

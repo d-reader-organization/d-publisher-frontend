@@ -3,18 +3,40 @@
 @use '../mixins/breakpoints.module.scss' as *;
 
 .raw-comic-list-wrapper {
-	width: calc(100% - 48px);
+	width: 100%;
 	margin: 24px;
 	@include pagePadding;
 
-	@include sm {
-		border: 1px solid $grey-300;
-		border-radius: 8px;
+	table {
+		display: table;
+		width: 100%;
+		overflow: scroll;
+	}
+
+	thead {
+		background-color: $grey-500;
+	}
+	
+	tr:nth-child(2n) {
+		background-color: rgba($grey-500, 0.6);
+	}
+
+	td {
+		text-align: center;
+		padding: 8px;
+		max-height: 150px;
+		min-width: 150px;
 	}
 
 	.title {
 		margin-bottom: 16px;
 		margin-top: -8px;
+	}
+
+	.description {
+		overflow:hidden;
+		max-height: 150px;
+		display: block;
 	}
 
 	.content-empty {
@@ -24,10 +46,6 @@
 		line-height: 18px;
 		text-align: center;
 		color: $grey-200;
-	}
-
-	.raw-comic-list {
-		@include flexRow;
 	}
 
 	.loading-more {

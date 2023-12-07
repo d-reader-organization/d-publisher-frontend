@@ -1,20 +1,18 @@
 import React, { useEffect, useMemo } from 'react'
 import CircularProgress from '@mui/material/CircularProgress'
-import { CreatorParams } from '@/models/creator/creatorParams'
-import { useFetchCreators } from '@/api/creator/queries/useFetchCreators'
+import { useFetchRawCreators } from '@/api/creator/queries/useFetchRawCreators'
 import { useBreakpoints, useOnScreen } from '@/hooks'
-import CreatorItem from './creator/CreatorItem'
-import Grid from '@mui/material/Grid'
+import RawCreatorTableRow from './creator/RawCreatorTableRow'
+import { RawCreatorParams } from '@/models/creator/rawCreatorParams'
 
 interface Props {
 	title: string
-	params?: Partial<CreatorParams>
-	enabled: boolean
+	params?: Partial<RawCreatorParams>
 	narrow?: boolean
 	hideItemsCount?: boolean
 }
 
-const CreatorList: React.FC<Props> = ({ title, params, enabled, narrow = false, hideItemsCount = false }) => {
+const CreatorList: React.FC<Props> = ({ title, params, narrow = false, hideItemsCount = false }) => {
 	const [, showMore, showMoreRef] = useOnScreen()
 	const { xs, sm, md, lg, xl } = useBreakpoints()
 
@@ -32,7 +30,7 @@ const CreatorList: React.FC<Props> = ({ title, params, enabled, narrow = false, 
 		fetchNextPage,
 		hasNextPage,
 		isFetching,
-	} = useFetchCreators({ skip: 0, take, ...params }, enabled)
+	} = useFetchRawCreators({ skip: 0, take, ...params })
 
 	const hasCreators = creators.length > 0
 	const showItemsCount = !hasNextPage && !isFetching && !hideItemsCount
@@ -46,13 +44,25 @@ const CreatorList: React.FC<Props> = ({ title, params, enabled, narrow = false, 
 		<div className='creator-list-wrapper'>
 			<h2 className='title'>{title}</h2>
 			{hasCreators && (
-				<Grid container spacing={1} className='creator-list'>
-					{creators.map((creator) => (
-						<Grid item key={creator.slug} xs={6} md={4} lg={3} xl={2}>
-							<CreatorItem creator={creator} key={creator.slug} />
-						</Grid>
-					))}
-				</Grid>
+				<table>
+					<thead>
+						<tr>
+							<td>Name</td>
+							<td>Email</td>
+							<td>Avatar</td>
+							<td>Logo</td>
+							<td>Banner</td>
+							<td>Twitter</td>
+							<td>Is Email Verified</td>
+							<td>Is Verified</td>
+						</tr>
+					</thead>
+					<tbody>
+						{creators.map((creator) => (
+							<RawCreatorTableRow key={creator.name} creator={creator} />
+						))}
+					</tbody>
+				</table>
 			)}
 			{!hasCreators && <div className='content-empty'>No creators to display!</div>}
 			<div ref={showMoreRef}>
