@@ -2,7 +2,7 @@ import React, { useEffect, useMemo } from 'react'
 import CircularProgress from '@mui/material/CircularProgress'
 import { useFetchRawCreators } from '@/api/creator/queries/useFetchRawCreators'
 import { useBreakpoints, useOnScreen } from '@/hooks'
-import RawCreatorItem from './creator/RawCreatorItem'
+import RawCreatorTableRow from './creator/RawCreatorTableRow'
 import { RawCreatorParams } from '@/models/creator/rawCreatorParams'
 
 interface Props {
@@ -58,9 +58,11 @@ const CreatorList: React.FC<Props> = ({ title, params, narrow = false, hideItems
 						</tr>
 					</thead>
 					<tbody>
-						{creators.map((creator)=> <RawCreatorItem key={creator.name} creator={creator}/>)}
+						{creators.map((creator) => (
+							<RawCreatorTableRow key={creator.name} creator={creator} />
+						))}
 					</tbody>
-			</table>
+				</table>
 			)}
 			{!hasCreators && <div className='content-empty'>No creators to display!</div>}
 			<div ref={showMoreRef}>

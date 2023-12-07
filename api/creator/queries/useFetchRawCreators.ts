@@ -10,7 +10,7 @@ import { useCreatorAuth } from '@/providers/CreatorAuthProvider'
 
 const { CREATOR, GET_RAW } = CREATOR_QUERY_KEYS
 
-const fetchCreators = async (params: CreatorParams): Promise<RawCreator[]> => {
+const fetchRawCreators = async (params: CreatorParams): Promise<RawCreator[]> => {
 	const response = await http.get<RawCreator[]>(`${CREATOR}/${GET_RAW}`, { params })
 	return response.data
 }
@@ -21,7 +21,7 @@ export const useFetchRawCreators = (params: RawCreatorParams) => {
 
 	const infiniteQuery = useInfiniteQuery({
 		queryKey: creatorKeys.getManyRaw(params),
-		queryFn: ({ pageParam = 0 }) => fetchCreators({ ...params, skip: pageParam * params.take }),
+		queryFn: ({ pageParam = 0 }) => fetchRawCreators({ ...params, skip: pageParam * params.take }),
 		getNextPageParam: (lastPage, allPages) => {
 			if (lastPage.length >= params.take) return allPages.length
 		},

@@ -3,7 +3,7 @@ import CircularProgress from '@mui/material/CircularProgress'
 import { RawComicParams } from '@/models/comic/comicParams'
 import { useFetchRawComics } from '@/api/comic/queries/useFetchRawComics'
 import { useBreakpoints, useOnScreen } from '@/hooks'
-import RawComicItem from './comic/RawComicItem'
+import RawComicTableRow from './comic/RawComicTableRow'
 
 interface Props {
 	title: string
@@ -59,7 +59,9 @@ const ComicList: React.FC<Props> = ({ title, params, enabled, narrow = false, hi
 						</tr>
 					</thead>
 					<tbody>
-						{comics.map((comic)=> <RawComicItem key={comic.title} comic={comic}/>)}
+						{comics.map((comic) => (
+							<RawComicTableRow key={comic.title} comic={comic} />
+						))}
 					</tbody>
 				</table>
 			)}
