@@ -20,8 +20,8 @@ export const useRateComic = (slug: string) => {
 	return useMutation({
 		mutationFn: (request: RateComic) => rateComic(slug, request),
 		onSuccess: () => {
+			toaster.add('Comic rated!', 'success')
 			queryClient.invalidateQueries(comicKeys.get(slug))
-			// 👇 TODO: this
 			// queryClient.invalidateQueries(comicKeys.getMany())
 			queryClient.invalidateQueries(comicKeys.getByOwner(me?.id || 0))
 		},

@@ -112,7 +112,7 @@ export const creatorVisualIdentityTooltipText = `Following formats are allowed:
 Preferrably a jpg or webp format if the image has no transparency.
 
 Ratio for the avatar is 1:1 and the resolution should be at least 500x500.
-Ratio for the avatar is 1920:900px and the resolution should be at least 1920x900px.
+Ratio for the banner is 1920:900px and the resolution should be at least 1920x900px.
 `
 
 export const comicIssueAuthorsTooltipText =
