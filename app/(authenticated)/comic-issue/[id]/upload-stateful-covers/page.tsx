@@ -1,8 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useRouter, useParams } from 'next/navigation'
-
+import { useRouter } from 'next/navigation'
 import Header from 'components/layout/Header'
 import Button from 'components/Button'
 import Steps from 'components/Steps'
@@ -23,11 +22,14 @@ import SkeletonImage from '@/components/SkeletonImage'
 import { statelessCoversToStatefulCovers } from '@/utils/covers'
 import { groupBy, map } from 'lodash'
 
-export default function UploadComicIssueStatefulCoversPage() {
+interface Params {
+	id: string | number
+}
+
+export default function UploadComicIssueStatefulCoversPage({ params }: { params: Params }) {
 	const toaster = useToaster()
 	const router = useRouter()
-	const params = useParams()
-	const comicIssueId = params['id'] || ''
+	const comicIssueId = params.id || ''
 	const nextPage = RoutePath.ComicIssueUploadAssets(comicIssueId)
 
 	const [issueCovers, setIssueCovers] = useState<CreateStatefulCoverData[]>([])

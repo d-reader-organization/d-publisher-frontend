@@ -2,7 +2,7 @@
 
 import { Resolver, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useRouter, useParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 import Header from 'components/layout/Header'
 import Button from 'components/Button'
@@ -27,11 +27,14 @@ import FormActions from '@/components/forms/FormActions'
 import Label from '@/components/forms/Label'
 import { imageTypes } from '@/constants/fileTypes'
 
-export default function UploadComicAssetsPage() {
+interface Params {
+	slug: string
+}
+
+export default function UploadComicAssetsPage({ params }: { params: Params }) {
 	const router = useRouter()
 	const toaster = useToaster()
-	const params = useParams()
-	const comicSlug = params['slug'] || ''
+	const comicSlug = params.slug || ''
 	const nextPage = RoutePath.ComicConnectSocials(comicSlug)
 
 	const { register, setValue, handleSubmit } = useForm<UpdateComicFilesData>({

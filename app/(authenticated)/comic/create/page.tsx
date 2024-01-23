@@ -31,6 +31,10 @@ import {
 	findOptions,
 	genresToSelectOptions,
 } from '@/constants/selectOptions'
+import Dialog from '@mui/material/Dialog'
+import CloseIcon from 'public/assets/vector-icons/close.svg'
+import { useLocalStorage } from '@/hooks/useLocalStorage'
+import { FIRST_TIME_PUBLISHING_NOTICE } from '@/constants/staticText'
 
 type LegalAgreement = {
 	ownershipConfirmation: boolean
@@ -40,6 +44,8 @@ type LegalAgreement = {
 export default function CreateComicPage() {
 	const router = useRouter()
 	const toaster = useToaster()
+
+	const [isFirstTimePublishing, setIsFirstPublishing] = useLocalStorage('firstTimePublishing', true)
 
 	const { register, setValue, watch, handleSubmit } = useForm<CreateComicData & LegalAgreement>({
 		defaultValues: {
@@ -217,6 +223,19 @@ export default function CreateComicPage() {
 					</FormActions>
 				</Form>
 			</main>
+
+			<Dialog
+				style={{ backdropFilter: 'blur(4px)' }}
+				PaperProps={{ className: 'text-dialog' }}
+				onClose={() => setIsFirstPublishing(false)}
+				open={isFirstTimePublishing}
+			>
+				<div className='close-icon-wrapper'>
+					<CloseIcon className='close-icon' onClick={() => setIsFirstPublishing(false)} />
+				</div>
+				<strong>IMPORTANT NOTICE!</strong>
+				<p>{FIRST_TIME_PUBLISHING_NOTICE}</p>
+			</Dialog>
 		</>
 	)
 }

@@ -1,8 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter, useParams } from 'next/navigation'
-
+import { useRouter } from 'next/navigation'
 import Header from 'components/layout/Header'
 import Button from 'components/Button'
 import Steps from 'components/Steps'
@@ -21,11 +20,14 @@ import IntegerInput from '@/components/forms/IntegerInput'
 import Label from '@/components/forms/Label'
 import { optimalImageTypes } from '@/constants/fileTypes'
 
-export default function UploadComicIssuePagesPage() {
+interface Params {
+	id: string | number
+}
+
+export default function UploadComicIssuePagesPage({ params }: { params: Params }) {
 	const toaster = useToaster()
 	const router = useRouter()
-	const params = useParams()
-	const comicIssueId = params['id'] || ''
+	const comicIssueId = params.id || ''
 	const nextPage = RoutePath.ComicIssuePublish(comicIssueId)
 
 	const [pageFiles, setPageFiles] = useState<File[]>([])

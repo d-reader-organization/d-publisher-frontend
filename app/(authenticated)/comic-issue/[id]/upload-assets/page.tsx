@@ -3,8 +3,7 @@
 
 import { FieldErrors, Resolver, useForm } from 'react-hook-form'
 import { useRef } from 'react'
-import { useRouter, useParams } from 'next/navigation'
-
+import { useRouter } from 'next/navigation'
 import Header from 'components/layout/Header'
 import Button from 'components/Button'
 import Steps from 'components/Steps'
@@ -29,11 +28,14 @@ import { useFetchRawComicIssue } from '@/api/comicIssue'
 import ReactSignatureCanvas from 'react-signature-canvas'
 import Grid from '@mui/material/Grid'
 
-export default function UploadComicIssueAssetsPage() {
+interface Params {
+	id: string | number
+}
+
+export default function UploadComicIssueAssetsPage({ params }: { params: Params }) {
 	const router = useRouter()
 	const toaster = useToaster()
-	const params = useParams()
-	const comicIssueId = params['id'] || ''
+	const comicIssueId = params.id || ''
 	const nextPage = RoutePath.ComicIssueUploadPages(comicIssueId)
 
 	const { register, setValue, handleSubmit } = useForm<UpdateComicIssueFilesData>({

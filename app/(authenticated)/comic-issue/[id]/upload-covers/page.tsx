@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useRouter, useParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 import Header from 'components/layout/Header'
 import Button from 'components/Button'
@@ -29,11 +29,14 @@ import Select from '@/components/forms/Select'
 import { imageTypes } from '@/constants/fileTypes'
 import { RARITY_SELECT_OPTIONS, findOptions } from '@/constants/selectOptions'
 
-export default function UploadComicIssueStatelessCoversPage() {
+interface Params {
+	id: string | number
+}
+
+export default function UploadComicIssueStatelessCoversPage({ params }: { params: Params }) {
 	const toaster = useToaster()
 	const router = useRouter()
-	const params = useParams()
-	const comicIssueId = params['id'] || ''
+	const comicIssueId = params.id || ''
 	const nextPage = RoutePath.ComicIssueUploadAssets(comicIssueId)
 
 	const [issueCovers, setIssueCovers] = useState<CreateStatelessCoverData[]>([])

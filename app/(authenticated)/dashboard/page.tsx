@@ -18,7 +18,7 @@ export default function DashboardPage() {
 		<>
 			<Header title={`Hi, ${me.name}`} />
 			<ComicList title='📖 my comics' params={{ creatorSlug: me.slug }} enabled hideItemsCount />
-			<Box px={3}>
+			<Box px={3} className='help-box'>
 				<p>{`We've placed '?' buttons across the app. Hover over them for help!`}</p>
 				<h4>At any point feel free to reach out if you need help/advice</h4>
 				<p>

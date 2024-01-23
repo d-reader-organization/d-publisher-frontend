@@ -2,8 +2,7 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter, useParams } from 'next/navigation'
-
+import { useRouter } from 'next/navigation'
 import Header from 'components/layout/Header'
 import Steps from 'components/Steps'
 import { useToaster } from '@/providers/ToastProvider'
@@ -14,11 +13,14 @@ import { RoutePath } from '@/enums/routePath'
 import usePrefetchRoute from '@/hooks/usePrefetchRoute'
 import { useUpdateComicIssuePages } from '@/api/comicIssue'
 
-export default function PublishComicIssuePage() {
+interface Params {
+	id: string | number
+}
+
+export default function PublishComicIssuePage({ params }: { params: Params }) {
 	const toaster = useToaster()
 	const router = useRouter()
-	const params = useParams()
-	const comicIssueId = params['id'] || ''
+	const comicIssueId = params.id || ''
 	const nextPage = RoutePath.ComicIssuePublish(comicIssueId)
 
 	const [pageFiles, setPageFiles] = useState<File[]>([])
