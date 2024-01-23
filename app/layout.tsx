@@ -23,6 +23,14 @@ import 'app/styles/app.scss'
  * - use https://github.com/atlassian/react-beautiful-dnd for comic pages upload
  */
 
+// - place images outside of tooltips?
+// - better "?" messages (what is signature/pfp used for, do we add a cover to the pdf file, do I add logo on top of the cover or not...)
+// - show where which asset will be used within the app (Figma files) + link publishing document beforehand
+// - TOS
+// - record a walkthrough
+// - enable renaming comic series and comic issues (update slugs) once per day
+// - admin interface (stateful covers, publish screen)
+
 const satoshi = localFont({
 	src: [
 		{ path: './fonts/Satoshi-Light.woff2', weight: '300', style: 'normal' },

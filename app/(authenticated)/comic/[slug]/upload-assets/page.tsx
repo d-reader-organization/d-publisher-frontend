@@ -17,15 +17,20 @@ import Form from '@/components/forms/Form'
 import usePrefetchRoute from '@/hooks/usePrefetchRoute'
 import { useToaster } from '@/providers/ToastProvider'
 import {
+	comicBannerPreviews,
 	comicBannerTooltipText,
+	comicCoverPreviews,
 	comicCoverTooltipText,
+	comicLogoPreviews,
 	comicLogoTooltipText,
+	comicPfpPreviews,
 	comicPfpTooltipText,
 } from '@/constants/tooltips'
 import FileUpload from '@/components/forms/FileUpload'
 import FormActions from '@/components/forms/FormActions'
 import Label from '@/components/forms/Label'
 import { imageTypes } from '@/constants/fileTypes'
+import TooltipContent from '@/components/TooltipContent'
 
 interface Params {
 	slug: string
@@ -89,7 +94,10 @@ export default function UploadComicAssetsPage({ params }: { params: Params }) {
 				<Form padding maxSize='lg' fullWidth className='form--edit-comic-assets'>
 					<div className='comic-file-wrapper'>
 						<div className='comic-file-container'>
-							<Label isRequired tooltipText={comicBannerTooltipText}>
+							<Label
+								isRequired
+								tooltipText={<TooltipContent previews={comicBannerPreviews} text={comicBannerTooltipText} />}
+							>
 								Comic Banner
 							</Label>
 							<FileUpload
@@ -106,7 +114,10 @@ export default function UploadComicAssetsPage({ params }: { params: Params }) {
 					</div>
 					<div className='comic-file-wrapper'>
 						<div className='comic-file-container'>
-							<Label isRequired tooltipText={comicCoverTooltipText}>
+							<Label
+								isRequired
+								tooltipText={<TooltipContent previews={comicCoverPreviews} text={comicCoverTooltipText} />}
+							>
 								Comic series cover
 							</Label>
 							<FileUpload
@@ -122,7 +133,9 @@ export default function UploadComicAssetsPage({ params }: { params: Params }) {
 						</div>
 
 						<div className='comic-file-container'>
-							<Label tooltipText={comicPfpTooltipText}>Comic Avatar/PFP</Label>
+							<Label tooltipText={<TooltipContent previews={comicPfpPreviews} text={comicPfpTooltipText} />}>
+								Comic Avatar/PFP
+							</Label>
 							<FileUpload
 								id='pfp-upload'
 								label='500x500px'
@@ -136,7 +149,10 @@ export default function UploadComicAssetsPage({ params }: { params: Params }) {
 						</div>
 
 						<div className='comic-file-container'>
-							<Label isRequired tooltipText={comicLogoTooltipText}>
+							<Label
+								isRequired
+								tooltipText={<TooltipContent previews={comicLogoPreviews} text={comicLogoTooltipText} />}
+							>
 								Comic Logo (title)
 							</Label>
 							<FileUpload

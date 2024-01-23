@@ -1,3 +1,18 @@
+import { TooltipImagePreview } from '@/components/TooltipContent'
+import comicBannerDesktopPreview from 'public/assets/previews/comic-banner-desktop.png'
+import comicBannerMobilePreview from 'public/assets/previews/comic-banner-mobile.jpg'
+import comicBannerExample from 'public/assets/previews/comic-banner-example.jpg'
+
+import comicCoverDesktopPreview from 'public/assets/previews/comic-cover-desktop.png'
+import comicCoverMobilePreview from 'public/assets/previews/comic-cover-mobile.jpg'
+import comicCoverExample from 'public/assets/previews/comic-cover-example.jpg'
+
+import comicPfpExample from 'public/assets/previews/comic-pfp-example.jpg'
+
+import comicLogoDesktopPreview from 'public/assets/previews/comic-logo-desktop.png'
+import comicLogoMobilePreview from 'public/assets/previews/comic-logo-mobile.jpg'
+import comicLogoExample from 'public/assets/previews/comic-logo-example.png'
+
 export const genresTooltipText = 'We suggest picking not more than 3 genres'
 export const audienceTypeTooltipText = `Pick an audience for your comic series:
 
@@ -55,6 +70,21 @@ Preferrably a jpg or webp format if the image has no transparency.
 Pick an image with a ratio 1920:900 and at least 1920x900 resolution.
 `
 
+export const comicBannerPreviews: TooltipImagePreview[] = [
+	{
+		image: comicBannerExample,
+		caption: 'Comic banner example',
+	},
+	{
+		image: comicBannerDesktopPreview,
+		caption: 'Comic banner on desktop',
+	},
+	{
+		image: comicBannerMobilePreview,
+		caption: 'Comic banner on mobile',
+	},
+]
+
 export const comicCoverTooltipText = `Following formats are allowed:
 - .jpg, .jpeg, .webp, .png, .gif
 
@@ -63,11 +93,25 @@ Make sure the image has no transparent background.
 
 Pick an image with a ratio 10:9 and at least 1000x900 resolution.
 
-Your cover image should not have the comic "title" art on top of it.
-This image will be used within the app to promote different comic series.
+Your cover image should not have the comic "title" art on top of it. This image will be used within the app to promote different comic series.
 
 If you don't have a "comic series" art, feel free to crop the cover art any of your comic issues
 `
+
+export const comicCoverPreviews: TooltipImagePreview[] = [
+	{
+		image: comicCoverExample,
+		caption: 'Comic cover example',
+	},
+	{
+		image: comicCoverDesktopPreview,
+		caption: 'Comic covers on desktop',
+	},
+	{
+		image: comicCoverMobilePreview,
+		caption: 'Cover cover on mobile',
+	},
+]
 
 export const comicPfpTooltipText = `Following formats are allowed:
 - if transparent: .png, .webp, .gif
@@ -75,18 +119,42 @@ export const comicPfpTooltipText = `Following formats are allowed:
 
 Preferrably a jpg or webp format if the image has no transparency.
 
-Pick an image with a ratio 1920:900 and at least 1920x900 resolution.
+Pick an image with a ratio 1:1 and at least 500x500 resolution.
 
 This image will be used around the app on places like leaderboards.
 `
+
+export const comicPfpPreviews: TooltipImagePreview[] = [
+	{
+		image: comicPfpExample,
+		caption: 'Comic PFP example',
+	},
+]
 
 export const comicLogoTooltipText = `Following formats are allowed:
 - .png, .webp, .gif
 
 Preferrably a png format. Make sure the image has a transparent background.
 
-Pick an image with a ratio 800:450 and at least 800x450 resolution.
+Preferrably an image with a ratio 800:450 and at least 800x450 resolution, but not a strict specification.
+
+This image will be placed on top of comic series banner and cover images.
 `
+
+export const comicLogoPreviews: TooltipImagePreview[] = [
+	{
+		image: comicLogoExample,
+		caption: 'Comic logo example',
+	},
+	{
+		image: comicLogoDesktopPreview,
+		caption: 'Comic logo on desktop',
+	},
+	{
+		image: comicLogoMobilePreview,
+		caption: 'Cover logos on mobile',
+	},
+]
 
 export const comicIssueCoverImageTooltipText = `Following formats are allowed:
 - .jpg, .jpeg, .webp, .png, .gif

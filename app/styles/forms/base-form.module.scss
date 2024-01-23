@@ -16,13 +16,13 @@
 	&--base-padding {
 		padding: 20px;
 
-		@include sm {
-			padding: 40px 60px;
-		}
+		// @include sm {
+		// 	padding: 40px 60px;
+		// }
 
-		@include md {
-			padding: 40px 80px;
-		}
+		// @include md {
+		// 	padding: 40px 80px;
+		// }
 	}
 
 	&--min-xs {

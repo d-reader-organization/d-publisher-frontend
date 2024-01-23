@@ -26,10 +26,6 @@
 		aspect-ratio: $comic-cover-aspect-ratio;
 		width: 100%;
 		height: auto;
-
-		@include lg {
-			height: 100%;
-		}
 	}
 
 	.comic-banner-input {
@@ -52,9 +48,5 @@
 		aspect-ratio: $comic-pfp-aspect-ratio;
 		width: 100%;
 		height: auto;
-
-		@include lg {
-			height: 100%;
-		}
 	}
 }
