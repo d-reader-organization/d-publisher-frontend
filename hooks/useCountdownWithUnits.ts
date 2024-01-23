@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-const formatTime = (secs: number, expirationDate?: string) => {
+const formatTime = (secs: number, expirationDate?: number) => {
 	if (!expirationDate) return { seconds: 0, minutes: 0, hours: 0, days: 0, isDue: false, countdownString: '--' }
 
 	const totalSeconds = Math.ceil(secs)
@@ -13,9 +13,9 @@ const formatTime = (secs: number, expirationDate?: string) => {
 	let countdownString = ''
 	if (totalSeconds > 0) {
 		if (days) {
-			countdownString += `${days}d ${hours}h`
+			countdownString += `${days}d ${hours}h ${`${minutes}`.padStart(2, '0')}:${`${seconds}`.padStart(2, '0')}`
 		} else if (hours) {
-			countdownString += `${hours}h ${minutes}m`
+			countdownString += `${hours}h ${minutes}m ${`${seconds}`.padStart(2, '0')}s`
 		} else if (minutes || seconds) {
 			countdownString += `${`${minutes}`.padStart(2, '0')}:${`${seconds}`.padStart(2, '0')}`
 		}
@@ -24,7 +24,7 @@ const formatTime = (secs: number, expirationDate?: string) => {
 	return { seconds, minutes, hours, days, isDue: totalSeconds === 0, countdownString }
 }
 
-const calculateRemaningSeconds = (expirationDate?: string) => {
+const calculateRemaningSeconds = (expirationDate?: number) => {
 	if (!expirationDate) return 0
 	const now = new Date().getTime()
 	const milliSecondsDistance = new Date(expirationDate).getTime() - now
@@ -32,7 +32,7 @@ const calculateRemaningSeconds = (expirationDate?: string) => {
 	return 0
 }
 
-type CountdownHook = (props: { expirationDate?: string; onExpire?: VoidFunction }) => {
+type CountdownHook = (props: { expirationDate?: number; onExpire?: VoidFunction }) => {
 	seconds: number
 	minutes: number
 	hours: number
@@ -41,7 +41,7 @@ type CountdownHook = (props: { expirationDate?: string; onExpire?: VoidFunction 
 	isDue: boolean
 }
 
-export const useCountdown: CountdownHook = ({ expirationDate, onExpire }) => {
+export const useCountdownWithUnits: CountdownHook = ({ expirationDate, onExpire }) => {
 	const [remainingSeconds, setRemainingSeconds] = useState(0)
 	const [isCounting, setIsCounting] = useState(false)
 
@@ -67,4 +67,4 @@ export const useCountdown: CountdownHook = ({ expirationDate, onExpire }) => {
 	return formatTime(remainingSeconds, expirationDate)
 }
 
-export default useCountdown
+export default useCountdownWithUnits

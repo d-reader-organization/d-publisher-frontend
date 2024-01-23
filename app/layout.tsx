@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import CssBaseline from '@mui/material/CssBaseline'
 import ClientContext from '@/providers/ClientContextProvider'
 import CreatorAuthProvider from 'providers/CreatorAuthProvider'
@@ -40,14 +40,20 @@ const satoshi = localFont({
 	preload: true,
 })
 
+export const viewport: Viewport = {
+	themeColor: '#15171c',
+	viewportFit: 'cover',
+	initialScale: 1,
+	minimumScale: 1,
+	width: 'device-width',
+}
+
 export const metadata: Metadata = {
 	title: 'dPublisher',
 	metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL as string),
 	description:
 		'📚 An on-chain platform for self-publishing digital comics, tracking user analytics, and capturing the audience',
 	keywords: 'NFT, dReader, dPublisher, Comic, Solana, SOL, mint, collection, manga, manwha',
-	themeColor: '#15171c',
-	viewport: 'minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover',
 	openGraph: {
 		type: 'website',
 		title: 'dPublisher',
@@ -65,8 +71,10 @@ export const metadata: Metadata = {
 		title: 'dPublisher',
 		description:
 			'📚 An on-chain platform for self-publishing digital comics, tracking user analytics, and capturing the audience',
-		site: undefined,
 		card: 'summary_large_image',
+		site: '@dPublisherApp',
+		creator: '@dPublisherApp',
+		images: '/assets/images/home-metadata.png',
 	},
 	manifest: '/manifest.json',
 }

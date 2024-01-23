@@ -1,10 +1,6 @@
 'use client'
 
-import { endpoint, network } from '@/constants/environment'
-import { getWallets } from '@/constants/wallets'
 import { ThemeProvider } from '@mui/material/styles'
-import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react'
-import { WalletModalProvider } from '@solana/wallet-adapter-react-ui'
 import { createContext, useContext } from 'react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import theme from 'app/styles/theme'
@@ -26,17 +22,11 @@ const queryClient = new QueryClient({
 const ClientContextProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 	return (
 		<QueryClientProvider client={queryClient}>
-			<ThemeProvider theme={theme}>
-				<ConnectionProvider endpoint={endpoint}>
-					<WalletProvider wallets={getWallets(network)} autoConnect>
-						<WalletModalProvider className='wallet-dialog'>{children}</WalletModalProvider>
-					</WalletProvider>
-				</ConnectionProvider>
-			</ThemeProvider>
+			<ThemeProvider theme={theme}>{children}</ThemeProvider>
 		</QueryClientProvider>
 	)
 }
 
 export default ClientContextProvider
 
-export const useToaster = (): null => useContext(ClientContext)
+export const useClientContext = (): null => useContext(ClientContext)

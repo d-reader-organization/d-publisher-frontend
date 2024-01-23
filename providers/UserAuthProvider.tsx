@@ -135,8 +135,10 @@ export const UserAuthProvider: React.FC<Props> = ({ children }) => {
 
 					const originalRequest = error.config
 					if (originalRequest && refreshToken) {
+						// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 						// @ts-ignore
 						if (message.includes('Authorization invalid or expired') && !originalRequest?._retry && status == 401) {
+							// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 							// @ts-ignore
 							originalRequest._retry = true
 							try {
