@@ -21,6 +21,8 @@ import 'app/styles/app.scss'
  * - refactor localStorage auth handling to SWR
  * - deprecate next-sitemap and implement https://nextjs.org/docs/app/api-reference/file-conventions/metadata
  * - use https://github.com/atlassian/react-beautiful-dnd for comic pages upload
+
+ * - upload carousel slides UI, add a creator.role column
  */
 
 // - place images outside of tooltips?
