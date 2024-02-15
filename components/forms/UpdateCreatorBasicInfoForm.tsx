@@ -76,7 +76,7 @@ const UpdateCreatorBasicInfoForm: React.FC = () => {
 			<Label>Short biography</Label>
 			<div className='description'>Your bio will be displayed on your dReader creator page</div>
 			<Textarea
-				maxCharacters={256}
+				maxCharacters={512}
 				rows={5}
 				{...register('description')}
 				defaultValue={me?.description}

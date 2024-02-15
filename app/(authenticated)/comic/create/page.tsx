@@ -159,7 +159,7 @@ export default function CreateComicPage() {
 					</div>
 
 					<Label isRequired>Description</Label>
-					<Textarea maxCharacters={256} rows={6} {...register('description')} placeholder='My comic description' />
+					<Textarea maxCharacters={1024} rows={6} {...register('description')} placeholder='My comic description' />
 
 					<Label>Flavor text</Label>
 					<Textarea maxCharacters={128} rows={2} {...register('flavorText')} placeholder='Some sweet flavor text' />

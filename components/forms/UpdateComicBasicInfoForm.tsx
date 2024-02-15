@@ -134,7 +134,7 @@ const UpdateComicBasicInfoForm: React.FC<Props> = ({ comic, genres }) => {
 
 			<Label isRequired>Description</Label>
 			<Textarea
-				maxCharacters={256}
+				maxCharacters={1024}
 				rows={6}
 				{...register('description')}
 				defaultValue={comic.description}

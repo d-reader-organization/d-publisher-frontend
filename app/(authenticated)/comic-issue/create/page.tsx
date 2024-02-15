@@ -114,7 +114,7 @@ export default function CreateComicIssuePage() {
 					/>
 					<Label>Description</Label>
 					<Textarea
-						maxCharacters={256}
+						maxCharacters={1024}
 						rows={6}
 						{...register('description')}
 						placeholder='My comic issue description'

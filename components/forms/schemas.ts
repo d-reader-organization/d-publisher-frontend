@@ -9,7 +9,7 @@ import {
 import * as yup from 'yup'
 
 export const updateCreatorValidationSchema = yup.object().shape({
-	description: yup.string().max(256, generateMaxLengthErrorMessage('description', 256)),
+	description: yup.string().max(512, generateMaxLengthErrorMessage('description', 512)),
 	flavorText: yup.string().max(128, generateMaxLengthErrorMessage('flavor text', 128)),
 	tippingAddress: yup.string().max(128, generateMaxLengthErrorMessage('tipping address', 128)),
 })
@@ -27,7 +27,7 @@ export const updateComicValidationSchema = yup.object().shape({
 		.string()
 		.required(yupRequiredMessage('Description'))
 		.min(0, generateMinLengthErrorMessage('description', 0))
-		.max(256, generateMaxLengthErrorMessage('description', 256)),
+		.max(1024, generateMaxLengthErrorMessage('description', 1024)),
 	flavorText: yup.string().notOneOf([undefined]).max(128, generateMaxLengthErrorMessage('flavorText', 128)),
 })
 
@@ -59,7 +59,7 @@ export const registerValidationSchema = yup.object().shape({
 })
 
 export const yourDetailsValidationSchema = yup.object().shape({
-	description: yup.string().max(256, generateMaxLengthErrorMessage('description', 256)),
+	description: yup.string().max(512, generateMaxLengthErrorMessage('description', 512)),
 	flavorText: yup.string().max(128, generateMaxLengthErrorMessage('flavor text', 128)),
 })
 
@@ -91,7 +91,7 @@ export const createComicValidationSchema = yup.object().shape({
 		.string()
 		.required(yupRequiredMessage('Description'))
 		.min(0, generateMinLengthErrorMessage('description', 0))
-		.max(256, generateMaxLengthErrorMessage('description', 256)),
+		.max(1024, generateMaxLengthErrorMessage('description', 1024)),
 	flavorText: yup.string().notOneOf([undefined]).max(128, generateMaxLengthErrorMessage('flavorText', 128)),
 	// collaborators: yup
 	// 	.array()
@@ -136,7 +136,7 @@ export const createComicIssueValidationSchema = yup.object().shape({
 		.string()
 		.required(yupRequiredMessage('Description'))
 		.min(0, generateMinLengthErrorMessage('description', 0))
-		.max(256, generateMaxLengthErrorMessage('description', 256)),
+		.max(1024, generateMaxLengthErrorMessage('description', 1024)),
 	flavorText: yup.string().notOneOf([undefined]).max(128, generateMaxLengthErrorMessage('flavorText', 128)),
 	creatorAddress: yup.string(),
 	comicSlug: yup.string().required(),
