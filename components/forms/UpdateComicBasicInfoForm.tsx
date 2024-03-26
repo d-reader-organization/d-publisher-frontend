@@ -41,6 +41,7 @@ const UpdateComicBasicInfoForm: React.FC<Props> = ({ comic, genres }) => {
 			isCompleted: false,
 			description: '',
 			flavorText: '',
+			title: comic.title,
 		},
 		resolver: yupResolver(updateComicValidationSchema) as Resolver<UpdateComicData>,
 	})
@@ -68,7 +69,7 @@ const UpdateComicBasicInfoForm: React.FC<Props> = ({ comic, genres }) => {
 	return (
 		<Form fullWidth className='form--update-comic-basic-info'>
 			<Label isRequired>Comic title</Label>
-			<Input disabled placeholder={comic.title} />
+			<Input placeholder={comic.title} {...register('title')} />
 
 			<Label isRequired>Slug</Label>
 			<Input disabled placeholder={comic.slug} />

@@ -58,6 +58,7 @@ export interface CreateComicData
 export type UpdateComicData = Partial<
 	Pick<
 		CreateComicData,
+		| 'title'
 		| 'isCompleted'
 		| 'audienceType'
 		| 'description'
