@@ -11,7 +11,8 @@
 		"prebuild": "node prebuild.js",
 		"build": "next build",
 		"start": "next start",
-		"lint": "next lint"
+		"lint": "next lint",
+		"preinstall": "npx only-allow yarn"
 	},
 	"dependencies": {
 		"@emotion/react": "^11.11.1",
