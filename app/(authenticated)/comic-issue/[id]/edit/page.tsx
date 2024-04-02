@@ -16,7 +16,6 @@ interface Params {
 
 export default function EditComicIssuePage({ params }: { params: Params }) {
 	const { data: comicIssue } = useFetchRawComicIssue(params.id)
-	console.log(comicIssue)
 	useAuthenticatedRoute()
 
 	if (!comicIssue) return null
@@ -28,7 +27,7 @@ export default function EditComicIssuePage({ params }: { params: Params }) {
 				<Expandable title='Basic details'>
 					<UpdateComicIssueBasicInfoForm comicIssue={comicIssue} />
 				</Expandable>
-				<Expandable title='Cover'>
+				<Expandable title='Covers'>
 					<UpdateComicIssueCoversForm comicIssue={comicIssue} />
 				</Expandable>
 				<Expandable title='Visual assets'>

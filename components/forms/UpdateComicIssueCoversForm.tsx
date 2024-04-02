@@ -78,10 +78,6 @@ const UpdateComicIssueCoversForm: React.FC<Props> = ({ comicIssue }) => {
 			await updateStatelessCovers(formData)
 		}
 	}
-	// const handlePreviewUrl = (rarity:ComicRarity) => {
-	// 	const rarityCover = comicIssue.statelessCovers.find((cover) => cover.rarity === rarity)
-	// 	rarityCover ? rarityCover.image : ''
-	// }
 
 	const handleChangeCoverImage = (rarity: ComicRarity, value: File) => {
 		setIssueCovers((currentIssueCovers) => {
@@ -120,7 +116,7 @@ const UpdateComicIssueCoversForm: React.FC<Props> = ({ comicIssue }) => {
 			<main>
 				<Form padding fullWidth className='form--edit-comic-issue-covers'>
 					<Label isRequired tooltipText={coverVariantsTooltipText}>
-						Issue Covers
+						Comic Issue Covers
 					</Label>
 					<Label>Reupload Cover variants (rarities)</Label>
 					<Select
@@ -133,10 +129,10 @@ const UpdateComicIssueCoversForm: React.FC<Props> = ({ comicIssue }) => {
 						placeholder='Number of rarities'
 						className='rarities-select'
 					/>
-					{issueCovers.map(({ rarity, artist, isDefault, image }) => {
-						console.log(artist)
+					{issueCovers.map(({ rarity, artist, isDefault }) => {
 						return (
-							<Expandable open={issueCovers.length === 1} title={rarity} key={rarity}>
+							<div key={rarity}>
+								<h2 className='rarity-header'>{rarity}</h2>
 								<div className='rarity-cover-wrapper'>
 									<div>
 										<Label isRequired tooltipText={comicIssueCoverImageTooltipText}>
@@ -150,7 +146,6 @@ const UpdateComicIssueCoversForm: React.FC<Props> = ({ comicIssue }) => {
 												handleChangeCoverImage(rarity, files[0]?.file ?? '')
 											}}
 											options={{ accept: imageTypes, maxFiles: 1 }}
-											// previewUrl={comicIssue.statelessCovers.find((cover) => cover.rarity === rarity)?.image}
 										/>
 									</div>
 									<div>
@@ -173,7 +168,7 @@ const UpdateComicIssueCoversForm: React.FC<Props> = ({ comicIssue }) => {
 										</div>
 									</div>
 								</div>
-							</Expandable>
+							</div>
 						)
 					})}
 					<FormActions>

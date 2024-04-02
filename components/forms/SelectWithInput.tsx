@@ -4,7 +4,7 @@ import { cloneDeep } from 'lodash'
 import { SelectOption } from 'models/selectOption'
 import { SelectInputField } from 'models/selectInputField'
 import CloseIcon from 'public/assets/vector-icons/close.svg'
-import { isValidDefaultValues } from '@/constants/selectOptions'
+import { areValidDefaultValues } from '@/constants/selectOptions'
 
 import Input from './Input'
 import Select from './Select'
@@ -17,7 +17,7 @@ interface Props {
 
 const SelectWithInput = forwardRef<HTMLInputElement, Props>(
 	({ defaultValues = [], options, onChange = () => {} }, ref) => {
-		const [inputs, setInputs] = useState<SelectInputField[]>(isValidDefaultValues(defaultValues) ? defaultValues : [])
+		const [inputs, setInputs] = useState<SelectInputField[]>(areValidDefaultValues(defaultValues) ? defaultValues : [])
 
 		const handleSelect = (selectedOptions: SelectOption[]) => {
 			const selectedOption = selectedOptions[0]
@@ -52,7 +52,7 @@ const SelectWithInput = forwardRef<HTMLInputElement, Props>(
 		}
 
 		useEffect(() => {
-			if (isValidDefaultValues(defaultValues)) setInputs(defaultValues)
+			if (areValidDefaultValues(defaultValues)) setInputs(defaultValues)
 		}, [defaultValues])
 
 		return (

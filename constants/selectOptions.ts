@@ -58,6 +58,6 @@ export function mapCollaboratorsToSelectInput(collaborators: ComicIssueCollabora
 	})
 }
 
-export const isValidDefaultValues = (defaultValues: SelectInputField[]): boolean => {
+export const areValidDefaultValues = (defaultValues: SelectInputField[]): boolean => {
 	return defaultValues.length > 0 && defaultValues.every((value) => value.hasOwnProperty('selectValue'))
 }

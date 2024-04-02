@@ -26,7 +26,6 @@ export interface RawComicIssue {
 	popularizedAt: Date
 	verifiedAt: Date
 	comicSlug: string
-
 	genres: PartialGenre[]
 	stats: RawComicIssueStats
 	creatorAddress: string
