@@ -18,6 +18,7 @@ export interface RawComicIssue {
 	flavorText: string
 	cover: string
 	signature: string
+	pdf: string
 	releaseDate: string
 	isFreeToRead: boolean
 	isFullyUploaded: boolean
@@ -25,6 +26,7 @@ export interface RawComicIssue {
 	popularizedAt: Date
 	verifiedAt: Date
 	comicSlug: string
+
 	genres: PartialGenre[]
 	stats: RawComicIssueStats
 	creatorAddress: string

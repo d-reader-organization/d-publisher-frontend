@@ -18,6 +18,8 @@ export const RoutePath = Object.freeze({
 	ComicUploadAssets: (comicSlug: string) => `/comic/${comicSlug}/upload-assets`,
 	ComicConnectSocials: (comicSlug: string) => `/comic/${comicSlug}/connect-socials`,
 	ComicIssue: (comicIssueId: string | number) => `/comic-issue${comicIssueId}`,
+
+	EditComicIssue: (comicIssueId: string | number) => `/comic-issue/${comicIssueId}/edit`,
 	CreateComicIssue: (comicSlug: string) => `/comic-issue/create?comicSlug=${comicSlug}`,
 	ComicIssueUploadCovers: (comicIssueId: string | number) => `/comic-issue/${comicIssueId}/upload-covers`,
 	ComicIssueUploadAssets: (comicIssueId: string | number) => `/comic-issue/${comicIssueId}/upload-assets`,

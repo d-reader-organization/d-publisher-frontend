@@ -83,6 +83,7 @@ export type UpdateComicIssueData = Partial<
 		| 'creatorBackupAddress'
 		| 'collaborators'
 		| 'royaltyWallets'
+		| 'isFreeToRead'
 	>
 >
 
