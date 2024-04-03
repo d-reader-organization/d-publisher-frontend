@@ -161,7 +161,7 @@ export default function ComicPage({ params }: { params: Params }) {
 											<td className='centered'>{issue.stats.averageRating}</td>
 											<td className='centered'>{issue.verifiedAt ? '✅' : '❌'}</td>
 											<td className='centered'>
-												<ButtonLink noMinWidth backgroundColor='transparent' href='#'>
+												<ButtonLink noMinWidth backgroundColor='transparent' href={RoutePath.EditComicIssue(issue.id)}>
 													Edit
 												</ButtonLink>
 											</td>

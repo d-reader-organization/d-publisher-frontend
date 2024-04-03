@@ -46,6 +46,7 @@
 		&--expanded {
 			height: var(--content-height);
 			overflow-x: auto;
+			overflow-y: auto;
 		}
 	}
 

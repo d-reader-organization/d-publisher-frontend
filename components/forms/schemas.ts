@@ -30,6 +30,14 @@ export const updateComicValidationSchema = yup.object().shape({
 		.max(1024, generateMaxLengthErrorMessage('description', 1024)),
 	flavorText: yup.string().notOneOf([undefined]).max(128, generateMaxLengthErrorMessage('flavorText', 128)),
 })
+export const updateComicIssueValidationSchema = yup.object().shape({
+	description: yup
+		.string()
+		.required(yupRequiredMessage('Description'))
+		.min(0, generateMinLengthErrorMessage('description', 0))
+		.max(1024, generateMaxLengthErrorMessage('description', 1024)),
+	flavorText: yup.string().notOneOf([undefined]).max(128, generateMaxLengthErrorMessage('flavorText', 128)),
+})
 
 export const visualIdentityValidationSchema = yup.object().shape({
 	avatar: yup.mixed(),

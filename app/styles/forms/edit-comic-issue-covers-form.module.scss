@@ -4,7 +4,16 @@
 	.rarities-select {
 		width: 262px;
 	}
-
+	.rarity-header {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		padding: 30px;
+		font-weight: 700;
+		font-size: 16px;
+		line-height: 22px;
+	}
 	.rarity-cover-wrapper {
 		display: flex;
 		justify-content: center;

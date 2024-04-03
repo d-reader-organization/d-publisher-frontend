@@ -1,6 +1,8 @@
 import { AudienceType } from '@/enums/audienceType'
 import { CollaboratorRole } from '@/enums/collaboratorRole'
+import { ComicIssueCollaborator } from '@/models/comicIssue/comicIssueCollaborator'
 import { PartialGenre } from '@/models/genre'
+import { SelectInputField } from '@/models/selectInputField'
 import { SelectOption } from '@/models/selectOption'
 
 export const ROLE_SELECT_OPTIONS: SelectOption[] = [
@@ -45,4 +47,17 @@ export const genresToSelectOptions = (genres: PartialGenre[]): SelectOption[] =>
 
 export const findOptions = (options: SelectOption[], ...values: string[]): SelectOption[] => {
 	return options.filter((option) => values.includes(option.value))
+}
+
+export function mapCollaboratorsToSelectInput(collaborators: ComicIssueCollaborator[]): SelectInputField[] {
+	return collaborators.map((collaborator) => {
+		return {
+			selectValue: collaborator.role as CollaboratorRole,
+			inputValue: collaborator.name,
+		}
+	})
+}
+
+export const areValidDefaultValues = (defaultValues: SelectInputField[]): boolean => {
+	return defaultValues.length > 0 && defaultValues.every((value) => value.hasOwnProperty('selectValue'))
 }
