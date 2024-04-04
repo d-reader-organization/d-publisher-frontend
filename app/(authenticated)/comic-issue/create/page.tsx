@@ -25,6 +25,7 @@ import IntegerInput from '@/components/forms/IntegerInput'
 import SelectWithInput from '@/components/forms/SelectWithInput'
 import Textarea from '@/components/forms/Textarea'
 import FormActions from '@/components/forms/FormActions'
+import CustomDatePicker from '@/components/forms/CustomDatePicker'
 
 export default function CreateComicIssuePage() {
 	const router = useRouter()
@@ -33,13 +34,13 @@ export default function CreateComicIssuePage() {
 	const searchParams = useSearchParams()
 	const comicSlug = searchParams.get('comicSlug') || ''
 
-	const { register, setValue, getValues, watch, handleSubmit } = useForm<CreateComicIssueData>({
+	const { register, setValue, getValues, watch, handleSubmit, control } = useForm<CreateComicIssueData>({
 		defaultValues: {
 			title: '',
 			number: 1,
 			description: '',
 			flavorText: '',
-			releaseDate: new Date(),
+			releaseDate: undefined,
 			comicSlug: comicSlug,
 			isFreeToRead: false,
 			collaborators: [],
@@ -112,6 +113,11 @@ export default function CreateComicIssuePage() {
 							)
 						}}
 					/>
+					<div className='issue-release-date-wrapper'>
+						<Label isRequired>Release Date</Label>
+						<CustomDatePicker name='releaseDate' control={control} />
+					</div>
+
 					<Label>Description</Label>
 					<Textarea
 						maxCharacters={1024}

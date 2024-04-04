@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
+import { Resolver, useForm } from 'react-hook-form'
 
 import Button from 'components/Button'
 import Input from '@/components/forms/Input'
 import SelectWithInput from './SelectWithInput'
-import { Resolver, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { updateComicIssueValidationSchema } from './schemas'
 import Form from './Form'
@@ -13,14 +13,13 @@ import FormActions from './FormActions'
 import { comicIssueAuthorsTooltipText, isComicFreeToReadTooltipText } from '@/constants/tooltips'
 import IntegerInput from './IntegerInput'
 import Checkbox from '../Checkbox'
-
 import { useToaster } from '@/providers/ToastProvider'
 import { RawComicIssue } from '@/models/comicIssue/rawComicIssue'
 import { UpdateComicIssueData } from '@/models/comicIssue'
 import { ROLE_SELECT_OPTIONS, mapCollaboratorsToSelectInput } from '@/constants/selectOptions'
-
 import { useUpdateComicIssue } from '@/api/comicIssue'
 import { CollaboratorRole } from '@/enums/collaboratorRole'
+import CustomDatePicker from './CustomDatePicker'
 
 interface Props {
 	comicIssue: RawComicIssue
@@ -30,13 +29,14 @@ const UpdateComicIssueBasicInfoForm: React.FC<Props> = ({ comicIssue }) => {
 	const toaster = useToaster()
 
 	const { mutateAsync: updateComicIssue } = useUpdateComicIssue(comicIssue.id)
-	const { register, handleSubmit, setValue, watch, reset, getValues } = useForm<UpdateComicIssueData>({
+	const { register, handleSubmit, setValue, watch, reset, getValues, control } = useForm<UpdateComicIssueData>({
 		defaultValues: {
 			number: 1,
 			description: '',
 			flavorText: '',
 			isFreeToRead: false,
 			collaborators: comicIssue.collaborators,
+			releaseDate: new Date(comicIssue.releaseDate),
 		},
 		resolver: yupResolver(updateComicIssueValidationSchema) as Resolver<UpdateComicIssueData>,
 	})
@@ -49,6 +49,7 @@ const UpdateComicIssueBasicInfoForm: React.FC<Props> = ({ comicIssue }) => {
 				number: comicIssue.number,
 				isFreeToRead: comicIssue.isFreeToRead,
 				collaborators: comicIssue.collaborators,
+				releaseDate: new Date(comicIssue.releaseDate),
 			})
 		}
 	}, [comicIssue, reset])
@@ -105,7 +106,10 @@ const UpdateComicIssueBasicInfoForm: React.FC<Props> = ({ comicIssue }) => {
 					)
 				}}
 			/>
-
+			<div className='issue-release-date-wrapper'>
+				<Label isRequired>Release Date</Label>
+				<CustomDatePicker name='releaseDate' control={control} />
+			</div>
 			<Label>Description</Label>
 			<Textarea maxCharacters={1024} rows={6} {...register('description')} placeholder='My comic issue description' />
 			<Label>Flavor text</Label>

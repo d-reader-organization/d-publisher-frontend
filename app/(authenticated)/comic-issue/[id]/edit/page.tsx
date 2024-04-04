@@ -17,7 +17,6 @@ interface Params {
 export default function EditComicIssuePage({ params }: { params: Params }) {
 	const { data: comicIssue } = useFetchRawComicIssue(params.id)
 	useAuthenticatedRoute()
-
 	if (!comicIssue) return null
 
 	return (
