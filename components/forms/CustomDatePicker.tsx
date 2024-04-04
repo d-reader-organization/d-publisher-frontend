@@ -24,7 +24,6 @@ const CustomDatePicker: React.FC<Props> = ({ name, control }) => {
 							{...field}
 							value={field.value ? dayjs(field.value) : null}
 							onChange={(date) => {
-								console.log(date)
 								field.onChange(date?.toDate() ?? null)
 								setValue(name, dayjs(date).toDate(), { shouldValidate: true })
 							}}
