@@ -37,6 +37,7 @@ const UpdateComicIssueBasicInfoForm: React.FC<Props> = ({ comicIssue }) => {
 			flavorText: '',
 			isFreeToRead: false,
 			collaborators: comicIssue.collaborators,
+			title: comicIssue.title,
 		},
 		resolver: yupResolver(updateComicIssueValidationSchema) as Resolver<UpdateComicIssueData>,
 	})
@@ -64,7 +65,7 @@ const UpdateComicIssueBasicInfoForm: React.FC<Props> = ({ comicIssue }) => {
 	return (
 		<Form padding maxSize='md' fullWidth className='form--create-comic-issue'>
 			<Label isRequired>Comic issue title</Label>
-			<Input placeholder={comicIssue.title} disabled />
+			<Input placeholder={comicIssue.title} {...register('title')} />
 
 			<Label isRequired>Slug</Label>
 			<Input disabled placeholder={comicIssue.slug} />
