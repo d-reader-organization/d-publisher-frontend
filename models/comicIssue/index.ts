@@ -85,7 +85,6 @@ export type UpdateComicIssueData = Partial<
 		| 'collaborators'
 		| 'royaltyWallets'
 		| 'isFreeToRead'
-		| 'title'
 	>
 >
 
