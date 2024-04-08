@@ -36,7 +36,7 @@ const UpdateComicIssueBasicInfoForm: React.FC<Props> = ({ comicIssue }) => {
 			flavorText: '',
 			isFreeToRead: false,
 			collaborators: comicIssue.collaborators,
-			releaseDate: new Date(comicIssue.releaseDate),
+			releaseDate: new Date(comicIssue.releaseDate).toLocaleDateString(),
 		},
 		resolver: yupResolver(updateComicIssueValidationSchema) as Resolver<UpdateComicIssueData>,
 	})
@@ -49,7 +49,7 @@ const UpdateComicIssueBasicInfoForm: React.FC<Props> = ({ comicIssue }) => {
 				number: comicIssue.number,
 				isFreeToRead: comicIssue.isFreeToRead,
 				collaborators: comicIssue.collaborators,
-				releaseDate: new Date(comicIssue.releaseDate),
+				releaseDate: new Date(comicIssue.releaseDate).toLocaleString(),
 			})
 		}
 	}, [comicIssue, reset])
@@ -86,6 +86,10 @@ const UpdateComicIssueBasicInfoForm: React.FC<Props> = ({ comicIssue }) => {
 					}}
 				/>
 			</div>
+			<div className='issue-release-date-wrapper'>
+				<Label isRequired>Release Date</Label>
+				<CustomDatePicker name='releaseDate' control={control} />
+			</div>
 			<Label isRequired tooltipText={comicIssueAuthorsTooltipText}>
 				Authors list
 			</Label>
@@ -106,10 +110,7 @@ const UpdateComicIssueBasicInfoForm: React.FC<Props> = ({ comicIssue }) => {
 					)
 				}}
 			/>
-			<div className='issue-release-date-wrapper'>
-				<Label isRequired>Release Date</Label>
-				<CustomDatePicker name='releaseDate' control={control} />
-			</div>
+
 			<Label>Description</Label>
 			<Textarea maxCharacters={1024} rows={6} {...register('description')} placeholder='My comic issue description' />
 			<Label>Flavor text</Label>

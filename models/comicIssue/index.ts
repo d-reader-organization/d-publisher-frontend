@@ -66,7 +66,7 @@ export interface CreateComicIssueData
 	creatorBackupAddress?: string
 	collaborators?: ComicIssueCollaborator[]
 	royaltyWallets?: RoyaltyWallet[]
-	releaseDate: Date
+	releaseDate: string
 }
 
 export type UpdateComicIssueData = Partial<

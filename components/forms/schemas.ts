@@ -148,7 +148,7 @@ export const createComicIssueValidationSchema = yup.object().shape({
 	flavorText: yup.string().notOneOf([undefined]).max(128, generateMaxLengthErrorMessage('flavorText', 128)),
 	creatorAddress: yup.string(),
 	comicSlug: yup.string().required(),
-	releaseDate: yup.date().required(),
+	releaseDate: yup.string().required(),
 	isFreeToRead: yup.boolean().required(),
 	collaborators: yup
 		.array()

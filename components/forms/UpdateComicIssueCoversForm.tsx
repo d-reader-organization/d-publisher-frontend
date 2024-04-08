@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react'
 
 import Button from 'components/Button'
 import Input from '@/components/forms/Input'
-import Expandable from '@/components/Expandable'
 import Checkbox from '@/components/Checkbox'
 import { useToaster } from '@/providers/ToastProvider'
 import { CreateStatelessCoverData } from '@/models/comicIssue/statelessCover'

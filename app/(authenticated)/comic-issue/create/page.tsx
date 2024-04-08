@@ -40,7 +40,7 @@ export default function CreateComicIssuePage() {
 			number: 1,
 			description: '',
 			flavorText: '',
-			releaseDate: undefined,
+			releaseDate: new Date().toLocaleDateString(),
 			comicSlug: comicSlug,
 			isFreeToRead: false,
 			collaborators: [],
@@ -59,7 +59,7 @@ export default function CreateComicIssuePage() {
 	}
 
 	const handleFormSubmit = async (data: CreateComicIssueData) => {
-		const comicIssue = await createComicIssue(data)
+		const comicIssue = await createComicIssue({ ...data, releaseDate: data.releaseDate.toLocaleString() })
 		router.push(RoutePath.ComicIssueUploadCovers(comicIssue.id))
 	}
 
@@ -95,6 +95,11 @@ export default function CreateComicIssuePage() {
 							}}
 						/>
 					</div>
+					<div className='issue-release-date-wrapper'>
+						<Label isRequired>Release Date</Label>
+						<CustomDatePicker name='releaseDate' control={control} />
+					</div>
+
 					<Label isRequired tooltipText={comicIssueAuthorsTooltipText}>
 						Authors list
 					</Label>
@@ -113,10 +118,6 @@ export default function CreateComicIssuePage() {
 							)
 						}}
 					/>
-					<div className='issue-release-date-wrapper'>
-						<Label isRequired>Release Date</Label>
-						<CustomDatePicker name='releaseDate' control={control} />
-					</div>
 
 					<Label>Description</Label>
 					<Textarea
