@@ -71,6 +71,7 @@ export interface CreateComicIssueData
 export type UpdateComicIssueData = Partial<
 	Pick<
 		CreateComicIssueData,
+		| 'title'
 		| 'number'
 		| 'supply'
 		| 'discountMintPrice'
