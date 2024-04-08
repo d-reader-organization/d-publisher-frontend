@@ -31,6 +31,7 @@ const UpdateComicIssueBasicInfoForm: React.FC<Props> = ({ comicIssue }) => {
 	const { mutateAsync: updateComicIssue } = useUpdateComicIssue(comicIssue.id)
 	const { register, handleSubmit, setValue, watch, reset, getValues, control } = useForm<UpdateComicIssueData>({
 		defaultValues: {
+			title: comicIssue.title,
 			number: 1,
 			description: '',
 			flavorText: '',
