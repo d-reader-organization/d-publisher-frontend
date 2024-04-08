@@ -37,7 +37,7 @@ const UpdateComicIssueBasicInfoForm: React.FC<Props> = ({ comicIssue }) => {
 			flavorText: '',
 			isFreeToRead: false,
 			collaborators: comicIssue.collaborators,
-			releaseDate: new Date(comicIssue.releaseDate).toLocaleDateString(),
+			releaseDate: new Date(comicIssue.releaseDate),
 		},
 		resolver: yupResolver(updateComicIssueValidationSchema) as Resolver<UpdateComicIssueData>,
 	})
@@ -50,7 +50,7 @@ const UpdateComicIssueBasicInfoForm: React.FC<Props> = ({ comicIssue }) => {
 				number: comicIssue.number,
 				isFreeToRead: comicIssue.isFreeToRead,
 				collaborators: comicIssue.collaborators,
-				releaseDate: new Date(comicIssue.releaseDate).toLocaleString(),
+				releaseDate: new Date(comicIssue.releaseDate),
 			})
 		}
 	}, [comicIssue, reset])

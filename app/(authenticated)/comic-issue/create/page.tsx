@@ -40,7 +40,7 @@ export default function CreateComicIssuePage() {
 			number: 1,
 			description: '',
 			flavorText: '',
-			releaseDate: new Date().toLocaleDateString(),
+			releaseDate: new Date(),
 			comicSlug: comicSlug,
 			isFreeToRead: false,
 			collaborators: [],
@@ -59,7 +59,7 @@ export default function CreateComicIssuePage() {
 	}
 
 	const handleFormSubmit = async (data: CreateComicIssueData) => {
-		const comicIssue = await createComicIssue({ ...data, releaseDate: data.releaseDate.toLocaleString() })
+		const comicIssue = await createComicIssue(data)
 		router.push(RoutePath.ComicIssueUploadCovers(comicIssue.id))
 	}
 

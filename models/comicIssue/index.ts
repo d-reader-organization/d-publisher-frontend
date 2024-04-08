@@ -55,7 +55,7 @@ export interface CreateComicIssueData
 		| 'flavorText'
 		| 'comicSlug'
 		| 'isFreeToRead'
-		// | 'releaseDate'
+		| 'releaseDate'
 	> {
 	isFullyUploaded?: BasicComicIssue['isFullyUploaded']
 	supply?: BasicComicIssue['supply']
@@ -66,7 +66,6 @@ export interface CreateComicIssueData
 	creatorBackupAddress?: string
 	collaborators?: ComicIssueCollaborator[]
 	royaltyWallets?: RoyaltyWallet[]
-	releaseDate: string
 }
 
 export type UpdateComicIssueData = Partial<
