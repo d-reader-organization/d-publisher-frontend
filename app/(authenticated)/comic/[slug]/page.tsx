@@ -115,7 +115,7 @@ export default function ComicPage({ params }: { params: Params }) {
 								slug: <em>{comic.slug}</em>
 							</p>
 							<p>Audience type (age): {comic.audienceType}</p>
-							{/* show banner, logo, and pfp */}
+							{/* show banner, logo */}
 							<p className='description'>{comic.description}</p>
 							<p className='flavor-text'>{comic.flavorText}</p>
 

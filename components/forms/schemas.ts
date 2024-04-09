@@ -124,7 +124,6 @@ export const createComicValidationSchema = yup.object().shape({
 export const uploadComicAssetsValidationSchema = yup.object().shape({
 	cover: yup.mixed(),
 	logo: yup.mixed(),
-	pfp: yup.mixed(),
 	banner: yup.mixed(),
 })
 

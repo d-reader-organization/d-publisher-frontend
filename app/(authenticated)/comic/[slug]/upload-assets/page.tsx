@@ -23,8 +23,6 @@ import {
 	comicCoverTooltipText,
 	comicLogoPreviews,
 	comicLogoTooltipText,
-	comicPfpPreviews,
-	comicPfpTooltipText,
 } from '@/constants/tooltips'
 import FileUpload from '@/components/forms/FileUpload'
 import FormActions from '@/components/forms/FormActions'
@@ -46,7 +44,6 @@ export default function UploadComicAssetsPage({ params }: { params: Params }) {
 		defaultValues: {
 			cover: undefined,
 			logo: undefined,
-			pfp: undefined,
 			banner: undefined,
 		},
 		resolver: yupResolver(uploadComicAssetsValidationSchema) as Resolver<UpdateComicFilesData>,
@@ -73,7 +70,6 @@ export default function UploadComicAssetsPage({ params }: { params: Params }) {
 
 		if (data.cover) formData.append('cover', data.cover)
 		if (data.banner) formData.append('banner', data.banner)
-		if (data.pfp) formData.append('pfp', data.pfp)
 		if (data.logo) formData.append('logo', data.logo)
 
 		await updateComicFiles(formData)
@@ -128,22 +124,6 @@ export default function UploadComicAssetsPage({ params }: { params: Params }) {
 									setValue('cover', files[0]?.file)
 								}}
 								ref={register('cover').ref}
-								options={{ accept: imageTypes, maxFiles: 1 }}
-							/>
-						</div>
-
-						<div className='comic-file-container'>
-							<Label tooltipText={<TooltipContent previews={comicPfpPreviews} text={comicPfpTooltipText} />}>
-								Comic Avatar/PFP
-							</Label>
-							<FileUpload
-								id='pfp-upload'
-								label='500x500px'
-								className='comic-pfp-input'
-								onUpload={(files) => {
-									setValue('pfp', files[0]?.file)
-								}}
-								ref={register('pfp').ref}
 								options={{ accept: imageTypes, maxFiles: 1 }}
 							/>
 						</div>

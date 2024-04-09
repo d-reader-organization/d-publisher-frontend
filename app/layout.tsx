@@ -26,7 +26,7 @@ import 'app/styles/app.scss'
  */
 
 // - place images outside of tooltips?
-// - better "?" messages (what is signature/pfp used for, do we add a cover to the pdf file, do I add logo on top of the cover or not...)
+// - better "?" messages (what is signature used for, do we add a cover to the pdf file, do I add logo on top of the cover or not...)
 // - show where which asset will be used within the app (Figma files) + link publishing document beforehand
 // - TOS
 // - record a walkthrough

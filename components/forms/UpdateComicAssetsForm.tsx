@@ -10,12 +10,7 @@ import FormActions from './FormActions'
 import { useUpdateComicFiles } from '@/api/comic'
 import { RawComic } from '@/models/comic/rawComic'
 import { UpdateComicFilesData } from '@/models/comic'
-import {
-	comicBannerTooltipText,
-	comicCoverTooltipText,
-	comicLogoTooltipText,
-	comicPfpTooltipText,
-} from '@/constants/tooltips'
+import { comicBannerTooltipText, comicCoverTooltipText, comicLogoTooltipText } from '@/constants/tooltips'
 import { useToaster } from '@/providers/ToastProvider'
 import FileUpload from './FileUpload'
 import { imageTypes } from '@/constants/fileTypes'
@@ -31,7 +26,6 @@ const UpdateComicAssetsForm: React.FC<Props> = ({ comic }) => {
 		defaultValues: {
 			cover: undefined,
 			logo: undefined,
-			pfp: undefined,
 			banner: undefined,
 		},
 		resolver: yupResolver(uploadComicAssetsValidationSchema) as Resolver<UpdateComicFilesData>,
@@ -48,7 +42,6 @@ const UpdateComicAssetsForm: React.FC<Props> = ({ comic }) => {
 
 		if (data.cover) formData.append('cover', data.cover)
 		if (data.banner) formData.append('banner', data.banner)
-		if (data.pfp) formData.append('pfp', data.pfp)
 		if (data.logo) formData.append('logo', data.logo)
 
 		await updateComicFiles(formData)
@@ -89,22 +82,6 @@ const UpdateComicAssetsForm: React.FC<Props> = ({ comic }) => {
 						}}
 						ref={register('cover').ref}
 						previewUrl={comic.cover}
-						isUploading={isUploadingFiles}
-						options={{ accept: imageTypes, maxFiles: 1 }}
-					/>
-				</div>
-
-				<div className='comic-file-container'>
-					<Label tooltipText={comicPfpTooltipText}>Comic Avatar/PFP</Label>
-					<FileUpload
-						id='pfp-upload'
-						label='500x500px'
-						className='comic-pfp-input'
-						onUpload={(files) => {
-							setValue('pfp', files[0]?.file)
-						}}
-						ref={register('pfp').ref}
-						previewUrl={comic.pfp}
 						isUploading={isUploadingFiles}
 						options={{ accept: imageTypes, maxFiles: 1 }}
 					/>

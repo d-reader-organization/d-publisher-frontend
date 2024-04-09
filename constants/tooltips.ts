@@ -7,8 +7,6 @@ import comicCoverDesktopPreview from 'public/assets/previews/comic-cover-desktop
 import comicCoverMobilePreview from 'public/assets/previews/comic-cover-mobile.jpg'
 import comicCoverExample from 'public/assets/previews/comic-cover-example.jpg'
 
-import comicPfpExample from 'public/assets/previews/comic-pfp-example.jpg'
-
 import comicLogoDesktopPreview from 'public/assets/previews/comic-logo-desktop.png'
 import comicLogoMobilePreview from 'public/assets/previews/comic-logo-mobile.jpg'
 import comicLogoExample from 'public/assets/previews/comic-logo-example.png'
