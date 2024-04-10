@@ -111,24 +111,6 @@ export const comicCoverPreviews: TooltipImagePreview[] = [
 	},
 ]
 
-export const comicPfpTooltipText = `Following formats are allowed:
-- if transparent: .png, .webp, .gif
-- if not transparent: .jpg, .jpeg, .webp, .png, .gif
-
-Preferrably a jpg or webp format if the image has no transparency.
-
-Pick an image with a ratio 1:1 and at least 500x500 resolution.
-
-This image will be used around the app on places like leaderboards.
-`
-
-export const comicPfpPreviews: TooltipImagePreview[] = [
-	{
-		image: comicPfpExample,
-		caption: 'Comic PFP example',
-	},
-]
-
 export const comicLogoTooltipText = `Following formats are allowed:
 - .png, .webp, .gif
 
