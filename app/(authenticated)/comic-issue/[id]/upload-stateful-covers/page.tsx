@@ -68,10 +68,13 @@ export default function UploadComicIssueStatefulCoversPage({ params }: { params:
 			issueCovers.map(async (cover, index) => {
 				if (cover.image) {
 					const imagesToMerge = [{ src: cover.image }]
-					if (cover.isUsed) imagesToMerge.push({ src: usedOverlayImage.src })
-					else imagesToMerge.push({ src: unusedOverlayImage.src })
+					if (cover.isUsed) {
+						imagesToMerge.push({ src: usedOverlayImage.src })
+					} else imagesToMerge.push({ src: unusedOverlayImage.src })
 
-					if (cover.isSigned && comicIssue.signature) imagesToMerge.push({ src: comicIssue.signature })
+					if (cover.isSigned && comicIssue.signature) {
+						imagesToMerge.push({ src: comicIssue.signature })
+					}
 
 					const mergedImageDataURL = await mergeImages(imagesToMerge, { crossOrigin: 'anonymous' })
 					const response = await fetch(mergedImageDataURL)
