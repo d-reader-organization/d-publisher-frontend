@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import mergeImages from 'merge-images'
+
 import Header from 'components/layout/Header'
 import Button from 'components/Button'
 import Steps from 'components/Steps'
@@ -12,7 +14,7 @@ import { CreateStatefulCoverData } from '@/models/comicIssue/statefulCover'
 import { generateRequiredArrayElementErrorMessage } from '@/utils/error'
 import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
 import Form from '@/components/forms/Form'
-import { useFetchRawComicIssue, useUpdateComicIssueStatelessCovers } from '@/api/comicIssue'
+import { useFetchRawComicIssue, useUpdateComicIssueStatefulCovers } from '@/api/comicIssue'
 import { RoutePath } from '@/enums/routePath'
 import usePrefetchRoute from '@/hooks/usePrefetchRoute'
 import { statefulCoverVariantsTooltipText } from '@/constants/tooltips'
@@ -21,6 +23,8 @@ import Label from '@/components/forms/Label'
 import SkeletonImage from '@/components/SkeletonImage'
 import { statelessCoversToStatefulCovers } from '@/utils/covers'
 import { groupBy, map } from 'lodash'
+import usedOverlayImage from '@/public/assets/images/used.png'
+import unusedOverlayImage from '@/public/assets/images/unused.png'
 
 interface Params {
 	id: string | number
@@ -31,27 +35,21 @@ export default function UploadComicIssueStatefulCoversPage({ params }: { params:
 	const router = useRouter()
 	const comicIssueId = params.id || ''
 	const nextPage = RoutePath.ComicIssueUploadAssets(comicIssueId)
-
 	const [issueCovers, setIssueCovers] = useState<CreateStatefulCoverData[]>([])
 
 	const { data: comicIssue } = useFetchRawComicIssue(comicIssueId)
-	const { mutateAsync: updateStatelessCovers } = useUpdateComicIssueStatelessCovers(comicIssueId)
-
+	const { mutateAsync: updateStatefulCovers } = useUpdateComicIssueStatefulCovers(comicIssueId)
 	usePrefetchRoute(nextPage)
 	useAuthenticatedRoute()
-
 	useEffect(() => {
 		if (comicIssue?.statelessCovers) {
 			const statefulCovers = statelessCoversToStatefulCovers(comicIssue?.statelessCovers)
 			setIssueCovers(statefulCovers)
 		}
 	}, [comicIssue?.statelessCovers])
-
 	if (!comicIssue) return null
-
 	const handleNextClick = async (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
-
 		const unsetArtist = issueCovers.some((issueCover) => issueCover.artist === '')
 		const unsetImage = issueCovers.some((issueCover) => issueCover.image === undefined)
 
@@ -66,21 +64,36 @@ export default function UploadComicIssueStatefulCoversPage({ params }: { params:
 
 		const formData = new FormData()
 
-		let i = 0
-		for (const cover of issueCovers) {
-			if (cover.image) formData.append(`covers[${i}][image]`, cover.image)
-			formData.append(`covers[${i}][artist]`, cover.artist)
-			formData.append(`covers[${i}][isSigned]`, cover.isSigned.toString())
-			formData.append(`covers[${i}][isUsed]`, cover.isUsed.toString())
-			formData.append(`covers[${i}][rarity]`, cover.rarity)
-			i = i + 1
-		}
+		await Promise.all(
+			issueCovers.map(async (cover, index) => {
+				if (cover.image) {
+					const imagesToMerge = [{ src: cover.image }]
+					if (cover.isUsed) {
+						imagesToMerge.push({ src: usedOverlayImage.src })
+					} else imagesToMerge.push({ src: unusedOverlayImage.src })
 
-		await updateStatelessCovers(formData)
+					if (cover.isSigned && comicIssue.signature) {
+						imagesToMerge.push({ src: comicIssue.signature })
+					}
+
+					const mergedImageDataURL = await mergeImages(imagesToMerge, { crossOrigin: 'anonymous' })
+					const response = await fetch(mergedImageDataURL)
+					const blob = await response.blob()
+					formData.append(`covers[${index}][image]`, blob, `cover-${index}.png`)
+				}
+				formData.append(`covers[${index}][artist]`, cover.artist)
+				formData.append(`covers[${index}][isSigned]`, cover.isSigned.toString())
+				formData.append(`covers[${index}][isUsed]`, cover.isUsed.toString())
+				formData.append(`covers[${index}][rarity]`, cover.rarity)
+			})
+		)
+
+		await updateStatefulCovers(formData)
 		router.push(nextPage)
 	}
 
 	const groupedCovers = groupBy(issueCovers, 'rarity')
+
 	return (
 		<>
 			<Header title='Create issue' />
@@ -102,7 +115,6 @@ export default function UploadComicIssueStatefulCoversPage({ params }: { params:
 					<p className='description'>
 						{`Covers with "signed" and "used" states. These will be used for collecting/gamification purposes`}
 					</p>
-
 					{map(groupedCovers, (covers, key) => {
 						return (
 							<Expandable open title={key} key={key}>
@@ -113,13 +125,30 @@ export default function UploadComicIssueStatefulCoversPage({ params }: { params:
 											<Label>{`${isUsed ? 'Used' : 'Unused'}, ${isSigned ? 'Signed' : 'Unsigned'}`}</Label>
 											<div className='cover-upload-wrapper'>
 												<SkeletonImage alt='' src={image} width={200} height={280} className='cover-upload' />
+												{isUsed ? (
+													<SkeletonImage
+														alt=''
+														src={usedOverlayImage}
+														width={200}
+														height={280}
+														className='overlay-image'
+													/>
+												) : (
+													<SkeletonImage
+														alt=''
+														src={unusedOverlayImage}
+														width={200}
+														height={280}
+														className='overlay-image'
+													/>
+												)}
 												{isSigned && (
 													<SkeletonImage
 														alt=''
 														src={comicIssue.signature}
 														width={200}
 														height={280}
-														className='signature-overlay'
+														className='overlay-image'
 													/>
 												)}
 											</div>
