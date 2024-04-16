@@ -2,12 +2,12 @@
 
 .form--edit-comic-issue-stateful-covers {
 	.rarity-cover-wrapper {
+		margin-top: 3rem;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		margin-right: 40px;
 		text-align: center;
-
 		.label {
 			justify-content: center;
 		}
@@ -28,10 +28,63 @@
 		}
 	}
 
+	// .expandable {
+	// 	max-width: 100%;
+	// 	position: relative;
+	// 	&:focus-within .stateful-cover-dropdown-wrapper {
+	// 		display: none; // Hide dropdown wrapper when Expandable is not focused
+	// 	  }
+	// }
+	// .stateful-cover-dropdown-wrapper {
+	// 	top: 6rem;
+	// 	left: 3rem;
+	// 	position: absolute;
+	// 	z-index: 1;
+	// 	display: flex;
+	// 	justify-content: center;
+	// 	gap: 1rem;
+	// 	aspect-ratio: $comic-issue-cover-aspect-ratio;
+	// }
+	// .stateful-cover-dropdown {
+	// 	width: 10rem;
+	// 	margin: 0;
+	// }
+	// .expandable-content {
+	// 	display: flex;
+	// }
+
 	.expandable {
 		max-width: 100%;
+		position: relative;
+
+		&:focus-within .stateful-cover-dropdown-wrapper {
+			display: none; // Hide dropdown wrapper when Expandable is not focused
+		}
 	}
 
+	.stateful-cover-dropdown-wrapper {
+		top: 6rem;
+		left: 3rem;
+		position: absolute;
+		z-index: 1;
+		display: flex;
+		justify-content: center;
+		gap: 1rem;
+		aspect-ratio: $comic-issue-cover-aspect-ratio;
+	}
+
+	.stateful-cover-dropdown {
+		width: 10rem;
+		margin: 0;
+	}
+
+	.expandable-content-wrapper {
+		display: none;
+	}
+
+	.expandable-content-wrapper--expanded {
+		display: flex;
+	}
 	.expandable-content {
 		display: flex;
 	}

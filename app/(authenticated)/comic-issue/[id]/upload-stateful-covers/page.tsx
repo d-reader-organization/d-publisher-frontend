@@ -23,8 +23,11 @@ import Label from '@/components/forms/Label'
 import SkeletonImage from '@/components/SkeletonImage'
 import { statelessCoversToStatefulCovers } from '@/utils/covers'
 import { groupBy, map } from 'lodash'
-import usedOverlayImage from '@/public/assets/images/used.png'
-import unusedOverlayImage from '@/public/assets/images/unused.png'
+import Select from '@/components/forms/Select'
+import { WRAPPER_SELECT_OPTIONS } from '@/constants/selectOptions'
+import { USED_OVERLAY_SELECT_OPTIONS } from '@/constants/selectOptions'
+
+import { SelectOption } from '@/models/selectOption'
 
 interface Params {
 	id: string | number
@@ -34,11 +37,15 @@ export default function UploadComicIssueStatefulCoversPage({ params }: { params:
 	const toaster = useToaster()
 	const router = useRouter()
 	const comicIssueId = params.id || ''
+	const { data: comicIssue } = useFetchRawComicIssue(comicIssueId)
 	const nextPage = RoutePath.ComicIssueUploadAssets(comicIssueId)
 	const [issueCovers, setIssueCovers] = useState<CreateStatefulCoverData[]>([])
+	const [wrapperOverlay, setWrapperOverlay] = useState<string>(WRAPPER_SELECT_OPTIONS[0].value)
+	const [usedOverlay, setUsedOverlay] = useState<string>(USED_OVERLAY_SELECT_OPTIONS[0].value)
+	const [signatureOverlay, setSignatureOverlay] = useState<string>(comicIssue?.signature || '')
 
-	const { data: comicIssue } = useFetchRawComicIssue(comicIssueId)
 	const { mutateAsync: updateStatefulCovers } = useUpdateComicIssueStatefulCovers(comicIssueId)
+
 	usePrefetchRoute(nextPage)
 	useAuthenticatedRoute()
 	useEffect(() => {
@@ -69,11 +76,13 @@ export default function UploadComicIssueStatefulCoversPage({ params }: { params:
 				if (cover.image) {
 					const imagesToMerge = [{ src: cover.image }]
 					if (cover.isUsed) {
-						imagesToMerge.push({ src: usedOverlayImage.src })
-					} else imagesToMerge.push({ src: unusedOverlayImage.src })
+						imagesToMerge.push({ src: usedOverlay })
+					} else {
+						imagesToMerge.push({ src: wrapperOverlay })
+					}
 
 					if (cover.isSigned && comicIssue.signature) {
-						imagesToMerge.push({ src: comicIssue.signature })
+						imagesToMerge.push({ src: signatureOverlay })
 					}
 
 					const mergedImageDataURL = await mergeImages(imagesToMerge, { crossOrigin: 'anonymous' })
@@ -93,7 +102,17 @@ export default function UploadComicIssueStatefulCoversPage({ params }: { params:
 	}
 
 	const groupedCovers = groupBy(issueCovers, 'rarity')
+	const handleWrapperSelect = (selectedOptions: SelectOption[]) => {
+		setWrapperOverlay(selectedOptions[0].value)
+	}
 
+	const handleUsedOverlaySelect = (selectedOptions: SelectOption[]) => {
+		setUsedOverlay(selectedOptions[0].value)
+	}
+
+	const handleSignatureOverlaySelect = (selectedOptions: SelectOption[]) => {
+		setSignatureOverlay(selectedOptions[0].value)
+	}
 	return (
 		<>
 			<Header title='Create issue' />
@@ -117,45 +136,70 @@ export default function UploadComicIssueStatefulCoversPage({ params }: { params:
 					</p>
 					{map(groupedCovers, (covers, key) => {
 						return (
-							<Expandable open title={key} key={key}>
-								{covers.map((cover) => {
-									const { rarity, isSigned, isUsed, image } = cover
-									return (
-										<div className='rarity-cover-wrapper' key={rarity + isSigned + isUsed}>
-											<Label>{`${isUsed ? 'Used' : 'Unused'}, ${isSigned ? 'Signed' : 'Unsigned'}`}</Label>
-											<div className='cover-upload-wrapper'>
-												<SkeletonImage alt='' src={image} width={200} height={280} className='cover-upload' />
-												{isUsed ? (
-													<SkeletonImage
-														alt=''
-														src={usedOverlayImage}
-														width={200}
-														height={280}
-														className='overlay-image'
-													/>
-												) : (
-													<SkeletonImage
-														alt=''
-														src={unusedOverlayImage}
-														width={200}
-														height={280}
-														className='overlay-image'
-													/>
-												)}
-												{isSigned && (
-													<SkeletonImage
-														alt=''
-														src={comicIssue.signature}
-														width={200}
-														height={280}
-														className='overlay-image'
-													/>
-												)}
+							<>
+								<Expandable open title={key} key={key}>
+									<div className='stateful-cover-dropdown-wrapper'>
+										<Select
+											options={WRAPPER_SELECT_OPTIONS}
+											onSelect={handleWrapperSelect}
+											defaultSelectedOptions={[WRAPPER_SELECT_OPTIONS[0]]}
+											className='stateful-cover-dropdown'
+											unselectableIfAlreadySelected={true}
+										/>
+										<Select
+											options={USED_OVERLAY_SELECT_OPTIONS}
+											onSelect={handleUsedOverlaySelect}
+											defaultSelectedOptions={[USED_OVERLAY_SELECT_OPTIONS[0]]}
+											className='stateful-cover-dropdown'
+											unselectableIfAlreadySelected={true}
+										/>
+										<Select
+											options={[{ label: 'Signature #1', value: comicIssue.signature }]}
+											onSelect={handleSignatureOverlaySelect}
+											defaultSelectedOptions={[[{ label: 'Signature #1', value: comicIssue.signature }][0]]}
+											className='stateful-cover-dropdown'
+											unselectableIfAlreadySelected={true}
+										/>
+									</div>
+									{covers.map((cover) => {
+										const { rarity, isSigned, isUsed, image } = cover
+										return (
+											<div className='rarity-cover-wrapper' key={rarity + isSigned + isUsed}>
+												<Label>{`${isUsed ? 'Used' : 'Unused'}, ${isSigned ? 'Signed' : 'Unsigned'}`}</Label>
+												<div className='cover-upload-wrapper'>
+													<SkeletonImage alt='' src={image} width={200} height={280} className='cover-upload' />
+													{isUsed ? (
+														<SkeletonImage
+															alt=''
+															src={usedOverlay}
+															width={200}
+															height={280}
+															className='overlay-image'
+														/>
+													) : (
+														<SkeletonImage
+															alt=''
+															src={wrapperOverlay}
+															width={200}
+															height={280}
+															className='overlay-image'
+														/>
+													)}
+													{isSigned && (
+														<SkeletonImage
+															alt=''
+															src={comicIssue.signature}
+															width={200}
+															height={280}
+															className='overlay-image'
+														/>
+													)}
+												</div>
 											</div>
-										</div>
-									)
-								})}
-							</Expandable>
+										)
+									})}
+								</Expandable>
+							</>
 						)
 					})}
 
