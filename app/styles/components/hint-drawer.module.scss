@@ -1,0 +1,133 @@
+@use '../variables/theme.module.scss' as *;
+@use '../mixins/breakpoints.module.scss' as *;
+@use '../mixins/common.module.scss' as *;
+
+.hint-drawer {
+	background: $grey-600;
+	white-space: pre-wrap;
+
+	// width: max-content;
+	margin-left: auto;
+
+	.hint-drawer-content {
+		height: 100%;
+
+		& img {
+			max-width: 100%;
+			height: auto;
+		}
+	}
+
+	&--open {
+		width: 100%;
+
+		@include lg {
+			min-width: 450px;
+			width: 450px;
+
+			.hint-drawer-title-wrapper,
+			.hint-drawer-content {
+				border-left: 1px solid $grey-300;
+			}
+		}
+	}
+
+	&--closed {
+		position: absolute;
+		right: 0;
+		top: 0;
+
+		.hint-drawer-title-wrapper {
+			border-left: 1px solid $grey-300;
+		}
+
+		@include md {
+			position: initial;
+
+			.hint-drawer-content {
+				border-left: 1px solid $grey-300;
+			}
+		}
+
+		.hint-drawer-title,
+		.hint-drawer-content > * {
+			display: none;
+		}
+	}
+
+	.hint-drawer-title-wrapper {
+		padding: 0.5rem;
+		border-bottom: 1px solid $grey-300;
+		justify-content: space-between;
+		@include flexRow;
+		align-items: center;
+	}
+
+	.hint-drawer-title {
+		font-weight: bold;
+		padding: 0 0.75rem;
+	}
+
+	.hint-drawer-button {
+		background: none;
+		border: none;
+		@include clickable;
+
+		svg {
+			width: 28px;
+			height: auto;
+		}
+	}
+
+	.expandable {
+		border: none;
+		padding: 0.5rem;
+		margin-bottom: 0.5rem;
+
+		.expandable-header,
+		.expandable-content {
+			border: none;
+			padding: 0.5rem 0.75rem;
+		}
+
+		.expandable-content-wrapper img {
+			max-width: $sm-width;
+			width: 100%;
+			border: 1px solid $grey-300;
+		}
+
+		.expandable-content {
+			font-size: 18px;
+		}
+	}
+}
+
+.main--with-hint-drawer {
+	display: flex;
+	position: relative;
+}
+
+.hint-image {
+	position: relative;
+	margin-bottom: 0.2rem;
+
+	&:first-child {
+		margin-top: 0.2rem;
+	}
+
+	img {
+		max-width: 100%;
+		height: auto;
+	}
+
+	.text {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		margin: 0 0 5px 0;
+		padding: 0.2rem 0.4rem 0.2rem 0.2rem;
+		font-style: italic;
+		background-color: $grey-400;
+		border-top-right-radius: 8px;
+	}
+}

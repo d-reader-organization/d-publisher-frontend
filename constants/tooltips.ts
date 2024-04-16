@@ -11,7 +11,7 @@ import comicLogoDesktopPreview from 'public/assets/previews/comic-logo-desktop.p
 import comicLogoMobilePreview from 'public/assets/previews/comic-logo-mobile.jpg'
 import comicLogoExample from 'public/assets/previews/comic-logo-example.png'
 
-export const genresTooltipText = 'We suggest picking not more than 3 genres'
+export const genresTooltipText = 'We suggest picking not more than 4 genres'
 export const audienceTypeTooltipText = `Pick an audience for your comic series:
 
 (E) EVERYONE - Appropriate for readers of all ages. May contain cartoon violence and/or some comic mischief.
@@ -20,7 +20,7 @@ export const audienceTypeTooltipText = `Pick an audience for your comic series:
 (M) MATURE - Appropriate for readers age 17 and older. May contain intense violence, extensive profanity, nudity, sexual themes and other content suitable only for older readers`
 
 export const currentStatusTooltipText =
-	'Are your series complete and expect no more releases or is it an ongoing series?'
+	'Is your series complete and expects no more releases or is it an ongoing series?'
 
 export const isComicFreeToReadTooltipText = `Do you want this comic episode to be available to read for free on the platform, Regardless if the user owns the digital copy or is a monthly subscriber?
 
@@ -75,7 +75,7 @@ export const comicBannerPreviews: TooltipImagePreview[] = [
 	},
 	{
 		image: comicBannerDesktopPreview,
-		caption: 'Comic banner on desktop',
+		caption: 'Comic banner with logo on top',
 	},
 	{
 		image: comicBannerMobilePreview,
@@ -103,7 +103,7 @@ export const comicCoverPreviews: TooltipImagePreview[] = [
 	},
 	{
 		image: comicCoverDesktopPreview,
-		caption: 'Comic covers on desktop',
+		caption: 'Comic covers with logo on top',
 	},
 	{
 		image: comicCoverMobilePreview,

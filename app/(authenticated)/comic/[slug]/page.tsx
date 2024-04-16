@@ -76,7 +76,7 @@ export default function ComicPage({ params }: { params: Params }) {
 										className='action-button'
 										clickableEffect
 									>
-										+Episode
+										New Episode
 									</ButtonLink>
 								</FlexRow>
 								<FlexRow className='socials'>

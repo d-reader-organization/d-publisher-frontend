@@ -29,6 +29,11 @@ import FormActions from '@/components/forms/FormActions'
 import Label from '@/components/forms/Label'
 import { imageTypes } from '@/constants/fileTypes'
 import TooltipContent from '@/components/TooltipContent'
+import { useLocalStorage } from '@/hooks'
+import HintDrawer from '@/components/layout/HintDrawer'
+import Box from '@mui/material/Box'
+import HintWithImage from '@/components/HintWithImage'
+import Expandable from '@/components/Expandable'
 
 interface Params {
 	slug: string
@@ -39,6 +44,7 @@ export default function UploadComicAssetsPage({ params }: { params: Params }) {
 	const toaster = useToaster()
 	const comicSlug = params.slug || ''
 	const nextPage = RoutePath.ComicConnectSocials(comicSlug)
+	const [isHintDrawerOpen] = useLocalStorage('hint-drawer-open', true)
 
 	const { register, setValue, handleSubmit } = useForm<UpdateComicFilesData>({
 		defaultValues: {
@@ -77,7 +83,7 @@ export default function UploadComicAssetsPage({ params }: { params: Params }) {
 
 	return (
 		<>
-			<Header title='Create Comic' />
+			<Header title='Create comic series' />
 			<Steps
 				steps={[
 					{ label: '01 Create comic', isActive: false },
@@ -86,15 +92,12 @@ export default function UploadComicAssetsPage({ params }: { params: Params }) {
 				]}
 			/>
 
-			<main>
-				<Form padding maxSize='lg' fullWidth className='form--edit-comic-assets'>
+			<main className='main--with-hint-drawer'>
+				<Form padding maxSize='lg' fullWidth className='form--edit-comic-assets' hiddenOnMobile={isHintDrawerOpen}>
 					<div className='comic-file-wrapper'>
 						<div className='comic-file-container'>
-							<Label
-								isRequired
-								tooltipText={<TooltipContent previews={comicBannerPreviews} text={comicBannerTooltipText} />}
-							>
-								Comic Banner
+							<Label isRequired tooltipText={<TooltipContent text={comicBannerTooltipText} />}>
+								Comic banner
 							</Label>
 							<FileUpload
 								id='banner-upload'
@@ -110,10 +113,7 @@ export default function UploadComicAssetsPage({ params }: { params: Params }) {
 					</div>
 					<div className='comic-file-wrapper'>
 						<div className='comic-file-container'>
-							<Label
-								isRequired
-								tooltipText={<TooltipContent previews={comicCoverPreviews} text={comicCoverTooltipText} />}
-							>
+							<Label isRequired tooltipText={<TooltipContent text={comicCoverTooltipText} />}>
 								Comic series cover
 							</Label>
 							<FileUpload
@@ -129,11 +129,8 @@ export default function UploadComicAssetsPage({ params }: { params: Params }) {
 						</div>
 
 						<div className='comic-file-container'>
-							<Label
-								isRequired
-								tooltipText={<TooltipContent previews={comicLogoPreviews} text={comicLogoTooltipText} />}
-							>
-								Comic Logo (title)
+							<Label isRequired tooltipText={<TooltipContent text={comicLogoTooltipText} />}>
+								Comic logo (title)
 							</Label>
 							<FileUpload
 								id='logo-upload'
@@ -163,6 +160,20 @@ export default function UploadComicAssetsPage({ params }: { params: Params }) {
 						</Button>
 					</FormActions>
 				</Form>
+
+				<HintDrawer>
+					<Box>
+						<Expandable title='Banner'>
+							<HintWithImage previews={comicBannerPreviews} text={comicBannerTooltipText} />
+						</Expandable>
+						<Expandable title='Cover'>
+							<HintWithImage previews={comicCoverPreviews} text={comicCoverTooltipText} />
+						</Expandable>
+						<Expandable title='Logo'>
+							<HintWithImage previews={comicLogoPreviews} text={comicLogoTooltipText} />
+						</Expandable>
+					</Box>
+				</HintDrawer>
 			</main>
 		</>
 	)

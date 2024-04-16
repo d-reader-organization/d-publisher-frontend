@@ -19,6 +19,8 @@ import usePrefetchRoute from '@/hooks/usePrefetchRoute'
 import { useToaster } from '@/providers/ToastProvider'
 import FormActions from '@/components/forms/FormActions'
 import Label from '@/components/forms/Label'
+import HintDrawer from '@/components/layout/HintDrawer'
+import Box from '@mui/material/Box'
 
 interface Params {
 	slug: string
@@ -75,7 +77,7 @@ export default function ConnectComicSocialsPage({ params }: { params: Params }) 
 
 	return (
 		<>
-			<Header title='Create Comic' />
+			<Header title='Create comic series' />
 			<Steps
 				steps={[
 					{ label: '01 Create comic', isActive: false },
@@ -84,8 +86,8 @@ export default function ConnectComicSocialsPage({ params }: { params: Params }) 
 				]}
 			/>
 
-			<main>
-				<Form padding maxSize='md' fullWidth className='form--edit-comic-socials'>
+			<main className='main--with-hint-drawer'>
+				<Form padding maxSize='sm' fullWidth className='form--edit-comic-socials'>
 					<Label className='group-label'>Additional Links</Label>
 					<Label size='small'>Website</Label>
 					<Input prefix='https://' {...register('website')} />
@@ -131,6 +133,13 @@ export default function ConnectComicSocialsPage({ params }: { params: Params }) 
 						</Button>
 					</FormActions>
 				</Form>
+
+				<HintDrawer>
+					<Box px={2.5} py={1}>
+						In case your comic series has any social media links, feel free to add them. These links will be shown on
+						the comic series page.
+					</Box>
+				</HintDrawer>
 			</main>
 		</>
 	)

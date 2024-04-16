@@ -35,6 +35,9 @@ import Dialog from '@mui/material/Dialog'
 import CloseIcon from 'public/assets/vector-icons/close.svg'
 import { useLocalStorage } from '@/hooks/useLocalStorage'
 import { FIRST_TIME_PUBLISHING_NOTICE } from '@/constants/staticText'
+import HintDrawer from '@/components/layout/HintDrawer'
+import FormFaqItems from '@/components/layout/FormFaqItem'
+import { CREATE_COMIC_FAQ } from '@/constants/hints'
 
 type LegalAgreement = {
 	ownershipConfirmation: boolean
@@ -45,7 +48,8 @@ export default function CreateComicPage() {
 	const router = useRouter()
 	const toaster = useToaster()
 
-	const [isFirstTimePublishing, setIsFirstPublishing] = useLocalStorage('firstTimePublishing', true)
+	const [isFirstTimePublishing, setIsFirstPublishing] = useLocalStorage('first-time-publishing', true)
+	const [isHintDrawerOpen] = useLocalStorage('hint-drawer-open', true)
 
 	const { register, setValue, watch, handleSubmit } = useForm<CreateComicData & LegalAgreement>({
 		defaultValues: {
@@ -85,7 +89,7 @@ export default function CreateComicPage() {
 
 	return (
 		<>
-			<Header title='Create Comic' />
+			<Header title='Create comic series' />
 			<Steps
 				steps={[
 					{ label: '01 Create comic', isActive: true },
@@ -94,8 +98,8 @@ export default function CreateComicPage() {
 				]}
 			/>
 
-			<main>
-				<Form padding maxSize='md' fullWidth className='form--create-comic'>
+			<main className='main--with-hint-drawer'>
+				<Form padding maxSize='sm' fullWidth className='form--create-comic' hiddenOnMobile={isHintDrawerOpen}>
 					<Label isRequired>Comic title</Label>
 					<p className='description'>Title of your comic series</p>
 					<Input {...register('title')} />
@@ -222,6 +226,10 @@ export default function CreateComicPage() {
 						</Button>
 					</FormActions>
 				</Form>
+
+				<HintDrawer>
+					<FormFaqItems items={CREATE_COMIC_FAQ} />
+				</HintDrawer>
 			</main>
 
 			<Dialog
@@ -234,6 +242,7 @@ export default function CreateComicPage() {
 					<CloseIcon className='close-icon' onClick={() => setIsFirstPublishing(false)} />
 				</div>
 				<strong>IMPORTANT NOTICE!</strong>
+				{/* TODO: add a link to the "publishing-instructions.pdf" document */}
 				<p>{FIRST_TIME_PUBLISHING_NOTICE}</p>
 			</Dialog>
 		</>

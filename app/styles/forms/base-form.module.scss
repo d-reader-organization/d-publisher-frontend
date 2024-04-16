@@ -65,6 +65,14 @@
 		margin: 0 auto;
 	}
 
+	&--hidden-mobile {
+		display: none;
+
+		@include lg {
+			display: block;
+		}
+	}
+
 	.description {
 		font-weight: 400;
 		margin-bottom: 12px;
