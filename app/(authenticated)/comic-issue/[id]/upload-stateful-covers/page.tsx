@@ -109,17 +109,14 @@ export default function UploadComicIssueStatefulCoversPage({ params }: { params:
 			if (cover.image) {
 				const imageWithPaddingPosition = { x: 24, y: 24 }
 				const imagesToMerge: ImageSource[] = [{ src: resizedImage, ...(!cover.isUsed && imageWithPaddingPosition) }]
+				if (cover.isSigned && comicIssue.signature) {
+					imagesToMerge.push({ src: comicIssue.signature })
+				}
 				if (cover.isUsed) {
 					imagesToMerge.push({
 						src: usedOverlays[cover.rarity] || USED_OVERLAY_SELECT_OPTIONS[0].value,
 					})
-					if (cover.isSigned && comicIssue.signature) {
-						imagesToMerge.push({ src: comicIssue.signature })
-					}
 				} else {
-					if (cover.isSigned && comicIssue.signature) {
-						imagesToMerge.push({ src: comicIssue.signature })
-					}
 					imagesToMerge.push({ src: wrapperOverlays[cover.rarity] || WRAPPER_SELECT_OPTIONS[0].value })
 				}
 
