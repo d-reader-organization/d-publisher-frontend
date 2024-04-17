@@ -35,6 +35,10 @@
 			display: none; // Hide dropdown wrapper when Expandable is not focused
 		}
 	}
+	.stateful-cover-signature {
+		height: 55px;
+		overflow-y: hidden;
+	}
 	.stateful-cover-dropdown-wrapper {
 		top: 6rem;
 		left: 3rem;
