@@ -36,16 +36,18 @@ interface Params {
 const resizeFile = ({
 	file,
 	dimensions = { maxWidth: 1024, maxHeight: 1484 },
+	isSignature = false,
 }: {
 	file: File
 	dimensions?: { maxWidth: number; maxHeight: number }
+	isSignature?: boolean
 }) =>
 	new Promise((resolve) => {
 		Resizer.imageFileResizer(
 			file,
 			dimensions.maxWidth,
 			dimensions.maxHeight,
-			'JPEG',
+			isSignature ? 'PNG' : 'JPEG',
 			100,
 			0,
 			(uri) => {
@@ -65,6 +67,7 @@ export default function UploadComicIssueStatefulCoversPage({ params }: { params:
 	const [wrapperOverlays, setWrapperOverlays] = useState<Record<string, string>>({})
 	const [usedOverlays, setUsedOverlays] = useState<Record<string, string>>({})
 	const [signatureImages, setSignatureImages] = useState<Record<string, string | null>>({})
+	const [onUploadLabel, setOnUploadLabel] = useState<string>('')
 
 	const { mutateAsync: updateStatefulCovers } = useUpdateComicIssueStatefulCovers(comicIssueId)
 
@@ -195,11 +198,17 @@ export default function UploadComicIssueStatefulCoversPage({ params }: { params:
 									<FileUpload
 										className='stateful-cover-signature'
 										id={`upload-${key}`}
-										label={`Upload signature image for ${key}`}
-										onUpload={(uploadedFiles) => {
+										label='Upload signature'
+										onUploadLabel={onUploadLabel}
+										onUpload={async (uploadedFiles) => {
 											const uploadedFile = uploadedFiles[0]
 											if (uploadedFile) {
-												setSignatureImages((prevState) => ({ ...prevState, [key]: uploadedFile?.url }))
+												setOnUploadLabel(uploadedFile.file.name)
+												const resizedImage = (await resizeFile({
+													file: uploadedFile.file,
+													isSignature: true,
+												})) as string
+												setSignatureImages((prevState) => ({ ...prevState, [key]: resizedImage }))
 											} else {
 												setSignatureImages((prevState) => ({ ...prevState, [key]: comicIssue.signature }))
 											}
@@ -208,7 +217,6 @@ export default function UploadComicIssueStatefulCoversPage({ params }: { params:
 								</div>
 								{covers.map((cover) => {
 									const { rarity, isSigned, isUsed, image } = cover
-
 									return (
 										<div className='rarity-cover-wrapper' key={rarity + isSigned + isUsed}>
 											<Label>{`${isUsed ? 'Used' : 'Unused'}, ${isSigned ? 'Signed' : 'Unsigned'}`}</Label>
