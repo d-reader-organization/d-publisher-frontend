@@ -105,14 +105,14 @@ export default function UploadComicIssueStatefulCoversPage({ params }: { params:
 				file,
 				...(!cover.isUsed && {
 					dimensions: {
-						maxWidth: 1008,
-						maxHeight: 1468,
+						maxWidth: 1116,
+						maxHeight: 1476,
 					},
 				}),
 			})) as string
 
 			if (cover.image) {
-				const imageWithPaddingPosition = { x: 24, y: 24 }
+				const imageWithPaddingPosition = { x: 18, y: 18 }
 				const imagesToMerge: ImageSource[] = [{ src: resizedImage, ...(!cover.isUsed && imageWithPaddingPosition) }]
 				if (cover.isSigned && comicIssue.signature) {
 					const signatureImage = signatureImages[cover.rarity] || comicIssue.signature
@@ -227,7 +227,7 @@ export default function UploadComicIssueStatefulCoversPage({ params }: { params:
 													width={200}
 													height={280}
 													className='cover-upload'
-													style={{ padding: isUsed ? 0 : '4px' }}
+													style={{ padding: isUsed ? 0 : '3px' }}
 												/>
 												{isUsed ? (
 													<>
