@@ -80,7 +80,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
 	sortable?: boolean
 	isUploading?: boolean
 	options?: Omit<DropzoneOptions, 'onDragEnter' | 'onDragLeave' | 'onDrop'>
-	onUploadLabel?: string
+	inline?: boolean
 }
 
 const FileUpload = forwardRef<HTMLInputElement, Props>(
@@ -95,7 +95,7 @@ const FileUpload = forwardRef<HTMLInputElement, Props>(
 			sortable = false,
 			isUploading = false,
 			options,
-			onUploadLabel,
+			inline = false,
 			...props
 		},
 		ref
@@ -192,55 +192,42 @@ const FileUpload = forwardRef<HTMLInputElement, Props>(
 				<label
 					htmlFor={id}
 					className={clsx('file-upload', className, {
-						'file-upload--no-pointer': !sortable && uploadedFiles.length > 0,
+						'file-upload--no-pointer': inline ? false : !sortable && uploadedFiles.length > 0,
 						'file-upload--dropping': draggingFileOver,
+						'file-upload--inline': inline,
 					})}
 					{...getRootProps()}
 				>
-					{!sortable &&
-						uploadedFiles.length > 0 &&
-						(onUploadLabel ? (
-							<>
-								<p>{onUploadLabel}</p>
-								<button
-									className='close-button'
-									onClick={(event) => {
-										handleRemoveFile(event, uploadedFiles[0])
-									}}
-								>
-									<CloseIcon className='close-icon' />
-								</button>
-							</>
-						) : (
-							<div className='preview-image-list'>
-								{uploadedFiles.map((uploadedFile) => {
-									return (
-										<div
-											key={uploadedFile.url}
-											className={clsx('preview-image-wrapper', {
-												'preview-image-wrapper--cover': uploadedFiles.length === 1,
-											})}
-										>
-											{uploadedFile.file?.type.includes('pdf') ? (
-												<embed src={uploadedFile.url} width='100%' height='100%' />
-											) : (
-												<SkeletonImage
-													src={uploadedFile.url || previewUrl}
-													isLoading={isUploading}
-													className='preview-image'
-													sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw'
-													fill
-													alt=''
-												/>
-											)}
-											<button className='close-button' onClick={(event) => handleRemoveFile(event, uploadedFile)}>
-												<CloseIcon className='close-icon' />
-											</button>
-										</div>
-									)
-								})}
-							</div>
-						))}
+					{!sortable && uploadedFiles.length > 0 && !inline && (
+						<div className='preview-image-list'>
+							{uploadedFiles.map((uploadedFile) => {
+								return (
+									<div
+										key={uploadedFile.url}
+										className={clsx('preview-image-wrapper', {
+											'preview-image-wrapper--cover': uploadedFiles.length === 1,
+										})}
+									>
+										{uploadedFile.file?.type.includes('pdf') ? (
+											<embed src={uploadedFile.url} width='100%' height='100%' />
+										) : (
+											<SkeletonImage
+												src={uploadedFile.url || previewUrl}
+												isLoading={isUploading}
+												className='preview-image'
+												sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw'
+												fill
+												alt=''
+											/>
+										)}
+										<button className='close-button' onClick={(event) => handleRemoveFile(event, uploadedFile)}>
+											<CloseIcon className='close-icon' />
+										</button>
+									</div>
+								)
+							})}
+						</div>
+					)}
 
 					<input
 						{...props}
@@ -250,13 +237,19 @@ const FileUpload = forwardRef<HTMLInputElement, Props>(
 						multiple={allowMultipleFiles}
 						onChange={handleFileChange}
 						ref={componentRef}
-						disabled={!sortable && uploadedFiles.length > 0}
+						disabled={inline ? false : !sortable && uploadedFiles.length > 0}
 						style={{ display: 'none' }}
 					/>
 					{(sortable || uploadedFiles.length === 0) && (
 						<>
-							<ImageIcon className='image-icon' />
-							<span className='label'>{label}</span>
+							<ImageIcon className={clsx('image-icon', inline && 'image-icon--inline')} />
+							<span className={clsx('label', inline && 'label--inline')}>{label}</span>
+						</>
+					)}
+					{inline && uploadedFiles.length > 0 && (
+						<>
+							<ImageIcon className={clsx('image-icon', inline && 'image-icon--inline')} />
+							<span className={clsx('label', inline && 'label--inline')}>{uploadedFiles[0].file.name}</span>
 						</>
 					)}
 				</label>

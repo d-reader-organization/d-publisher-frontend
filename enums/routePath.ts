@@ -21,7 +21,9 @@ export const RoutePath = Object.freeze({
 	EditComicIssue: (comicIssueId: string | number) => `/comic-issue/${comicIssueId}/edit`,
 	CreateComicIssue: (comicSlug: string) => `/comic-issue/create?comicSlug=${comicSlug}`,
 	ComicIssueUploadCovers: (comicIssueId: string | number) => `/comic-issue/${comicIssueId}/upload-covers`,
-	ComicIssueUploadAssets: (comicIssueId: string | number) => `/comic-issue/${comicIssueId}/upload-assets`,
 	ComicIssueUploadPages: (comicIssueId: string | number) => `/comic-issue/${comicIssueId}/upload-pages`,
-	ComicIssuePublish: (comicIssueId: string | number) => `/comic-issue/${comicIssueId}/publish`,
+	ComicIssuePublish: (comicIssueId: string | number) => `/comic-issue/${comicIssueId}/publish/`,
+	ComicIssuePublishStatefulCovers: (comicIssueId: string | number) =>
+		`/comic-issue/${comicIssueId}/publish/stateful-covers`,
+	ComicIssuePublishSaleDetails: (comicIssueId: string | number) => `/comic-issue/${comicIssueId}/publish/sale-details`,
 })

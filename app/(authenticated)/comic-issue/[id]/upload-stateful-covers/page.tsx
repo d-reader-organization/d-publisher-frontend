@@ -62,12 +62,11 @@ export default function UploadComicIssueStatefulCoversPage({ params }: { params:
 	const router = useRouter()
 	const comicIssueId = params.id || ''
 	const { data: comicIssue } = useFetchRawComicIssue(comicIssueId)
-	const nextPage = RoutePath.ComicIssueUploadAssets(comicIssueId)
+	const nextPage = RoutePath.ComicIssuePublishSaleDetails(comicIssueId)
 	const [issueCovers, setIssueCovers] = useState<CreateStatefulCoverData[]>([])
 	const [wrapperOverlays, setWrapperOverlays] = useState<Record<string, string>>({})
 	const [usedOverlays, setUsedOverlays] = useState<Record<string, string>>({})
 	const [signatureImages, setSignatureImages] = useState<Record<string, string | null>>({})
-	const [onUploadLabel, setOnUploadLabel] = useState<string>('')
 
 	const { mutateAsync: updateStatefulCovers } = useUpdateComicIssueStatefulCovers(comicIssueId)
 
@@ -161,11 +160,8 @@ export default function UploadComicIssueStatefulCoversPage({ params }: { params:
 			<Header title='Create issue' />
 			<Steps
 				steps={[
-					{ label: '01 Create Issue', isActive: false },
-					{ label: '02 Upload covers', isActive: true },
-					{ label: '03 Upload assets', isActive: false },
-					{ label: '04 Upload pages', isActive: false },
-					{ label: '05 Publish', isActive: false },
+					{ label: '01 Gamified covers', isActive: true },
+					{ label: '02 Sale details', isActive: false },
 				]}
 			/>
 
@@ -196,14 +192,13 @@ export default function UploadComicIssueStatefulCoversPage({ params }: { params:
 										unselectableIfAlreadySelected={true}
 									/>
 									<FileUpload
+										inline
 										className='stateful-cover-signature'
 										id={`upload-${key}`}
 										label='Upload signature'
-										onUploadLabel={onUploadLabel}
 										onUpload={async (uploadedFiles) => {
 											const uploadedFile = uploadedFiles[0]
 											if (uploadedFile) {
-												setOnUploadLabel(uploadedFile.file.name)
 												const resizedImage = (await resizeFile({
 													file: uploadedFile.file,
 													isSignature: true,

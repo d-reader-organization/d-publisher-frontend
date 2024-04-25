@@ -10,7 +10,7 @@ import Form from './Form'
 import Label from './Label'
 import Textarea from './Textarea'
 import FormActions from './FormActions'
-import { comicIssueAuthorsTooltipText, isComicFreeToReadTooltipText } from '@/constants/tooltips'
+import { issueAuthorsTooltipText, isComicFreeToReadTooltipText } from '@/constants/tooltips'
 import IntegerInput from './IntegerInput'
 import Checkbox from '../Checkbox'
 import { useToaster } from '@/providers/ToastProvider'
@@ -91,7 +91,7 @@ const UpdateComicIssueBasicInfoForm: React.FC<Props> = ({ comicIssue }) => {
 				<Label isRequired>Release Date</Label>
 				<CustomDatePicker name='releaseDate' control={control} />
 			</div>
-			<Label isRequired tooltipText={comicIssueAuthorsTooltipText}>
+			<Label isRequired tooltipText={issueAuthorsTooltipText}>
 				Authors list
 			</Label>
 

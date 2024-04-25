@@ -19,13 +19,22 @@ import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
 import Form from '@/components/forms/Form'
 import Checkbox from '@/components/Checkbox'
 import { useToaster } from '@/providers/ToastProvider'
-import { comicIssueAuthorsTooltipText, isComicFreeToReadTooltipText } from '@/constants/tooltips'
+import {
+	issueAuthorsTooltipText,
+	isComicFreeToReadTooltipText,
+	issueNumberTooltipText,
+	issueTitleTooltipText,
+	releaseDateTooltipText,
+} from '@/constants/tooltips'
 import Label from '@/components/forms/Label'
 import IntegerInput from '@/components/forms/IntegerInput'
 import SelectWithInput from '@/components/forms/SelectWithInput'
 import Textarea from '@/components/forms/Textarea'
 import FormActions from '@/components/forms/FormActions'
 import CustomDatePicker from '@/components/forms/CustomDatePicker'
+import HintDrawer from '@/components/layout/HintDrawer'
+import FormFaqItems from '@/components/layout/FormFaqItem'
+import { CREATE_COMIC_ISSUE_FAQ } from '@/constants/hints'
 
 export default function CreateComicIssuePage() {
 	const router = useRouter()
@@ -76,13 +85,17 @@ export default function CreateComicIssuePage() {
 				]}
 			/>
 
-			<main>
+			<main className='main--with-hint-drawer'>
 				<Form padding maxSize='md' fullWidth className='form--create-comic-issue'>
-					<Label isRequired>Issue title</Label>
+					<Label isRequired tooltipText={issueTitleTooltipText}>
+						Issue title
+					</Label>
 					<Input {...register('title')} placeholder='Name of the episode' />
 					<div className='issue-number-wrapper'>
 						<div>
-							<Label isRequired>Issue number</Label>
+							<Label isRequired tooltipText={issueNumberTooltipText}>
+								Issue number
+							</Label>
 							<p className='description'>Choose the episode number</p>
 						</div>
 						<IntegerInput
@@ -96,11 +109,13 @@ export default function CreateComicIssuePage() {
 						/>
 					</div>
 					<div className='issue-release-date-wrapper'>
-						<Label isRequired>Release Date</Label>
+						<Label isRequired tooltipText={releaseDateTooltipText}>
+							Release Date
+						</Label>
 						<CustomDatePicker name='releaseDate' control={control} />
 					</div>
 
-					<Label isRequired tooltipText={comicIssueAuthorsTooltipText}>
+					<Label isRequired tooltipText={issueAuthorsTooltipText}>
 						Authors list
 					</Label>
 					<SelectWithInput
@@ -149,6 +164,10 @@ export default function CreateComicIssuePage() {
 						</Button>
 					</FormActions>
 				</Form>
+
+				<HintDrawer>
+					<FormFaqItems items={CREATE_COMIC_ISSUE_FAQ} />
+				</HintDrawer>
 			</main>
 		</>
 	)

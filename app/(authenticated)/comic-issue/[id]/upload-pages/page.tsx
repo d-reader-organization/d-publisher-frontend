@@ -12,13 +12,19 @@ import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
 import Form from '@/components/forms/Form'
 import { RoutePath } from '@/enums/routePath'
 import usePrefetchRoute from '@/hooks/usePrefetchRoute'
-import { useUpdateComicIssuePages } from '@/api/comicIssue'
-import { comicIssuePagesTooltipText, numberOfPagesTooltipText } from '@/constants/tooltips'
+import { useUpdateComicIssuePages, useUpdateComicIssuePdf } from '@/api/comicIssue'
+import { comicIssuePagesTooltipText, numberOfPagesTooltipText, pdfTooltipText } from '@/constants/tooltips'
 import FileUpload from '@/components/forms/FileUpload'
 import FormActions from '@/components/forms/FormActions'
 import IntegerInput from '@/components/forms/IntegerInput'
 import Label from '@/components/forms/Label'
-import { optimalImageTypes } from '@/constants/fileTypes'
+import { optimalImageTypes, pdfType } from '@/constants/fileTypes'
+import { Resolver, useForm } from 'react-hook-form'
+import { UpdateComicIssueFilesData } from 'models/comicIssue'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { uploadComicIssueAssetsValidationSchema } from '@/components/forms/schemas'
+// import SignatureCanvas from 'react-signature-canvas'
+// import SkeletonImage from '@/components/SkeletonImage'
 
 interface Params {
 	id: string | number
@@ -33,6 +39,15 @@ export default function UploadComicIssuePagesPage({ params }: { params: Params }
 	const [pageFiles, setPageFiles] = useState<File[]>([])
 	const [numberOfPreviewPages, setNumberOfPreviewPages] = useState(3)
 	const { mutateAsync: updatePages } = useUpdateComicIssuePages(comicIssueId)
+	const { mutateAsync: updateComicIssuePdf } = useUpdateComicIssuePdf(comicIssueId)
+
+	const { register, setValue, handleSubmit } = useForm<UpdateComicIssueFilesData>({
+		defaultValues: {
+			signature: undefined,
+			pdf: undefined,
+		},
+		resolver: yupResolver(uploadComicIssueAssetsValidationSchema) as Resolver<UpdateComicIssueFilesData>,
+	})
 
 	usePrefetchRoute(nextPage)
 	useAuthenticatedRoute()
@@ -41,8 +56,18 @@ export default function UploadComicIssuePagesPage({ params }: { params: Params }
 		setPageFiles(pageFiles)
 	}
 
+	const handleUploadPdf = async (data: UpdateComicIssueFilesData) => {
+		const formData = new FormData()
+
+		if (data.pdf) formData.append('pdf', data.pdf)
+
+		await updateComicIssuePdf(formData)
+	}
+
 	const handleNextClick = async (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
+
+		await handleSubmit(handleUploadPdf, toaster.onFormError)()
 
 		if (pageFiles.length === 0) {
 			toaster.add(yupRequiredMessage('Issue pages'), 'error')
@@ -71,14 +96,29 @@ export default function UploadComicIssuePagesPage({ params }: { params: Params }
 				steps={[
 					{ label: '01 Create Issue', isActive: false },
 					{ label: '02 Upload covers', isActive: false },
-					{ label: '03 Upload assets', isActive: false },
-					{ label: '04 Upload pages', isActive: true },
-					{ label: '05 Publish', isActive: false },
+					{ label: '03 Upload pages', isActive: true },
+					{ label: '04 Publish', isActive: false },
 				]}
 			/>
 
 			<main>
 				<Form padding fullWidth className='form--edit-comic-issue-pages'>
+					<Label isRequired tooltipText={pdfTooltipText}>
+						Comic PDF
+					</Label>
+					<p className='description'>PDF file of the comic episode</p>
+					<FileUpload
+						id='pdf-upload'
+						label='Choose a PDF file'
+						className='comic-issue-pdf-input'
+						onUpload={(files) => {
+							setValue('pdf', files[0]?.file)
+						}}
+						ref={register('pdf').ref}
+						options={{ accept: pdfType, maxFiles: 1 }}
+						inline
+					/>
+
 					<div className='page-previews-number-wrapper'>
 						<div>
 							<Label tooltipText={numberOfPagesTooltipText}>Preview pages</Label>

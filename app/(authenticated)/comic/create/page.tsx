@@ -168,7 +168,7 @@ export default function CreateComicPage() {
 					<Label>Flavor text</Label>
 					<Textarea maxCharacters={128} rows={2} {...register('flavorText')} placeholder='Some sweet flavor text' />
 
-					{/* <Label isRequired tooltipText={comicIssueAuthorsTooltipText}>
+					{/* <Label isRequired tooltipText={issueAuthorsTooltipText}>
 						Authors list
 					</Label>
 					<SelectWithInput

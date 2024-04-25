@@ -21,13 +21,16 @@ import Form from '@/components/forms/Form'
 import { useUpdateComicIssueStatelessCovers } from '@/api/comicIssue'
 import { RoutePath } from '@/enums/routePath'
 import usePrefetchRoute from '@/hooks/usePrefetchRoute'
-import { comicIssueCoverImageTooltipText, coverVariantsTooltipText } from '@/constants/tooltips'
+import { issueCoverImageTooltipText, coverVariantsTooltipText } from '@/constants/tooltips'
 import FileUpload from '@/components/forms/FileUpload'
 import FormActions from '@/components/forms/FormActions'
 import Label from '@/components/forms/Label'
 import Select from '@/components/forms/Select'
 import { imageTypes } from '@/constants/fileTypes'
 import { RARITY_SELECT_OPTIONS, findOptions } from '@/constants/selectOptions'
+import HintDrawer from '@/components/layout/HintDrawer'
+import FormFaqItems from '@/components/layout/FormFaqItem'
+import { UPLOAD_COMIC_ISSUE_COVERS_FAQ } from '@/constants/hints'
 
 interface Params {
 	id: string | number
@@ -37,7 +40,7 @@ export default function UploadComicIssueStatelessCoversPage({ params }: { params
 	const toaster = useToaster()
 	const router = useRouter()
 	const comicIssueId = params.id || ''
-	const nextPage = RoutePath.ComicIssueUploadAssets(comicIssueId)
+	const nextPage = RoutePath.ComicIssueUploadPages(comicIssueId)
 
 	const [issueCovers, setIssueCovers] = useState<CreateStatelessCoverData[]>([])
 	const [numberOfRarities, setNumberOfRarities] = useState(1)
@@ -129,18 +132,16 @@ export default function UploadComicIssueStatelessCoversPage({ params }: { params
 				steps={[
 					{ label: '01 Create Issue', isActive: false },
 					{ label: '02 Upload covers', isActive: true },
-					{ label: '03 Upload assets', isActive: false },
-					{ label: '04 Upload pages', isActive: false },
-					{ label: '05 Publish', isActive: false },
+					{ label: '03 Upload pages', isActive: false },
+					{ label: '04 Publish', isActive: false },
 				]}
 			/>
 
-			<main>
+			<main className='main--with-hint-drawer'>
 				<Form padding maxSize='md' fullWidth className='form--edit-comic-issue-covers'>
 					<Label isRequired tooltipText={coverVariantsTooltipText}>
-						Issue Covers
+						Cover rarities
 					</Label>
-					<Label>Cover variants (rarities)</Label>
 					<Select
 						options={RARITY_SELECT_OPTIONS}
 						defaultSelectedOptions={findOptions(RARITY_SELECT_OPTIONS, '1')}
@@ -155,7 +156,7 @@ export default function UploadComicIssueStatelessCoversPage({ params }: { params
 						<Expandable open={issueCovers.length === 1} title={rarity} key={rarity}>
 							<div className='rarity-cover-wrapper'>
 								<div>
-									<Label isRequired tooltipText={comicIssueCoverImageTooltipText}>
+									<Label isRequired tooltipText={issueCoverImageTooltipText}>
 										Cover image
 									</Label>
 									<FileUpload
@@ -192,6 +193,10 @@ export default function UploadComicIssueStatelessCoversPage({ params }: { params
 						</Button>
 					</FormActions>
 				</Form>
+
+				<HintDrawer>
+					<FormFaqItems items={UPLOAD_COMIC_ISSUE_COVERS_FAQ} />
+				</HintDrawer>
 			</main>
 		</>
 	)

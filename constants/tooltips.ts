@@ -24,7 +24,7 @@ export const currentStatusTooltipText =
 
 export const isComicFreeToReadTooltipText = `Do you want this comic episode to be available to read for free on the platform, Regardless if the user owns the digital copy or is a monthly subscriber?
 
-In other words, do you want this comic episode to be part of our freemium offer`
+In other words, do you want this comic episode to be part of our freemium offer.`
 
 export const signatureTooltipText = `.png format required
 
@@ -53,7 +53,9 @@ export const statefulCoverVariantsTooltipText = `Each cover variant can have 4 d
 - opened (used), unsigned
 - opened (used), signed
 
-Artists can sign the digital copy of a comic, and collectors can choose to 'unwrap' the comic. Just like with physical comics`
+Artists can sign the digital copy of a comic, and collectors can choose to 'unwrap' the comic. Just like with physical comics.
+
+Make sure to upload your signature to all cover rarities, and select the "wrapper" and "used" overlays you prefer!`
 
 export const numberOfPagesTooltipText = `Creators sometimes hesitate to show their full comic episode. Most common reason is to keep the full content premium (monetizable) and only tease portion of the story.
 
@@ -136,13 +138,15 @@ export const comicLogoPreviews: TooltipImagePreview[] = [
 	},
 ]
 
-export const comicIssueCoverImageTooltipText = `Following formats are allowed:
+export const issueCoverImageTooltipText = `Following formats are allowed:
 - .jpg, .jpeg, .webp, .png, .gif
 
 Preferrably a jpg or webp format.
 Make sure the image has no transparent background.
 
 Pick an image with a ratio 690:1000 and (ideally) at least 1024x1484px resolution.
+
+You can set the cover as 'default'. Default cover is shown across the app when displaying the comic.
 `
 
 export const comicIssuePagesTooltipText = `Following formats are allowed:
@@ -163,7 +167,12 @@ Ratio for the avatar is 1:1 and the resolution should be at least 500x500.
 Ratio for the banner is 1920:900px and the resolution should be at least 1920x900px.
 `
 
-export const comicIssueAuthorsTooltipText =
-	'A list of artists which were involved in the creative process of the comic episode'
 export const comicAuthorsTooltipText =
 	'A list of artists which were involved in the creative process of the comic series'
+
+export const issueTitleTooltipText = `This is a title of your comic episode. Do not mistake it with a series title.
+For example, comic series title is 'One Punch Man', and comic episode title is 'Episode 1' or 'One Punch Origin'.`
+export const issueNumberTooltipText = `Numeration of your comic episode: first episode, second episode..`
+export const releaseDateTooltipText = `Date your comic has been first released, whether it's physically or digitally. When does your comic celebrate it's birthday?`
+export const issueAuthorsTooltipText =
+	'A list of artists which were involved in the creative process of the comic episode'

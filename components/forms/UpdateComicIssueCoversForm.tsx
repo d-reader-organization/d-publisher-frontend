@@ -14,7 +14,7 @@ import { cloneDeep } from 'lodash'
 import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
 import Form from '@/components/forms/Form'
 import { useUpdateComicIssueStatelessCovers } from '@/api/comicIssue'
-import { comicIssueCoverImageTooltipText, coverVariantsTooltipText } from '@/constants/tooltips'
+import { issueCoverImageTooltipText, coverVariantsTooltipText } from '@/constants/tooltips'
 import FileUpload from '@/components/forms/FileUpload'
 import FormActions from '@/components/forms/FormActions'
 import Label from '@/components/forms/Label'
@@ -134,7 +134,7 @@ const UpdateComicIssueCoversForm: React.FC<Props> = ({ comicIssue }) => {
 								<h2 className='rarity-header'>{rarity}</h2>
 								<div className='rarity-cover-wrapper'>
 									<div>
-										<Label isRequired tooltipText={comicIssueCoverImageTooltipText}>
+										<Label isRequired tooltipText={issueCoverImageTooltipText}>
 											Reupload Cover image
 										</Label>
 										<FileUpload
