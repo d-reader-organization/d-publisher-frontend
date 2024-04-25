@@ -19,6 +19,7 @@ interface ToastContextState {
 	add: (message: React.ReactNode, severity: AlertColor) => void
 	confirmingTransactions: VoidFunction
 	uploadingFiles: VoidFunction
+	processingFiles: VoidFunction
 	onQueryError: (error: Error) => void
 	onFormError: <T extends FieldValues = FieldValues>(errors: FieldErrors<T>) => void
 }
@@ -27,6 +28,7 @@ const initialContextValue: ToastContextState = {
 	add: () => {},
 	confirmingTransactions: () => {},
 	uploadingFiles: () => {},
+	processingFiles: () => {},
 	onQueryError: () => {},
 	onFormError: () => {},
 }
@@ -55,6 +57,10 @@ const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ children }) =>
 
 	const uploadingFiles = useCallback(() => {
 		setToast({ message: 'Uploading file(s)', severity: 'info', isOpen: true, duration: null })
+	}, [])
+
+	const processingFiles = useCallback(() => {
+		setToast({ message: 'Processing file(s)', severity: 'info', isOpen: true, duration: null })
 	}, [])
 
 	const remove = () => {
@@ -89,8 +95,8 @@ const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ children }) =>
 	)
 
 	const value = useMemo(
-		() => ({ add, confirmingTransactions, uploadingFiles, onQueryError, onFormError }),
-		[add, confirmingTransactions, uploadingFiles, onQueryError, onFormError]
+		() => ({ add, confirmingTransactions, uploadingFiles, onQueryError, onFormError, processingFiles }),
+		[add, confirmingTransactions, uploadingFiles, onQueryError, onFormError, processingFiles]
 	)
 
 	return (

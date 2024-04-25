@@ -28,6 +28,7 @@ import { WRAPPER_SELECT_OPTIONS } from '@/constants/selectOptions'
 import { USED_OVERLAY_SELECT_OPTIONS } from '@/constants/selectOptions'
 import { SelectOption } from '@/models/selectOption'
 import FileUpload from '@/components/forms/FileUpload'
+import { useGlobalContext } from '@/providers/GlobalProvider'
 
 interface Params {
 	id: string | number
@@ -67,8 +68,9 @@ export default function UploadComicIssueStatefulCoversPage({ params }: { params:
 	const [wrapperOverlays, setWrapperOverlays] = useState<Record<string, string>>({})
 	const [usedOverlays, setUsedOverlays] = useState<Record<string, string>>({})
 	const [signatureImages, setSignatureImages] = useState<Record<string, string | null>>({})
-
 	const { mutateAsync: updateStatefulCovers } = useUpdateComicIssueStatefulCovers(comicIssueId)
+	const [isProcessingFiles, setIsProcessingFiles] = useState<boolean>(false)
+	const { isLoading } = useGlobalContext()
 
 	usePrefetchRoute(nextPage)
 	useAuthenticatedRoute()
@@ -79,7 +81,66 @@ export default function UploadComicIssueStatefulCoversPage({ params }: { params:
 			setIssueCovers(statefulCovers)
 		}
 	}, [comicIssue?.statelessCovers])
-	if (!comicIssue) return null
+
+	if (!comicIssue) {
+		return null
+	}
+	const mergeFiles = async (): Promise<FormData> => {
+		const formData = new FormData()
+		let index = 0
+		toaster.processingFiles()
+		setIsProcessingFiles(true)
+		try {
+			for (const cover of issueCovers) {
+				const res = await fetch(cover.image)
+				const blobFile = await res.blob()
+				const file = new File([blobFile], `cover-${index}.png`, { type: blobFile.type })
+				const resizedImage = (await resizeFile({
+					file,
+					...(!cover.isUsed && {
+						dimensions: {
+							maxWidth: 1116,
+							maxHeight: 1476,
+						},
+					}),
+				})) as string
+
+				if (cover.image) {
+					const imageWithPaddingPosition = { x: 18, y: 18 }
+					const imagesToMerge: ImageSource[] = [{ src: resizedImage, ...(!cover.isUsed && imageWithPaddingPosition) }]
+					if (cover.isSigned && comicIssue.signature) {
+						const signatureImage = signatureImages[cover.rarity] || comicIssue.signature
+						imagesToMerge.push({ src: signatureImage })
+					}
+					if (cover.isUsed) {
+						imagesToMerge.push({
+							src: usedOverlays[cover.rarity] || USED_OVERLAY_SELECT_OPTIONS[0].value,
+						})
+					} else {
+						imagesToMerge.push({ src: wrapperOverlays[cover.rarity] || WRAPPER_SELECT_OPTIONS[0].value })
+					}
+
+					const mergedImageDataURL = await mergeImages(imagesToMerge, { crossOrigin: 'anonymous' })
+					const response = await fetch(mergedImageDataURL)
+
+					const blob = await response.blob()
+					formData.append(`covers[${index}][image]`, blob, `cover-${index}.png`)
+				}
+				formData.append(`covers[${index}][artist]`, cover.artist)
+				formData.append(`covers[${index}][isSigned]`, cover.isSigned.toString())
+				formData.append(`covers[${index}][isUsed]`, cover.isUsed.toString())
+				formData.append(`covers[${index}][rarity]`, cover.rarity)
+
+				++index
+			}
+		} catch (error) {
+			setIsProcessingFiles(false)
+			toaster.add('Failed to process file(s)', 'error')
+		}
+		setIsProcessingFiles(false)
+		return formData
+	}
+
 	const handleNextClick = async (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
 		const unsetArtist = issueCovers.some((issueCover) => issueCover.artist === '')
@@ -93,51 +154,7 @@ export default function UploadComicIssueStatefulCoversPage({ params }: { params:
 			toaster.add(generateRequiredArrayElementErrorMessage('image'), 'error')
 			return
 		}
-
-		const formData = new FormData()
-		let index = 0
-		for (const cover of issueCovers) {
-			const res = await fetch(cover.image)
-			const blobFile = await res.blob()
-			const file = new File([blobFile], `cover-${index}.png`, { type: blobFile.type })
-			const resizedImage = (await resizeFile({
-				file,
-				...(!cover.isUsed && {
-					dimensions: {
-						maxWidth: 1116,
-						maxHeight: 1476,
-					},
-				}),
-			})) as string
-
-			if (cover.image) {
-				const imageWithPaddingPosition = { x: 18, y: 18 }
-				const imagesToMerge: ImageSource[] = [{ src: resizedImage, ...(!cover.isUsed && imageWithPaddingPosition) }]
-				if (cover.isSigned && comicIssue.signature) {
-					const signatureImage = signatureImages[cover.rarity] || comicIssue.signature
-					imagesToMerge.push({ src: signatureImage })
-				}
-				if (cover.isUsed) {
-					imagesToMerge.push({
-						src: usedOverlays[cover.rarity] || USED_OVERLAY_SELECT_OPTIONS[0].value,
-					})
-				} else {
-					imagesToMerge.push({ src: wrapperOverlays[cover.rarity] || WRAPPER_SELECT_OPTIONS[0].value })
-				}
-
-				const mergedImageDataURL = await mergeImages(imagesToMerge, { crossOrigin: 'anonymous' })
-				const response = await fetch(mergedImageDataURL)
-
-				const blob = await response.blob()
-				formData.append(`covers[${index}][image]`, blob, `cover-${index}.png`)
-			}
-			formData.append(`covers[${index}][artist]`, cover.artist)
-			formData.append(`covers[${index}][isSigned]`, cover.isSigned.toString())
-			formData.append(`covers[${index}][isUsed]`, cover.isUsed.toString())
-			formData.append(`covers[${index}][rarity]`, cover.rarity)
-
-			++index
-		}
+		const formData = await mergeFiles()
 
 		await updateStatefulCovers(formData)
 		router.push(nextPage)
@@ -272,7 +289,13 @@ export default function UploadComicIssueStatefulCoversPage({ params }: { params:
 					})}
 
 					<FormActions marginTop>
-						<Button type='submit' onClick={handleNextClick} backgroundColor='grey-100' className='action-button'>
+						<Button
+							type='submit'
+							disabled={isProcessingFiles || isLoading}
+							onClick={handleNextClick}
+							backgroundColor='grey-100'
+							className='action-button'
+						>
 							Next <ArrowRightIcon className='action-button-icon' />
 						</Button>
 					</FormActions>

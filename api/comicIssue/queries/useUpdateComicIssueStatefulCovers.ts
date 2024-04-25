@@ -2,6 +2,7 @@ import { COMIC_ISSUE_QUERY_KEYS, comicIssueKeys } from 'api/comicIssue/comicIssu
 import { useToaster } from 'providers/ToastProvider'
 import { useMutation, useQueryClient } from 'react-query'
 import http from 'api/http'
+import { useGlobalContext } from '@/providers/GlobalProvider'
 
 const { COMIC_ISSUE, UPDATE, STATEFUL_COVERS } = COMIC_ISSUE_QUERY_KEYS
 
@@ -13,15 +14,23 @@ const updateComicIssueStatefulCovers = async (id: string | number, request: Form
 
 export const useUpdateComicIssueStatefulCovers = (id: string | number) => {
 	const toaster = useToaster()
+	const { setIsLoading } = useGlobalContext()
 	const queryClient = useQueryClient()
 
 	return useMutation({
 		mutationFn: (updateData: FormData) => updateComicIssueStatefulCovers(id, updateData),
 		onSuccess: () => {
+			setIsLoading(false)
 			toaster.add('Covers updated!', 'success')
 			queryClient.invalidateQueries(comicIssueKeys.getRaw(id))
 		},
-		onMutate: toaster.uploadingFiles,
-		onError: toaster.onQueryError,
+		onMutate: () => {
+			setIsLoading(true)
+			toaster.uploadingFiles()
+		},
+		onError: (error: Error) => {
+			setIsLoading(false)
+			toaster.onQueryError(error)
+		},
 	})
 }

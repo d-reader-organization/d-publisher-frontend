@@ -6,6 +6,7 @@ import ToastProvider from 'providers/ToastProvider'
 import localFont from 'next/font/local'
 import clsx from 'clsx'
 import 'app/styles/app.scss'
+import { GlobalContextProvider } from '@/providers/GlobalProvider'
 
 /**
  * TODO:
@@ -95,10 +96,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 			<body className={clsx(satoshi.className, 'layout')}>
 				<ClientContext>
 					<CreatorAuthProvider>
-						<ToastProvider>
-							<CssBaseline />
-							{children}
-						</ToastProvider>
+						<GlobalContextProvider>
+							<ToastProvider>
+								<CssBaseline />
+								{children}
+							</ToastProvider>
+						</GlobalContextProvider>
 					</CreatorAuthProvider>
 				</ClientContext>
 			</body>
