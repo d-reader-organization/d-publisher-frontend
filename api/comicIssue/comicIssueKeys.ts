@@ -11,7 +11,6 @@ export const COMIC_ISSUE_QUERY_KEYS = Object.freeze({
 	UPDATE: 'update',
 	FILES: 'files',
 	PDF: 'pdf',
-	SIGNATURE: 'signature',
 	STATELESS_COVERS: 'stateless-covers',
 	STATEFUL_COVERS: 'stateful-covers',
 	FAVOURITISE: 'favouritise',

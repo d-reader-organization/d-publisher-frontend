@@ -22,7 +22,6 @@ export interface BasicComicIssue {
 	description: string
 	flavorText: string
 	cover: string
-	signature: string
 	releaseDate: Date
 	isFreeToRead: boolean
 	isFullyUploaded: boolean
@@ -89,6 +88,5 @@ export type UpdateComicIssueData = Partial<
 >
 
 export type UpdateComicIssueFilesData = Partial<{
-	signature: File
 	pdf: File
 }>

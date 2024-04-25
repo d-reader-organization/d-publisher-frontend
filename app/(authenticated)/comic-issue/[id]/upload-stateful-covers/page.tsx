@@ -67,7 +67,7 @@ export default function UploadComicIssueStatefulCoversPage({ params }: { params:
 	const [issueCovers, setIssueCovers] = useState<CreateStatefulCoverData[]>([])
 	const [wrapperOverlays, setWrapperOverlays] = useState<Record<string, string>>({})
 	const [usedOverlays, setUsedOverlays] = useState<Record<string, string>>({})
-	const [signatureImages, setSignatureImages] = useState<Record<string, string | null>>({})
+	const [signatureImages, setSignatureImages] = useState<Record<string, string> | null>(null)
 	const { mutateAsync: updateStatefulCovers } = useUpdateComicIssueStatefulCovers(comicIssueId)
 	const [isProcessingFiles, setIsProcessingFiles] = useState<boolean>(false)
 	const { isLoading } = useGlobalContext()
@@ -108,8 +108,8 @@ export default function UploadComicIssueStatefulCoversPage({ params }: { params:
 				if (cover.image) {
 					const imageWithPaddingPosition = { x: 18, y: 18 }
 					const imagesToMerge: ImageSource[] = [{ src: resizedImage, ...(!cover.isUsed && imageWithPaddingPosition) }]
-					if (cover.isSigned && comicIssue.signature) {
-						const signatureImage = signatureImages[cover.rarity] || comicIssue.signature
+					if (cover.isSigned && signatureImages) {
+						const signatureImage = signatureImages[cover.rarity]
 						imagesToMerge.push({ src: signatureImage })
 					}
 					if (cover.isUsed) {
@@ -221,8 +221,6 @@ export default function UploadComicIssueStatefulCoversPage({ params }: { params:
 													isSignature: true,
 												})) as string
 												setSignatureImages((prevState) => ({ ...prevState, [key]: resizedImage }))
-											} else {
-												setSignatureImages((prevState) => ({ ...prevState, [key]: comicIssue.signature }))
 											}
 										}}
 									/>
@@ -250,10 +248,10 @@ export default function UploadComicIssueStatefulCoversPage({ params }: { params:
 															height={280}
 															className='overlay-image'
 														/>
-														{isSigned && (
+														{isSigned && signatureImages && (
 															<SkeletonImage
 																alt=''
-																src={signatureImages[cover.rarity] || comicIssue.signature}
+																src={signatureImages[cover.rarity]}
 																width={200}
 																height={280}
 																className='overlay-image'
@@ -262,10 +260,10 @@ export default function UploadComicIssueStatefulCoversPage({ params }: { params:
 													</>
 												) : (
 													<>
-														{isSigned && (
+														{isSigned && signatureImages && (
 															<SkeletonImage
 																alt=''
-																src={signatureImages[cover.rarity] || comicIssue.signature}
+																src={signatureImages[cover.rarity]}
 																width={200}
 																height={280}
 																className='overlay-image'

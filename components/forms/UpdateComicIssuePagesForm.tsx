@@ -6,14 +6,18 @@ import { useToaster } from '@/providers/ToastProvider'
 import { yupRequiredMessage } from '@/utils/error'
 import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
 import Form from '@/components/forms/Form'
-import { useUpdateComicIssuePages } from '@/api/comicIssue'
-import { comicIssuePagesTooltipText, numberOfPagesTooltipText } from '@/constants/tooltips'
+import { useUpdateComicIssuePages, useUpdateComicIssuePdf } from '@/api/comicIssue'
+import { comicIssuePagesTooltipText, numberOfPagesTooltipText, pdfTooltipText } from '@/constants/tooltips'
 import FileUpload from '@/components/forms/FileUpload'
 import FormActions from '@/components/forms/FormActions'
 import IntegerInput from '@/components/forms/IntegerInput'
 import Label from '@/components/forms/Label'
-import { optimalImageTypes } from '@/constants/fileTypes'
+import { optimalImageTypes, pdfType } from '@/constants/fileTypes'
 import { RawComicIssue } from '@/models/comicIssue/rawComicIssue'
+import { UpdateComicIssueFilesData } from '@/models/comicIssue'
+import { Resolver, useForm } from 'react-hook-form'
+import { uploadComicIssuePdfValidationSchema } from './schemas'
+import { yupResolver } from '@hookform/resolvers/yup'
 
 interface Props {
 	comicIssue: RawComicIssue
@@ -24,6 +28,14 @@ const UpdateComicIssuePagesForm: React.FC<Props> = ({ comicIssue }) => {
 	const [pageFiles, setPageFiles] = useState<File[]>([])
 	const [numberOfPreviewPages, setNumberOfPreviewPages] = useState(3)
 	const { mutateAsync: updatePages } = useUpdateComicIssuePages(comicIssue.id)
+	const { mutateAsync: updateComicIssuePdf } = useUpdateComicIssuePdf(comicIssue.id)
+
+	const { register, setValue, handleSubmit } = useForm<UpdateComicIssueFilesData>({
+		defaultValues: {
+			pdf: undefined,
+		},
+		resolver: yupResolver(uploadComicIssuePdfValidationSchema) as Resolver<UpdateComicIssueFilesData>,
+	})
 
 	useAuthenticatedRoute()
 
@@ -31,8 +43,18 @@ const UpdateComicIssuePagesForm: React.FC<Props> = ({ comicIssue }) => {
 		setPageFiles(pageFiles)
 	}
 
+	const handleUploadPdf = async (data: UpdateComicIssueFilesData) => {
+		const formData = new FormData()
+
+		if (data.pdf) formData.append('pdf', data.pdf)
+
+		await updateComicIssuePdf(formData)
+	}
+
 	const onSubmitClick = async (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
+
+		await handleSubmit(handleUploadPdf, toaster.onFormError)()
 
 		if (pageFiles.length === 0) {
 			toaster.add(yupRequiredMessage('Issue pages'), 'error')
@@ -57,6 +79,21 @@ const UpdateComicIssuePagesForm: React.FC<Props> = ({ comicIssue }) => {
 		<>
 			<main>
 				<Form padding fullWidth className='form--edit-comic-issue-pages'>
+					<Label isRequired tooltipText={pdfTooltipText}>
+						Comic Issue PDF
+					</Label>
+					<p className='description'>Edit PDF file of the comic episode</p>
+					<FileUpload
+						id='pdf-upload'
+						label='Choose a PDF file'
+						className='comic-issue-pdf-input'
+						onUpload={(files) => {
+							setValue('pdf', files[0]?.file)
+						}}
+						ref={register('pdf').ref}
+						options={{ accept: pdfType, maxFiles: 1 }}
+						inline
+					/>
 					<div className='page-previews-number-wrapper'>
 						<div>
 							<Label tooltipText={numberOfPagesTooltipText}>Preview pages</Label>

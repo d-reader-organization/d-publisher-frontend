@@ -19,7 +19,8 @@ export const useUpdateComicIssue = (id: string | number) => {
 		mutationFn: (request: UpdateComicIssueData) => updateComicIssue(id, request),
 		onSuccess: () => {
 			toaster.add('Comic Issue updated!', 'success')
-			queryClient.invalidateQueries([COMIC_ISSUE_QUERY_KEYS.COMIC_ISSUE, COMIC_ISSUE_QUERY_KEYS.GET_RAW])
+			queryClient.invalidateQueries([COMIC_ISSUE_QUERY_KEYS.COMIC_ISSUE])
+			queryClient.invalidateQueries([COMIC_ISSUE_QUERY_KEYS.GET_RAW])
 		},
 
 		onError: toaster.onQueryError,

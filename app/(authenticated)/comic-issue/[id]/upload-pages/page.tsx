@@ -22,7 +22,7 @@ import { optimalImageTypes, pdfType } from '@/constants/fileTypes'
 import { Resolver, useForm } from 'react-hook-form'
 import { UpdateComicIssueFilesData } from 'models/comicIssue'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { uploadComicIssueAssetsValidationSchema } from '@/components/forms/schemas'
+import { uploadComicIssuePdfValidationSchema } from '@/components/forms/schemas'
 // import SignatureCanvas from 'react-signature-canvas'
 // import SkeletonImage from '@/components/SkeletonImage'
 
@@ -43,10 +43,9 @@ export default function UploadComicIssuePagesPage({ params }: { params: Params }
 
 	const { register, setValue, handleSubmit } = useForm<UpdateComicIssueFilesData>({
 		defaultValues: {
-			signature: undefined,
 			pdf: undefined,
 		},
-		resolver: yupResolver(uploadComicIssueAssetsValidationSchema) as Resolver<UpdateComicIssueFilesData>,
+		resolver: yupResolver(uploadComicIssuePdfValidationSchema) as Resolver<UpdateComicIssueFilesData>,
 	})
 
 	usePrefetchRoute(nextPage)

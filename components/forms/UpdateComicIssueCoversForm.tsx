@@ -120,7 +120,7 @@ const UpdateComicIssueCoversForm: React.FC<Props> = ({ comicIssue }) => {
 					<Label>Reupload Cover variants (rarities)</Label>
 					<Select
 						options={RARITY_SELECT_OPTIONS}
-						defaultSelectedOptions={findOptions(RARITY_SELECT_OPTIONS, '1')}
+						defaultSelectedOptions={findOptions(RARITY_SELECT_OPTIONS, comicIssue.statelessCovers.length.toString())}
 						onSelect={(selectedOptions) => {
 							setNumberOfRarities(+selectedOptions[0]?.value ?? 0)
 						}}

@@ -17,7 +17,6 @@ export interface RawComicIssue {
 	description: string
 	flavorText: string
 	cover: string
-	signature: string
 	pdf: string
 	releaseDate: string
 	isFreeToRead: boolean

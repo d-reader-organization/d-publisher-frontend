@@ -79,9 +79,8 @@ export default function CreateComicIssuePage() {
 				steps={[
 					{ label: '01 Create Issue', isActive: true },
 					{ label: '02 Upload covers', isActive: false },
-					{ label: '03 Upload assets', isActive: false },
-					{ label: '04 Upload pages', isActive: false },
-					{ label: '05 Publish', isActive: false },
+					{ label: '03 Upload pages', isActive: false },
+					{ label: '04 Publish', isActive: false },
 				]}
 			/>
 
