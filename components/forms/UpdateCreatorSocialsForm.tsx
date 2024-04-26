@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import Button from 'components/Button'
 import Label from './Label'
@@ -22,13 +22,17 @@ import {
 	prependLynkfire,
 } from '@/utils/helpers'
 import { useToaster } from '@/providers/ToastProvider'
+import { useFetchDiscordAuthorization } from '@/api/creator/queries/usefetchDiscordAuthorization'
+import { useUpdateCreatorDiscord } from '@/api/creator/queries/useUpdateCreatorDiscord'
 
 const UpdateCreatorSocialsForm: React.FC = () => {
 	const toaster = useToaster()
-
+	const [prevCode, setPrevCode] = useState<string | null>(null)
 	const { data: me } = useFetchMe()
 	const { mutateAsync: updateCreator } = useUpdateCreator(me?.slug || '')
-
+	const { refetch: fetchDiscordAuthorization } = useFetchDiscordAuthorization(false)
+	const [discordUpdated, setDiscordUpdated] = useState(false)
+	const { mutateAsync: updateCreatorDiscord } = useUpdateCreatorDiscord()
 	const { register, handleSubmit, reset } = useForm<UpdateCreatorData>({
 		defaultValues: {
 			twitter: removeTwitter(me?.twitter),
@@ -67,6 +71,39 @@ const UpdateCreatorSocialsForm: React.FC = () => {
 		}, toaster.onFormError)()
 	}
 
+	const onConnectDiscordClick = async () => {
+		try {
+			const { data: authorizationUri } = await fetchDiscordAuthorization()
+			if (authorizationUri) {
+				window.location.href = authorizationUri
+			}
+		} catch (error) {
+			toaster.add('Failed to fetch Discord authorization URI.', 'error')
+		}
+	}
+
+	useEffect(() => {
+		const params = new URLSearchParams(window.location.search)
+		const code = params.get('code')
+		if (code && code !== prevCode) {
+			updateCreatorDiscord({ slug: me?.slug || '', code })
+				.then(() => {
+					setDiscordUpdated(true)
+				})
+				.catch((error) => {
+					console.error('Failed to update Discord ID:', error)
+				})
+			setPrevCode(code)
+		}
+	}, [me, prevCode, updateCreatorDiscord])
+
+	useEffect(() => {
+		if (discordUpdated) {
+			setTimeout(() => {
+				window.location.href = '/profile'
+			}, 2000)
+		}
+	}, [discordUpdated])
 	return (
 		<Form fullWidth>
 			<div className='social-media-wrapper'>
@@ -86,6 +123,11 @@ const UpdateCreatorSocialsForm: React.FC = () => {
 					<Label size='small'>Website</Label>
 					<Input {...register('website')} prefix='https://' />
 				</div>
+			</div>
+			<div className='discord-button'>
+				<Button type='button' onClick={onConnectDiscordClick} backgroundColor='transparent' borderColor='grey-100'>
+					Connect Discord
+				</Button>
 			</div>
 
 			<FormActions>
