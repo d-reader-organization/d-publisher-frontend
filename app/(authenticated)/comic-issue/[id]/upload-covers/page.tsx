@@ -133,7 +133,7 @@ export default function UploadComicIssueStatelessCoversPage({ params }: { params
 					{ label: '01 Create Issue', isActive: false },
 					{ label: '02 Upload covers', isActive: true },
 					{ label: '03 Upload pages', isActive: false },
-					{ label: '04 Publish', isActive: false },
+					{ label: '04 Submitted', isActive: false },
 				]}
 			/>
 

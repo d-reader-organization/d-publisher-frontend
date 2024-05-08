@@ -21,7 +21,7 @@ export default function PublishComicIssuePage({ params }: { params: Params }) {
 	const toaster = useToaster()
 	const router = useRouter()
 	const comicIssueId = params.id || ''
-	const nextPage = RoutePath.ComicIssuePublish(comicIssueId)
+	const nextPage = RoutePath.ComicIssueSubmitted(comicIssueId)
 
 	const [pageFiles, setPageFiles] = useState<File[]>([])
 	const { mutateAsync: updatePages } = useUpdateComicIssuePages(comicIssueId)
@@ -65,7 +65,7 @@ export default function PublishComicIssuePage({ params }: { params: Params }) {
 					{ label: '01 Create Issue', isActive: false },
 					{ label: '02 Upload covers', isActive: false },
 					{ label: '03 Upload pages', isActive: false },
-					{ label: '04 Publish', isActive: true },
+					{ label: '04 Submitted', isActive: true },
 				]}
 			/>
 

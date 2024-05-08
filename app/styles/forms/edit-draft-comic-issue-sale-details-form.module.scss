@@ -1,0 +1,50 @@
+@use '../variables/theme.module.scss' as *;
+
+.form--edit-draft-comic-issue-sales-data {
+	.range-wrapper {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		width: 100%;
+		max-width: max-content;
+		margin-bottom: 34px;
+
+		input {
+			max-width: 100px;
+		}
+	}
+
+	.number-input {
+		max-width: 100px;
+	}
+
+	.range-spacing {
+		margin-right: 12px;
+	}
+
+	.date-range-wrapper {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		width: 100%;
+		max-width: max-content;
+		margin-bottom: 34px;
+
+		.date-input {
+			background: $grey-500;
+			border: none;
+			border-radius: 8px;
+		}
+	}
+
+	input::-webkit-outer-spin-button,
+	input::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+
+	/* Firefox */
+	input[type='number'] {
+		-moz-appearance: textfield;
+	}
+}

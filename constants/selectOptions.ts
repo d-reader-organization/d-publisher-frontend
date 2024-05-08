@@ -4,6 +4,7 @@ import { ComicIssueCollaborator } from '@/models/comicIssue/comicIssueCollaborat
 import { PartialGenre } from '@/models/genre'
 import { SelectInputField } from '@/models/selectInputField'
 import { SelectOption } from '@/models/selectOption'
+import { SplToken } from '@/models/settings/splToken'
 import wrapperOne from '@/public/assets/images/unused-1.png'
 import wrapperTwo from '@/public/assets/images/unused-2.png'
 import wrapperThree from '@/public/assets/images/unused-3.png'
@@ -76,4 +77,14 @@ export function mapCollaboratorsToSelectInput(collaborators: ComicIssueCollabora
 
 export const areValidDefaultValues = (defaultValues: SelectInputField[]): boolean => {
 	return defaultValues.length > 0 && defaultValues.every((value) => value.hasOwnProperty('selectValue'))
+}
+
+export const splTokensToSelectOptions = (splTokens: SplToken[]): SelectOption[] => {
+	return splTokens.map((splToken) => {
+		return {
+			label: splToken.name,
+			value: splToken.symbol,
+			icon: splToken.icon,
+		}
+	})
 }

@@ -176,3 +176,11 @@ export const issueNumberTooltipText = `Numeration of your comic episode: first e
 export const releaseDateTooltipText = `Date your comic has been first released, whether it's physically or digitally. When does your comic celebrate it's birthday?`
 export const issueAuthorsTooltipText =
 	'A list of artists which were involved in the creative process of the comic episode'
+
+export const saleDetailsRevenueRangeTooltipText = `Revenue range tooltip` // TODO change text
+export const saleDetailsSupplyRangeTooltipText = `Supply range tooltip` // TODO change text
+export const saleDetailsLaunchDateTooltipText = `Launch date range tooltip` // TODO change text
+export const saleDetailsCurrenciesTooltipText = `Select wanted currencies` // TODO change text
+export const saleDetailsRoyaltyBasisPointTooltipText = `Royalty basis point tooltip` // TODO change text
+export const saleDetailsRoyaltyAddressTooltipText = `Royalty address tooltip` // TODO change text
+export const saleDetailsNoteTooltipText = `Note tooltip` // TODO change text

@@ -58,12 +58,12 @@ const resizeFile = ({
 		)
 	})
 
-export default function UploadComicIssueStatefulCoversPage({ params }: { params: Params }) {
+export default function MakeCollectibleGamifiedCovers({ params }: { params: Params }) {
 	const toaster = useToaster()
 	const router = useRouter()
 	const comicIssueId = params.id || ''
 	const { data: comicIssue } = useFetchRawComicIssue(comicIssueId)
-	const nextPage = RoutePath.ComicIssuePublishSaleDetails(comicIssueId)
+	const nextPage = RoutePath.ComicIssueMakeCollectibleSalesData(comicIssueId)
 	const [issueCovers, setIssueCovers] = useState<CreateStatefulCoverData[]>([])
 	const [wrapperOverlays, setWrapperOverlays] = useState<Record<string, string>>({})
 	const [usedOverlays, setUsedOverlays] = useState<Record<string, string>>({})
@@ -92,7 +92,7 @@ export default function UploadComicIssueStatefulCoversPage({ params }: { params:
 		setIsProcessingFiles(true)
 		try {
 			for (const cover of issueCovers) {
-				const res = await fetch(cover.image)
+				const res = await fetch(cover.image, { headers: { 'Access-Control-Allow-Origin': location.origin } })
 				const blobFile = await res.blob()
 				const file = new File([blobFile], `cover-${index}.png`, { type: blobFile.type })
 				const resizedImage = (await resizeFile({
@@ -157,6 +157,7 @@ export default function UploadComicIssueStatefulCoversPage({ params }: { params:
 		const formData = await mergeFiles()
 
 		await updateStatefulCovers(formData)
+
 		router.push(nextPage)
 	}
 
@@ -174,7 +175,7 @@ export default function UploadComicIssueStatefulCoversPage({ params }: { params:
 
 	return (
 		<>
-			<Header title='Create issue' />
+			<Header title='Submit for sale' />
 			<Steps
 				steps={[
 					{ label: '01 Gamified covers', isActive: true },
