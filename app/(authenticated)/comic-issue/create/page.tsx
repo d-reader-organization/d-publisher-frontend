@@ -1,6 +1,6 @@
 'use client'
 
-import { Resolver, useForm } from 'react-hook-form'
+import { FormProvider, Resolver, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useRouter, useSearchParams } from 'next/navigation'
 
@@ -35,6 +35,7 @@ import CustomDatePicker from '@/components/forms/CustomDatePicker'
 import HintDrawer from '@/components/layout/HintDrawer'
 import FormFaqItems from '@/components/layout/FormFaqItem'
 import { CREATE_COMIC_ISSUE_FAQ } from '@/constants/hints'
+import { useLocalStorage } from '@/hooks'
 
 export default function CreateComicIssuePage() {
 	const router = useRouter()
@@ -42,8 +43,9 @@ export default function CreateComicIssuePage() {
 
 	const searchParams = useSearchParams()
 	const comicSlug = searchParams.get('comicSlug') || ''
-
-	const { register, setValue, getValues, watch, handleSubmit, control } = useForm<CreateComicIssueData>({
+	const [isHintDrawerOpen] = useLocalStorage('hint-drawer-open', true)
+	
+	const form = useForm<CreateComicIssueData>({
 		defaultValues: {
 			title: '',
 			number: 1,
@@ -56,6 +58,7 @@ export default function CreateComicIssuePage() {
 		},
 		resolver: yupResolver(createComicIssueValidationSchema) as Resolver<CreateComicIssueData>,
 	})
+	const { register, setValue, getValues, watch, handleSubmit } = form
 	const { mutateAsync: createComicIssue } = useCreateComicIssue()
 
 	useAuthenticatedRoute()
@@ -80,90 +83,91 @@ export default function CreateComicIssuePage() {
 					{ label: '01 Create Issue', isActive: true },
 					{ label: '02 Upload covers', isActive: false },
 					{ label: '03 Upload pages', isActive: false },
-					{ label: '04 Publish', isActive: false },
+					{ label: '04 Submitted', isActive: false },
 				]}
 			/>
 
 			<main className='main--with-hint-drawer'>
-				<Form padding maxSize='md' fullWidth className='form--create-comic-issue'>
-					<Label isRequired tooltipText={issueTitleTooltipText}>
-						Issue title
-					</Label>
-					<Input {...register('title')} placeholder='Name of the episode' />
-					<div className='issue-number-wrapper'>
-						<div>
-							<Label isRequired tooltipText={issueNumberTooltipText}>
-								Issue number
-							</Label>
-							<p className='description'>Choose the episode number</p>
-						</div>
-						<IntegerInput
-							min={1}
-							ref={register('number').ref}
-							value={watch('number')}
-							onChange={(step) => {
-								const currentNumber = getValues('number')
-								setValue('number', currentNumber + step)
-							}}
-						/>
-					</div>
-					<div className='issue-release-date-wrapper'>
-						<Label isRequired tooltipText={releaseDateTooltipText}>
-							Release Date
+				<FormProvider {...form}>
+					<Form padding maxSize='md' fullWidth className='form--create-comic-issue' hiddenOnMobile={isHintDrawerOpen}>
+						<Label isRequired tooltipText={issueTitleTooltipText}>
+							Issue title
 						</Label>
-						<CustomDatePicker name='releaseDate' control={control} />
-					</div>
+						<Input {...register('title')} placeholder='Name of the episode' />
+						<div className='issue-number-wrapper'>
+							<div>
+								<Label isRequired tooltipText={issueNumberTooltipText}>
+									Issue number
+								</Label>
+								<p className='description'>Choose the episode number</p>
+							</div>
+							<IntegerInput
+								min={1}
+								ref={register('number').ref}
+								value={watch('number')}
+								onChange={(step) => {
+									const currentNumber = getValues('number')
+									setValue('number', currentNumber + step)
+								}}
+							/>
+						</div>
+						<div className='issue-release-date-wrapper'>
+							<Label isRequired tooltipText={releaseDateTooltipText}>
+								Release Date
+							</Label>
+							<CustomDatePicker name='releaseDate' />
+						</div>
 
-					<Label isRequired tooltipText={issueAuthorsTooltipText}>
-						Authors list
-					</Label>
-					<SelectWithInput
-						ref={register('collaborators').ref}
-						options={ROLE_SELECT_OPTIONS}
-						onChange={(inputs) => {
-							setValue(
-								'collaborators',
-								inputs.map((input) => {
-									return {
-										role: input.selectValue as CollaboratorRole,
-										name: input.inputValue,
-									}
-								})
-							)
-						}}
-					/>
-
-					<Label>Description</Label>
-					<Textarea
-						maxCharacters={1024}
-						rows={6}
-						{...register('description')}
-						placeholder='My comic issue description'
-					/>
-					<Label>Flavor text</Label>
-					<Textarea maxCharacters={128} rows={2} {...register('flavorText')} placeholder='Some sweet flavor text' />
-
-					<Label isRequired tooltipText={isComicFreeToReadTooltipText}>
-						Is this comic free to read?
-					</Label>
-					<div className='checkmark-row'>
-						<Checkbox
-							checked={watch('isFreeToRead')}
-							onChange={(event) => {
-								setValue('isFreeToRead', Boolean(event.target.checked))
+						<Label isRequired tooltipText={issueAuthorsTooltipText}>
+							Authors list
+						</Label>
+						<SelectWithInput
+							ref={register('collaborators').ref}
+							options={ROLE_SELECT_OPTIONS}
+							onChange={(inputs) => {
+								setValue(
+									'collaborators',
+									inputs.map((input) => {
+										return {
+											role: input.selectValue as CollaboratorRole,
+											name: input.inputValue,
+										}
+									})
+								)
 							}}
-							ref={register('isFreeToRead').ref}
 						/>
-						<span className='checkmark-text'>Free to read</span>
-					</div>
 
-					<FormActions marginTop>
-						<Button type='submit' onClick={onSubmitClick} backgroundColor='grey-100' className='action-button'>
-							Next <ArrowRightIcon className='action-button-icon' />
-						</Button>
-					</FormActions>
-				</Form>
+						<Label>Description</Label>
+						<Textarea
+							maxCharacters={1024}
+							rows={6}
+							{...register('description')}
+							placeholder='My comic issue description'
+						/>
+						<Label>Flavor text</Label>
+						<Textarea maxCharacters={128} rows={2} {...register('flavorText')} placeholder='Some sweet flavor text' />
 
+						<Label isRequired tooltipText={isComicFreeToReadTooltipText}>
+							Is this comic free to read?
+						</Label>
+						<div className='checkmark-row'>
+							<Checkbox
+								checked={watch('isFreeToRead')}
+								onChange={(event) => {
+									setValue('isFreeToRead', Boolean(event.target.checked))
+								}}
+								ref={register('isFreeToRead').ref}
+							/>
+							<span className='checkmark-text'>Free to read</span>
+						</div>
+
+						<FormActions marginTop>
+							<Button type='submit' onClick={onSubmitClick} backgroundColor='grey-100' className='action-button'>
+								Next <ArrowRightIcon className='action-button-icon' />
+							</Button>
+						</FormActions>
+					</Form>
+				</FormProvider>
 				<HintDrawer>
 					<FormFaqItems items={CREATE_COMIC_ISSUE_FAQ} />
 				</HintDrawer>

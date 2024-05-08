@@ -7,6 +7,7 @@ import {
 	yupRequiredMessage,
 } from 'utils/error'
 import * as yup from 'yup'
+import dayjs from 'dayjs'
 
 export const updateCreatorValidationSchema = yup.object().shape({
 	description: yup.string().max(512, generateMaxLengthErrorMessage('description', 512)),
@@ -163,4 +164,43 @@ export const createComicIssueValidationSchema = yup.object().shape({
 
 export const uploadComicIssuePdfValidationSchema = yup.object().shape({
 	pdf: yup.mixed(),
+})
+
+export const createDraftComicIssueSalesDataValidationSchema = yup.object().shape({
+	comicIssueId: yup.number().required(),
+	revenueMin: yup.number().min(0).default(0),
+	revenueMax: yup
+		.number()
+		.min(0)
+		.default(0)
+		.test('is-greater', 'revenueMax must be greater than revenueMin', function (value) {
+			const revenueMin = this.parent.revenueMin
+			return value > revenueMin
+		}),
+	supplyMin: yup.number().min(0).default(0),
+	supplyMax: yup
+		.number()
+		.min(0)
+		.default(0)
+		.test('is-greater-supply', 'supplyMax must be greater than supplyMin', function (value) {
+			const supplyMin = this.parent.supplyMin
+			return value > supplyMin
+		}),
+	launchDateMin: yup.date(),
+	launchDateMax: yup
+		.date()
+		.test('is-greater-launch-date', 'launchDateMax must be greater than launchDateMin', function (value) {
+			const maxDate = dayjs(value)
+			const minDate = dayjs(this.parent.launchDateMin)
+
+			return maxDate.diff(minDate) >= 0
+		}),
+	currencies: yup
+		.array()
+		.of(yup.string())
+		.required(yupRequiredMessage('Select at least 1 currency'))
+		.min(1, 'At least 1 currency should be selected'),
+	royaltyBasisPoint: yup.number().min(0).max(10000).default(0),
+	royaltyAddress: yup.string().default(''),
+	note: yup.string().default(''),
 })

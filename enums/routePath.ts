@@ -22,8 +22,11 @@ export const RoutePath = Object.freeze({
 	CreateComicIssue: (comicSlug: string) => `/comic-issue/create?comicSlug=${comicSlug}`,
 	ComicIssueUploadCovers: (comicIssueId: string | number) => `/comic-issue/${comicIssueId}/upload-covers`,
 	ComicIssueUploadPages: (comicIssueId: string | number) => `/comic-issue/${comicIssueId}/upload-pages`,
-	ComicIssuePublish: (comicIssueId: string | number) => `/comic-issue/${comicIssueId}/publish/`,
-	ComicIssuePublishStatefulCovers: (comicIssueId: string | number) =>
-		`/comic-issue/${comicIssueId}/publish/stateful-covers`,
-	ComicIssuePublishSaleDetails: (comicIssueId: string | number) => `/comic-issue/${comicIssueId}/publish/sale-details`,
+	ComicIssueSubmitted: (comicIssueId: string | number) => `/comic-issue/${comicIssueId}/submitted`,
+	ComicIssueMakeCollectibleGamifiedCovers: (comicIssueId: string | number) =>
+		`/comic-issue/make-collectible/${comicIssueId}/gamified-covers`,
+	ComicIssueMakeCollectibleSalesData: (comicIssueId: string | number) =>
+		`/comic-issue/make-collectible/${comicIssueId}/sales-data`,
+	ComicIssueMakeCollectibleSubmitted: (comicIssueId: string | number) =>
+		`/comic-issue/make-collectible/${comicIssueId}/submitted`,
 })
