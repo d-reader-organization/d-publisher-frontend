@@ -38,6 +38,7 @@ export default function ComicPage({ params }: { params: Params }) {
 
 	if (!comic) return <Header title='📖' />
 	const hasComicIssues = comicIssues.length > 0
+	const hasVerifiedIssues = comicIssues.some((issue) => !!issue.verifiedAt)
 
 	return (
 		<>
@@ -147,6 +148,7 @@ export default function ComicPage({ params }: { params: Params }) {
 									<td className='centered'>Rating</td>
 									<td className='centered'>Status</td>
 									<td></td>
+									{hasVerifiedIssues ? <td></td> : null}
 								</tr>
 							</thead>
 							<tbody>
@@ -165,6 +167,16 @@ export default function ComicPage({ params }: { params: Params }) {
 													Edit
 												</ButtonLink>
 											</td>
+											{issue.verifiedAt ? (
+												<td className='centered'>
+													<ButtonLink
+														backgroundColor='green-500'
+														href={RoutePath.ComicIssueMakeCollectibleGamifiedCovers(issue.id)}
+													>
+														Publish collectibles
+													</ButtonLink>
+												</td>
+											) : null}
 										</tr>
 									)
 								})}

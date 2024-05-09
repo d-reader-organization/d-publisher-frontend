@@ -77,7 +77,7 @@ export default function MakeCollectibleSalesDataPage({ params }: { params: Param
 
 	return (
 		<>
-			<Header title='Submit for sale' />
+			<Header title='Publish collectibles' />
 			<Steps
 				steps={[
 					{ label: '01 Gamified covers', isActive: false },
