@@ -1,11 +1,11 @@
 import { TooltipImagePreview } from '@/components/TooltipContent'
-import comicBannerDesktopPreview from 'public/assets/previews/comic-banner-desktop.png'
-import comicBannerMobilePreview from 'public/assets/previews/comic-banner-mobile.jpg'
-import comicBannerExample from 'public/assets/previews/comic-banner-example.jpg'
+import comicBannerMobilePreview from 'public/assets/previews/comic-banner-mobile.png'
 
 import comicCoverDesktopPreview from 'public/assets/previews/comic-cover-desktop.png'
-import comicCoverMobilePreview from 'public/assets/previews/comic-cover-mobile.jpg'
-import comicCoverExample from 'public/assets/previews/comic-cover-example.jpg'
+import comicCoverMobilePreview from 'public/assets/previews/comic-cover-mobile.png'
+
+import issueCoverVariantsPreview from 'public/assets/previews/comic-issue-cover-variants.png'
+import issueCoverPreview from 'public/assets/previews/comic-issue-cover-preview.png'
 
 import comicLogoDesktopPreview from 'public/assets/previews/comic-logo-desktop.png'
 import comicLogoMobilePreview from 'public/assets/previews/comic-logo-mobile.jpg'
@@ -35,9 +35,11 @@ If you're unsure what to put in here, feel free to skip the step or contact us f
 Ideally, signature image would have the same resolution (width, height) as the comic cover which you've previously uploaded
 `
 
-export const pdfTooltipText = `This file will be used for offline reading when users want to download offline content
+export const pdfTooltipText = `This file will be used for offline reading when users want to download offline content.
 
-Furthermore, if your comic issue is an NFT collection, this pdf file will be attached the each NFT from the collection to guarantee the ownership of the content to collectors.
+Furthermore, if your comic issue is an Digital Collectible, this pdf file will be attached the each collectible from the collection to guarantee the ownership of the content to collectors.
+
+In other words, if someone owns the token representation of the comic, they'll have access to the pdf.
 `
 
 export const coverVariantsTooltipText = `Comic episodes can have up to 5 rarities. You might opt into:
@@ -46,6 +48,13 @@ export const coverVariantsTooltipText = `Comic episodes can have up to 5 raritie
 - 5 rarities (common, uncommon, rare, epic, legendary)
 
 Ideally, these rarities would represent variants done by different featured cover artists`
+
+export const issueCoverVariantsPreviews: TooltipImagePreview[] = [
+	{
+		image: issueCoverVariantsPreview,
+		caption: 'Cover variants',
+	},
+]
 
 export const statefulCoverVariantsTooltipText = `Each cover variant can have 4 different states:
 - unopened (mint), unsigned
@@ -72,14 +81,6 @@ Pick an image with a ratio 1920:900 and at least 1920x900 resolution.
 
 export const comicBannerPreviews: TooltipImagePreview[] = [
 	{
-		image: comicBannerExample,
-		caption: 'Comic banner example',
-	},
-	{
-		image: comicBannerDesktopPreview,
-		caption: 'Comic banner with logo on top',
-	},
-	{
 		image: comicBannerMobilePreview,
 		caption: 'Comic banner on mobile',
 	},
@@ -88,28 +89,25 @@ export const comicBannerPreviews: TooltipImagePreview[] = [
 export const comicCoverTooltipText = `Following formats are allowed:
 - .jpg, .jpeg, .webp, .png, .gif
 
-Preferrably a jpg or webp format.
-Make sure the image has no transparent background.
+Preferrably a jpg or webp format. Make sure the image has no transparent background.
 
 Pick an image with a ratio 10:9 and at least 1000x900 resolution.
 
-Your cover image should not have the comic "title" art on top of it. This image will be used within the app to promote different comic series.
+Your cover image should not have the comic "title" (logo) art on top of it as that's a separate asset.
 
-If you don't have a "comic series" art, feel free to crop the cover art any of your comic issues
+This cover image will be used within the app to promote different comic series.
+
+If you don't have comic series art, feel free to crop the cover art any of your comic issues
 `
 
 export const comicCoverPreviews: TooltipImagePreview[] = [
 	{
-		image: comicCoverExample,
-		caption: 'Comic cover example',
+		image: comicCoverMobilePreview,
+		caption: 'Cover cover on mobile',
 	},
 	{
 		image: comicCoverDesktopPreview,
 		caption: 'Comic covers with logo on top',
-	},
-	{
-		image: comicCoverMobilePreview,
-		caption: 'Cover cover on mobile',
 	},
 ]
 
@@ -118,7 +116,7 @@ export const comicLogoTooltipText = `Following formats are allowed:
 
 Preferrably a png format. Make sure the image has a transparent background.
 
-Preferrably an image with a ratio 800:450 and at least 800x450 resolution, but not a strict specification.
+Preferrably a horizontal (landscape) orientation of the image.
 
 This image will be placed on top of comic series banner and cover images.
 `
@@ -141,13 +139,19 @@ export const comicLogoPreviews: TooltipImagePreview[] = [
 export const issueCoverImageTooltipText = `Following formats are allowed:
 - .jpg, .jpeg, .webp, .png, .gif
 
-Preferrably a jpg or webp format.
-Make sure the image has no transparent background.
+Preferrably a jpg or webp format. Make sure the image has no transparent background.
 
-Pick an image with a ratio 690:1000 and (ideally) at least 1024x1484px resolution.
+Pick an image with a ratio 690:1000 and at least 1024x1484px resolution.
 
 You can set the cover as 'default'. Default cover is shown across the app when displaying the comic.
 `
+
+export const issueCoverPreviews: TooltipImagePreview[] = [
+	{
+		image: issueCoverPreview,
+		caption: 'Cover in-app preview',
+	},
+]
 
 export const comicIssuePagesTooltipText = `Following formats are allowed:
 - .jpg, .jpeg, .webp
@@ -170,7 +174,8 @@ Ratio for the banner is 1920:900px and the resolution should be at least 1920x90
 export const comicAuthorsTooltipText =
 	'A list of artists which were involved in the creative process of the comic series'
 
-export const issueTitleTooltipText = `This is a title of your comic episode. Do not mistake it with a series title.
+export const issueTitleTooltipText = `This is a title of your individual comic episode. Do not mistake it with a series title.
+
 For example, comic series title is 'One Punch Man', and comic episode title is 'Episode 1' or 'One Punch Origin'.`
 export const issueNumberTooltipText = `Numeration of your comic episode: first episode, second episode..`
 export const releaseDateTooltipText = `Date your comic has been first released, whether it's physically or digitally. When does your comic celebrate it's birthday?`

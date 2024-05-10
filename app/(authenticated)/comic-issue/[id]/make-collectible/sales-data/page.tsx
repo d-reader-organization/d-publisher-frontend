@@ -160,6 +160,7 @@ export default function MakeCollectibleSalesDataPage({ params }: { params: Param
 						</FormActions>
 					</Form>
 				</FormProvider>
+
 				<HintDrawer>
 					<FormFaqItems items={CREATE_DRAFT_COMIC_ISSUE_SALES_DATA_FAQ} />
 				</HintDrawer>

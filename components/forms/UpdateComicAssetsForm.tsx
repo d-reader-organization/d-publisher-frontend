@@ -93,7 +93,7 @@ const UpdateComicAssetsForm: React.FC<Props> = ({ comic }) => {
 					</Label>
 					<FileUpload
 						id='logo-upload'
-						label='800x450px'
+						label='landscape orientation'
 						className='comic-logo-input'
 						onUpload={(files) => {
 							setValue('logo', files[0]?.file)

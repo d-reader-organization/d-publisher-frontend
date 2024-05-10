@@ -1,8 +1,6 @@
 import { FaqItem } from '@/components/layout/FormFaqItem'
 import {
 	audienceTypeTooltipText,
-	issueCoverImageTooltipText,
-	coverVariantsTooltipText,
 	isComicFreeToReadTooltipText,
 	issueAuthorsTooltipText,
 	issueNumberTooltipText,
@@ -15,6 +13,9 @@ import {
 	saleDetailsRoyaltyBasisPointTooltipText,
 	saleDetailsRoyaltyAddressTooltipText,
 	saleDetailsNoteTooltipText,
+	pdfTooltipText,
+	numberOfPagesTooltipText,
+	comicIssuePagesTooltipText,
 } from './tooltips'
 
 export const CREATE_COMIC_FAQ: FaqItem[] = [
@@ -59,17 +60,6 @@ export const CREATE_COMIC_ISSUE_FAQ: FaqItem[] = [
 	},
 ]
 
-export const UPLOAD_COMIC_ISSUE_COVERS_FAQ: FaqItem[] = [
-	{
-		summary: 'Covers',
-		content: coverVariantsTooltipText,
-	},
-	{
-		summary: 'Cover image',
-		content: issueCoverImageTooltipText,
-	},
-]
-
 export const CREATE_DRAFT_COMIC_ISSUE_SALES_DATA_FAQ: FaqItem[] = [
 	{
 		summary: 'Revenue range',
@@ -98,5 +88,20 @@ export const CREATE_DRAFT_COMIC_ISSUE_SALES_DATA_FAQ: FaqItem[] = [
 	{
 		summary: 'Note',
 		content: saleDetailsNoteTooltipText,
+	},
+]
+
+export const UPLOAD_COMIC_ISSUE_PAGES_FAQ: FaqItem[] = [
+	{
+		summary: 'PDF details',
+		content: pdfTooltipText,
+	},
+	{
+		summary: 'Preview pages',
+		content: numberOfPagesTooltipText,
+	},
+	{
+		summary: 'Pages format',
+		content: comicIssuePagesTooltipText,
 	},
 ]

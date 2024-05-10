@@ -23,6 +23,9 @@ import { Resolver, useForm } from 'react-hook-form'
 import { UpdateComicIssueFilesData } from 'models/comicIssue'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { uploadComicIssuePdfValidationSchema } from '@/components/forms/schemas'
+import HintDrawer from '@/components/layout/HintDrawer'
+import FormFaqItems from '@/components/layout/FormFaqItem'
+import { UPLOAD_COMIC_ISSUE_PAGES_FAQ } from '@/constants/hints'
 // import SignatureCanvas from 'react-signature-canvas'
 // import SkeletonImage from '@/components/SkeletonImage'
 
@@ -100,12 +103,11 @@ export default function UploadComicIssuePagesPage({ params }: { params: Params }
 				]}
 			/>
 
-			<main>
+			<main className='main--with-hint-drawer'>
 				<Form padding fullWidth className='form--edit-comic-issue-pages'>
 					<Label isRequired tooltipText={pdfTooltipText}>
-						Comic PDF
+						PDF File
 					</Label>
-					<p className='description'>PDF file of the comic episode</p>
 					<FileUpload
 						id='pdf-upload'
 						label='Choose a PDF file'
@@ -158,6 +160,10 @@ export default function UploadComicIssuePagesPage({ params }: { params: Params }
 						</Button>
 					</FormActions>
 				</Form>
+
+				<HintDrawer>
+					<FormFaqItems items={UPLOAD_COMIC_ISSUE_PAGES_FAQ} />
+				</HintDrawer>
 			</main>
 		</>
 	)
