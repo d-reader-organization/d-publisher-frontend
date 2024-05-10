@@ -34,10 +34,10 @@ import {
 import Dialog from '@mui/material/Dialog'
 import CloseIcon from 'public/assets/vector-icons/close.svg'
 import { useLocalStorage } from '@/hooks/useLocalStorage'
-import { FIRST_TIME_PUBLISHING_NOTICE } from '@/constants/staticText'
 import HintDrawer from '@/components/layout/HintDrawer'
 import FormFaqItems from '@/components/layout/FormFaqItem'
 import { CREATE_COMIC_FAQ } from '@/constants/hints'
+import InlineLink from '@/components/InlineLink'
 
 type LegalAgreement = {
 	ownershipConfirmation: boolean
@@ -48,7 +48,7 @@ export default function CreateComicPage() {
 	const router = useRouter()
 	const toaster = useToaster()
 
-	const [isFirstTimePublishing, setIsFirstPublishing] = useLocalStorage('first-time-publishing', true)
+	const [isFirstTimePublishing, setIsFirstPublishing] = useLocalStorage('first-time-publisher', true)
 	const [isHintDrawerOpen] = useLocalStorage('hint-drawer-open', true)
 
 	const { register, setValue, watch, handleSubmit } = useForm<CreateComicData & LegalAgreement>({
@@ -241,9 +241,20 @@ export default function CreateComicPage() {
 				<div className='close-icon-wrapper'>
 					<CloseIcon className='close-icon' onClick={() => setIsFirstPublishing(false)} />
 				</div>
-				<strong>IMPORTANT NOTICE!</strong>
-				{/* TODO: add a link to the "publishing-instructions.pdf" document */}
-				<p>{FIRST_TIME_PUBLISHING_NOTICE}</p>
+				<strong>HEY YOU! 🫵</strong>
+				<p>Welcome to the publishing interface! 💥</p>
+				<p>
+					If this is your first time self-publishing a comic on our platform, go ahead and revise the&nbsp;
+					<InlineLink href='https://drive.google.com/file/d/1e9r5376HAkCUpI9l3BJWMLcTu9Oeb67M/view'>
+						asset-explainer.pdf
+					</InlineLink>
+					! In case you have any questions or concerns, don&apos; hesitate to reach out.
+				</p>
+				<p>
+					Appreciate you,
+					<br />
+					dReader team
+				</p>
 			</Dialog>
 		</>
 	)

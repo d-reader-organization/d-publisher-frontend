@@ -85,7 +85,7 @@ export const metadata: Metadata = {
 		card: 'summary_large_image',
 		site: '@dPublisherApp',
 		creator: '@dPublisherApp',
-		images: '/assets/images/home-metadata.png',
+		images: '/assets/images/home-metadata.jpg',
 	},
 	manifest: '/manifest.json',
 }
