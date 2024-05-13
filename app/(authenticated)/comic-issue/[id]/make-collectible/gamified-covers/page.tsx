@@ -92,7 +92,9 @@ export default function MakeCollectibleGamifiedCovers({ params }: { params: Para
 		setIsProcessingFiles(true)
 		try {
 			for (const cover of issueCovers) {
-				const res = await fetch(cover.image, { headers: { 'Access-Control-Allow-Origin': location.origin } })
+				const res = await fetch(cover.image, {
+					mode: 'no-cors',
+				})
 				const blobFile = await res.blob()
 				const file = new File([blobFile], `cover-${index}.png`, { type: blobFile.type })
 				const resizedImage = (await resizeFile({
