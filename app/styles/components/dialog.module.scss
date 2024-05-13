@@ -11,6 +11,10 @@
 	max-height: 100% !important;
 	width: 100% !important;
 
+	p {
+		margin: 8px 0;
+	}
+
 	@include sm {
 		height: unset !important;
 		max-height: calc(100% - 128px) !important;

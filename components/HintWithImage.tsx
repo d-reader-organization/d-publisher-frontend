@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import FlexColumn from './FlexColumn'
 
 export type TooltipImagePreview = { image: string | StaticImageData; caption: string }
 
@@ -12,10 +13,10 @@ export const HintWithImage: React.FC<Props> = ({ previews, text }) => {
 		<>
 			{text}
 			{previews.map((preview) => (
-				<div key={preview.caption} className='hint-image'>
+				<FlexColumn centered key={preview.caption} className='hint-image'>
+					<p className='text'>{preview.caption}</p>
 					<Image src={preview.image} alt='' />
-					<span className='text'>{preview.caption}</span>
-				</div>
+				</FlexColumn>
 			))}
 		</>
 	)

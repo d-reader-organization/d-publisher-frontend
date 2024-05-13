@@ -6,6 +6,7 @@ import ComicList from '@/components/ComicList'
 import { useFetchMe } from '@/api/creator'
 import Box from '@mui/material/Box'
 import Link from 'next/link'
+import InlineLink from '@/components/InlineLink'
 
 export default function DashboardPage() {
 	const { data: me } = useFetchMe()
@@ -31,6 +32,12 @@ export default function DashboardPage() {
 					<Link className='text--important text--underline' href='https://discord.gg/rrZsRvC9mh' target='_blank'>
 						invite link
 					</Link>
+				</p>
+				<p>
+					publishing details:&nbsp;
+					<InlineLink href='https://drive.google.com/file/d/1e9r5376HAkCUpI9l3BJWMLcTu9Oeb67M/view'>
+						asset-explainer.pdf
+					</InlineLink>
 				</p>
 			</Box>
 		</>

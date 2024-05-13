@@ -12,6 +12,7 @@ import Form from '@/components/forms/Form'
 import { RoutePath } from '@/enums/routePath'
 import usePrefetchRoute from '@/hooks/usePrefetchRoute'
 import { useUpdateComicIssuePages } from '@/api/comicIssue'
+import Link from 'next/link'
 
 interface Params {
 	id: string | number
@@ -72,7 +73,14 @@ export default function PublishComicIssuePage({ params }: { params: Params }) {
 			<main>
 				<Form padding className='form--edit-comic-issue-pages'>
 					<p>Thanks for publishing your comic episode 🎉</p>
-					<p>We&apos;ll review it soon and get back to you</p>
+					<p>We&apos;ll review it soon and get back to you.</p>
+					<p>If we are slow to respond, please reach out on email or raise a support ticket on our discord server.</p>
+					<p>
+						email:&nbsp;
+						<Link className='text--important text--underline' href='mailto:support@dreader.io' target='_blank'>
+							support@dreader.io
+						</Link>
+					</p>
 					{/* <FormActions marginTop>
 						<Button type='submit' onClick={handleNextClick} backgroundColor='grey-100' className='action-button'>
 							Next <ArrowRightIcon className='action-button-icon' />

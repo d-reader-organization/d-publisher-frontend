@@ -21,7 +21,12 @@ import Form from '@/components/forms/Form'
 import { useUpdateComicIssueStatelessCovers } from '@/api/comicIssue'
 import { RoutePath } from '@/enums/routePath'
 import usePrefetchRoute from '@/hooks/usePrefetchRoute'
-import { issueCoverImageTooltipText, coverVariantsTooltipText } from '@/constants/tooltips'
+import {
+	issueCoverImageTooltipText,
+	coverVariantsTooltipText,
+	issueCoverVariantsPreviews,
+	issueCoverPreviews,
+} from '@/constants/tooltips'
 import FileUpload from '@/components/forms/FileUpload'
 import FormActions from '@/components/forms/FormActions'
 import Label from '@/components/forms/Label'
@@ -29,8 +34,8 @@ import Select from '@/components/forms/Select'
 import { imageTypes } from '@/constants/fileTypes'
 import { RARITY_SELECT_OPTIONS, findOptions } from '@/constants/selectOptions'
 import HintDrawer from '@/components/layout/HintDrawer'
-import FormFaqItems from '@/components/layout/FormFaqItem'
-import { UPLOAD_COMIC_ISSUE_COVERS_FAQ } from '@/constants/hints'
+import HintWithImage from '@/components/HintWithImage'
+import { Box } from '@mui/material'
 
 interface Params {
 	id: string | number
@@ -195,7 +200,14 @@ export default function UploadComicIssueStatelessCoversPage({ params }: { params
 				</Form>
 
 				<HintDrawer>
-					<FormFaqItems items={UPLOAD_COMIC_ISSUE_COVERS_FAQ} />
+					<Box>
+						<Expandable title='Cover & rarities'>
+							<HintWithImage previews={issueCoverVariantsPreviews} text={coverVariantsTooltipText} />
+						</Expandable>
+						<Expandable title='Cover'>
+							<HintWithImage previews={issueCoverPreviews} text={issueCoverImageTooltipText} />
+						</Expandable>
+					</Box>
 				</HintDrawer>
 			</main>
 		</>
