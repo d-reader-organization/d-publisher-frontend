@@ -64,7 +64,7 @@ export const metadata: Metadata = {
 	metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL as string),
 	description:
 		'📚 An on-chain platform for self-publishing digital comics, tracking user analytics, and capturing the audience',
-	keywords: 'NFT, dReader, dPublisher, Comic, Solana, SOL, mint, collection, manga, manwha',
+	keywords: 'NFT, asset, dReader, dPublisher, Comic, Solana, SOL, mint, collection, manga, manwha',
 	openGraph: {
 		type: 'website',
 		title: 'dPublisher',
