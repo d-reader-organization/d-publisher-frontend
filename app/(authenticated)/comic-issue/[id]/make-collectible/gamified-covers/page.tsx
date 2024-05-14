@@ -37,18 +37,16 @@ interface Params {
 const resizeFile = ({
 	file,
 	dimensions = { maxWidth: 1024, maxHeight: 1484 },
-	isSignature = false,
 }: {
 	file: File
 	dimensions?: { maxWidth: number; maxHeight: number }
-	isSignature?: boolean
 }) =>
 	new Promise((resolve) => {
 		Resizer.imageFileResizer(
 			file,
 			dimensions.maxWidth,
 			dimensions.maxHeight,
-			isSignature ? 'PNG' : 'JPEG',
+			file.type,
 			100,
 			0,
 			(uri) => {
@@ -92,9 +90,7 @@ export default function MakeCollectibleGamifiedCovers({ params }: { params: Para
 		setIsProcessingFiles(true)
 		try {
 			for (const cover of issueCovers) {
-				const res = await fetch(cover.image, {
-					mode: 'no-cors',
-				})
+				const res = await fetch(cover.image)
 				const blobFile = await res.blob()
 				const file = new File([blobFile], `cover-${index}.png`, { type: blobFile.type })
 				const resizedImage = (await resizeFile({
@@ -221,7 +217,6 @@ export default function MakeCollectibleGamifiedCovers({ params }: { params: Para
 											if (uploadedFile) {
 												const resizedImage = (await resizeFile({
 													file: uploadedFile.file,
-													isSignature: true,
 												})) as string
 												setSignatureImages((prevState) => ({ ...prevState, [key]: resizedImage }))
 											}
