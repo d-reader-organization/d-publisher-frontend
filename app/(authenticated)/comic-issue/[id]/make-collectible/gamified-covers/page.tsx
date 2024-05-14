@@ -90,7 +90,9 @@ export default function MakeCollectibleGamifiedCovers({ params }: { params: Para
 		setIsProcessingFiles(true)
 		try {
 			for (const cover of issueCovers) {
-				const res = await fetch(cover.image)
+				const res = await fetch(cover.image, {
+					headers: { 'Cache-Control': 'no-cache' },
+				})
 				const blobFile = await res.blob()
 				const file = new File([blobFile], `cover-${index}.png`, { type: blobFile.type })
 				const resizedImage = (await resizeFile({
