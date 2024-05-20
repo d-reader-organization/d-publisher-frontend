@@ -8,6 +8,7 @@ export const CREATOR_QUERY_KEYS = Object.freeze({
 	UPDATE_PASSWORD: 'update-password',
 	RESET_PASSWORD: 'reset-password',
 	REQUEST_EMAIL_VERIFICATION: 'request-email-verification',
+	REQUEST_PASSWORD_RESET: 'request-password-reset',
 	VERIFY_EMAIL: 'verify-email',
 	FILES: 'files',
 	AVATAR: 'avatar',

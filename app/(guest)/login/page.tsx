@@ -18,13 +18,21 @@ import ButtonLink from '@/components/ButtonLink'
 import FormActions from '@/components/forms/FormActions'
 import Label from '@/components/forms/Label'
 import { useToaster } from '@/providers/ToastProvider'
+import { useToggle } from '@/hooks'
+import Dialog from '@mui/material/Dialog'
+import CloseIcon from 'public/assets/vector-icons/close.svg'
+import { useState } from 'react'
+import { useRequestCreatorPasswordReset } from '@/api/creator/queries/useRequestCreatorPasswordReset'
 
 export default function LoginPage() {
+	const [passwordDialogOpen, togglePasswordDialog] = useToggle()
+	const [forgotPasswordEmailOrName, setForgotPasswordEmailOrName] = useState('')
 	const router = useRouter()
 	const toaster = useToaster()
 	const nextPage = RoutePath.Dashboard
 
 	const { mutateAsync: login } = useLoginCreator()
+	const { mutateAsync: requestPasswordReset } = useRequestCreatorPasswordReset()
 	const { register, handleSubmit } = useForm<LoginData>({
 		defaultValues: {
 			nameOrEmail: '',
@@ -43,6 +51,10 @@ export default function LoginPage() {
 			await login(data)
 			router.push(nextPage)
 		}, toaster.onFormError)()
+	}
+
+	const handleForgotPasswordEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setForgotPasswordEmailOrName(event.target.value)
 	}
 
 	return (
@@ -64,6 +76,14 @@ export default function LoginPage() {
 						<Button type='submit' onClick={onSubmitClick} backgroundColor='green-500' className='action-button'>
 							Let&apos;s go
 						</Button>
+						<Button
+							onClick={togglePasswordDialog}
+							type='button'
+							backgroundColor='transparent'
+							className='action-button action-button--forgot-password'
+						>
+							Forgot password?
+						</Button>
 
 						<ButtonLink
 							href={RoutePath.Register}
@@ -75,6 +95,48 @@ export default function LoginPage() {
 						</ButtonLink>
 					</FormActions>
 				</Form>
+				<Dialog
+					style={{ backdropFilter: 'blur(4px)' }}
+					PaperProps={{ className: 'action-dialog forgot-password-dialog' }}
+					onClose={togglePasswordDialog}
+					maxWidth='xs'
+					open={passwordDialogOpen}
+				>
+					<div className='close-icon-wrapper'>
+						<CloseIcon className='close-icon' onClick={togglePasswordDialog} />
+					</div>
+
+					<div className='dialog-content'>
+						<strong>Reset password</strong>
+						<p>
+							Type in your email address to send password reset instructions to your mail inbox. Make sure to check your
+							spam folder!
+						</p>
+						<Input
+							type='text'
+							placeholder='john.doe@dreader.io'
+							className='forgot-password-input'
+							value={forgotPasswordEmailOrName}
+							onChange={handleForgotPasswordEmailChange}
+						/>
+					</div>
+
+					<div className='dialog-actions'>
+						<Button naked onClick={togglePasswordDialog}>
+							Cancel
+						</Button>
+						<Button
+							naked
+							onClick={async () => {
+								await requestPasswordReset({ nameOrEmail: forgotPasswordEmailOrName })
+								setForgotPasswordEmailOrName('')
+								togglePasswordDialog()
+							}}
+						>
+							Send
+						</Button>
+					</div>
+				</Dialog>
 			</main>
 		</>
 	)

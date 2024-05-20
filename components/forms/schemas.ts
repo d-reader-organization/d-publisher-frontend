@@ -204,3 +204,8 @@ export const createDraftComicIssueSalesDataValidationSchema = yup.object().shape
 	royaltyAddress: yup.string().default(''),
 	note: yup.string().default(''),
 })
+
+export const resetPasswordValidationSchema = yup.object().shape({
+	verificationToken: yup.string().required(yupRequiredMessage('Verification token')),
+	newPassword: yup.string().required(yupRequiredMessage('New password')),
+})

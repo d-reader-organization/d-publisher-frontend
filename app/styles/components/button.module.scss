@@ -19,6 +19,14 @@
 		filter: brightness(1.1);
 	}
 
+	&--naked {
+		background: transparent;
+		color: $grey-100;
+		border-radius: 0;
+		padding: 0;
+		min-width: unset;
+	}
+
 	&--background-color-important {
 		background: $important-color;
 		color: $grey-600;
