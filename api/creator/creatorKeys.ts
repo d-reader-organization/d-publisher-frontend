@@ -17,6 +17,8 @@ export const CREATOR_QUERY_KEYS = Object.freeze({
 	DELETE: 'delete',
 	RECOVER: 'recover',
 	FOLLOW: 'follow',
+	GET_DISCORD_AUTHORIZATION: 'get-discord-authorization',
+	UPDATE_CREATOR_DISCORD: 'update-creator-discord',
 })
 
 export const creatorKeys = Object.freeze({

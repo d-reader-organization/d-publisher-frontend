@@ -17,6 +17,7 @@ export interface BasicCreator {
 	twitter: string
 	instagram: string
 	lynkfire: string
+	discord: string
 }
 
 export interface Creator extends BasicCreator {
@@ -27,7 +28,15 @@ export interface Creator extends BasicCreator {
 export type UpdateCreatorData = Partial<
 	Pick<
 		Creator,
-		'email' | 'description' | 'flavorText' | 'tippingAddress' | 'website' | 'twitter' | 'instagram' | 'lynkfire'
+		| 'email'
+		| 'description'
+		| 'flavorText'
+		| 'tippingAddress'
+		| 'website'
+		| 'twitter'
+		| 'instagram'
+		| 'lynkfire'
+		| 'discord'
 	>
 >
 
