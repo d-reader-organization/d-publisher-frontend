@@ -17,6 +17,7 @@ export const CREATOR_QUERY_KEYS = Object.freeze({
 	DELETE: 'delete',
 	RECOVER: 'recover',
 	FOLLOW: 'follow',
+	DOWNLOAD_ASSETS: 'download-assets',
 })
 
 export const creatorKeys = Object.freeze({

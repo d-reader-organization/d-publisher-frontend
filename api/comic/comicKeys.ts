@@ -19,6 +19,7 @@ export const COMIC_QUERY_KEYS = Object.freeze({
 	UNPUBLISH: 'unpublish',
 	DELETE: 'delete',
 	RECOVER: 'recover',
+	DOWNLOAD_ASSETS: 'download-assets',
 })
 
 export const comicKeys = Object.freeze({
