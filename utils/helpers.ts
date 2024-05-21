@@ -76,30 +76,44 @@ export function removeHttps(string?: string) {
 export function removeTwitter(string?: string) {
 	if (string?.startsWith('https://twitter.com/')) {
 		return string.substring(20)
+	} else if (string?.startsWith('https://www.twitter.com/')) {
+		return string.substring(24)
+	} else if (string?.startsWith('https://x.com/')) {
+		return string.substring(18)
+	} else if (string?.startsWith('https://www.x.com/')) {
+		return string.substring(22)
 	} else return ''
 }
 
 export function removeInstagram(string?: string) {
 	if (string?.startsWith('https://instagram.com/')) {
 		return string.substring(22)
+	} else if (string?.startsWith('https://www.instagram.com/')) {
+		return string.substring(26)
 	} else return ''
 }
 
 export function removeTikTok(string?: string) {
 	if (string?.startsWith('https://tiktok.com/@')) {
 		return string.substring(20)
+	} else if (string?.startsWith('https://www.tiktok.com/@')) {
+		return string.substring(24)
 	} else return ''
 }
 
 export function removeYouTube(string?: string) {
 	if (string?.startsWith('https://youtube.com/@')) {
 		return string.substring(21)
+	} else if (string?.startsWith('https://www.youtube.com/@')) {
+		return string.substring(25)
 	} else return ''
 }
 
 export function removeLynkfire(string?: string) {
 	if (string?.startsWith('https://lynkfire.com/')) {
 		return string.substring(21)
+	} else if (string?.startsWith('https://www.lynkfire.com/')) {
+		return string.substring(25)
 	} else return ''
 }
 
