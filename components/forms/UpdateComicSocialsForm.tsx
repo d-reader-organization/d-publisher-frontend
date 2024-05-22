@@ -64,14 +64,18 @@ const UpdateComicSocialsForm: React.FC<Props> = ({ comic }) => {
 		event.preventDefault()
 
 		handleSubmit(async (data) => {
+			const sanitizedWebsite = removeHttps(data.website)
+			const sanitizedDiscord = removeHttps(data.discord)
+			const sanitizedTelegram = removeHttps(data.telegram)
+
 			const requestData: UpdateComicSocialsData = {
-				website: prependHttps(data.website),
+				website: prependHttps(sanitizedWebsite),
 				twitter: prependTwitter(data.twitter),
 				instagram: prependInstagram(data.instagram),
 				tikTok: prependTikTok(data.tikTok),
 				youTube: prependYouTube(data.youTube),
-				discord: prependHttps(data.discord),
-				telegram: prependHttps(data.telegram),
+				discord: prependHttps(sanitizedDiscord),
+				telegram: prependHttps(sanitizedTelegram),
 			}
 
 			await updateComic(requestData)

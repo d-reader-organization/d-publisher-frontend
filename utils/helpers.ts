@@ -70,7 +70,7 @@ export function prependLynkfire(string?: string) {
 export function removeHttps(string?: string) {
 	if (string?.startsWith('https://')) {
 		return string.substring(8)
-	} else return ''
+	} else return string
 }
 
 export function removeTwitter(string?: string) {

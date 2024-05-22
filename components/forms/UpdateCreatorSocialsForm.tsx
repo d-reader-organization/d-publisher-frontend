@@ -56,10 +56,12 @@ const UpdateCreatorSocialsForm: React.FC = () => {
 		event.preventDefault()
 
 		handleSubmit(async (data) => {
+			const sanitizedWebsite = removeHttps(data.website)
+
 			const formattedData = {
 				twitter: prependTwitter(data.twitter),
 				instagram: prependInstagram(data.instagram),
-				website: prependHttps(data.website),
+				website: prependHttps(sanitizedWebsite),
 				lynkfire: prependLynkfire(data.lynkfire),
 			}
 
