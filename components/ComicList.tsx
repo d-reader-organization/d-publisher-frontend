@@ -12,9 +12,10 @@ interface Props {
 	enabled: boolean
 	narrow?: boolean
 	hideItemsCount?: boolean
+	isAdmin?: boolean
 }
 
-const ComicList: React.FC<Props> = ({ title, params, enabled, narrow = false, hideItemsCount = false }) => {
+const ComicList: React.FC<Props> = ({ title, params, enabled, narrow = false, hideItemsCount = false, isAdmin }) => {
 	const [, showMore, showMoreRef] = useOnScreen()
 	const { xs, sm, md, lg, xl } = useBreakpoints()
 
@@ -32,7 +33,7 @@ const ComicList: React.FC<Props> = ({ title, params, enabled, narrow = false, hi
 		fetchNextPage,
 		hasNextPage,
 		isFetching,
-	} = useFetchRawComics({ skip: 0, take, ...params }, enabled)
+	} = useFetchRawComics({ skip: 0, take, ...params }, enabled, isAdmin)
 
 	const hasComics = comics.length > 0
 	const showItemsCount = !hasNextPage && !isFetching && !hideItemsCount

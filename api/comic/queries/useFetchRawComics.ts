@@ -14,7 +14,7 @@ const fetchRawComics = async (params: RawComicParams): Promise<RawComic[]> => {
 	return response.data
 }
 
-export const useFetchRawComics = (params: RawComicParams, enabled = true) => {
+export const useFetchRawComics = (params: RawComicParams, enabled = true, isAdmin?: boolean) => {
 	const { isAuthenticated } = useCreatorAuth()
 	const toaster = useToaster()
 
@@ -25,7 +25,7 @@ export const useFetchRawComics = (params: RawComicParams, enabled = true) => {
 			if (lastPage.length >= params.take) return allPages.length
 		},
 		staleTime: 1000 * 60 * 30, // stale for 30 minutes
-		enabled: isAuthenticated && enabled && !!params.creatorSlug && !!params.take,
+		enabled: isAuthenticated && enabled && (isAdmin || !!params.creatorSlug) && !!params.take,
 		onError: toaster.onQueryError,
 	})
 
