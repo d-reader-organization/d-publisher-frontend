@@ -38,15 +38,20 @@ const UpdateComicIssueCoversForm: React.FC<Props> = ({ comicIssue }) => {
 	useAuthenticatedRoute()
 
 	useEffect(() => {
-		setNumberOfRarities(numberOfRarities)
-		const newIssueCovers: CreateStatelessCoverData[] = getRarityShares(numberOfRarities).map((rarity) => ({
-			rarity,
-			artist: '',
-			isDefault: false,
-			image: undefined,
-		}))
-
-		setIssueCovers(newIssueCovers)
+		setIssueCovers((covers) => {
+			const newIssueCovers: CreateStatelessCoverData[] = getRarityShares(numberOfRarities).map((rarity) => {
+				const existing = covers.find((existingCover) => existingCover.rarity === rarity)
+				return (
+					existing ?? {
+						rarity,
+						artist: '',
+						isDefault: false,
+						image: undefined,
+					}
+				)
+			})
+			return newIssueCovers
+		})
 	}, [numberOfRarities])
 
 	const onSubmitClick = async (event: React.MouseEvent<HTMLButtonElement>) => {
