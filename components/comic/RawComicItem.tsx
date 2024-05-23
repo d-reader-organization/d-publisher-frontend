@@ -7,11 +7,10 @@ import clsx from 'clsx'
 import { useDownloadComicAssets } from '@/api/comic/queries/useDownloadComicAssets'
 import { Button } from '@mui/material'
 import { handleAssetDownload } from '@/utils/helpers'
+import { DownloadAssetProps } from '@/types/downloadAssetProps'
 
-interface Props extends BoxProps {
+interface Props extends BoxProps, DownloadAssetProps {
 	comic: RawComic
-	isDownloadLink?: boolean
-	isAdmin?: boolean
 }
 
 const RawComicItem: React.FC<Props> = ({ comic, className, isDownloadLink, isAdmin = false, ...props }) => {

@@ -51,7 +51,7 @@ const DownloadCreatorAssetList: React.FC<Props> = ({
 	return (
 		<div className='creator-list-wrapper'>
 			<h2 className='title'>{title}</h2>
-			{hasCreators && (
+			{hasCreators ? (
 				<Grid container spacing={1} className='creator-list'>
 					{creators.map((creator) => (
 						<Grid item key={creator.slug} xs={6} md={4} lg={3} xl={2}>
@@ -59,8 +59,9 @@ const DownloadCreatorAssetList: React.FC<Props> = ({
 						</Grid>
 					))}
 				</Grid>
+			) : (
+				<div className='content-empty'>No creators to display!</div>
 			)}
-			{!hasCreators && <div className='content-empty'>No creators to display!</div>}
 			<div ref={showMoreRef}>
 				<div className='loading-more'>
 					{isFetching && <CircularProgress size={32} />}

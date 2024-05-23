@@ -48,18 +48,19 @@ const DownloadComicIssueAssetList: React.FC<Props> = ({
 	}, [fetchNextPage, hasNextPage, isFetching, showMore])
 
 	return (
-		<div className='raw-comic-list-wrapper'>
+		<div className='raw-issue-list-wrapper'>
 			<h2 className='title'>{title}</h2>
-			{hasComicIssues && (
-				<Grid container spacing={1} className='raw-comic-list'>
+			{hasComicIssues ? (
+				<Grid container spacing={1} className='raw-issue-list'>
 					{issues.map((issue) => (
-						<Grid item key={issue.slug} xs={6} md={4} lg={3} xl={2}>
+						<Grid item key={issue.id} xs={6} md={4} lg={3} xl={2}>
 							<RawComicIssueItem comicIssue={issue} isAdmin isDownloadLink />
 						</Grid>
 					))}
 				</Grid>
+			) : (
+				<div className='content-empty'>No issues to display!</div>
 			)}
-			{!hasComicIssues && <div className='content-empty'>No comics to display!</div>}
 			<div ref={showMoreRef}>
 				<div className='loading-more'>
 					{isFetching && <CircularProgress size={32} />}

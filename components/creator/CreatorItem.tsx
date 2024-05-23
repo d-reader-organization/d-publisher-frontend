@@ -7,11 +7,10 @@ import clsx from 'clsx'
 import { Button } from '@mui/material'
 import { useDownloadCreatorAssets } from '@/api/creator/queries/useDownloadCreatorAssets'
 import { handleAssetDownload } from '@/utils/helpers'
+import { DownloadAssetProps } from '@/types/downloadAssetProps'
 
-interface Props extends BoxProps {
+interface Props extends BoxProps, DownloadAssetProps {
 	creator: Creator
-	isDownloadLink?: boolean
-	isAdmin?: boolean
 }
 
 const CreatorItem: React.FC<Props> = ({ creator, className, isDownloadLink, isAdmin = false, ...props }) => {

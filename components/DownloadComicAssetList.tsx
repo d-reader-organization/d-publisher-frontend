@@ -52,7 +52,7 @@ const DownloadComicAssetList: React.FC<Props> = ({
 	return (
 		<div className='raw-comic-list-wrapper'>
 			<h2 className='title'>{title}</h2>
-			{hasComics && (
+			{hasComics ? (
 				<Grid container spacing={1} className='raw-comic-list'>
 					{comics.map((comic) => (
 						<Grid item key={comic.slug} xs={6} md={4} lg={3} xl={2}>
@@ -60,8 +60,9 @@ const DownloadComicAssetList: React.FC<Props> = ({
 						</Grid>
 					))}
 				</Grid>
+			) : (
+				<div className='content-empty'>No comics to display!</div>
 			)}
-			{!hasComics && <div className='content-empty'>No comics to display!</div>}
 			<div ref={showMoreRef}>
 				<div className='loading-more'>
 					{isFetching && <CircularProgress size={32} />}

@@ -7,11 +7,10 @@ import { Button } from '@mui/material'
 import { handleAssetDownload } from '@/utils/helpers'
 import { RawComicIssue } from '@/models/comicIssue/rawComicIssue'
 import { useDownloadComicIssueAssets } from '@/api/comicIssue/queries/useDownloadComicIssueAssets'
+import { DownloadAssetProps } from '@/types/downloadAssetProps'
 
-interface Props extends BoxProps {
+interface Props extends BoxProps, DownloadAssetProps {
 	comicIssue: RawComicIssue
-	isDownloadLink?: boolean
-	isAdmin?: boolean
 }
 
 const RawComicIssueItem: React.FC<Props> = ({ comicIssue, className, isDownloadLink, isAdmin = false, ...props }) => {

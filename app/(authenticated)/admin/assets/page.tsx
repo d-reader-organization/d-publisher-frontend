@@ -8,37 +8,19 @@ import { Box, Container, Tab, Tabs } from '@mui/material'
 import DownloadComicAssetList from '@/components/DownloadComicAssetList'
 import DownloadCreatorAssetList from '@/components/DownloadCreatorAssetList'
 import DownloadComicIssueAssetList from '@/components/DownloadComicIssueAssetList'
-type TabKey = 'comics' | 'comic-issues' | 'creators'
-
-type TabType = {
-	key: TabKey
-	index: number
-	label: string
-}
-
-const tabs: TabType[] = [
-	{ key: 'comics', label: 'Comics', index: 0 },
-	{ key: 'comic-issues', label: 'Episodes', index: 1 },
-	{ key: 'creators', label: 'Creators', index: 2 },
-]
-
-const findKeyByIndex = (index: number): TabType['key'] => {
-	return tabs.find((tab) => tab.index === index)?.key || 'comics'
-}
-const findIndexByKey = (key: string): TabType['index'] => tabs.find((tab) => tab.key === key)?.index || 0
 
 export default function AdminAssetsPage() {
 	const { data: me } = useFetchMe()
 
 	useAuthenticatedRoute()
-	const [activeTab, setActiveTab] = useState(findIndexByKey('comics'))
+	const [activeTab, setActiveTab] = useState(0)
 	const [searchString, setSearchString] = useState('')
 
 	if (!me || (me.role !== Role.Admin && me.role !== Role.Superadmin)) return null
 
-	const comicsTab = findKeyByIndex(activeTab) === 'comics'
-	const comicIssuesTab = findKeyByIndex(activeTab) === 'comic-issues'
-	const creatorsTab = findKeyByIndex(activeTab) === 'creators'
+	const isComicsTabActive = activeTab === 0
+	const isComicIssuesTabActive = activeTab === 1
+	const isCreatorsTabActive = activeTab === 2
 
 	const handleTabChange = async (_: React.SyntheticEvent, newValue: number) => {
 		setActiveTab(newValue)
@@ -61,19 +43,19 @@ export default function AdminAssetsPage() {
 							label='Comics'
 							disableRipple
 							id='Comics'
-							className={comicsTab ? 'tab-button' : 'tab-button--inactive'}
+							className={isComicsTabActive ? 'tab-button' : 'tab-button--inactive'}
 						/>
 						<Tab
 							label='Issues'
 							disableRipple
 							id='Issues'
-							className={comicIssuesTab ? 'tab-button' : 'tab-button--inactive'}
+							className={isComicIssuesTabActive ? 'tab-button' : 'tab-button--inactive'}
 						/>
 						<Tab
 							label='Creators'
 							disableRipple
 							id='Creators'
-							className={creatorsTab ? 'tab-button' : 'tab-button--inactive'}
+							className={isCreatorsTabActive ? 'tab-button' : 'tab-button--inactive'}
 						/>
 					</Tabs>
 
@@ -89,23 +71,27 @@ export default function AdminAssetsPage() {
 						/>
 					</Box>
 
-					<Box hidden={!comicsTab} className='discover-content'>
+					<Box hidden={!isComicsTabActive} className='discover-content'>
 						<DownloadComicAssetList
 							title='Comics'
 							params={{ titleSubstring: searchString }}
-							enabled={comicsTab}
+							enabled={isComicsTabActive}
 							isAdmin
 						/>
 					</Box>
-					<Box hidden={!comicIssuesTab} className='discover-content'>
+					<Box hidden={!isComicIssuesTabActive} className='discover-content'>
 						<DownloadComicIssueAssetList
 							title='Issues'
 							params={{ titleSubstring: searchString }}
-							enabled={comicIssuesTab}
+							enabled={isComicIssuesTabActive}
 						/>
 					</Box>
-					<Box hidden={!creatorsTab} className='discover-content'>
-						<DownloadCreatorAssetList title='Creators' params={{ nameSubstring: searchString }} enabled={creatorsTab} />
+					<Box hidden={!isCreatorsTabActive} className='discover-content'>
+						<DownloadCreatorAssetList
+							title='Creators'
+							params={{ nameSubstring: searchString }}
+							enabled={isCreatorsTabActive}
+						/>
 					</Box>
 				</Container>
 			</main>
