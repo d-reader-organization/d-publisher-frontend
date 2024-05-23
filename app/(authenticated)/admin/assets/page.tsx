@@ -42,8 +42,6 @@ export default function AdminAssetsPage() {
 
 	const handleTabChange = async (_: React.SyntheticEvent, newValue: number) => {
 		setActiveTab(newValue)
-		// https://github.com/vercel/next.js/discussions/48320
-		window.history.pushState({}, '')
 	}
 
 	return (
