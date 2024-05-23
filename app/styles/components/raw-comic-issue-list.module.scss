@@ -1,0 +1,41 @@
+@use '../variables/theme.module.scss' as *;
+@use '../mixins/common.module.scss' as *;
+@use '../mixins/breakpoints.module.scss' as *;
+
+.raw-issue-list-wrapper {
+    width: calc(100% - 48px);
+    margin: 24px;
+    @include pagePadding;
+
+    @include sm {
+        border: 1px solid $grey-300;
+        border-radius: 8px;
+    }
+
+    .title {
+        margin-bottom: 16px;
+        margin-top: -8px;
+    }
+
+    .content-empty {
+        padding: 8px;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 18px;
+        text-align: center;
+        color: $grey-200;
+    }
+
+    .raw-issue-list {
+        @include flexRow;
+    }
+
+    .loading-more {
+        @include centeredRow;
+        padding: 2rem 1rem;
+
+        svg {
+            color: $grey-100;
+        }
+    }
+}

@@ -1,0 +1,86 @@
+@use '../variables/theme.module.scss' as *;
+@use '../mixins/breakpoints.module.scss' as *;
+@use '../mixins/common.module.scss' as *;
+
+.admin-assets-page {
+    padding-top: 2rem;
+
+    .header-image {
+        background-size: cover;
+        background-repeat: no-repeat;
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 50%;
+    }
+
+    .tabs {
+        margin-left: 1.5rem;
+    }
+
+    .tab-button {
+        text-transform: capitalize !important;
+        font-weight: bold;
+        color: white !important;
+        font-size: 1.6rem;
+
+        @include lg {
+            font-size: 2rem;
+        }
+
+        &--inactive {
+            color: $grey-100 !important;
+        }
+    }
+
+    .search-box {
+        margin: 1rem 1.5rem 0 1.5rem;
+        height: 50px;
+
+        @include flexRow {
+            align-items: stretch;
+            justify-content: space-between;
+        }
+
+        >*:not(:last-child) {
+            margin-right: 1rem;
+        }
+    }
+
+    .search-input {
+        border: 1px solid $grey-100;
+        background-color: transparent;
+        color: $text-color;
+        border-radius: 0.5rem;
+        padding: 0.2rem 1.2rem;
+        width: 100%;
+        font-size: 18px;
+
+        &::placeholder {
+            color: $grey-100;
+            opacity: 1;
+        }
+    }
+
+    .search-button {
+        @include flexRow;
+        border-radius: 0.5rem;
+        min-width: max-content;
+        padding: 0 1rem;
+    }
+
+    .discover-body {
+        min-height: 80vh;
+        @include flexRow;
+
+        @include sm {
+            padding: 2rem 0;
+        }
+    }
+
+    .discover-content {
+        width: 100%;
+    }
+}

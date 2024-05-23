@@ -1,21 +1,26 @@
 import React, { useEffect, useMemo } from 'react'
 import CircularProgress from '@mui/material/CircularProgress'
-import { RawComicParams } from '@/models/comic/comicParams'
-import { useFetchRawComics } from '@/api/comic/queries/useFetchRawComics'
 import { useBreakpoints, useOnScreen } from '@/hooks'
-import RawComicItem from './comic/RawComicItem'
 import Grid from '@mui/material/Grid'
+import { useFetchRawComicIssues } from '@/api/comicIssue'
+import { RawComicIssueParams } from '@/models/comicIssue/comicIssueParams'
+import RawComicIssueItem from './comicIssue/RawComicIssueItem'
 
 interface Props {
 	title: string
-	params?: Partial<RawComicParams>
+	params?: Partial<RawComicIssueParams>
 	enabled: boolean
 	narrow?: boolean
 	hideItemsCount?: boolean
-	isAdmin?: boolean
 }
 
-const ComicList: React.FC<Props> = ({ title, params, enabled, narrow = false, hideItemsCount = false, isAdmin }) => {
+const DownloadComicIssueAssetList: React.FC<Props> = ({
+	title,
+	params,
+	enabled,
+	narrow = false,
+	hideItemsCount = false,
+}) => {
 	const [, showMore, showMoreRef] = useOnScreen()
 	const { xs, sm, md, lg, xl } = useBreakpoints()
 
@@ -29,13 +34,13 @@ const ComicList: React.FC<Props> = ({ title, params, enabled, narrow = false, hi
 	}, [xl, narrow, lg, md, sm, xs])
 
 	const {
-		flatData: comics,
+		flatData: issues,
 		fetchNextPage,
 		hasNextPage,
 		isFetching,
-	} = useFetchRawComics({ skip: 0, take, ...params }, enabled, isAdmin)
+	} = useFetchRawComicIssues({ skip: 0, take, ...params }, enabled)
 
-	const hasComics = comics.length > 0
+	const hasComicIssues = issues.length > 0
 	const showItemsCount = !hasNextPage && !isFetching && !hideItemsCount
 
 	useEffect(() => {
@@ -43,26 +48,27 @@ const ComicList: React.FC<Props> = ({ title, params, enabled, narrow = false, hi
 	}, [fetchNextPage, hasNextPage, isFetching, showMore])
 
 	return (
-		<div className='raw-comic-list-wrapper'>
+		<div className='raw-issue-list-wrapper'>
 			<h2 className='title'>{title}</h2>
-			{hasComics && (
-				<Grid container spacing={1} className='raw-comic-list'>
-					{comics.map((comic) => (
-						<Grid item key={comic.slug} xs={6} md={4} lg={3} xl={2}>
-							<RawComicItem comic={comic} key={comic.slug} />
+			{hasComicIssues ? (
+				<Grid container spacing={1} className='raw-issue-list'>
+					{issues.map((issue) => (
+						<Grid item key={issue.id} xs={6} md={4} lg={3} xl={2}>
+							<RawComicIssueItem comicIssue={issue} isAdmin isDownloadLink />
 						</Grid>
 					))}
 				</Grid>
+			) : (
+				<div className='content-empty'>No issues to display!</div>
 			)}
-			{!hasComics && <div className='content-empty'>No comics to display!</div>}
 			<div ref={showMoreRef}>
 				<div className='loading-more'>
 					{isFetching && <CircularProgress size={32} />}
-					{showItemsCount && `${comics.length} ${comics.length === 1 ? 'item' : 'items'} found`}
+					{showItemsCount && `${issues.length} ${issues.length === 1 ? 'item' : 'items'} found`}
 				</div>
 			</div>
 		</div>
 	)
 }
 
-export default ComicList
+export default DownloadComicIssueAssetList

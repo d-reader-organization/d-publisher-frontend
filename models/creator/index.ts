@@ -1,10 +1,12 @@
 import { CreatorStats } from './creatorStats'
 import { CreatorMyStats } from './creatorMyStats'
+import { Role } from '@/enums/role'
 
 export interface BasicCreator {
 	id: number
 	email: string
 	name: string
+	role: Role
 	slug: string
 	isVerified: boolean
 	avatar: string

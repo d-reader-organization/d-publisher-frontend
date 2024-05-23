@@ -132,3 +132,12 @@ export function isBrave() {
 export function genresToSlugs(genres: PartialGenre[]): string[] {
 	return genres.map((genre) => genre.slug)
 }
+
+export const handleAssetDownload = async (downloadLinks: string[]) => {
+	for (const link of downloadLinks) {
+		const obj = window.open(link, '_self', 'popup')
+		// wait for download to start before closing the context window
+		await sleep(2000)
+		obj?.close()
+	}
+}

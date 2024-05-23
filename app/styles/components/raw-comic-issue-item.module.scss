@@ -1,0 +1,56 @@
+@use '../variables/theme.module.scss' as *;
+@use '../mixins/common.module.scss' as *;
+@use '../mixins/breakpoints.module.scss' as *;
+
+.raw-issue-item {
+    position: relative;
+    border: 0.2rem solid $grey-500;
+    border-radius: 1.1rem;
+    aspect-ratio: $comic-cover-aspect-ratio;
+    width: 100%;
+    cursor: pointer;
+    pointer-events: all;
+    transition: transform 0.2s ease;
+
+    &:hover {
+        .cover-image {
+            filter: brightness(1);
+        }
+    }
+
+    .issue-item-link {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .issue-cover {
+        aspect-ratio: $comic-cover-aspect-ratio;
+        z-index: -1;
+        object-fit: cover;
+        border-radius: 1rem;
+        border: 2px solid $grey-300;
+        @include unclickable;
+        opacity: 0.4;
+        background-color: $grey-500;
+        height: auto;
+        filter: brightness(1);
+    }
+
+    .download-button {
+        z-index: 0;
+        width: 100%;
+        position: absolute;
+        background-color: $grey-100;
+        opacity: 0.5;
+        top: 80%;
+        font-weight: bold;
+    }
+
+    .download-button:hover {
+        opacity: 1;
+        background-color: white;
+    }
+}
