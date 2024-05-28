@@ -70,7 +70,7 @@ export function prependLynkfire(string?: string) {
 export function removeHttps(string?: string) {
 	if (string?.startsWith('https://')) {
 		return string.substring(8)
-	} else return ''
+	} else return string
 }
 
 export function removeTwitter(string?: string) {
@@ -140,4 +140,7 @@ export const handleAssetDownload = async (downloadLinks: string[]) => {
 		await sleep(2000)
 		obj?.close()
 	}
+}
+export function isASocialHandle(value: string) {
+	return !value.includes('/') && !value.includes('@')
 }

@@ -7,6 +7,7 @@ import {
 	yupRequiredMessage,
 } from 'utils/error'
 import * as yup from 'yup'
+import '@/types/yup.extensions'
 import dayjs from 'dayjs'
 
 export const updateCreatorValidationSchema = yup.object().shape({
@@ -47,9 +48,9 @@ export const visualIdentityValidationSchema = yup.object().shape({
 
 export const connectSocialsValidationSchema = yup.object().shape({
 	website: yup.string(),
-	twitter: yup.string(),
-	instagram: yup.string(),
-	lynkfire: yup.string(),
+	twitter: yup.string().noSlash('Provide only the Twitter handle'),
+	instagram: yup.string().noSlash('Provide only the Instagram handle'),
+	lynkfire: yup.string().noSlash('Provide only the Linkfire handle'),
 })
 
 export const loginValidationSchema = yup.object().shape({
@@ -74,12 +75,12 @@ export const yourDetailsValidationSchema = yup.object().shape({
 
 export const connectComicSocialsValidationSchema = yup.object().shape({
 	website: yup.string(),
-	twitter: yup.string(),
+	twitter: yup.string().noSlash('Provide only the Twitter handle'),
 	discord: yup.string(),
-	instagram: yup.string(),
-	telegram: yup.string(),
-	tikTok: yup.string(),
-	youTube: yup.string(),
+	instagram: yup.string().noSlash('Provide only the Instagram handle'),
+	telegram: yup.string().noSlash('Provide only the Telegram handle'),
+	tikTok: yup.string().noSlash('Provide only the Tiktok handle'),
+	youTube: yup.string().noSlash('Provide only the Youtube handle'),
 })
 
 export const createComicValidationSchema = yup.object().shape({

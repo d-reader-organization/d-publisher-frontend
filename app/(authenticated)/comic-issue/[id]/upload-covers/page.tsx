@@ -26,6 +26,7 @@ import {
 	coverVariantsTooltipText,
 	issueCoverVariantsPreviews,
 	issueCoverPreviews,
+	handleTooltipText,
 } from '@/constants/tooltips'
 import FileUpload from '@/components/forms/FileUpload'
 import FormActions from '@/components/forms/FormActions'
@@ -36,6 +37,7 @@ import { RARITY_SELECT_OPTIONS, findOptions } from '@/constants/selectOptions'
 import HintDrawer from '@/components/layout/HintDrawer'
 import HintWithImage from '@/components/HintWithImage'
 import { Box } from '@mui/material'
+import { isASocialHandle } from '@/utils/helpers'
 
 interface Params {
 	id: string | number
@@ -59,6 +61,7 @@ export default function UploadComicIssueStatelessCoversPage({ params }: { params
 		const newIssueCovers: CreateStatelessCoverData[] = getRarityShares(numberOfRarities).map((rarity) => ({
 			rarity,
 			artist: '',
+			artistTwitterHandle: '',
 			isDefault: false,
 			image: undefined,
 		}))
@@ -72,6 +75,9 @@ export default function UploadComicIssueStatelessCoversPage({ params }: { params
 		const unsetArtist = issueCovers.some((issueCover) => issueCover.artist === '')
 		const unsetImage = issueCovers.some((issueCover) => issueCover.image === undefined)
 		const noDefaultCover = issueCovers.every((issueCover) => !issueCover.isDefault)
+		const isNotASocialHandle = issueCovers.some((issueCover) =>
+			issueCover.artistTwitterHandle ? !isASocialHandle(issueCover.artistTwitterHandle) : false
+		)
 
 		if (unsetArtist) {
 			toaster.add(generateRequiredArrayElementErrorMessage('artist'), 'error')
@@ -81,6 +87,8 @@ export default function UploadComicIssueStatelessCoversPage({ params }: { params
 			toaster.add(generateRequiredArrayElementErrorMessage('image'), 'error')
 		} else if (noDefaultCover) {
 			toaster.add('Default cover must be selected', 'error')
+		} else if (isNotASocialHandle) {
+			toaster.add('Only Twitter handle is required', 'error')
 		} else {
 			const formData = new FormData()
 
@@ -90,6 +98,7 @@ export default function UploadComicIssueStatelessCoversPage({ params }: { params
 				formData.append(`covers[${i}][artist]`, cover.artist)
 				formData.append(`covers[${i}][isDefault]`, cover.isDefault.toString())
 				formData.append(`covers[${i}][rarity]`, cover.rarity)
+				formData.append(`covers[${i}][artistTwitterHandle]`, cover.artistTwitterHandle ?? '')
 				i = i + 1
 			}
 
@@ -114,6 +123,16 @@ export default function UploadComicIssueStatelessCoversPage({ params }: { params
 			const issueCoverToUpdate = deepClonedIssueCovers.find((issueCover) => issueCover.rarity === rarity)
 			if (!issueCoverToUpdate) return currentIssueCovers
 			issueCoverToUpdate.artist = value
+			return deepClonedIssueCovers
+		})
+	}
+
+	const handleChangeArtistTwitterHandle = (rarity: ComicRarity, value: string) => {
+		setIssueCovers((currentIssueCovers) => {
+			const deepClonedIssueCovers = cloneDeep(currentIssueCovers)
+			const issueCoverToUpdate = deepClonedIssueCovers.find((issueCover) => issueCover.rarity === rarity)
+			if (!issueCoverToUpdate) return currentIssueCovers
+			issueCoverToUpdate.artistTwitterHandle = value
 			return deepClonedIssueCovers
 		})
 	}
@@ -157,7 +176,7 @@ export default function UploadComicIssueStatelessCoversPage({ params }: { params
 						placeholder='Number of rarities'
 						className='rarities-select'
 					/>
-					{issueCovers.map(({ rarity, artist, isDefault }) => (
+					{issueCovers.map(({ rarity, artist, isDefault, artistTwitterHandle }) => (
 						<Expandable open={issueCovers.length === 1} title={rarity} key={rarity}>
 							<div className='rarity-cover-wrapper'>
 								<div>
@@ -175,8 +194,19 @@ export default function UploadComicIssueStatelessCoversPage({ params }: { params
 									/>
 								</div>
 								<div>
-									<Label isRequired>Artist of a cover image</Label>
-									<Input onChange={(event) => handleChangeArtist(rarity, event.target.value)} value={artist} />
+									<div>
+										<Label isRequired>Artist of a cover image</Label>
+										<Input onChange={(event) => handleChangeArtist(rarity, event.target.value)} value={artist} />
+									</div>
+									<div>
+										<Label tooltipText={handleTooltipText}>Artist&apos;s Twitter Handle</Label>
+										<Input
+											prefix='@'
+											onChange={(event) => handleChangeArtistTwitterHandle(rarity, event.target.value)}
+											value={artistTwitterHandle}
+										/>
+									</div>
+
 									<div className='default-issue-checkbox-wrapper'>
 										<Checkbox
 											className='default-issue-checkbox'

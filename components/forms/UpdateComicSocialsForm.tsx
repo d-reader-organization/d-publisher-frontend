@@ -24,6 +24,7 @@ import {
 	removeTwitter,
 	removeYouTube,
 } from '@/utils/helpers'
+import { handleTooltipText } from '@/constants/tooltips'
 
 interface Props {
 	comic: RawComic
@@ -64,14 +65,18 @@ const UpdateComicSocialsForm: React.FC<Props> = ({ comic }) => {
 		event.preventDefault()
 
 		handleSubmit(async (data) => {
+			const sanitizedWebsite = removeHttps(data.website)
+			const sanitizedDiscord = removeHttps(data.discord)
+			const sanitizedTelegram = removeHttps(data.telegram)
+
 			const requestData: UpdateComicSocialsData = {
-				website: prependHttps(data.website),
+				website: prependHttps(sanitizedWebsite),
 				twitter: prependTwitter(data.twitter),
 				instagram: prependInstagram(data.instagram),
 				tikTok: prependTikTok(data.tikTok),
 				youTube: prependYouTube(data.youTube),
-				discord: prependHttps(data.discord),
-				telegram: prependHttps(data.telegram),
+				discord: prependHttps(sanitizedDiscord),
+				telegram: prependHttps(sanitizedTelegram),
 			}
 
 			await updateComic(requestData)
@@ -84,19 +89,27 @@ const UpdateComicSocialsForm: React.FC<Props> = ({ comic }) => {
 			<Input prefix='https://' {...register('website')} />
 			<div className='social-media-wrapper'>
 				<div className='social-media-container'>
-					<Label size='small'>Twitter</Label>
+					<Label size='small' tooltipText={handleTooltipText}>
+						Twitter
+					</Label>
 					<Input {...register('twitter')} prefix='@' />
 				</div>
 				<div className='social-media-container'>
-					<Label size='small'>Instagram</Label>
+					<Label size='small' tooltipText={handleTooltipText}>
+						Instagram
+					</Label>
 					<Input {...register('instagram')} prefix='@' />
 				</div>
 				<div className='social-media-container'>
-					<Label size='small'>TikTok</Label>
+					<Label size='small' tooltipText={handleTooltipText}>
+						TikTok
+					</Label>
 					<Input {...register('tikTok')} prefix='@' />
 				</div>
 				<div className='social-media-container'>
-					<Label size='small'>YouTube</Label>
+					<Label size='small' tooltipText={handleTooltipText}>
+						YouTube
+					</Label>
 					<Input {...register('youTube')} prefix='@' />
 				</div>
 				<div className='social-media-container'>
