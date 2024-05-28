@@ -166,6 +166,10 @@ export const uploadComicIssuePdfValidationSchema = yup.object().shape({
 	pdf: yup.mixed(),
 })
 
+export const editComicIssuePdfValidationSchema = yup.object().shape({
+	pdf: yup.mixed().optional(),
+})
+
 export const createDraftComicIssueSalesDataValidationSchema = yup.object().shape({
 	comicIssueId: yup.number().required(),
 	revenueMin: yup.number().min(0).default(0),

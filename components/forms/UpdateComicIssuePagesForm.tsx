@@ -16,7 +16,7 @@ import { optimalImageTypes, pdfType } from '@/constants/fileTypes'
 import { RawComicIssue } from '@/models/comicIssue/rawComicIssue'
 import { UpdateComicIssueFilesData } from '@/models/comicIssue'
 import { Resolver, useForm } from 'react-hook-form'
-import { uploadComicIssuePdfValidationSchema } from './schemas'
+import { editComicIssuePdfValidationSchema } from './schemas'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 interface Props {
@@ -34,7 +34,7 @@ const UpdateComicIssuePagesForm: React.FC<Props> = ({ comicIssue }) => {
 		defaultValues: {
 			pdf: undefined,
 		},
-		resolver: yupResolver(uploadComicIssuePdfValidationSchema) as Resolver<UpdateComicIssueFilesData>,
+		resolver: yupResolver(editComicIssuePdfValidationSchema) as Resolver<UpdateComicIssueFilesData>,
 	})
 
 	useAuthenticatedRoute()
@@ -44,6 +44,9 @@ const UpdateComicIssuePagesForm: React.FC<Props> = ({ comicIssue }) => {
 	}
 
 	const handleUploadPdf = async (data: UpdateComicIssueFilesData) => {
+		if (!data.pdf?.size) {
+			return
+		}
 		const formData = new FormData()
 
 		if (data.pdf) formData.append('pdf', data.pdf)
