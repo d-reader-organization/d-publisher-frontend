@@ -141,3 +141,6 @@ export const handleAssetDownload = async (downloadLinks: string[]) => {
 		obj?.close()
 	}
 }
+export function isASocialHandle(value: string) {
+	return !value.includes('/') && !value.includes('@')
+}

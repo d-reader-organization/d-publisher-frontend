@@ -22,6 +22,7 @@ import Select from '@/components/forms/Select'
 import { imageTypes } from '@/constants/fileTypes'
 import { RARITY_SELECT_OPTIONS, findOptions } from '@/constants/selectOptions'
 import { RawComicIssue } from '@/models/comicIssue/rawComicIssue'
+import { isASocialHandle } from '@/utils/helpers'
 
 interface Props {
 	comicIssue: RawComicIssue
@@ -60,6 +61,9 @@ const UpdateComicIssueCoversForm: React.FC<Props> = ({ comicIssue }) => {
 		const unsetArtist = issueCovers.some((issueCover) => issueCover.artist === '')
 		const unsetImage = issueCovers.some((issueCover) => issueCover.image === undefined)
 		const noDefaultCover = issueCovers.every((issueCover) => !issueCover.isDefault)
+		const isNotASocialHandle = issueCovers.some((issueCover) =>
+			issueCover.artistTwitterHandle ? !isASocialHandle(issueCover.artistTwitterHandle) : false
+		)
 
 		if (unsetArtist) {
 			toaster.add(generateRequiredArrayElementErrorMessage('artist'), 'error')
@@ -67,6 +71,8 @@ const UpdateComicIssueCoversForm: React.FC<Props> = ({ comicIssue }) => {
 			toaster.add(generateRequiredArrayElementErrorMessage('image'), 'error')
 		} else if (noDefaultCover) {
 			toaster.add('Default cover must be selected', 'error')
+		} else if (isNotASocialHandle) {
+			toaster.add('Only Twitter handle is required', 'error')
 		} else {
 			const formData = new FormData()
 
@@ -76,6 +82,7 @@ const UpdateComicIssueCoversForm: React.FC<Props> = ({ comicIssue }) => {
 				formData.append(`covers[${i}][artist]`, cover.artist)
 				formData.append(`covers[${i}][isDefault]`, cover.isDefault.toString())
 				formData.append(`covers[${i}][rarity]`, cover.rarity)
+				formData.append(`covers[${i}][artistTwitterHandle]`, cover.artistTwitterHandle ?? '')
 				i = i + 1
 			}
 
@@ -115,6 +122,16 @@ const UpdateComicIssueCoversForm: React.FC<Props> = ({ comicIssue }) => {
 		})
 	}
 
+	const handleChangeArtistTwitterHandle = (rarity: ComicRarity, value: string) => {
+		setIssueCovers((currentIssueCovers) => {
+			const deepClonedIssueCovers = cloneDeep(currentIssueCovers)
+			const issueCoverToUpdate = deepClonedIssueCovers.find((issueCover) => issueCover.rarity === rarity)
+			if (!issueCoverToUpdate) return currentIssueCovers
+			issueCoverToUpdate.artistTwitterHandle = value
+			return deepClonedIssueCovers
+		})
+	}
+
 	return (
 		<>
 			<main>
@@ -133,7 +150,7 @@ const UpdateComicIssueCoversForm: React.FC<Props> = ({ comicIssue }) => {
 						placeholder='Number of rarities'
 						className='rarities-select'
 					/>
-					{issueCovers.map(({ rarity, artist, isDefault }) => {
+					{issueCovers.map(({ rarity, artist, isDefault, artistTwitterHandle }) => {
 						return (
 							<div key={rarity}>
 								<h2 className='rarity-header'>{rarity}</h2>
@@ -153,12 +170,18 @@ const UpdateComicIssueCoversForm: React.FC<Props> = ({ comicIssue }) => {
 										/>
 									</div>
 									<div>
-										<Label isRequired>Artist of a cover image</Label>
-										<Input
-											onChange={(event) => handleChangeArtist(rarity, event.target.value)}
-											value={comicIssue.statefulCovers.find((cover) => cover.artist === artist)?.artist}
-											defaultValue={artist}
-										/>
+										<div>
+											<Label isRequired>Artist of a cover image</Label>
+											<Input onChange={(event) => handleChangeArtist(rarity, event.target.value)} value={artist} />
+										</div>
+										<div>
+											<Label>Artist&apos;s Twitter Handle</Label>
+											<Input
+												prefix='@'
+												onChange={(event) => handleChangeArtistTwitterHandle(rarity, event.target.value)}
+												value={artistTwitterHandle}
+											/>
+										</div>
 										<div className='default-issue-checkbox-wrapper'>
 											<Checkbox
 												className='default-issue-checkbox'
