@@ -24,6 +24,7 @@ import {
 	removeTwitter,
 	removeYouTube,
 } from '@/utils/helpers'
+import { handleTooltipText } from '@/constants/tooltips'
 
 interface Props {
 	comic: RawComic
@@ -88,19 +89,27 @@ const UpdateComicSocialsForm: React.FC<Props> = ({ comic }) => {
 			<Input prefix='https://' {...register('website')} />
 			<div className='social-media-wrapper'>
 				<div className='social-media-container'>
-					<Label size='small'>Twitter</Label>
+					<Label size='small' tooltipText={handleTooltipText}>
+						Twitter
+					</Label>
 					<Input {...register('twitter')} prefix='@' />
 				</div>
 				<div className='social-media-container'>
-					<Label size='small'>Instagram</Label>
+					<Label size='small' tooltipText={handleTooltipText}>
+						Instagram
+					</Label>
 					<Input {...register('instagram')} prefix='@' />
 				</div>
 				<div className='social-media-container'>
-					<Label size='small'>TikTok</Label>
+					<Label size='small' tooltipText={handleTooltipText}>
+						TikTok
+					</Label>
 					<Input {...register('tikTok')} prefix='@' />
 				</div>
 				<div className='social-media-container'>
-					<Label size='small'>YouTube</Label>
+					<Label size='small' tooltipText={handleTooltipText}>
+						YouTube
+					</Label>
 					<Input {...register('youTube')} prefix='@' />
 				</div>
 				<div className='social-media-container'>

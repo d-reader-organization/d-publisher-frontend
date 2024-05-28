@@ -26,6 +26,7 @@ import {
 	coverVariantsTooltipText,
 	issueCoverVariantsPreviews,
 	issueCoverPreviews,
+	handleTooltipText,
 } from '@/constants/tooltips'
 import FileUpload from '@/components/forms/FileUpload'
 import FormActions from '@/components/forms/FormActions'
@@ -198,7 +199,7 @@ export default function UploadComicIssueStatelessCoversPage({ params }: { params
 										<Input onChange={(event) => handleChangeArtist(rarity, event.target.value)} value={artist} />
 									</div>
 									<div>
-										<Label>Artist&apos;s Twitter Handle</Label>
+										<Label tooltipText={handleTooltipText}>Artist&apos;s Twitter Handle</Label>
 										<Input
 											prefix='@'
 											onChange={(event) => handleChangeArtistTwitterHandle(rarity, event.target.value)}

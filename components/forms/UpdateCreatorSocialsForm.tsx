@@ -22,6 +22,7 @@ import {
 	prependLynkfire,
 } from '@/utils/helpers'
 import { useToaster } from '@/providers/ToastProvider'
+import { handleTooltipText } from '@/constants/tooltips'
 
 const UpdateCreatorSocialsForm: React.FC = () => {
 	const toaster = useToaster()
@@ -73,15 +74,21 @@ const UpdateCreatorSocialsForm: React.FC = () => {
 		<Form fullWidth>
 			<div className='social-media-wrapper'>
 				<div className='social-media-container'>
-					<Label size='small'>Twitter</Label>
+					<Label size='small' tooltipText={handleTooltipText}>
+						Twitter
+					</Label>
 					<Input {...register('twitter')} prefix='@' />
 				</div>
 				<div className='social-media-container'>
-					<Label size='small'>Instagram</Label>
+					<Label size='small' tooltipText={handleTooltipText}>
+						Instagram
+					</Label>
 					<Input {...register('instagram')} prefix='@' />
 				</div>
 				<div className='social-media-container'>
-					<Label size='small'>Lynkfire</Label>
+					<Label size='small' tooltipText={handleTooltipText}>
+						Lynkfire
+					</Label>
 					<Input {...register('lynkfire')} prefix='@' />
 				</div>
 				<div className='social-media-container'>

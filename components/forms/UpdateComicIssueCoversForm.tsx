@@ -14,7 +14,7 @@ import { cloneDeep } from 'lodash'
 import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
 import Form from '@/components/forms/Form'
 import { useUpdateComicIssueStatelessCovers } from '@/api/comicIssue'
-import { issueCoverImageTooltipText, coverVariantsTooltipText } from '@/constants/tooltips'
+import { issueCoverImageTooltipText, coverVariantsTooltipText, handleTooltipText } from '@/constants/tooltips'
 import FileUpload from '@/components/forms/FileUpload'
 import FormActions from '@/components/forms/FormActions'
 import Label from '@/components/forms/Label'
@@ -175,7 +175,7 @@ const UpdateComicIssueCoversForm: React.FC<Props> = ({ comicIssue }) => {
 											<Input onChange={(event) => handleChangeArtist(rarity, event.target.value)} value={artist} />
 										</div>
 										<div>
-											<Label>Artist&apos;s Twitter Handle</Label>
+											<Label tooltipText={handleTooltipText}>Artist&apos;s Twitter Handle</Label>
 											<Input
 												prefix='@'
 												onChange={(event) => handleChangeArtistTwitterHandle(rarity, event.target.value)}

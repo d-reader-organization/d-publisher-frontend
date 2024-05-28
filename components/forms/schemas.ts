@@ -7,7 +7,7 @@ import {
 	yupRequiredMessage,
 } from 'utils/error'
 import * as yup from 'yup'
-import 'yup.extensions'
+import '@/types/yup.extensions'
 import dayjs from 'dayjs'
 
 export const updateCreatorValidationSchema = yup.object().shape({
