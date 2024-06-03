@@ -72,7 +72,7 @@ const UpdateComicIssueCoversForm: React.FC<Props> = ({ comicIssue }) => {
 		} else if (noDefaultCover) {
 			toaster.add('Default cover must be selected', 'error')
 		} else if (isNotASocialHandle) {
-			toaster.add('Only Twitter handle is required', 'error')
+			toaster.add('Twitter handle should not contain URLs or @ characters', 'error')
 		} else {
 			const formData = new FormData()
 
