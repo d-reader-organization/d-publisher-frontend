@@ -14,25 +14,18 @@ interface Props extends BoxProps, DownloadAssetProps {
 }
 
 const CreatorItem: React.FC<Props> = ({ creator, className, isDownloadLink, isAdmin = false, ...props }) => {
-	const nextPage = RoutePath.Creator(creator.slug)
+	const nextPage = isDownloadLink ? RoutePath.CreatorAdmin(creator.slug): RoutePath.Creator(creator.slug)
 	const { data: downloadLinks } = useDownloadCreatorAssets(creator.slug, isAdmin)
 
 	return (
 		<Box className={clsx('creator-item', className)} {...props}>
-			{isDownloadLink ? (
-				<Box className='creator-item-link'>
-					<SkeletonImage sizes='1000px' className='creator-banner' src={creator.banner} loading='lazy' alt='' fill />
-					<SkeletonImage sizes='450px' className='creator-avatar' src={creator.avatar} loading='lazy' alt='' fill />
-					<Button className='download-button' onClick={() => handleAssetDownload(downloadLinks ?? [])}>
-						Download
-					</Button>
-				</Box>
-			) : (
 				<Link className='creator-item-link' href={nextPage}>
 					<SkeletonImage sizes='1000px' className='creator-banner' src={creator.banner} loading='lazy' alt='' fill />
 					<SkeletonImage sizes='450px' className='creator-avatar' src={creator.avatar} loading='lazy' alt='' fill />
+					{isDownloadLink ? <Button className='download-button' onClick={() => handleAssetDownload(downloadLinks ?? [])}>
+						Download
+					</Button> : null}
 				</Link>
-			)}
 		</Box>
 	)
 }

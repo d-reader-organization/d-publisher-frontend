@@ -28,6 +28,7 @@ export interface RawComicIssue {
 	genres: PartialGenre[]
 	stats: RawComicIssueStats
 	creatorAddress: string
+	creatorSlug?: string
 	creatorBackupAddress: string
 	collaborators: ComicIssueCollaborator[]
 	statefulCovers: StatefulCover[]

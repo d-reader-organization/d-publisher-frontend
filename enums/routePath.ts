@@ -12,6 +12,7 @@ export const RoutePath = Object.freeze({
 	RegisterVisualIdentity: '/register/visual-identity',
 	RegisterConnectSocials: '/register/connect-socials',
 	Creator: (creatorId: string | number) => `/creator/${creatorId}`,
+	CreatorAdmin: (creatorId:string | number) => `/admin/creator/${creatorId}`,
 	Comic: (comicSlug: string) => `/comic/${comicSlug}`,
 	CreateComic: '/comic/create',
 	EditComic: (comicSlug: string) => `/comic/${comicSlug}/edit`,

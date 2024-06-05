@@ -3,6 +3,7 @@ import { CreatorParams } from 'models/creator/creatorParams'
 export const CREATOR_QUERY_KEYS = Object.freeze({
 	CREATOR: 'creator',
 	GET: 'get',
+	GET_RAW: 'get-raw',
 	ME: 'me',
 	UPDATE: 'update',
 	UPDATE_PASSWORD: 'update-password',
