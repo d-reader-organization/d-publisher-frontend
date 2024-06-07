@@ -3,117 +3,138 @@
 @use '../mixins/breakpoints.module.scss' as *;
 
 .issue-spotlight-page {
-	width: calc(100% - 48px);
-	margin: 24px;
-	@include pagePadding;
-
-	@include sm {
-		border: 1px solid $grey-300;
-		border-radius: 8px;
-	}
-
-	.creator-avatar-wrapper {
-		aspect-ratio: $creator-avatar-aspect-ratio;
-		position: relative;
-		min-height: 170px;
-		min-width: 170px;
-	}
-
-	.creator-avatar {
-		aspect-ratio: $creator-avatar-aspect-ratio;
-		border-radius: 1rem;
-	}
-
-    .comic-cover-wrapper {
-		aspect-ratio: $comic-cover-aspect-ratio;
-		position: relative;
-		min-height: 170px;
-	}
-
-	.comic-cover {
-		aspect-ratio: $comic-cover-aspect-ratio;
-		border-radius: 1rem;
-	}
-
-    .issue-cover-wrapper {
-		aspect-ratio: $comic-issue-cover-aspect-ratio;
-		position: relative;
-		min-width: 180px;
-		max-height: 250px;
-	}
-
-	.issue-cover {
-		aspect-ratio: $comic-issue-cover-aspect-ratio;
-		border-radius: 1rem;
-	}
-
-    .genre {
-        &:not(:first-child) {
-            margin-left: 1rem;
-        }
-		font-weight: 500;
-
-    }
-
-    .details-wrapper {
-        display: flex;
-        justify-content:space-between;
-        flex-direction: row;
-        margin-left: 20px;
-		width: 100%;
-		border: 2px solid white;
-		padding: 15px;
-		border-radius: 20px;
-		background:rgba(1,1,1,0.3);
-		&:not(:last-child) {
-            margin-bottom: 2rem;
-        }
-    }
-
-	.details {
-		.badge-row {
-			margin: 1rem 0;
-			@include flexRow {
-				align-items: center;
-			}
+	.issue-spotlight-content {
+		width: calc(100% - 48px);
+		margin: 24px;
+		@include pagePadding;
+	
+		@include sm {
+			border: 1px solid $grey-300;
+			border-radius: 8px;
 		}
-
-		.title {
-			margin-right: 1rem;
-
-			svg {
-				margin-left: 1rem;
-				height: 20px;
-			}
+	
+		.creator-avatar-wrapper {
+			aspect-ratio: $creator-avatar-aspect-ratio;
+			position: relative;
+			min-height: 170px;
+			min-width: 170px;
 		}
-
-		.subtitle {
-			line-height: 16px;
+	
+		.creator-avatar {
+			aspect-ratio: $creator-avatar-aspect-ratio;
+			border-radius: 1rem;
 		}
-
-		.title,
-		.subtitle {
-			white-space: nowrap;
-			margin: 0;
+	
+		.comic-cover-wrapper {
+			aspect-ratio: $comic-cover-aspect-ratio;
+			position: relative;
+			min-height: 170px;
 		}
-
-		.flavor-text {
-			font-style: italic;
-			border-left: 4px solid $green-500;
-			padding-left: 0.5rem;
-			margin-bottom: 0.5rem;
-			color: $grey-100;
+	
+		.comic-cover {
+			aspect-ratio: $comic-cover-aspect-ratio;
+			border-radius: 1rem;
 		}
-
-		.cover-rarity {
-			font-weight: bold;
-			text-align: center;
+	
+		.issue-cover-wrapper {
+			aspect-ratio: $comic-issue-cover-aspect-ratio;
+			position: relative;
+			min-width: 180px;
+			max-height: 250px;
 		}
-
-		.stateless-cover-wrapper {
+	
+		.issue-cover {
+			aspect-ratio: $comic-issue-cover-aspect-ratio;
+			border-radius: 1rem;
+		}
+	
+		.genre {
 			&:not(:first-child) {
-				margin-left: 2rem;
+				margin-left: 1rem;
+			}
+			font-weight: 500;
+	
+		}
+	
+		.details-wrapper {
+			display: flex;
+			justify-content:space-between;
+			flex-direction: row;
+			margin-left: 20px;
+			width: 100%;
+			border: 2px solid white;
+			padding: 15px;
+			border-radius: 20px;
+			background:rgba(1,1,1,0.3);
+			&:not(:last-child) {
+				margin-bottom: 2rem;
 			}
 		}
+	
+		.details {
+			.badge-row {
+				margin: 1rem 0;
+				@include flexRow {
+					align-items: center;
+				}
+			}
+	
+			.title {
+				margin-right: 1rem;
+	
+				svg {
+					margin-left: 1rem;
+					height: 20px;
+				}
+			}
+	
+			.subtitle {
+				line-height: 16px;
+			}
+	
+			.title,
+			.subtitle {
+				white-space: nowrap;
+				margin: 0;
+			}
+	
+			.flavor-text {
+				font-style: italic;
+				border-left: 4px solid $green-500;
+				padding-left: 0.5rem;
+				margin-bottom: 0.5rem;
+				color: $grey-100;
+			}
+	
+			.cover-rarity {
+				font-weight: bold;
+				text-align: center;
+			}
+	
+			.stateless-cover-wrapper {
+				&:not(:first-child) {
+					margin-left: 2rem;
+				}
+			}
+		}
+	}
+	.head {
+		margin:20px;
+		display: flex;
+		justify-content: space-between;
+	}
+	
+	.twitter-button {
+		width: max-content;
+		align-self: center;
+		margin: 16px 5px 0 0;
+		box-sizing: border-box;
+		padding: 4px 12px 4px 12px;
+		border: 2px solid black;
+		background-color: $green-600;
+		color: black;
+		border-radius: 0.5rem;
+		font-weight: bolder;
+		cursor: pointer;
 	}
 }

@@ -13,6 +13,8 @@ import {  useFetchMe } from '@/api/creator'
 import { useFetchRawCreator } from '@/api/creator/queries/useFetchRawCreator'
 import { removeTwitter } from '@/utils/helpers'
 import { Role } from '@/enums/role'
+import { useFetchTwitterIntentIssueSpotlight } from '@/api/twitter/queries/useFetchIntentIssueSpotlight'
+import Link from 'next/link'
 
 interface Params {
 	id: string
@@ -23,17 +25,22 @@ export default function ComicIssueSpotlightPage({ params }: { params: Params }) 
 	const {data:issue,isLoading:isLoadingIssue} = useFetchRawComicIssue(params.id);
 	const {data:creator} = useFetchRawCreator(issue?.creatorSlug || '');
 	const {data:comic} = useFetchRawComic(issue?.comicSlug || '');
+	const {data:issueSpotlightTwitterIntent} = useFetchTwitterIntentIssueSpotlight(params.id)
 
 
 	useAuthenticatedRoute()
     if (!me || (me.role !== Role.Admin && me.role !== Role.Superadmin)) return null
 	
-	if (!issue || !creator) return <Header title='📖' />
+	if (!issue || !creator || !issueSpotlightTwitterIntent) return <Header title='📖' />
 	return (
-		<>
-			<Header title={`📖 ${issue.title}`} />
+		<div className='issue-spotlight-page'>
+			<div className='head'>
+			<h1>{`📖 ${issue.title}`} </h1>
+			<Link href={issueSpotlightTwitterIntent} target='_blank' className='twitter-button'>Share Spotlight On &#120143;</Link>
+			</div>
 
-			<main className='issue-spotlight-page'>
+
+			<main className='issue-spotlight-content'>
 				<h2 className='title'></h2>
 
 				{isLoadingIssue && (
@@ -106,6 +113,6 @@ export default function ComicIssueSpotlightPage({ params }: { params: Params }) 
 				)}
 
 			</main>
-		</>
+		</div>
 	)
 }

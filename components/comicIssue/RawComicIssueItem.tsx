@@ -14,22 +14,16 @@ interface Props extends BoxProps, DownloadAssetProps {
 }
 
 const RawComicIssueItem: React.FC<Props> = ({ comicIssue, className, isDownloadLink, isAdmin = false, ...props }) => {
-	const nextPage = RoutePath.ComicIssue(comicIssue.id)
+	const nextPage = isDownloadLink ? RoutePath.IssueSpotlight(comicIssue.id) : RoutePath.ComicIssue(comicIssue.id)
 	const { data: downloadLinks } = useDownloadComicIssueAssets(comicIssue.id, isAdmin)
 	return (
 		<Box className={clsx('raw-issue-item', className)} {...props}>
-			{isDownloadLink ? (
-				<Box className='issue-item-link'>
-					<SkeletonImage sizes='1000px' className='issue-cover' src={comicIssue.cover} loading='lazy' alt='' fill />
-					<Button className='download-button' onClick={() => handleAssetDownload(downloadLinks ?? [])}>
-						Download
-					</Button>
-				</Box>
-			) : (
 				<Link className='issue-item-link' href={nextPage}>
 					<SkeletonImage sizes='1000px' className='issue-cover' src={comicIssue.cover} loading='lazy' alt='' fill />
+					{isDownloadLink ? <Button className='download-button' onClick={() => handleAssetDownload(downloadLinks ?? [])}>
+						Download
+					</Button> : null}
 				</Link>
-			)}
 		</Box>
 	)
 }

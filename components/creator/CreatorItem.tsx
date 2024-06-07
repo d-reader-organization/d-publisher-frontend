@@ -14,7 +14,7 @@ interface Props extends BoxProps, DownloadAssetProps {
 }
 
 const CreatorItem: React.FC<Props> = ({ creator, className, isDownloadLink, isAdmin = false, ...props }) => {
-	const nextPage = isDownloadLink ? RoutePath.CreatorAdmin(creator.slug): RoutePath.Creator(creator.slug)
+	const nextPage = isDownloadLink ? RoutePath.IssueSpotlight(creator.slug): RoutePath.Creator(creator.slug)
 	const { data: downloadLinks } = useDownloadCreatorAssets(creator.slug, isAdmin)
 
 	return (
