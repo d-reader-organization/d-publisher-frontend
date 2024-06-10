@@ -20,10 +20,10 @@ const RawComicIssueItem: React.FC<Props> = ({ comicIssue, className, isDownloadL
 		<Box className={clsx('raw-issue-item', className)} {...props}>
 				<Link className='issue-item-link' href={nextPage}>
 					<SkeletonImage sizes='1000px' className='issue-cover' src={comicIssue.cover} loading='lazy' alt='' fill />
-					{isDownloadLink ? <Button className='download-button' onClick={() => handleAssetDownload(downloadLinks ?? [])}>
+				</Link>
+				{isDownloadLink ? <Button className='download-button' onClick={() => handleAssetDownload(downloadLinks ?? [])}>
 						Download
 					</Button> : null}
-				</Link>
 		</Box>
 	)
 }

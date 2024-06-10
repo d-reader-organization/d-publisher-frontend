@@ -19,13 +19,15 @@ const CreatorItem: React.FC<Props> = ({ creator, className, isDownloadLink, isAd
 
 	return (
 		<Box className={clsx('creator-item', className)} {...props}>
-				<Link className='creator-item-link' href={nextPage}>
-					<SkeletonImage sizes='1000px' className='creator-banner' src={creator.banner} loading='lazy' alt='' fill />
-					<SkeletonImage sizes='450px' className='creator-avatar' src={creator.avatar} loading='lazy' alt='' fill />
+				<Box className='creator-item-link' >
+					<Link href={nextPage}>
+						<SkeletonImage sizes='1000px' className='creator-banner' src={creator.banner} loading='lazy' alt='' fill />
+						<SkeletonImage sizes='450px' className='creator-avatar' src={creator.avatar} loading='lazy' alt='' fill />
+					</Link>
 					{isDownloadLink ? <Button className='download-button' onClick={() => handleAssetDownload(downloadLinks ?? [])}>
 						Download
 					</Button> : null}
-				</Link>
+				</Box>
 		</Box>
 	)
 }
