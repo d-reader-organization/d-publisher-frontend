@@ -6,7 +6,7 @@ import Link from 'next/link'
 import clsx from 'clsx'
 import { Button } from '@mui/material'
 import { useDownloadCreatorAssets } from '@/api/creator/queries/useDownloadCreatorAssets'
-import { handleAssetDownload } from '@/utils/helpers'
+import { handleAssetDownloads } from '@/utils/helpers'
 import { DownloadAssetProps } from '@/types/downloadAssetProps'
 
 interface Props extends BoxProps, DownloadAssetProps {
@@ -15,7 +15,7 @@ interface Props extends BoxProps, DownloadAssetProps {
 
 const CreatorItem: React.FC<Props> = ({ creator, className, isDownloadLink, isAdmin = false, ...props }) => {
 	const nextPage = isDownloadLink ? RoutePath.IssueSpotlight(creator.slug): RoutePath.Creator(creator.slug)
-	const { data: downloadLinks } = useDownloadCreatorAssets(creator.slug, isAdmin)
+	const { refetch:refetchDownloadLinks} = useDownloadCreatorAssets(creator.slug, isAdmin)
 
 	return (
 		<Box className={clsx('creator-item', className)} {...props}>
@@ -24,7 +24,7 @@ const CreatorItem: React.FC<Props> = ({ creator, className, isDownloadLink, isAd
 						<SkeletonImage sizes='1000px' className='creator-banner' src={creator.banner} loading='lazy' alt='' fill />
 						<SkeletonImage sizes='450px' className='creator-avatar' src={creator.avatar} loading='lazy' alt='' fill />
 					</Link>
-					{isDownloadLink ? <Button className='download-button' onClick={() => handleAssetDownload(downloadLinks ?? [])}>
+					{isDownloadLink ? <Button className='download-button' onClick={() => handleAssetDownloads(refetchDownloadLinks)}>
 						Download
 					</Button> : null}
 				</Box>

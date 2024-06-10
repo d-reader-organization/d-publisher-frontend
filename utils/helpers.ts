@@ -1,5 +1,6 @@
 import { PartialGenre } from '@/models/genre'
 import { LAMPORTS_PER_SOL } from '@solana/web3.js'
+import { QueryObserverResult } from 'react-query'
 
 export function sleep(ms: number): Promise<void> {
 	return new Promise((resolve) => setTimeout(resolve, ms))
@@ -133,13 +134,16 @@ export function genresToSlugs(genres: PartialGenre[]): string[] {
 	return genres.map((genre) => genre.slug)
 }
 
-export const handleAssetDownload = async (downloadLinks: string[]) => {
-	for (const link of downloadLinks) {
-		const obj = window.open(link, '_self', 'popup')
-		// wait for download to start before closing the context window
-		await sleep(2000)
-		obj?.close()
-	}
+export async function handleAssetDownloads<T>(refetchDownloadLinks : ()=>Promise<QueryObserverResult<string[], Error>>){
+		const {data:links} = await refetchDownloadLinks();
+		if(links){
+			for (const link of links) {
+				const obj = window.open(link, '_self', 'popup')
+				// wait for download to start before closing the context window
+				await sleep(2000)
+				obj?.close()
+			}
+		}
 }
 export function isASocialHandle(value: string) {
 	return !value.includes('/') && !value.includes('@')
