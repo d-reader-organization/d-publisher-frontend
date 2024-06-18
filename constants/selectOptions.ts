@@ -1,4 +1,5 @@
 import { AudienceType } from '@/enums/audienceType'
+import { CarouselLocation } from '@/enums/carouselLocation'
 import { CollaboratorRole } from '@/enums/collaboratorRole'
 import { ComicIssueCollaborator } from '@/models/comicIssue/comicIssueCollaborator'
 import { PartialGenre } from '@/models/genre'
@@ -52,6 +53,10 @@ export const WRAPPER_SELECT_OPTIONS = [
 	{ label: 'Wrapper #3', value: wrapperThree.src },
 	{ label: 'Wrapper #4', value: wrapperFour.src },
 	{ label: 'Wrapper #5', value: wrapperFive.src },
+]
+
+export const CAROUSEL_LOCATION_OPTIONS = [
+	{label: 'Home', value: CarouselLocation.Home}
 ]
 
 export const USED_OVERLAY_SELECT_OPTIONS = [{ label: 'used #1', value: usedOverlayImage.src }]

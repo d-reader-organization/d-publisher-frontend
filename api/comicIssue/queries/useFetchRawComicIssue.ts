@@ -3,7 +3,7 @@ import { useCreatorAuth } from '@/providers/CreatorAuthProvider'
 import { useToaster } from 'providers/ToastProvider'
 import { RawComicIssue } from '@/models/comicIssue/rawComicIssue'
 import { useQuery } from 'react-query'
-import { isNil } from 'lodash'
+import { isEmpty, isNil, isNull, isUndefined } from 'lodash'
 import http from 'api/http'
 
 const { COMIC_ISSUE, GET_RAW } = COMIC_ISSUE_QUERY_KEYS
@@ -21,7 +21,7 @@ export const useFetchRawComicIssue = (id: string | number) => {
 		queryFn: () => fetchRawComicIssue(id),
 		queryKey: comicIssueKeys.getRaw(id),
 		staleTime: 1000 * 60 * 30, // stale for 30 minutes
-		enabled: isAuthenticated && !isNil(id),
+		enabled: isAuthenticated && !isNull(id),
 		onError: toaster.onQueryError,
 	})
 }

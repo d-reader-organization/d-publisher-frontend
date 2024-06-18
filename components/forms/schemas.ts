@@ -163,6 +163,27 @@ export const createComicIssueValidationSchema = yup.object().shape({
 		.min(1, yupRequiredMessage('Collaborators list')),
 })
 
+export const createCarouselSlideValidationSchema = yup.object().shape({
+	image: yup.mixed(),
+	title: yup
+		.string()
+		.max(26, generateMaxLengthErrorMessage('title', 26)),
+	priority: yup
+		.number()
+		.required(yupRequiredMessage('Priority number'))
+		.positive()
+		.integer()
+		.min(1, generateMinNumberErrorMessage('Priority number', 1)),
+	subtitle: yup
+		.string()
+		.max(48, generateMaxLengthErrorMessage('title', 48)),
+	location: yup.string().required(yupRequiredMessage('Carousel Location')),
+	comicIssueId: yup.number(),
+	comicSlug: yup.string(),
+	creatorSlug: yup.string(),
+	externalLink: yup.string(),
+})
+
 export const uploadComicIssuePdfValidationSchema = yup.object().shape({
 	pdf: yup.mixed(),
 })

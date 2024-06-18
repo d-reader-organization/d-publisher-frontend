@@ -4,6 +4,7 @@ import { useToaster } from 'providers/ToastProvider'
 import { RawComic } from '@/models/comic/rawComic'
 import { useQuery } from 'react-query'
 import http from 'api/http'
+import { isEmpty } from 'lodash'
 
 const { COMIC, GET_RAW } = COMIC_QUERY_KEYS
 
@@ -20,7 +21,7 @@ export const useFetchRawComic = (slug: string) => {
 		queryFn: () => fetchRawComic(slug),
 		queryKey: comicKeys.getRaw(slug),
 		staleTime: 1000 * 60 * 30, // stale for 30 minutes
-		enabled: isAuthenticated && !!slug,
+		enabled: isAuthenticated && !isEmpty(slug),
 		onError: toaster.onQueryError,
 	})
 }

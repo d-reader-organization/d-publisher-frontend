@@ -15,18 +15,19 @@ export interface CarouselSlide {
 	externalLink?: string
 }
 
-export type CreateCarouselSlideData = Pick<
+export interface CreateCarouselSlideData extends Pick<
 	CarouselSlide,
-	| 'image'
 	| 'priority'
 	| 'title'
 	| 'subtitle'
-	| 'location'
 	| 'comicIssueId'
 	| 'comicSlug'
 	| 'creatorSlug'
 	| 'externalLink'
->
+> {
+	image: File
+	location:string
+}
 
 export type UpdateCarouselSlideData = Partial<
 	Pick<
