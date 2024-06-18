@@ -44,9 +44,8 @@ const UpdateComicIssuePagesForm: React.FC<Props> = ({ comicIssue }) => {
 	}
 
 	const handleUploadPdf = async (data: UpdateComicIssueFilesData) => {
-		if (!data.pdf?.size) {
-			return
-		}
+		if (!data.pdf?.size) return
+
 		const formData = new FormData()
 
 		if (data.pdf) formData.append('pdf', data.pdf)
@@ -59,10 +58,7 @@ const UpdateComicIssuePagesForm: React.FC<Props> = ({ comicIssue }) => {
 
 		await handleSubmit(handleUploadPdf, toaster.onFormError)()
 
-		if (pageFiles.length === 0) {
-			toaster.add(yupRequiredMessage('Issue pages'), 'error')
-			return
-		}
+		if (pageFiles.length === 0) return
 
 		const formData = new FormData()
 

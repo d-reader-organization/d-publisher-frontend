@@ -56,7 +56,7 @@ export const issueCoverVariantsPreviews: TooltipImagePreview[] = [
 	},
 ]
 
-export const handleTooltipText = `Only handles/usernames without '@' symbol are valid, eg: for @dReaderApp input only 'dReaderApp'`
+export const handleTooltipText = `For example, for user @dReaderApp input only 'dReaderApp'`
 
 export const statefulCoverVariantsTooltipText = `Each cover variant can have 4 different states:
 - unopened (mint), unsigned
