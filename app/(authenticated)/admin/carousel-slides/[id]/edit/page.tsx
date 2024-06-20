@@ -109,8 +109,8 @@ export default function CreateCarouselSlidePage({ params }: { params: Params }){
 	return (
 		<>
 			<Header title='Update Carousel' />
-			<main className='carousel-slide'>
-				<Form padding fullWidth className='form--create-crousel-slide'>
+			<main className='form--update-carousel-slide-info'>
+				<Form padding fullWidth className='update-carousel-slide-info'>
 					<div className='form-wrapper'>
 						<Label isRequired>Location</Label>
 						<Select

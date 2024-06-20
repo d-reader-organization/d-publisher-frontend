@@ -30,4 +30,5 @@ export const RoutePath = Object.freeze({
 		`/comic-issue/${comicIssueId}/make-collectible/sales-data`,
 	ComicIssueMakeCollectibleSubmitted: (comicIssueId: string | number) =>
 		`/comic-issue/${comicIssueId}/make-collectible/submitted`,
+	EditCarouselSlide: (slideId: string | number) => `/admin/carousel-slides/${slideId}/edit`
 })

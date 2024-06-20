@@ -2,43 +2,52 @@
 @use '../mixins/breakpoints.module.scss' as *;
 @use '../mixins/common.module.scss' as *;
 
-.carousel-slide {
-    .form--create-crousel-slide{
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
-    .form-wrapper {
-        width: 60%;
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: column;
-    }
-    .carousel-image-upload{
-        width: 100%;
-    }
-    .carousel-image-submit {
-        margin-right: 20px;
-        justify-content: end;
-        width: 30%;
-    }
-    .action-button-wrapper{
-        justify-content: flex-end;
-        .action-button {
-            background-color: $green-500;
-            width: 100%;
-        }
-    }
-    .button--delete {
-        margin-top: 2rem;
-        width: 100%;
-    }
+.carousel-slide-page {
+    width: calc(100% - 48px);
+	margin: 24px;
+	@include pagePadding;
 
-    .button--expired {
-        @include unclickable;
+	@include sm {
+		border: 1px solid $grey-300;
+		border-radius: 8px;
+	}
+    
+    .content-table-wrapper {
+		margin-top: 2rem;
+		overflow-x: auto;
+	}
 
-        margin-top: 2rem;
-        width: 100%;
-        background-color: $red-100;
-    }
+	.content-table {
+		width: 100%;
+		font-size: 14px;
+
+		@include sm {
+			font-size: 16px;
+		}
+
+		@include md {
+			font-size: 18px;
+		}
+
+		thead {
+			background-color: $grey-500;
+		}
+
+		td {
+			padding: 0.5rem;
+			width: 1%;
+		}
+
+		tr:nth-child(2n) {
+			background-color: rgba($grey-500, 0.6);
+		}
+
+		.centered {
+			text-align: center;
+		}
+
+		.no-wrap {
+			white-space: nowrap;
+		}
+	}
 }

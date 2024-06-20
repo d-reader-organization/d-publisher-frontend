@@ -1,0 +1,59 @@
+@use '../variables/theme.module.scss' as *;
+@use '../mixins/breakpoints.module.scss' as *;
+@use '../mixins/common.module.scss' as *;
+
+.form--create-carousel-slide,.form--update-carousel-slide-info {
+    .create-crousel-slide, .update-carousel-slide-info{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    .form-wrapper {
+        width: 60%;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+    }
+    .carousel-image-upload{
+        width: 100%;
+    }
+    .carousel-image-submit {
+        margin-right: 20px;
+        justify-content: end;
+        width: 30%;
+    }
+    .action-button-wrapper{
+        justify-content: flex-end;
+        .action-button {
+            background-color: $green-500;
+            width: 100%;
+        }
+    }
+    .button--delete {
+        margin-top: 2rem;
+        width: 100%;
+    }
+
+    .button--expired {
+        @include unclickable;
+
+        margin-top: 2rem;
+        width: 100%;
+        background-color: $red-100;
+    }
+    .inputs--top {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .location {
+            width: 100%;
+            margin-right: 30px;
+        }
+
+        .date-picker {
+            border: 1px solid white;
+            border-radius: 10px;
+        }
+    }
+}

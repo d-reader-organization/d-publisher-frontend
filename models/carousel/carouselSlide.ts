@@ -27,6 +27,7 @@ export interface CreateCarouselSlideData extends Pick<
 > {
 	image: File
 	location:string
+	expiredAt?:Date
 }
 
 export type UpdateCarouselSlideData = Partial<
@@ -35,3 +36,7 @@ export type UpdateCarouselSlideData = Partial<
 		'priority' | 'title' | 'subtitle' | 'location' | 'comicIssueId' | 'comicSlug' | 'creatorSlug' | 'externalLink'
 	>
 >
+
+export interface CarouselSlideParams {
+	getExpired?:boolean
+}
