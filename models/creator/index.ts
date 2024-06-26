@@ -29,7 +29,7 @@ export interface Creator extends BasicCreator {
 export type UpdateCreatorData = Partial<
 	Pick<
 		Creator,
-		'email' | 'description' | 'flavorText' | 'tippingAddress' | 'website' | 'twitter' | 'instagram' | 'lynkfire'
+		'email' | 'name' | 'description' | 'flavorText' | 'tippingAddress' | 'website' | 'twitter' | 'instagram' | 'lynkfire'
 	>
 >
 

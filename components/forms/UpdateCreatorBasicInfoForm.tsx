@@ -68,7 +68,7 @@ const UpdateCreatorBasicInfoForm: React.FC = () => {
 			<Input disabled placeholder={me?.email} />
 
 			<Label isRequired>Display name</Label>
-			<Input disabled placeholder={me?.name} />
+			<Input {...register('name')} defaultValue={me?.name} placeholder='John Doe'/>
 
 			<Label tooltipText={<TippingAddressTooltip />}>Tipping address</Label>
 			<Input {...register('tippingAddress')} placeholder='wallet address' />
