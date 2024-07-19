@@ -16,8 +16,7 @@
 		.creator-avatar-wrapper {
 			aspect-ratio: $creator-avatar-aspect-ratio;
 			position: relative;
-			min-height: 170px;
-			min-width: 170px;
+			height: 170px;
 		}
 	
 		.creator-avatar {
@@ -28,7 +27,7 @@
 		.comic-cover-wrapper {
 			aspect-ratio: $comic-cover-aspect-ratio;
 			position: relative;
-			min-height: 170px;
+			height: 200px;
 		}
 	
 		.comic-cover {
@@ -39,8 +38,7 @@
 		.issue-cover-wrapper {
 			aspect-ratio: $comic-issue-cover-aspect-ratio;
 			position: relative;
-			min-width: 180px;
-			max-height: 250px;
+			height: 250px;
 		}
 	
 		.issue-cover {
