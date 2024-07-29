@@ -167,7 +167,7 @@ export default function ComicPage({ params }: { params: Params }) {
 													Edit
 												</ButtonLink>
 											</td>
-											{issue.verifiedAt ? (
+											{issue.verifiedAt && !issue.isCollectible? (
 												<td className='centered'>
 													<ButtonLink
 														backgroundColor='green-500'
