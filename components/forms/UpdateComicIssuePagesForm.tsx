@@ -3,7 +3,6 @@
 import React, { useState } from 'react'
 import Button from 'components/Button'
 import { useToaster } from '@/providers/ToastProvider'
-import { yupRequiredMessage } from '@/utils/error'
 import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
 import Form from '@/components/forms/Form'
 import { useUpdateComicIssuePages, useUpdateComicIssuePdf } from '@/api/comicIssue'
@@ -26,7 +25,7 @@ interface Props {
 const UpdateComicIssuePagesForm: React.FC<Props> = ({ comicIssue }) => {
 	const toaster = useToaster()
 	const [pageFiles, setPageFiles] = useState<File[]>([])
-	const [numberOfPreviewPages, setNumberOfPreviewPages] = useState(3)
+	const [numberOfPreviewPages, setNumberOfPreviewPages] = useState(comicIssue.stats.previewPagesCount)
 	const { mutateAsync: updatePages } = useUpdateComicIssuePages(comicIssue.id)
 	const { mutateAsync: updateComicIssuePdf } = useUpdateComicIssuePdf(comicIssue.id)
 
@@ -57,18 +56,17 @@ const UpdateComicIssuePagesForm: React.FC<Props> = ({ comicIssue }) => {
 		event.preventDefault()
 
 		await handleSubmit(handleUploadPdf, toaster.onFormError)()
+		const filesLength = pageFiles.length;
+		const arePagesUpdated = filesLength > 0;
 
-		if (pageFiles.length === 0) return
+		if (!arePagesUpdated && numberOfPreviewPages === comicIssue.stats.previewPagesCount) return
 
 		const formData = new FormData()
-
-		let i = 0
-		for (const pageFile of pageFiles) {
+		for (let i = 0; i<Math.max(filesLength,numberOfPreviewPages); i++) {
 			const pageNumber = i + 1
-			if (pageFile) formData.append(`pages[${i}][image]`, pageFile)
+			if (arePagesUpdated && pageFiles[i]) formData.append(`pages[${i}][image]`, pageFiles[i])
 			formData.append(`pages[${i}][pageNumber]`, pageNumber.toString())
 			formData.append(`pages[${i}][isPreviewable]`, (pageNumber <= numberOfPreviewPages).toString())
-			i = i + 1
 		}
 
 		await updatePages(formData)
@@ -78,7 +76,7 @@ const UpdateComicIssuePagesForm: React.FC<Props> = ({ comicIssue }) => {
 		<>
 			<main>
 				<Form padding fullWidth className='form--edit-comic-issue-pages'>
-					<Label isRequired tooltipText={pdfTooltipText}>
+					<Label tooltipText={pdfTooltipText}>
 						Comic Issue PDF
 					</Label>
 					<p className='description'>Edit PDF file of the comic episode</p>
@@ -100,7 +98,7 @@ const UpdateComicIssuePagesForm: React.FC<Props> = ({ comicIssue }) => {
 						</div>
 						<IntegerInput
 							min={0}
-							max={pageFiles.length || 3}
+							max={pageFiles.length || comicIssue.stats.totalPagesCount}
 							value={numberOfPreviewPages}
 							onChange={(step) => {
 								setNumberOfPreviewPages((currentValue) => currentValue + step)
@@ -108,7 +106,7 @@ const UpdateComicIssuePagesForm: React.FC<Props> = ({ comicIssue }) => {
 						/>
 					</div>
 
-					<Label isRequired tooltipText={comicIssuePagesTooltipText}>
+					<Label tooltipText={comicIssuePagesTooltipText}>
 						Reupload issue pages
 					</Label>
 					<FileUpload

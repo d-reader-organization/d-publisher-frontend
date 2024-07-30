@@ -144,7 +144,7 @@ const UpdateComicIssueCoversForm: React.FC<Props> = ({ comicIssue }) => {
 						options={RARITY_SELECT_OPTIONS}
 						defaultSelectedOptions={findOptions(RARITY_SELECT_OPTIONS, comicIssue.statelessCovers.length.toString())}
 						onSelect={(selectedOptions) => {
-							setNumberOfRarities(+selectedOptions[0]?.value ?? 0)
+							setNumberOfRarities(+selectedOptions[0]?.value)
 						}}
 						unselectableIfAlreadySelected
 						placeholder='Number of rarities'

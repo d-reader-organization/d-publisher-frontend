@@ -5,4 +5,5 @@ export interface RawComicIssueStats {
 	readersCount: number
 	viewersCount: number
 	totalPagesCount: number
+	previewPagesCount: number
 }
