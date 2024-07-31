@@ -1,12 +1,12 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 
 import Button from 'components/Button'
 import Input from '@/components/forms/Input'
 import Checkbox from '@/components/Checkbox'
 import { useToaster } from '@/providers/ToastProvider'
-import { CreateStatelessCoverData } from '@/models/comicIssue/statelessCover'
+import { CreateStatelessCoverData, StatelessCover } from '@/models/comicIssue/statelessCover'
 import { getRarityShares } from '@/constants/rarities'
 import { generateRequiredArrayElementErrorMessage } from '@/utils/error'
 import { ComicRarity } from '@/enums/comicRarity'
@@ -15,7 +15,7 @@ import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
 import Form from '@/components/forms/Form'
 import { useUpdateComicIssueStatelessCovers } from '@/api/comicIssue'
 import { issueCoverImageTooltipText, coverVariantsTooltipText, handleTooltipText } from '@/constants/tooltips'
-import FileUpload from '@/components/forms/FileUpload'
+import FileUpload, { UploadedFile } from '@/components/forms/FileUpload'
 import FormActions from '@/components/forms/FormActions'
 import Label from '@/components/forms/Label'
 import Select from '@/components/forms/Select'
@@ -28,13 +28,24 @@ interface Props {
 	comicIssue: RawComicIssue
 }
 
+const toCreateStatelessCoverData = (statelessCovers:StatelessCover[]): CreateStatelessCoverData[] =>{
+	const createStatelessCoverData = statelessCovers.map((cover)=>{
+		return {
+			...cover,
+			imageSrc: cover.image,
+			image:undefined,
+		}
+	});
+	return createStatelessCoverData;
+}
+
 const UpdateComicIssueCoversForm: React.FC<Props> = ({ comicIssue }) => {
 	const toaster = useToaster()
 
-	const [issueCovers, setIssueCovers] = useState<CreateStatelessCoverData[]>([])
+	const [issueCovers, setIssueCovers] = useState<CreateStatelessCoverData[]>(toCreateStatelessCoverData(comicIssue.statelessCovers))
 	const [numberOfRarities, setNumberOfRarities] = useState(comicIssue.statelessCovers.length)
 
-	const { mutateAsync: updateStatelessCovers } = useUpdateComicIssueStatelessCovers(comicIssue.id)
+	const { mutateAsync: updateStatelessCovers } = useUpdateComicIssueStatelessCovers(comicIssue.id,numberOfRarities)
 
 	useAuthenticatedRoute()
 
@@ -59,7 +70,7 @@ const UpdateComicIssueCoversForm: React.FC<Props> = ({ comicIssue }) => {
 		event.preventDefault()
 
 		const unsetArtist = issueCovers.some((issueCover) => issueCover.artist === '')
-		const unsetImage = issueCovers.some((issueCover) => issueCover.image === undefined)
+		const unsetImage = issueCovers.some((issueCover) => issueCover.image === undefined && issueCover.imageSrc === undefined)
 		const noDefaultCover = issueCovers.every((issueCover) => !issueCover.isDefault)
 		const isNotASocialHandle = issueCovers.some((issueCover) =>
 			issueCover.artistTwitterHandle ? !isASocialHandle(issueCover.artistTwitterHandle) : false
@@ -78,14 +89,13 @@ const UpdateComicIssueCoversForm: React.FC<Props> = ({ comicIssue }) => {
 
 			let i = 0
 			for (const cover of issueCovers) {
-				if (cover.image) formData.append(`covers[${i}][image]`, cover.image)
+				formData.append(`covers[${i}][image]`, cover.image ? cover.image : new Blob([new Uint8Array(0)], { type: 'buffer' }) as Blob)
 				formData.append(`covers[${i}][artist]`, cover.artist)
 				formData.append(`covers[${i}][isDefault]`, cover.isDefault.toString())
 				formData.append(`covers[${i}][rarity]`, cover.rarity)
 				formData.append(`covers[${i}][artistTwitterHandle]`, cover.artistTwitterHandle ?? '')
 				i = i + 1
 			}
-
 			await updateStatelessCovers(formData)
 		}
 	}
@@ -132,6 +142,10 @@ const UpdateComicIssueCoversForm: React.FC<Props> = ({ comicIssue }) => {
 		})
 	}
 
+	const onUpload = useCallback((files:UploadedFile[],rarity:ComicRarity) => {
+		handleChangeCoverImage(rarity, files[0]?.file ?? '')
+	},[])
+
 	return (
 		<>
 			<main>
@@ -150,28 +164,27 @@ const UpdateComicIssueCoversForm: React.FC<Props> = ({ comicIssue }) => {
 						placeholder='Number of rarities'
 						className='rarities-select'
 					/>
-					{issueCovers.map(({ rarity, artist, isDefault, artistTwitterHandle }) => {
+					{issueCovers.map(({ rarity, artist, isDefault, artistTwitterHandle, imageSrc }) => {
 						return (
 							<div key={rarity}>
 								<h2 className='rarity-header'>{rarity}</h2>
 								<div className='rarity-cover-wrapper'>
 									<div>
-										<Label isRequired tooltipText={issueCoverImageTooltipText}>
+										<Label tooltipText={issueCoverImageTooltipText}>
 											Reupload Cover image
 										</Label>
 										<FileUpload
 											id={`${rarity}-cover`}
 											label='Choose a picture 1024x1484px'
 											className='cover-image-upload'
-											onUpload={(files) => {
-												handleChangeCoverImage(rarity, files[0]?.file ?? '')
-											}}
+											onUpload={(files)=>onUpload(files,rarity)}
+											previewUrl={imageSrc}
 											options={{ accept: imageTypes, maxFiles: 1 }}
 										/>
 									</div>
 									<div>
 										<div>
-											<Label isRequired>Artist of a cover image</Label>
+											<Label>Artist of a cover image</Label>
 											<Input onChange={(event) => handleChangeArtist(rarity, event.target.value)} value={artist} />
 										</div>
 										<div>

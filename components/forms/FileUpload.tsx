@@ -17,7 +17,7 @@ import CloseIcon from 'public/assets/vector-icons/close.svg'
 import { convertFileToBlob } from 'utils/file'
 import SkeletonImage from '../SkeletonImage'
 
-type UploadedFile = { url: string; file: File }
+export type UploadedFile = { url: string; file: File }
 
 function arrayMove<T>(arr: T[], fromIndex: number, toIndex: number) {
 	const arrayCopy = [...arr]
@@ -179,13 +179,19 @@ const FileUpload = forwardRef<HTMLInputElement, Props>(
 			componentRef.current.value = ''
 		}
 
+		/** use useRef, since onUpload changes too often leading to unnecessary rerenders */
+		const onUploadRef = useRef(onUpload)
+		useEffect(()=>{
+			onUploadRef.current = onUpload;
+		},[onUpload])
+
 		useEffect(() => {
 			if (previewUrl) {
 				const previewFile = [{ url: previewUrl, file: undefined as unknown as File }]
 				setUploadedFiles(previewFile)
-				onUpload(previewFile)
+				onUploadRef.current(previewFile)
 			}
-		}, [onUpload, previewUrl])
+		}, [previewUrl])
 
 		return (
 			<>

@@ -170,7 +170,7 @@ export default function UploadComicIssueStatelessCoversPage({ params }: { params
 						options={RARITY_SELECT_OPTIONS}
 						defaultSelectedOptions={findOptions(RARITY_SELECT_OPTIONS, '1')}
 						onSelect={(selectedOptions) => {
-							setNumberOfRarities(+selectedOptions[0]?.value ?? 0)
+							setNumberOfRarities(+selectedOptions[0]?.value)
 						}}
 						unselectableIfAlreadySelected
 						placeholder='Number of rarities'
