@@ -45,7 +45,7 @@ const UpdateComicIssueCoversForm: React.FC<Props> = ({ comicIssue }) => {
 	const [issueCovers, setIssueCovers] = useState<CreateStatelessCoverData[]>(toCreateStatelessCoverData(comicIssue.statelessCovers))
 	const [numberOfRarities, setNumberOfRarities] = useState(comicIssue.statelessCovers.length)
 
-	const { mutateAsync: updateStatelessCovers } = useUpdateComicIssueStatelessCovers(comicIssue.id,numberOfRarities)
+	const { mutateAsync: updateStatelessCovers } = useUpdateComicIssueStatelessCovers(comicIssue.id)
 
 	useAuthenticatedRoute()
 

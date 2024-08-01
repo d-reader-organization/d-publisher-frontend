@@ -7,7 +7,7 @@ import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
 import Form from '@/components/forms/Form'
 import { useUpdateComicIssuePages, useUpdateComicIssuePdf } from '@/api/comicIssue'
 import { comicIssuePagesTooltipText, numberOfPagesTooltipText, pdfTooltipText } from '@/constants/tooltips'
-import FileUpload from '@/components/forms/FileUpload'
+import FileUpload, { UploadedFile } from '@/components/forms/FileUpload'
 import FormActions from '@/components/forms/FormActions'
 import IntegerInput from '@/components/forms/IntegerInput'
 import Label from '@/components/forms/Label'
@@ -72,6 +72,33 @@ const UpdateComicIssuePagesForm: React.FC<Props> = ({ comicIssue }) => {
 		await updatePages(formData)
 	}
 
+	const onUploadPdf = (uploadedFiles: UploadedFile[]) => {
+		const file = uploadedFiles[0]?.file
+		setValue('pdf', file);
+
+		const pdfSize = Math.ceil(file.size/(1024*1024))
+		if(pdfSize > 100){
+			toaster.add("Pdf size is above 100 mb, try compressing files", 'error');
+			return;
+		}
+	}
+
+	const onUploadPages = (uploadedFiles: UploadedFile[]) => {
+			let totalSize = 0;
+			uploadedFiles.forEach(data=>totalSize += data.file.size);
+			totalSize = Math.ceil(totalSize / (1024*1024));
+
+			if(totalSize > 100){
+				toaster.add("Total size of pages are above 100 mb, try compressing files", 'error');
+				return;
+			}
+			
+			handleUploadPages(uploadedFiles.map((file) => file.file))
+			setNumberOfPreviewPages((currentValue) => {
+				if (currentValue > uploadedFiles.length) return uploadedFiles.length
+				return currentValue
+			})
+		}
 	return (
 		<>
 			<main>
@@ -84,9 +111,7 @@ const UpdateComicIssuePagesForm: React.FC<Props> = ({ comicIssue }) => {
 						id='pdf-upload'
 						label='Choose a PDF file'
 						className='comic-issue-pdf-input'
-						onUpload={(files) => {
-							setValue('pdf', files[0]?.file)
-						}}
+						onUpload={onUploadPdf}
 						ref={register('pdf').ref}
 						options={{ accept: pdfType, maxFiles: 1 }}
 						inline
@@ -115,13 +140,7 @@ const UpdateComicIssuePagesForm: React.FC<Props> = ({ comicIssue }) => {
 						id='pages-upload'
 						className='upload-pages'
 						label={`Upload pages\nImages should have at least 1024x1484px`}
-						onUpload={(uploadedFiles) => {
-							handleUploadPages(uploadedFiles.map((file) => file.file))
-							setNumberOfPreviewPages((currentValue) => {
-								if (currentValue > uploadedFiles.length) return uploadedFiles.length
-								return currentValue
-							})
-						}}
+						onUpload={onUploadPages}
 						options={{ accept: optimalImageTypes }}
 					/>
 

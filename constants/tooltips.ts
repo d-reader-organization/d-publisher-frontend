@@ -40,6 +40,8 @@ export const pdfTooltipText = `This file will be used for offline reading when u
 Furthermore, if your comic issue is an Digital Collectible, this pdf file will be attached the each collectible from the collection to guarantee the ownership of the content to collectors.
 
 In other words, if someone owns the token representation of the comic, they'll have access to the pdf.
+
+Maximum file size: 100 MB.
 `
 
 export const coverVariantsTooltipText = `Comic episodes can have up to 5 rarities. You might opt into:
@@ -161,6 +163,8 @@ export const comicIssuePagesTooltipText = `Following formats are allowed:
 Preferrably a jpg or webp format and optimize your assets for best download speed
 
 Ratio 690:1000 and at least 1024x1484px resolution is preferred for optimal display, but not a necessity.
+
+Max total page size: 100 MB.
 `
 
 export const creatorVisualIdentityTooltipText = `Following formats are allowed:
