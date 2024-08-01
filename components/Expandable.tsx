@@ -1,8 +1,6 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import clsx from 'clsx'
-
 import ArrowDownIcon from 'public/assets/vector-icons/arrow-down-2.svg'
-import useEventListener from '@/hooks/useEventListener'
 
 interface Props {
 	title: string
@@ -13,22 +11,32 @@ interface Props {
 const Expandable: React.FC<Props> = ({ title, open = false, children }) => {
 	const [isExpanded, setIsExpanded] = useState(open)
 	const [contentHeight, setContentHeight] = useState(0)
-	const [contentRef, setContentRef] = useState<HTMLDivElement | null>(null)
+	const contentRef = useRef<HTMLDivElement | null>(null)
 
-	const handleContentHeightChange = useCallback(() => {
-		if (!contentRef) return 0
+	const handleContentHeightChange = () => {
+		if (!contentRef.current) return 0
 
 		setContentHeight(
-			contentRef.clientHeight +
-				+contentRef.style.getPropertyValue('padding-top').split('px')[0] +
-				+contentRef.style.getPropertyValue('padding-bottom').split('px')[0]
+			contentRef.current.clientHeight +
+				+contentRef.current.style.getPropertyValue('padding-top').split('px')[0] +
+				+contentRef.current.style.getPropertyValue('padding-bottom').split('px')[0]
 		)
-	}, [contentRef])
+	};
+
+	useEffect(()=>{
+		document.addEventListener("resize-expandable",()=>{
+			handleContentHeightChange()
+		});
+
+		return ()=>{
+			document.removeEventListener("resize-expandable",()=>{})
+		}
+	},[])
+	
 
 	useEffect(() => {
 		handleContentHeightChange()
-	}, [handleContentHeightChange])
-	useEventListener('resize', handleContentHeightChange)
+	}, [contentRef.current?.clientHeight])
 
 	return (
 		<div className='expandable'>
@@ -46,7 +54,7 @@ const Expandable: React.FC<Props> = ({ title, open = false, children }) => {
 				})}
 				style={{ '--content-height': `${contentHeight}px` } as React.CSSProperties}
 			>
-				<div ref={(contentRef) => setContentRef(contentRef)} className='expandable-content'>
+				<div ref={contentRef} className='expandable-content'>
 					{children}
 				</div>
 			</div>

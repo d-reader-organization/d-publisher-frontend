@@ -146,6 +146,8 @@ const UpdateComicIssueCoversForm: React.FC<Props> = ({ comicIssue }) => {
 		handleChangeCoverImage(rarity, files[0]?.file ?? '')
 	},[])
 
+	const resizeExpandable = new Event('resize-expandable');
+
 	return (
 		<>
 			<main>
@@ -159,6 +161,7 @@ const UpdateComicIssueCoversForm: React.FC<Props> = ({ comicIssue }) => {
 						defaultSelectedOptions={findOptions(RARITY_SELECT_OPTIONS, comicIssue.statelessCovers.length.toString())}
 						onSelect={(selectedOptions) => {
 							setNumberOfRarities(+selectedOptions[0]?.value)
+							document.dispatchEvent(resizeExpandable);
 						}}
 						unselectableIfAlreadySelected
 						placeholder='Number of rarities'
