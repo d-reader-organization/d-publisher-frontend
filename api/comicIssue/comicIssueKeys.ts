@@ -51,7 +51,7 @@ export const comicIssueKeys = Object.freeze({
 		params.take,
 	],
 	get: (id: string | number) => [COMIC_ISSUE_QUERY_KEYS.COMIC_ISSUE, COMIC_ISSUE_QUERY_KEYS.GET, `${id}`],
-	getRaw: (id: string | number) => [COMIC_ISSUE_QUERY_KEYS.COMIC_ISSUE, COMIC_ISSUE_QUERY_KEYS.GET_RAW, `${id}`],
+	getRaw: (id: string | number | undefined) => [COMIC_ISSUE_QUERY_KEYS.COMIC_ISSUE, COMIC_ISSUE_QUERY_KEYS.GET_RAW, `${id}`],
 	getPublic: (id: string | number) => [COMIC_ISSUE_QUERY_KEYS.COMIC_ISSUE, COMIC_ISSUE_QUERY_KEYS.GET_PUBLIC, `${id}`],
 	getByOwner: (userId: string | number) => [
 		COMIC_ISSUE_QUERY_KEYS.COMIC_ISSUE,

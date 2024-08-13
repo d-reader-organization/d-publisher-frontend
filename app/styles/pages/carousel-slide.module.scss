@@ -50,4 +50,21 @@
 			white-space: nowrap;
 		}
 	}
+
+	.button--delete {
+        margin-top: 2rem;
+        width: 100%;
+		background-color: $green-500;
+		&:hover {
+			background-color: $white;
+		}
+    }
+
+    .button--expired {
+        @include unclickable;
+
+        margin-top: 2rem;
+        width: 100%;
+        background-color: $red-100;
+    }
 }

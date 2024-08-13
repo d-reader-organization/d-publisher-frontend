@@ -8,12 +8,12 @@ import { isEmpty } from 'lodash'
 
 const { COMIC, GET_RAW } = COMIC_QUERY_KEYS
 
-const fetchRawComic = async (slug: string): Promise<RawComic> => {
+const fetchRawComic = async (slug: string | undefined): Promise<RawComic> => {
 	const response = await http.get<RawComic>(`${COMIC}/${GET_RAW}/${slug}`)
 	return response.data
 }
 
-export const useFetchRawComic = (slug: string) => {
+export const useFetchRawComic = (slug: string | undefined) => {
 	const { isAuthenticated } = useCreatorAuth()
 	const toaster = useToaster()
 
@@ -21,7 +21,7 @@ export const useFetchRawComic = (slug: string) => {
 		queryFn: () => fetchRawComic(slug),
 		queryKey: comicKeys.getRaw(slug),
 		staleTime: 1000 * 60 * 30, // stale for 30 minutes
-		enabled: isAuthenticated && !isEmpty(slug),
+		enabled: isAuthenticated && !isEmpty(slug) && !!slug,
 		onError: toaster.onQueryError,
 	})
 }

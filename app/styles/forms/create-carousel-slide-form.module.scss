@@ -29,18 +29,6 @@
             width: 100%;
         }
     }
-    .button--delete {
-        margin-top: 2rem;
-        width: 100%;
-    }
-
-    .button--expired {
-        @include unclickable;
-
-        margin-top: 2rem;
-        width: 100%;
-        background-color: $red-100;
-    }
     .inputs--top {
         display: flex;
         flex-direction: row;

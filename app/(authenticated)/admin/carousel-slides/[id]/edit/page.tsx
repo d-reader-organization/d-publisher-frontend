@@ -17,7 +17,7 @@ import { CarouselLocation } from '@/enums/carouselLocation'
 import Select from '@/components/forms/Select'
 import { useEffect, useState } from 'react'
 import { UpdateCarouselSlideData } from '@/models/carousel/carouselSlide'
-import { useExpireCarouselSlide, useFetchCarouselSlide, useUpdateCarouselSlide, useUpdateCarouselSlideImage } from '@/api/carousel'
+import { useFetchCarouselSlide, useUpdateCarouselSlide, useUpdateCarouselSlideImage } from '@/api/carousel'
 import { useFetchComics, useFetchRawComic } from '@/api/comic'
 import { Role } from '@/enums/role'
 import { useFetchMe } from '@/api/creator'
@@ -38,14 +38,13 @@ export default function CreateCarouselSlidePage({ params }: { params: Params }){
 	const { data: carouselSlide } = useFetchCarouselSlide(params.id);
 	const { flatData: comicIssues } = useFetchComicIssues({ titleSubstring: searchComicIssue, skip: 0, take: 10 });
 	const { flatData: comics } = useFetchComics({ titleSubstring: searchComic, skip: 0, take: 10 });
-	const { data: comicIssue } = useFetchRawComicIssue(carouselSlide?.comicIssueId ?? '');
-	const { data: comic } = useFetchRawComic(carouselSlide?.comicSlug ?? '');
+	const { data: comicIssue } = useFetchRawComicIssue(carouselSlide?.comicIssueId);
+	const { data: comic } = useFetchRawComic(carouselSlide?.comicSlug);
 	
 	const form = useForm<UpdateCarouselSlideData>();
 	const { register, setValue, handleSubmit } = form;
 	const { mutateAsync: updateCarouselSlide } = useUpdateCarouselSlide(params.id);
 	const { mutateAsync: updateCarouselSlideImage } = useUpdateCarouselSlideImage(params.id);
-	const { mutateAsync: expireCarouselSlide } = useExpireCarouselSlide(params.id);
 	
 	useAuthenticatedRoute();
 	const { data: me } = useFetchMe()
@@ -100,10 +99,6 @@ export default function CreateCarouselSlidePage({ params }: { params: Params }){
 		setValue('location', value);
 	};
 	
-	const onDelete = async () => {
-		await expireCarouselSlide();
-	};	
-
 	if (!me || (me.role !== Role.Admin && me.role !== Role.Superadmin)) return null
 
 	return (
@@ -201,11 +196,6 @@ export default function CreateCarouselSlidePage({ params }: { params: Params }){
 								Update
 							</Button>
 						</FormActions>
-                        {!carouselSlide?.isExpired ? <Button type='submit' onClick={onDelete} className='button--delete'>
-								Delete
-						</Button> : <Button className='button--expired'>
-								Expired
-						</Button>}
 					</div>
 				</Form>
 			</main>

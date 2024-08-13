@@ -7,15 +7,21 @@ import CircularProgress from '@mui/material/CircularProgress'
 import SkeletonImage from '@/components/SkeletonImage'
 import ButtonLink from '@/components/ButtonLink'
 import { RoutePath } from '@/enums/routePath'
-import { useFetchCarouselSlides } from '@/api/carousel'
+import { useExpireCarouselSlide, useFetchCarouselSlides } from '@/api/carousel'
 import { useFetchMe } from '@/api/creator'
 import { Role } from '@/enums/role'
+import { Button } from '@mui/material'
 
 export default function CarouselSlidePage() {
     const {data: carouselSlides, isLoading: isLoadingCarouselSlides} = useFetchCarouselSlides({getExpired:true})
 	useAuthenticatedRoute()
+	const { mutateAsync: expireCarouselSlide } = useExpireCarouselSlide();
 
     const { data: me } = useFetchMe()
+	const onDelete = async(id:number)=>{
+		await expireCarouselSlide(id)
+	};
+
     if (!me || (me.role !== Role.Admin && me.role !== Role.Superadmin)) return null
     
 	if (!carouselSlides) return <Header title="No Available Carousel Slides" />
@@ -39,7 +45,7 @@ export default function CarouselSlidePage() {
 									<td></td>
 									<td>Image</td>
 									<td className='centered'>Title</td>
-									<td className='centered'>Expired</td>
+									<td className='centered'></td>
 									<td></td>
 								</tr>
 							</thead>
@@ -52,13 +58,22 @@ export default function CarouselSlidePage() {
                                                 <SkeletonImage src={slide.image} alt={"Slide Image"} height={150} width={300}/>
                                             </td>
 											<td className='no-wrap'>{slide.title}</td>
-											<td className='centered'>{slide.isExpired ? '✅' : '❌'}</td>
 											<td className='centered'>
 												<ButtonLink noMinWidth backgroundColor='transparent' href={RoutePath.EditCarouselSlide(slide.id)}>
 													Edit
 												</ButtonLink>
 											</td>
-
+											<td>
+												{!slide.isExpired ? 
+													<Button onClick={()=>onDelete(slide.id)} className='button--delete'>
+																Delete
+													</Button>
+													: 
+													<Button className='button--expired'>
+															Expired
+													</Button>
+												}
+											</td>
 										</tr>
 									)
 								})}
