@@ -1,0 +1,45 @@
+@use '../variables/theme.module.scss' as *;
+
+.search-input {
+	position: relative;
+	width: 100%;
+	margin-bottom: 34px;
+
+	.search-input-input {
+		color: $white;
+		width: 100%;
+		padding: 14px;
+		border: 1px solid $grey-300;
+		border-radius: 8px;
+		cursor: pointer;
+		background: $grey-500;
+		font-weight: 500;
+		font-size: 16px;
+	}
+
+	.search-input-list {
+		border: 1px solid $grey-300;
+		max-height: 300px;
+		background: $grey-500;
+		border-bottom-left-radius: 8px;
+		border-bottom-right-radius: 8px;
+		overflow-y: auto;
+		position: absolute;
+		width: 100%;
+		border-top: none;
+		z-index: 1000;
+		list-style-type: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	.search-input-item {
+		padding: 10px;
+		cursor: pointer;
+		font-size: 16px;
+	}
+
+	.search-input-item:hover {
+		background: $grey-600;
+	}
+}

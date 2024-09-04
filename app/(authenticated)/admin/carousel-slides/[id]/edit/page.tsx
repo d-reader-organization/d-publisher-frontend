@@ -21,6 +21,12 @@ import { useFetchCarouselSlide, useUpdateCarouselSlide, useUpdateCarouselSlideIm
 import { useFetchComics, useFetchRawComic } from '@/api/comic'
 import { Role } from '@/enums/role'
 import { useFetchMe } from '@/api/creator'
+import SearchInput from '@/components/forms/SearchInput'
+
+type SearchInputOption = {
+	value: string | number;
+	label: string;
+}
 
 interface Params {
     id: string | number
@@ -32,8 +38,6 @@ export default function CreateCarouselSlidePage({ params }: { params: Params }){
 	const [searchComic, setSearchComic] = useState('');
 	const [carouselSlideImage, setCarouselSlideImage] = useState<File>();
 	const [oldSlideImage, setOldSlideImage] = useState('');
-	const [isSearchingIssues, setIsSearchingIssues] = useState(false);
-	const [isSearchingComics, setIsSearchingComics] = useState(false);
 	
 	const { data: carouselSlide } = useFetchCarouselSlide(params.id);
 	const { flatData: comicIssues } = useFetchComicIssues({ titleSubstring: searchComicIssue, skip: 0, take: 10 });
@@ -86,13 +90,11 @@ export default function CreateCarouselSlidePage({ params }: { params: Params }){
 	const handleChangeComicIssue = (value: number, title: string) => {
 		setValue('comicIssueId', value);
 		setSearchComicIssue(title);
-		setIsSearchingIssues(false);
 	};
 	
 	const handleChangeComic = (value: string, title: string) => {
 		setValue('comicSlug', value);
 		setSearchComic(title);
-		setIsSearchingComics(false);
 	};
 	
 	const handleChangeLocation = (value: string) => {
@@ -116,49 +118,35 @@ export default function CreateCarouselSlidePage({ params }: { params: Params }){
 							placeholder='Carousel Location'
 						/>
 						<div className='items'>
-							<div onMouseLeave={() => setIsSearchingIssues(false)}>
-								<Input
+							<div>
+								<Label>Comic Issue</Label>
+								<SearchInput
+									options={comicIssues.map(issue => ({ value: issue.id, label: issue.title }))}
 									value={searchComicIssue}
-									type='text'
-									placeholder='Select Comic Issues'
-									onMouseEnter={() => setIsSearchingIssues(true)}
-									onChange={(e) => {
-										setSearchComicIssue(e.target.value)
+									onChange={(value:string, option?:SearchInputOption) => {
+										setSearchComicIssue(value);
+										if (option) {
+											handleChangeComicIssue(option.value as number, option.label);
+										}
 									}}
+									onInputChange={setSearchComicIssue}
+									placeholder="Select Comic Issues"
 								/>
-								{isSearchingIssues
-									? comicIssues.map((issue) => (
-											<p 
-												key={issue.id} 
-												style={{ cursor: 'pointer', zIndex: 1 }} 
-												onClick={() => handleChangeComicIssue(issue.id, issue.title)}
-											>
-												{issue.title}
-											</p>
-									  ))
-									: null}
 							</div>
-							<div onMouseLeave={() => setIsSearchingComics(false)}>
-								<Input
-									value={searchComic}
-									type='text'
-									placeholder='Select Comics'
-									onChange={(e) => {
-										setSearchComic(e.target.value)
-									}}
-									onMouseEnter={() => setIsSearchingComics(true)}
+							<div>
+									<Label>Comic</Label>
+									<SearchInput
+										options={comics.map(comic => ({ value: comic.slug, label: comic.title }))}
+										value={searchComic}
+										onChange={(value:string, option?:SearchInputOption) => {
+											setSearchComic(value);
+											if (option) {
+												handleChangeComic(option.value as string, option.label);
+											}
+										}}
+									onInputChange={setSearchComic}
+									placeholder="Select Comics"
 								/>
-								{isSearchingComics
-									? comics.map((comic) => (
-											<p
-												key={comic.slug}
-												style={{ cursor: 'pointer', zIndex: 1 }}
-												onClick={() => handleChangeComic(comic.slug, comic.title)}
-											>
-												{comic.title}
-											</p>
-									  ))
-									: null}
 							</div>
 							<div>
 								<Label>Title</Label>
