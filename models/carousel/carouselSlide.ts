@@ -38,5 +38,5 @@ export type UpdateCarouselSlideData = Partial<
 >
 
 export interface CarouselSlideParams {
-	getExpired?:boolean
+	isExpired?:boolean
 }

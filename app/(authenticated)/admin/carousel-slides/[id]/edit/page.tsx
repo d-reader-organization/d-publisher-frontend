@@ -22,11 +22,7 @@ import { useFetchComics, useFetchRawComic } from '@/api/comic'
 import { Role } from '@/enums/role'
 import { useFetchMe } from '@/api/creator'
 import SearchInput from '@/components/forms/SearchInput'
-
-type SearchInputOption = {
-	value: string | number;
-	label: string;
-}
+import { CarouselSlideSearchInputOption } from '@/types/carouseSlideSearchInputOption'
 
 interface Params {
     id: string | number
@@ -123,7 +119,7 @@ export default function CreateCarouselSlidePage({ params }: { params: Params }){
 								<SearchInput
 									options={comicIssues.map(issue => ({ value: issue.id, label: issue.title }))}
 									value={searchComicIssue}
-									onChange={(value:string, option?:SearchInputOption) => {
+									onChange={(value:string, option?:CarouselSlideSearchInputOption) => {
 										setSearchComicIssue(value);
 										if (option) {
 											handleChangeComicIssue(option.value as number, option.label);
@@ -138,7 +134,7 @@ export default function CreateCarouselSlidePage({ params }: { params: Params }){
 									<SearchInput
 										options={comics.map(comic => ({ value: comic.slug, label: comic.title }))}
 										value={searchComic}
-										onChange={(value:string, option?:SearchInputOption) => {
+										onChange={(value:string, option?:CarouselSlideSearchInputOption) => {
 											setSearchComic(value);
 											if (option) {
 												handleChangeComic(option.value as string, option.label);

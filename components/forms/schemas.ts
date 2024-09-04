@@ -167,7 +167,7 @@ export const createCarouselSlideValidationSchema = yup.object().shape({
 	image: yup.mixed(),
 	title: yup
 		.string()
-		.max(26, generateMaxLengthErrorMessage('title', 26)),
+		.max(64, generateMaxLengthErrorMessage('title', 64)),
 	priority: yup
 		.number()
 		.required(yupRequiredMessage('Priority number'))
@@ -176,7 +176,7 @@ export const createCarouselSlideValidationSchema = yup.object().shape({
 		.min(1, generateMinNumberErrorMessage('Priority number', 1)),
 	subtitle: yup
 		.string()
-		.max(48, generateMaxLengthErrorMessage('title', 48)),
+		.max(256, generateMaxLengthErrorMessage('subtitle', 256)),
 	location: yup.string().required(yupRequiredMessage('Carousel Location')),
 	comicIssueId: yup.number(),
 	comicSlug: yup.string(),

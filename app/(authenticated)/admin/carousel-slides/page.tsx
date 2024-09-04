@@ -7,13 +7,14 @@ import CircularProgress from '@mui/material/CircularProgress'
 import SkeletonImage from '@/components/SkeletonImage'
 import ButtonLink from '@/components/ButtonLink'
 import { RoutePath } from '@/enums/routePath'
-import { useExpireCarouselSlide, useFetchCarouselSlides } from '@/api/carousel'
+import { useExpireCarouselSlide } from '@/api/carousel'
 import { useFetchMe } from '@/api/creator'
 import { Role } from '@/enums/role'
 import { Button } from '@mui/material'
+import { useFetchRawCarouselSlides } from '@/api/carousel/queries/useFetchRawCarouselSlides'
 
 export default function CarouselSlidePage() {
-    const {data: carouselSlides, isLoading: isLoadingCarouselSlides} = useFetchCarouselSlides({getExpired:true})
+    const {data: carouselSlides, isLoading: isLoadingCarouselSlides} = useFetchRawCarouselSlides({isExpired:true})
 	useAuthenticatedRoute()
 	const { mutateAsync: expireCarouselSlide } = useExpireCarouselSlide();
 
