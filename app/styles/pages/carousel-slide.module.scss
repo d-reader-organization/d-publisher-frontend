@@ -11,6 +11,11 @@
 		border: 1px solid $grey-300;
 		border-radius: 8px;
 	}
+
+	.head {
+		display: flex;
+		justify-content: space-between;
+	}
     
     .content-table-wrapper {
 		margin-top: 2rem;
@@ -67,4 +72,10 @@
         width: 100%;
         background-color: $red-100;
     }
+
+	.button--create {
+		width: 100px;
+		font-weight: bold;
+		background-color: $green-500;
+	}
 }

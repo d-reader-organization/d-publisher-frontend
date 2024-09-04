@@ -24,11 +24,13 @@ export default function CarouselSlidePage() {
 
     if (!me || (me.role !== Role.Admin && me.role !== Role.Superadmin)) return null
     
-	if (!carouselSlides) return <Header title="No Available Carousel Slides" />
 	return (
 		<>
 			<main className='carousel-slide-page'>
-				<h2 className='title'>Carousel Slides</h2>
+				<div className='head'>
+					<h2 className='title'>Carousel Slides</h2>
+					<ButtonLink className='button--create' href={RoutePath.CreateCarouselSlide()}>Create</ButtonLink>
+				</div>
 
 				{isLoadingCarouselSlides && (
 					<FlexColumn centered>
@@ -50,7 +52,7 @@ export default function CarouselSlidePage() {
 								</tr>
 							</thead>
 							<tbody>
-								{carouselSlides.map((slide,index) => {
+								{carouselSlides ? carouselSlides.map((slide,index) => {
 									return (
 										<tr key={slide.id}>
 											<td className='centered'>{index + 1}</td>
@@ -76,7 +78,7 @@ export default function CarouselSlidePage() {
 											</td>
 										</tr>
 									)
-								})}
+								}) : <Header title="No Available Carousel Slides" />}
 							</tbody>
 						</table>
 					</div>
