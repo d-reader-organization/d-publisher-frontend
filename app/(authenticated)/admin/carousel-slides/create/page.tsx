@@ -7,7 +7,7 @@ import Header from 'components/layout/Header'
 import Button from 'components/Button'
 import Input from '@/components/forms/Input'
 import { createCarouselSlideValidationSchema } from '@/components/forms/schemas'
-import { useFetchComicIssues } from 'api/comicIssue'
+import { useFetchBasicComicIssues } from 'api/comicIssue'
 import { CAROUSEL_LOCATION_OPTIONS, findOptions } from '@/constants/selectOptions'
 import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
 import Form from '@/components/forms/Form'
@@ -21,7 +21,7 @@ import Select from '@/components/forms/Select'
 import { useState } from 'react'
 import { CreateCarouselSlideData } from '@/models/carousel/carouselSlide'
 import { useCreateCarouselSlide } from '@/api/carousel'
-import { useFetchComics } from '@/api/comic'
+import { useFetchBasicComics } from '@/api/comic'
 import { useFetchMe } from '@/api/creator'
 import { Role } from '@/enums/role'
 import CustomDatePicker from '@/components/forms/CustomDatePicker'
@@ -33,8 +33,8 @@ export default function CreateCarouselSlidePage() {
 	const [searchComicIssue, setSearchComicIssue] = useState('')
 	const [searchComic, setSearchComic] = useState('')
 
-	const { flatData: comicIssues } = useFetchComicIssues({ titleSubstring: searchComicIssue, skip: 0, take: 10 })
-	const { flatData: comics } = useFetchComics({ titleSubstring: searchComic, skip: 0, take: 10 })
+	const { flatData: comicIssues } = useFetchBasicComicIssues({ titleSubstring: searchComicIssue, skip: 0, take: 10 })
+	const { flatData: comics } = useFetchBasicComics({ titleSubstring: searchComic, skip: 0, take: 10 })
 
 	const form = useForm<CreateCarouselSlideData>({
 		defaultValues: {

@@ -3,6 +3,7 @@ import { ComicIssueParams, RawComicIssueParams } from 'models/comicIssue/comicIs
 export const COMIC_ISSUE_QUERY_KEYS = Object.freeze({
 	COMIC_ISSUE: 'comic-issue',
 	GET: 'get',
+	GET_BASIC: 'get-basic',
 	GET_RAW: 'get-raw',
 	GET_PUBLIC: 'get-public',
 	CREATE: 'create',

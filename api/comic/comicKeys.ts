@@ -3,6 +3,7 @@ import { ComicParams, RawComicParams } from 'models/comic/comicParams'
 export const COMIC_QUERY_KEYS = Object.freeze({
 	COMIC: 'comic',
 	GET: 'get',
+	GET_BASIC: 'get-basic',
 	GET_RAW: 'get-raw',
 	CREATE: 'create',
 	BY_OWNER: 'by-owner',
