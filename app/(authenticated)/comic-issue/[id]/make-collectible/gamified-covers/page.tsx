@@ -176,8 +176,9 @@ export default function MakeCollectibleGamifiedCovers({ params }: { params: Para
 			<Header title='Publish collectibles' />
 			<Steps
 				steps={[
-					{ label: '01 Gamified covers', isActive: true },
-					{ label: '02 Sale details', isActive: false },
+					{ label: '01 Cover variants', isActive: false },
+					{ label: '02 Gamified covers', isActive: true },
+					{ label: '03 Sale details', isActive: false },
 				]}
 			/>
 

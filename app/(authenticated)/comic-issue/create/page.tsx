@@ -44,7 +44,7 @@ export default function CreateComicIssuePage() {
 	const searchParams = useSearchParams()
 	const comicSlug = searchParams.get('comicSlug') || ''
 	const [isHintDrawerOpen] = useLocalStorage('hint-drawer-open', true)
-	
+
 	const form = useForm<CreateComicIssueData>({
 		defaultValues: {
 			title: '',
@@ -81,7 +81,7 @@ export default function CreateComicIssuePage() {
 			<Steps
 				steps={[
 					{ label: '01 Create Issue', isActive: true },
-					{ label: '02 Upload covers', isActive: false },
+					{ label: '02 Upload cover', isActive: false },
 					{ label: '03 Upload pages', isActive: false },
 					{ label: '04 Submitted', isActive: false },
 				]}

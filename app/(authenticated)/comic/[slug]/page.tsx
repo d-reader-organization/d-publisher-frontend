@@ -167,11 +167,11 @@ export default function ComicPage({ params }: { params: Params }) {
 													Edit
 												</ButtonLink>
 											</td>
-											{issue.verifiedAt && !issue.isCollectible? (
+											{issue.verifiedAt && !issue.isCollectible ? (
 												<td className='centered'>
 													<ButtonLink
 														backgroundColor='green-500'
-														href={RoutePath.ComicIssueMakeCollectibleGamifiedCovers(issue.id)}
+														href={RoutePath.ComicIssueMakeCollectibleCoverVariants(issue.id)}
 													>
 														Publish collectibles
 													</ButtonLink>

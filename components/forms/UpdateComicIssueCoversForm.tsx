@@ -28,21 +28,23 @@ interface Props {
 	comicIssue: RawComicIssue
 }
 
-const toCreateStatelessCoverData = (statelessCovers:StatelessCover[]): CreateStatelessCoverData[] =>{
-	const createStatelessCoverData = statelessCovers.map((cover)=>{
+const toCreateStatelessCoverData = (statelessCovers: StatelessCover[]): CreateStatelessCoverData[] => {
+	const createStatelessCoverData = statelessCovers.map((cover) => {
 		return {
 			...cover,
 			imageSrc: cover.image,
-			image:undefined,
+			image: undefined,
 		}
-	});
-	return createStatelessCoverData;
+	})
+	return createStatelessCoverData
 }
 
 const UpdateComicIssueCoversForm: React.FC<Props> = ({ comicIssue }) => {
 	const toaster = useToaster()
 
-	const [issueCovers, setIssueCovers] = useState<CreateStatelessCoverData[]>(toCreateStatelessCoverData(comicIssue.statelessCovers))
+	const [issueCovers, setIssueCovers] = useState<CreateStatelessCoverData[]>(
+		toCreateStatelessCoverData(comicIssue.statelessCovers)
+	)
 	const [numberOfRarities, setNumberOfRarities] = useState(comicIssue.statelessCovers.length)
 
 	const { mutateAsync: updateStatelessCovers } = useUpdateComicIssueStatelessCovers(comicIssue.id)
@@ -70,7 +72,9 @@ const UpdateComicIssueCoversForm: React.FC<Props> = ({ comicIssue }) => {
 		event.preventDefault()
 
 		const unsetArtist = issueCovers.some((issueCover) => issueCover.artist === '')
-		const unsetImage = issueCovers.some((issueCover) => issueCover.image === undefined && issueCover.imageSrc === undefined)
+		const unsetImage = issueCovers.some(
+			(issueCover) => issueCover.image === undefined && issueCover.imageSrc === undefined
+		)
 		const noDefaultCover = issueCovers.every((issueCover) => !issueCover.isDefault)
 		const isNotASocialHandle = issueCovers.some((issueCover) =>
 			issueCover.artistTwitterHandle ? !isASocialHandle(issueCover.artistTwitterHandle) : false
@@ -89,7 +93,10 @@ const UpdateComicIssueCoversForm: React.FC<Props> = ({ comicIssue }) => {
 
 			let i = 0
 			for (const cover of issueCovers) {
-				formData.append(`covers[${i}][image]`, cover.image ? cover.image : new Blob([new Uint8Array(0)], { type: 'buffer' }) as Blob)
+				formData.append(
+					`covers[${i}][image]`,
+					cover.image ? cover.image : (new Blob([new Uint8Array(0)], { type: 'buffer' }) as Blob)
+				)
 				formData.append(`covers[${i}][artist]`, cover.artist)
 				formData.append(`covers[${i}][isDefault]`, cover.isDefault.toString())
 				formData.append(`covers[${i}][rarity]`, cover.rarity)
@@ -142,26 +149,25 @@ const UpdateComicIssueCoversForm: React.FC<Props> = ({ comicIssue }) => {
 		})
 	}
 
-	const onUpload = useCallback((files:UploadedFile[],rarity:ComicRarity) => {
+	const onUpload = useCallback((files: UploadedFile[], rarity: ComicRarity) => {
 		handleChangeCoverImage(rarity, files[0]?.file ?? '')
-	},[])
+	}, [])
 
-	const resizeExpandable = new Event('resize-expandable');
+	const resizeExpandable = new Event('resize-expandable')
 
 	return (
 		<>
 			<main>
 				<Form padding fullWidth className='form--edit-comic-issue-covers'>
 					<Label isRequired tooltipText={coverVariantsTooltipText}>
-						Comic Issue Covers
+						Episode covers
 					</Label>
-					<Label>Reupload Cover variants (rarities)</Label>
 					<Select
 						options={RARITY_SELECT_OPTIONS}
 						defaultSelectedOptions={findOptions(RARITY_SELECT_OPTIONS, comicIssue.statelessCovers.length.toString())}
 						onSelect={(selectedOptions) => {
 							setNumberOfRarities(+selectedOptions[0]?.value)
-							document.dispatchEvent(resizeExpandable);
+							document.dispatchEvent(resizeExpandable)
 						}}
 						unselectableIfAlreadySelected
 						placeholder='Number of rarities'
@@ -170,28 +176,25 @@ const UpdateComicIssueCoversForm: React.FC<Props> = ({ comicIssue }) => {
 					{issueCovers.map(({ rarity, artist, isDefault, artistTwitterHandle, imageSrc }) => {
 						return (
 							<div key={rarity}>
-								<h2 className='rarity-header'>{rarity}</h2>
 								<div className='rarity-cover-wrapper'>
 									<div>
-										<Label tooltipText={issueCoverImageTooltipText}>
-											Reupload Cover image
-										</Label>
+										<Label tooltipText={issueCoverImageTooltipText}>{rarity} cover</Label>
 										<FileUpload
 											id={`${rarity}-cover`}
 											label='Choose a picture 1024x1484px'
 											className='cover-image-upload'
-											onUpload={(files)=>onUpload(files,rarity)}
+											onUpload={(files) => onUpload(files, rarity)}
 											previewUrl={imageSrc}
 											options={{ accept: imageTypes, maxFiles: 1 }}
 										/>
 									</div>
 									<div>
 										<div>
-											<Label>Artist of a cover image</Label>
+											<Label>Cover artist</Label>
 											<Input onChange={(event) => handleChangeArtist(rarity, event.target.value)} value={artist} />
 										</div>
 										<div>
-											<Label tooltipText={handleTooltipText}>Artist&apos;s Twitter Handle</Label>
+											<Label tooltipText={handleTooltipText}>Artist&apos;s Twitter handle</Label>
 											<Input
 												prefix='@'
 												onChange={(event) => handleChangeArtistTwitterHandle(rarity, event.target.value)}

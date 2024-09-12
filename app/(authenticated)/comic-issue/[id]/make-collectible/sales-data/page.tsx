@@ -80,8 +80,9 @@ export default function MakeCollectibleSalesDataPage({ params }: { params: Param
 			<Header title='Publish collectibles' />
 			<Steps
 				steps={[
-					{ label: '01 Gamified covers', isActive: false },
-					{ label: '02 Sale details', isActive: true },
+					{ label: '01 Cover variants', isActive: false },
+					{ label: '02 Gamified covers', isActive: false },
+					{ label: '03 Sale details', isActive: true },
 				]}
 			/>
 

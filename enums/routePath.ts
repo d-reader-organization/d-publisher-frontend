@@ -12,7 +12,7 @@ export const RoutePath = Object.freeze({
 	RegisterVisualIdentity: '/register/visual-identity',
 	RegisterConnectSocials: '/register/connect-socials',
 	Creator: (creatorId: string | number) => `/creator/${creatorId}`,
-	IssueSpotlight: (comicIssueId:string | number) => `/admin/issue-spotlight/${comicIssueId}`,
+	IssueSpotlight: (comicIssueId: string | number) => `/admin/issue-spotlight/${comicIssueId}`,
 	Comic: (comicSlug: string) => `/comic/${comicSlug}`,
 	CreateComic: '/comic/create',
 	EditComic: (comicSlug: string) => `/comic/${comicSlug}/edit`,
@@ -24,6 +24,8 @@ export const RoutePath = Object.freeze({
 	ComicIssueUploadCovers: (comicIssueId: string | number) => `/comic-issue/${comicIssueId}/upload-covers`,
 	ComicIssueUploadPages: (comicIssueId: string | number) => `/comic-issue/${comicIssueId}/upload-pages`,
 	ComicIssueSubmitted: (comicIssueId: string | number) => `/comic-issue/${comicIssueId}/submitted`,
+	ComicIssueMakeCollectibleCoverVariants: (comicIssueId: string | number) =>
+		`/comic-issue/${comicIssueId}/make-collectible/cover-variants`,
 	ComicIssueMakeCollectibleGamifiedCovers: (comicIssueId: string | number) =>
 		`/comic-issue/${comicIssueId}/make-collectible/gamified-covers`,
 	ComicIssueMakeCollectibleSalesData: (comicIssueId: string | number) =>
@@ -31,5 +33,5 @@ export const RoutePath = Object.freeze({
 	ComicIssueMakeCollectibleSubmitted: (comicIssueId: string | number) =>
 		`/comic-issue/${comicIssueId}/make-collectible/submitted`,
 	EditCarouselSlide: (slideId: string | number) => `/admin/carousel-slides/${slideId}/edit`,
-	CreateCarouselSlide: () => `/admin/carousel-slides/create`
+	CreateCarouselSlide: () => `/admin/carousel-slides/create`,
 })

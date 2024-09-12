@@ -93,24 +93,24 @@ export default function UploadComicIssuePagesPage({ params }: { params: Params }
 
 	const onUploadPdf = (uploadedFiles: UploadedFile[]) => {
 		const file = uploadedFiles[0]?.file
-		setValue('pdf', file);
+		setValue('pdf', file)
 
-		const pdfSize = Math.ceil(file.size/(1024*1024))
-		if(pdfSize > 100){
-			toaster.add("Pdf size is above 100 mb, try compressing files", 'error');
-			return;
+		const pdfSize = Math.ceil(file.size / (1024 * 1024))
+		if (pdfSize > 100) {
+			toaster.add('Pdf size is above 100 mb, try compressing files', 'error')
+			return
 		}
 	}
 
 	const onUploadPages = (uploadedFiles: UploadedFile[]) => {
-		let totalSize = 0;
-			uploadedFiles.forEach(data=>totalSize += data.file.size);
-			totalSize = Math.ceil(totalSize / (1024*1024));
+		let totalSize = 0
+		uploadedFiles.forEach((data) => (totalSize += data.file.size))
+		totalSize = Math.ceil(totalSize / (1024 * 1024))
 
-			if(totalSize > 100){
-				toaster.add("Total size of pages are above 100 mb, try compressing files", 'error');
-				return;
-			}
+		if (totalSize > 100) {
+			toaster.add('Total size of pages are above 100 mb, try compressing files', 'error')
+			return
+		}
 
 		handleUploadPages(uploadedFiles.map((file) => file.file))
 		setNumberOfPreviewPages((currentValue) => {
@@ -125,7 +125,7 @@ export default function UploadComicIssuePagesPage({ params }: { params: Params }
 			<Steps
 				steps={[
 					{ label: '01 Create Issue', isActive: false },
-					{ label: '02 Upload covers', isActive: false },
+					{ label: '02 Upload cover', isActive: false },
 					{ label: '03 Upload pages', isActive: true },
 					{ label: '04 Submitted', isActive: false },
 				]}
