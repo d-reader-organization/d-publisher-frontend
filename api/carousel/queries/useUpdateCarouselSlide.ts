@@ -18,7 +18,7 @@ export const useUpdateCarouselSlide = (id: string | number) => {
 	return useMutation({
 		mutationFn: (request: UpdateCarouselSlideData) => updateCarouselSlide(id, request),
 		onSuccess: () => {
-			toaster.add('Carousel slide udpated! 🎉', 'success')
+			toaster.add('Carousel slide updated! 🎉', 'success')
 			queryClient.invalidateQueries(carouselKeys.getMany)
 		},
 		onError: toaster.onQueryError,

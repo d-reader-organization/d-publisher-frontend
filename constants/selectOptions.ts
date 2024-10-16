@@ -56,7 +56,8 @@ export const WRAPPER_SELECT_OPTIONS = [
 ]
 
 export const CAROUSEL_LOCATION_OPTIONS = [
-	{label: 'Home', value: CarouselLocation.Home}
+	{ label: 'Home Primary', value: CarouselLocation.HomePrimary },
+	{ label: 'Home Secondary', value: CarouselLocation.HomeSecondary },
 ]
 
 export const USED_OVERLAY_SELECT_OPTIONS = [{ label: 'used #1', value: usedOverlayImage.src }]

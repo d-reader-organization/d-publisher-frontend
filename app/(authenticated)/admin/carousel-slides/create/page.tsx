@@ -39,7 +39,7 @@ export default function CreateCarouselSlidePage() {
 	const form = useForm<CreateCarouselSlideData>({
 		defaultValues: {
 			priority: 1,
-			location: CarouselLocation.Home,
+			location: CarouselLocation.HomePrimary,
 		},
 		resolver: yupResolver(createCarouselSlideValidationSchema) as Resolver<CreateCarouselSlideData>,
 	})
@@ -64,7 +64,7 @@ export default function CreateCarouselSlidePage() {
 		if (data.comicIssueId) formData.append('comicIssueId', data.comicIssueId.toString())
 		if (data.comicSlug) formData.append('comicSlug', data.comicSlug)
 		if (data.externalLink) formData.append('externalLink', data.externalLink)
-		if(data.expiredAt) formData.append('expiresAt',data.expiredAt.toDateString())
+		if (data.expiredAt) formData.append('expiresAt', data.expiredAt.toDateString())
 
 		await createCarouselSlide(formData)
 	}
@@ -100,7 +100,7 @@ export default function CreateCarouselSlidePage() {
 									<Label isRequired>Location</Label>
 									<Select
 										options={CAROUSEL_LOCATION_OPTIONS}
-										defaultSelectedOptions={findOptions(CAROUSEL_LOCATION_OPTIONS, CarouselLocation.Home)}
+										defaultSelectedOptions={findOptions(CAROUSEL_LOCATION_OPTIONS, CarouselLocation.HomePrimary)}
 										onSelect={(selectedOptions) => handleChangeLocation(selectedOptions[0].value)}
 										unselectableIfAlreadySelected
 										placeholder='Carousel Location'
@@ -111,51 +111,51 @@ export default function CreateCarouselSlidePage() {
 									<CustomDatePicker name='expiredAt' className='date-picker' />
 								</div>
 							</div>
-							
+
 							<div className='inputs--bottom'>
-							<Label>Comic Issue</Label>
-							<SearchInput
-									options={comicIssues.map(issue => ({ value: issue.id, label: issue.title }))}
+								<Label>Comic Issue</Label>
+								<SearchInput
+									options={comicIssues.map((issue) => ({ value: issue.id, label: `ID ${issue.id}: ${issue.title}` }))}
 									value={searchComicIssue}
-									onChange={(value:string, option?:CarouselSlideSearchInputOption) => {
-										setSearchComicIssue(value);
+									onChange={(value: string, option?: CarouselSlideSearchInputOption) => {
+										setSearchComicIssue(value)
 										if (option) {
-											handleChangeComicIssue(option.value as number, option.label);
+											handleChangeComicIssue(option.value as number, option.label)
 										}
 									}}
 									onInputChange={setSearchComicIssue}
-									placeholder="Select Comic Issues"
+									placeholder='Select a comic issue'
 								/>
 								<div>
 									<Label>Comic</Label>
 									<SearchInput
-										options={comics.map(comic => ({ value: comic.slug, label: comic.title }))}
+										options={comics.map((comic) => ({ value: comic.slug, label: comic.title }))}
 										value={searchComic}
-										onChange={(value:string, option?:CarouselSlideSearchInputOption) => {
-											setSearchComic(value);
+										onChange={(value: string, option?: CarouselSlideSearchInputOption) => {
+											setSearchComic(value)
 											if (option) {
-												handleChangeComic(option.value as string, option.label);
+												handleChangeComic(option.value as string, option.label)
 											}
 										}}
-									onInputChange={setSearchComic}
-									placeholder="Select Comics"
-								/>
-							</div>
+										onInputChange={setSearchComic}
+										placeholder='Select a comic'
+									/>
+								</div>
+								<div>
+									<Label>External Link</Label>
+									<Input {...register('externalLink')} />
+								</div>
 								<div>
 									<Label>Title</Label>
 									<Input {...register('title')} />
 								</div>
 								<div>
-									<Label>Sub Title</Label>
+									<Label>Subtitle</Label>
 									<Input {...register('subtitle')} />
 								</div>
 								<div>
 									<Label isRequired>Priority</Label>
 									<Input {...register('priority')} />
-								</div>
-								<div>
-									<Label>External Link</Label>
-									<Input {...register('externalLink')} />
 								</div>
 							</div>
 						</div>
