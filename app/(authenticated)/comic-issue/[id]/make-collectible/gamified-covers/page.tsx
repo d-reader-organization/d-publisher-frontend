@@ -17,7 +17,7 @@ import Form from '@/components/forms/Form'
 import { useFetchRawComicIssue, useUpdateComicIssueStatefulCovers } from '@/api/comicIssue'
 import { RoutePath } from '@/enums/routePath'
 import usePrefetchRoute from '@/hooks/usePrefetchRoute'
-import { statefulCoverVariantsTooltipText } from '@/constants/tooltips'
+import { issueCoverPreviews, signaturePreviews, signatureTooltipText, statefulCoverVariantsTooltipText } from '@/constants/tooltips'
 import FormActions from '@/components/forms/FormActions'
 import Label from '@/components/forms/Label'
 import SkeletonImage from '@/components/SkeletonImage'
@@ -29,6 +29,9 @@ import { USED_OVERLAY_SELECT_OPTIONS } from '@/constants/selectOptions'
 import { SelectOption } from '@/models/selectOption'
 import FileUpload from '@/components/forms/FileUpload'
 import { useGlobalContext } from '@/providers/GlobalProvider'
+import HintWithImage from '@/components/HintWithImage'
+import HintDrawer from '@/components/layout/HintDrawer'
+import { Box } from '@mui/material'
 
 interface Params {
 	id: string | number
@@ -182,10 +185,10 @@ export default function MakeCollectibleGamifiedCovers({ params }: { params: Para
 				]}
 			/>
 
-			<main>
+			<main className='main--with-hint-drawer'>
 				<Form padding maxSize='xl' fullWidth className='form--edit-comic-issue-stateful-covers'>
 					<Label isRequired tooltipText={statefulCoverVariantsTooltipText}>
-						Issue Covers
+						Gamified covers
 					</Label>
 					<p className='description'>
 						{`Covers with "signed" and "used" states. These will be used for collecting/gamification purposes`}
@@ -297,6 +300,16 @@ export default function MakeCollectibleGamifiedCovers({ params }: { params: Para
 						</Button>
 					</FormActions>
 				</Form>
+				<HintDrawer>
+					<Box>
+						<Expandable title='Gamified covers'>
+							<HintWithImage previews={issueCoverPreviews} text={statefulCoverVariantsTooltipText} />
+						</Expandable>
+						<Expandable title='Signature details'>
+							<HintWithImage previews={signaturePreviews} text={signatureTooltipText} />
+						</Expandable>
+					</Box>
+				</HintDrawer>
 			</main>
 		</>
 	)

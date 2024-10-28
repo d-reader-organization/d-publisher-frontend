@@ -7,6 +7,11 @@ import { useFetchRawComicIssue } from '@/api/comicIssue'
 import { RoutePath } from '@/enums/routePath'
 import usePrefetchRoute from '@/hooks/usePrefetchRoute'
 import UpdateComicIssueCoversForm from '@/components/forms/UpdateComicIssueCoversForm'
+import HintDrawer from '@/components/layout/HintDrawer'
+import { Box } from '@mui/material'
+import Expandable from '@/components/Expandable'
+import HintWithImage from '@/components/HintWithImage'
+import { coverVariantsTooltipText, issueCoverImageTooltipText, issueCoverPreviews, issueCoverVariantsPreviews } from '@/constants/tooltips'
 
 interface Params {
 	id: string | number
@@ -35,8 +40,18 @@ export default function MakeCollectibleCoverVariants({ params }: { params: Param
 				]}
 			/>
 
-			<main>
+			<main className='main--with-hint-drawer'>
 				<UpdateComicIssueCoversForm comicIssue={comicIssue} />
+				<HintDrawer>
+					<Box>
+					<Expandable title='Cover rarities'>
+							<HintWithImage previews={issueCoverVariantsPreviews} text={coverVariantsTooltipText} />
+						</Expandable>
+						<Expandable title='Cover'>
+							<HintWithImage previews={issueCoverPreviews} text={issueCoverImageTooltipText} />
+						</Expandable>
+					</Box>
+				</HintDrawer>
 			</main>
 		</>
 	)
