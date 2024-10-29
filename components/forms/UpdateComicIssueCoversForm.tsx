@@ -26,6 +26,7 @@ import { isASocialHandle } from '@/utils/helpers'
 
 interface Props {
 	comicIssue: RawComicIssue
+	onUpdate?: VoidFunction
 }
 
 const toCreateStatelessCoverData = (statelessCovers: StatelessCover[]): CreateStatelessCoverData[] => {
@@ -39,7 +40,7 @@ const toCreateStatelessCoverData = (statelessCovers: StatelessCover[]): CreateSt
 	return createStatelessCoverData
 }
 
-const UpdateComicIssueCoversForm: React.FC<Props> = ({ comicIssue }) => {
+const UpdateComicIssueCoversForm: React.FC<Props> = ({ comicIssue, onUpdate }) => {
 	const toaster = useToaster()
 
 	const [issueCovers, setIssueCovers] = useState<CreateStatelessCoverData[]>(
@@ -105,6 +106,8 @@ const UpdateComicIssueCoversForm: React.FC<Props> = ({ comicIssue }) => {
 			}
 			await updateStatelessCovers(formData)
 		}
+
+		if (typeof onUpdate === "function") onUpdate()
 	}
 
 	const handleChangeCoverImage = (rarity: ComicRarity, value: File) => {

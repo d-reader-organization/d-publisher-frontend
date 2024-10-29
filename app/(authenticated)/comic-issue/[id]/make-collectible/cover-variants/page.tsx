@@ -12,6 +12,7 @@ import { Box } from '@mui/material'
 import Expandable from '@/components/Expandable'
 import HintWithImage from '@/components/HintWithImage'
 import { coverVariantsTooltipText, issueCoverImageTooltipText, issueCoverPreviews, issueCoverVariantsPreviews } from '@/constants/tooltips'
+import { useRouter } from 'next/navigation'
 
 interface Params {
 	id: string | number
@@ -20,10 +21,15 @@ interface Params {
 export default function MakeCollectibleCoverVariants({ params }: { params: Params }) {
 	const comicIssueId = params.id || ''
 	const { data: comicIssue } = useFetchRawComicIssue(comicIssueId)
+	const router = useRouter()
 	const nextPage = RoutePath.ComicIssueMakeCollectibleGamifiedCovers(comicIssueId)
 
 	usePrefetchRoute(nextPage)
 	useAuthenticatedRoute()
+
+	const onUpdate = () => {
+		router.push(RoutePath.Dashboard)
+	}
 
 	if (!comicIssue) {
 		return null
@@ -41,10 +47,10 @@ export default function MakeCollectibleCoverVariants({ params }: { params: Param
 			/>
 
 			<main className='main--with-hint-drawer'>
-				<UpdateComicIssueCoversForm comicIssue={comicIssue} />
+				<UpdateComicIssueCoversForm comicIssue={comicIssue} onUpdate={onUpdate} />
 				<HintDrawer>
 					<Box>
-					<Expandable title='Cover rarities'>
+						<Expandable title='Cover rarities'>
 							<HintWithImage previews={issueCoverVariantsPreviews} text={coverVariantsTooltipText} />
 						</Expandable>
 						<Expandable title='Cover'>
