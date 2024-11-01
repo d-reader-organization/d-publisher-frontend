@@ -28,7 +28,7 @@ export default function MakeCollectibleCoverVariants({ params }: { params: Param
 	useAuthenticatedRoute()
 
 	const onUpdate = () => {
-		router.push(RoutePath.Dashboard)
+		router.push(nextPage)
 	}
 
 	if (!comicIssue) {
