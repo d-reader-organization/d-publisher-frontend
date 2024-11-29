@@ -2,23 +2,23 @@ import { useMemo } from 'react'
 import { comicKeys, COMIC_QUERY_KEYS } from 'api/comic/comicKeys'
 import { useToaster } from 'providers/ToastProvider'
 import { useInfiniteQuery } from 'react-query'
-import { BasicComic } from 'models/comic'
+import { SearchComic } from 'models/comic'
 import http from 'api/http'
-import { BasicComicParams } from '@/models/comic/basicComicParams'
+import { SearchComicParams } from '@/models/comic/searchComicParams'
 
-const { COMIC, GET_BASIC } = COMIC_QUERY_KEYS
+const { COMIC, SEARCH } = COMIC_QUERY_KEYS
 
-const fetchBasicComics = async (params: BasicComicParams): Promise<BasicComic[]> => {
-	const response = await http.get<BasicComic[]>(`${COMIC}/${GET_BASIC}`, { params })
+const searchComics = async (params: SearchComicParams): Promise<SearchComic[]> => {
+	const response = await http.get<SearchComic[]>(`${COMIC}/${SEARCH}`, { params })
 	return response.data
 }
 
-export const useFetchBasicComics = (params: BasicComicParams, enabled = true) => {
+export const useSearchComics = (params: SearchComicParams, enabled = true) => {
 	const toaster = useToaster()
 
 	const infiniteQuery = useInfiniteQuery({
 		queryKey: comicKeys.getMany(params),
-		queryFn: ({ pageParam = 0 }) => fetchBasicComics({ ...params, skip: pageParam * params.take }),
+		queryFn: ({ pageParam = 0 }) => searchComics({ ...params, skip: pageParam * params.take }),
 		getNextPageParam: (lastPage, allPages) => {
 			if (lastPage.length >= params.take) return allPages.length
 		},

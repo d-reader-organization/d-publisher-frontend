@@ -3,7 +3,7 @@ import { ComicParams, RawComicParams } from 'models/comic/comicParams'
 export const COMIC_QUERY_KEYS = Object.freeze({
 	COMIC: 'comic',
 	GET: 'get',
-	GET_BASIC: 'get-basic',
+	SEARCH: 'search',
 	GET_RAW: 'get-raw',
 	CREATE: 'create',
 	BY_OWNER: 'by-owner',
@@ -27,7 +27,7 @@ export const comicKeys = Object.freeze({
 	getMany: (params: ComicParams) => [
 		COMIC_QUERY_KEYS.COMIC,
 		COMIC_QUERY_KEYS.GET,
-		params.titleSubstring,
+		params.search,
 		params.creatorSlug,
 		params.genreSlugs,
 		params.filterTag,
@@ -39,7 +39,7 @@ export const comicKeys = Object.freeze({
 	getManyRaw: (params: RawComicParams) => [
 		COMIC_QUERY_KEYS.COMIC,
 		COMIC_QUERY_KEYS.GET_RAW,
-		params.titleSubstring,
+		params.search,
 		params.creatorSlug,
 		params.genreSlugs,
 		params.sortOrder,

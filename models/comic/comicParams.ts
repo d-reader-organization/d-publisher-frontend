@@ -16,7 +16,7 @@ export enum ComicSortTag {
 
 export interface ComicParams extends Pagination {
 	creatorSlug?: string
-	titleSubstring?: string
+	search?: string
 	genreSlugs?: string[]
 	sortOrder?: SortOrder
 	filterTag?: ComicFilterTag

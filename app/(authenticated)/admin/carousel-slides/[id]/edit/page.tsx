@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 import Header from 'components/layout/Header'
 import Button from 'components/Button'
 import Input from '@/components/forms/Input'
-import { useFetchBasicComicIssues, useFetchRawComicIssue } from 'api/comicIssue'
+import { useSearchComicIssues, useFetchRawComicIssue } from 'api/comicIssue'
 import { CAROUSEL_LOCATION_OPTIONS, findOptions } from '@/constants/selectOptions'
 import useAuthenticatedRoute from '@/hooks/useCreatorAuthenticatedRoute'
 import Form from '@/components/forms/Form'
@@ -18,7 +18,7 @@ import Select from '@/components/forms/Select'
 import { useEffect, useState } from 'react'
 import { UpdateCarouselSlideData } from '@/models/carousel/carouselSlide'
 import { useFetchCarouselSlide, useUpdateCarouselSlide, useUpdateCarouselSlideImage } from '@/api/carousel'
-import { useFetchBasicComics, useFetchRawComic } from '@/api/comic'
+import { useSearchComics, useFetchRawComic } from '@/api/comic'
 import { Role } from '@/enums/role'
 import { useFetchMe } from '@/api/creator'
 import SearchInput from '@/components/forms/SearchInput'
@@ -36,8 +36,8 @@ export default function CreateCarouselSlidePage({ params }: { params: Params }) 
 	const [oldSlideImage, setOldSlideImage] = useState('')
 
 	const { data: carouselSlide } = useFetchCarouselSlide(params.id)
-	const { flatData: comicIssues } = useFetchBasicComicIssues({ titleSubstring: searchComicIssue, skip: 0, take: 10 })
-	const { flatData: comics } = useFetchBasicComics({ titleSubstring: searchComic, skip: 0, take: 10 })
+	const { flatData: comicIssues } = useSearchComicIssues({ search: searchComicIssue, skip: 0, take: 10 })
+	const { flatData: comics } = useSearchComics({ search: searchComic, skip: 0, take: 10 })
 	const { data: comicIssue } = useFetchRawComicIssue(carouselSlide?.comicIssueId)
 	const { data: comic } = useFetchRawComic(carouselSlide?.comicSlug)
 

@@ -26,6 +26,10 @@ export interface BasicComic {
 	youTube: string
 }
 
+export type SearchComic = Pick<BasicComic, 'title' | 'slug' | 'cover'> & {
+	issuesCount: number
+}
+
 export interface Comic extends BasicComic {
 	stats?: ComicStats
 	myStats?: ComicMyStats

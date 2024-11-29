@@ -74,7 +74,7 @@ export default function AdminAssetsPage() {
 					<Box hidden={!isComicsTabActive} className='discover-content'>
 						<DownloadComicAssetList
 							title='Comics'
-							params={{ titleSubstring: searchString }}
+							params={{ search: searchString }}
 							enabled={isComicsTabActive}
 							isAdmin
 						/>
@@ -82,14 +82,14 @@ export default function AdminAssetsPage() {
 					<Box hidden={!isComicIssuesTabActive} className='discover-content'>
 						<DownloadComicIssueAssetList
 							title='Issues'
-							params={{ titleSubstring: searchString }}
+							params={{ search: searchString }}
 							enabled={isComicIssuesTabActive}
 						/>
 					</Box>
 					<Box hidden={!isCreatorsTabActive} className='discover-content'>
 						<DownloadCreatorAssetList
 							title='Creators'
-							params={{ nameSubstring: searchString }}
+							params={{ search: searchString }}
 							enabled={isCreatorsTabActive}
 						/>
 					</Box>

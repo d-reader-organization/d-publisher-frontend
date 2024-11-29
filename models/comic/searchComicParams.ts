@@ -1,10 +1,8 @@
 import { SortOrder } from 'enums/sortOrder'
 import { Pagination } from 'models/pagination'
 
-export interface BasicComicIssueParams extends Pagination {
+export interface SearchComicParams extends Pagination {
 	creatorSlug?: string
-	comicSlug?: string
-	titleSubstring?: string
+	search?: string
 	sortOrder?: SortOrder
 }
-

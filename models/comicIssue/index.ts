@@ -31,6 +31,10 @@ export interface BasicComicIssue {
 	isVerified: boolean
 }
 
+export type SearchComicIssue = Pick<BasicComicIssue, 'title' | 'slug' | 'cover'> & {
+	issuesCount: number
+}
+
 export interface ComicIssue extends BasicComicIssue {
 	activeCandyMachineAddress?: string
 	creator?: Pick<Creator, 'name' | 'slug' | 'isVerified' | 'avatar'>

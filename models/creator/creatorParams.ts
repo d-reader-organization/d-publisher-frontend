@@ -11,7 +11,7 @@ export enum CreatorSortTag {
 }
 
 export interface CreatorParams extends Pagination {
-	nameSubstring?: string
+	search?: string
 	genreSlugs?: string[]
 	sortOrder?: SortOrder
 	filterTag?: CreatorFilterTag
